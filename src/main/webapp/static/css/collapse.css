@@ -1,0 +1,227 @@
+﻿
+/*
+@keyframes hideMain
+{
+0%   {margin-left:200px;}
+100% {margin-left:50px;}
+}
+@keyframes showMain
+{
+0%   {margin-left:50px;}
+100% {margin-left:200px;}
+}
+@keyframes hideMenu
+{
+0%   {width:200px;}
+100% {width:50px;}
+}
+
+@-moz-keyframes hideMenu Firefox
+{
+0%   {width:200px;}
+100% {width:50px;}
+}
+
+@-webkit-keyframes hideMenu Safari and Chrome
+{
+0%   {width:200px;}
+100% {width:50px;}
+}
+
+@-o-keyframes hideMenu Opera
+{
+0%   {width:200px;}
+100% {width:50px;}
+}
+*/
+
+/*.collapse1{
+animation: myfirst 5s linear 2s infinite alternate;
+Firefox:
+-moz-animation: myfirst 5s linear 2s infinite alternate;
+Safari 和 Chrome:
+-webkit-animation: myfirst 5s linear 2s infinite alternate;
+Opera:
+-o-animation: myfirst 5s linear 2s infinite alternate;
+}*/
+
+.collapse1 .logo-desc
+{
+/* width:0px; */
+/* position:relative; */
+/* animation:hideMenu 0.5s;
+-moz-animation:hideMenu 0.5s;
+-webkit-animation:hideMenu 0.5s;
+-o-animation:hideMenu 0.5s;  */
+}
+.collapse1 .menu-wrap
+{
+width:100px;
+position:relative;
+/* animation:hideMenu 0.5s;
+-moz-animation:hideMenu 0.5s;
+-webkit-animation:hideMenu 0.5s;
+-o-animation:hideMenu 0.5s;  */
+}
+.collapse1 .main-wrap
+{
+margin-left:50px;
+/* animation:hideMain 0.5s;
+-moz-animation:hideMain 0.5s;
+-webkit-animation:hideMain 0.5s;
+-o-animation:hideMain 0.5s;*/
+}
+
+.collapse1 .logo-desc{
+	/* width:0px; */
+}
+
+.collapse1 .logo-desc-text{
+	/* display:none; */
+}
+
+ /** make icon don't get too colose with the left side **/
+
+  .collapse1 .menu>ul.nav>li>ul>li .nav-icon{
+    display: none;
+ }
+
+  .collapse1  .menu-wrap .menu .nav-icon{
+
+ /* margin-left:7px;*/
+  margin-left:0px;
+
+  }
+
+ .collapse1  .menu-wrap .menu>ul>li>a>.nav-icon{
+
+/* margin-left:7px;*/
+ margin-left:0px;
+ display:block;
+  width:100%;
+  text-align:center;
+ }
+
+/***nav-text ***/
+ .nav-text  {
+   /*  opacity:0.5; */
+ /*  display:inline-block;*/
+   /* width:200px;*/
+  /*     -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;*/
+}
+.collapse1 .nav-text {
+	width:0px;
+/*   opacity:1;
+    filter: alpha(opacity=1); */
+}
+.collapse1  .menu>ul.nav>li>a>.nav-text {
+   /* display: none;*/
+   font-size:0.5rem;
+   margin-left:0px;
+}
+.collapse1 .menu>ul.nav>li>ul>li .nav-text{
+ /*   margin-left:5px;
+    padding-left:5px;*/
+}
+ .collapse1 .menu-wrap .menu .nav-text
+  {
+       margin-left:0px;
+
+
+    }
+
+
+ .collapse1  .menu-wrap .menu>ul>li>a> .nav-text{
+display:block;
+width:100%;
+text-align:center;
+line-height:1.25rem;
+ min-height:1.25rem;
+
+ }
+
+/* .tranform-demo{
+	color:yellow;
+    font-size:14px;
+    transition-property:color;
+    transition-duration: 2s;
+
+}
+.tranform-demo2 {
+    font-size:5px;
+    color:blue;
+
+}
+ */
+ .collapse1 .menu-wrap {
+      width: 50px;
+ }
+ .collapse1 .main-wrap
+{
+margin-left:50px;
+}
+.collapse1 .logo-desc-text{
+    display:none;
+}
+
+
+
+.collapse1 .menu>ul.nav>li>a>.nav-caret{
+    display: none;
+}
+
+ .collapse1 .menu li:hover>ul{
+   /*  display: block; */
+}
+ .collapse1 .menu li li>ul{
+   /*  display: none; */
+}
+
+ .collapse1 .menu>ul.nav>li>ul {
+    position: absolute;
+    left: 50px;
+    top: 0px;
+    diplay: block;
+    width: 100px;
+    z-index: 2000;
+  /*  background-color:  #2E3E4E;*/
+}
+
+/**icon **/
+
+ .collapse1 .fa{
+    font-size:1.5rem;
+ }
+   .collapse1  ul ul .fa{
+  font-size:0.8rem;
+
+   }
+ .menu-wrap .menu li > a{
+/* min-height:2.25rem;
+ transition:min-height 0.5s;
+ -moz-transition:min-height 0.5s;
+ -webkit-transition:min-height 0.5s;
+ -o-transition:min-height 0.5s;*/
+ }
+
+ .collapse1  .menu-wrap .menu li > a{
+     /*min-height:3.25rem;*/
+    /* text-align:center;*/
+    	line-height: 2.25rem;
+    	min-height: 2.25rem;
+
+ }
+
+
+  /** becasuse the icon become bigger so height need higher **/
+
+
+
+/* @keyframes myfirst
+{
+0%   {width:200px;}
+100% {width:0px;}
+} */

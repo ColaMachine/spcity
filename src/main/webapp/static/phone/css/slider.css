@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/**
+ * slider
+ * @authors Ping YF (koakumaping@163.com)
+ * @date    2015-10-28 14:01:13
+ * @version $Id$
+ */
+
+.carousel {
+    display: none;
+    position: relative;
+    overflow: auto;
+}
+
+.carousel-ul {
+    padding: 0;
+    margin: 0;
+}
+
+.carousel-ul-li {
+    list-style: none;
+    float: left;
+}
+
+.carousel-img {
+    display: block;
+    position: relative;
+    left: 0;
+}

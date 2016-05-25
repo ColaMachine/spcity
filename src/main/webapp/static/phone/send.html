@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	    <meta name="format-detection" content="telephone=no" />
+		<title>个人中心</title>
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/comm.css">
+		<link rel="stylesheet" href="css/header.css">
+		<link rel="stylesheet" href="css/footer.css">
+		<link rel="stylesheet" href="css/send/main.css">
+	</head>
+
+	<body>
+		<header class="header back-blue">
+	    	<nav>
+	    		<a href="index.html"><div class="header-left center-text row-2-5 left small-text">
+	    			<img class="header-left-img" src="img/header/back.png">
+	    		</div></a>
+	    		<div class="center-text row-5 left normal-text">发短信</div>
+	    	</nav>
+    	</header>
+    	
+    	<div class="container">
+			<div class="row-10 back-lighter-gray">
+				<div class="row-9 small-text send-text">共找到了11位访客：小明、王三、张四、138****8890、133****9900、萝莉的毛毛、南瓜节、小新、里斯本、四四...</div>
+			</div>
+
+			<div class="title">
+				<span class="title-text small-text gray-text">请输入短信内容</span>
+			</div>
+
+			<div class="row-10">
+				<div class="row-9">
+					<textarea class="send-textarea row-10 no-border" name="sms" id="sms" rows="4" maxlength="50"></textarea>
+				</div>
+			</div>
+
+			<div class="row-10 back-lighter-gray send-sms">
+				<div class="row-9">
+					<button class="back-orange">免费发送短信</button>
+				</div>
+				<div class="row-9 gray-text smaller-text send-warn">每周只能发送一次</div>
+			</div>
+    	</div>
+		
+		<footer class="row-10 footer light-gray-text">
+			<div class="row-9 center-text footer-top">
+				<span class="small-text">本系统由中国电信爱WiFi运营中心提供支持</span>
+			</div>
+			<div class="row-9 center-text footer-bottom">
+				<span class="small-text">400-8252-525</span>
+			</div>
+		</footer>
+
+		<script type="text/javascript" src="js/comm/util.js"></script>
+		<script type="text/javascript" src="js/comm/httpx.js"></script>
+		<script type="text/javascript" src="<fmt:message key="staticdomain"/>static/weizhan/bower_components/vue/dist/vue.min.js"></script>
+	</body>
+</html>

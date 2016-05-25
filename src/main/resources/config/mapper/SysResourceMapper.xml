@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cola.machine.dao.SysResourceMapper">
+  <resultMap id="BaseResultMap" type="cola.machine.bean.SysResource">
+      <id column="id" jdbcType="BIGINT" property="id" />
+      <result column="pid" jdbcType="BIGINT" property="pid" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="code" jdbcType="VARCHAR" property="code" />
+      <result column="type" jdbcType="VARCHAR" property="type" />
+      <result column="url" jdbcType="VARCHAR" property="url" />
+      <result column="order" jdbcType="INTEGER" property="order" />
+      <result column="status" jdbcType="INTEGER" property="status" />
+      <result column="remark" jdbcType="VARCHAR" property="remark" />
+      <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    `id` ,`pid` ,`name` ,`code` ,`type` ,`url` ,`order` ,`status` ,`remark` ,`createtime` 
+   
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_resource
+    where id =   #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_resource
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id"   parameterType="cola.machine.bean.SysResource" >
+
+    insert into sys_resource (  <include refid="Base_Column_List" />)
+    values (
+#{id,jdbcType=BIGINT}
+,#{pid,jdbcType=BIGINT}
+,#{name,jdbcType=VARCHAR}
+,#{code,jdbcType=VARCHAR}
+,#{type,jdbcType=VARCHAR}
+,#{url,jdbcType=VARCHAR}
+,#{order,jdbcType=INTEGER}
+,#{status,jdbcType=INTEGER}
+,#{remark,jdbcType=VARCHAR}
+,#{createtime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+   <insert id="insertSelective" parameterType="cola.machine.bean.SysResource" >
+    insert into sys_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="id != null" >  
+           `id`, 
+        </if>  
+        <if test="pid != null" >  
+           `pid`, 
+        </if>  
+        <if test="name != null" >  
+           `name`, 
+        </if>  
+        <if test="code != null" >  
+           `code`, 
+        </if>  
+        <if test="type != null" >  
+           `type`, 
+        </if>  
+        <if test="url != null" >  
+           `url`, 
+        </if>  
+        <if test="order != null" >  
+           `order`, 
+        </if>  
+        <if test="status != null" >  
+           `status`, 
+        </if>  
+        <if test="remark != null" >  
+           `remark`, 
+        </if>  
+        <if test="createtime != null" >  
+           `createtime`, 
+        </if>  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="id != null" >  
+          #{id,jdbcType=BIGINT},
+        </if>  
+        <if test="pid != null" >  
+          #{pid,jdbcType=BIGINT},
+        </if>  
+        <if test="name != null" >  
+          #{name,jdbcType=VARCHAR},
+        </if>  
+        <if test="code != null" >  
+          #{code,jdbcType=VARCHAR},
+        </if>  
+        <if test="type != null" >  
+          #{type,jdbcType=VARCHAR},
+        </if>  
+        <if test="url != null" >  
+          #{url,jdbcType=VARCHAR},
+        </if>  
+        <if test="order != null" >  
+          #{order,jdbcType=INTEGER},
+        </if>  
+        <if test="status != null" >  
+          #{status,jdbcType=INTEGER},
+        </if>  
+        <if test="remark != null" >  
+          #{remark,jdbcType=VARCHAR},
+        </if>  
+        <if test="createtime != null" >  
+          #{createtime,jdbcType=TIMESTAMP},
+        </if>  
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cola.machine.bean.SysResource" >
+    update sys_resource
+    <set >
+        <if test="id != null" >  
+             `id`=#{id,jdbcType=BIGINT},
+        </if>  
+        <if test="pid != null" >  
+             `pid`=#{pid,jdbcType=BIGINT},
+        </if>  
+        <if test="name != null" >  
+             `name`=#{name,jdbcType=VARCHAR},
+        </if>  
+        <if test="code != null" >  
+             `code`=#{code,jdbcType=VARCHAR},
+        </if>  
+        <if test="type != null" >  
+             `type`=#{type,jdbcType=VARCHAR},
+        </if>  
+        <if test="url != null" >  
+             `url`=#{url,jdbcType=VARCHAR},
+        </if>  
+        <if test="order != null" >  
+             `order`=#{order,jdbcType=INTEGER},
+        </if>  
+        <if test="status != null" >  
+             `status`=#{status,jdbcType=INTEGER},
+        </if>  
+        <if test="remark != null" >  
+             `remark`=#{remark,jdbcType=VARCHAR},
+        </if>  
+        <if test="createtime != null" >  
+             `createtime`=#{createtime,jdbcType=TIMESTAMP},
+        </if>  
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cola.machine.bean.SysResource" >
+    update sys_resource
+    set 
+              `pid`=#{pid,jdbcType=BIGINT},  
+              `name`=#{name,jdbcType=VARCHAR},  
+              `code`=#{code,jdbcType=VARCHAR},  
+              `type`=#{type,jdbcType=VARCHAR},  
+              `url`=#{url,jdbcType=VARCHAR},  
+              `order`=#{order,jdbcType=INTEGER},  
+              `status`=#{status,jdbcType=INTEGER},  
+              `remark`=#{remark,jdbcType=VARCHAR},  
+              `createtime`=#{createtime,jdbcType=TIMESTAMP}  
+where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="listByParams" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_resource where 1=1
+        <if test="id != null and id != '' ">  
+           and `id` = #{id}
+        </if>  
+        <if test="pid != null and pid != '' ">  
+           and `pid` = #{pid}
+        </if>  
+        <if test="name != null and name != '' ">  
+           and `name` = #{name}
+        </if>  
+        <if test="nameLike != null and nameLike != '' ">  
+             and `name` like "%"#{nameLike}"%"
+        </if>   
+        <if test="code != null and code != '' ">  
+           and `code` = #{code}
+        </if>  
+        <if test="codeLike != null and codeLike != '' ">  
+             and `code` like "%"#{codeLike}"%"
+        </if>   
+        <if test="type != null and type != '' ">  
+           and `type` = #{type}
+        </if>  
+        <if test="typeLike != null and typeLike != '' ">  
+             and `type` like "%"#{typeLike}"%"
+        </if>   
+        <if test="url != null and url != '' ">  
+           and `url` = #{url}
+        </if>  
+        <if test="urlLike != null and urlLike != '' ">  
+             and `url` like "%"#{urlLike}"%"
+        </if>   
+        <if test="order != null and order != '' ">  
+           and `order` = #{order}
+        </if>  
+        <if test="status != null and status != '' ">  
+           and `status` = #{status}
+        </if>  
+        <if test="remark != null and remark != '' ">  
+           and `remark` = #{remark}
+        </if>  
+        <if test="remarkLike != null and remarkLike != '' ">  
+             and `remark` like "%"#{remarkLike}"%"
+        </if>   
+        <if test="createtime != null and createtime != '' ">  
+           and `createtime` = #{createtime}
+        </if>  
+        <if test="createtimeBegin != null and createtimeBegin != '' ">  
+             and `createtime` &gt;= #{createtimeBegin}
+        </if>   
+         <if test="createtimeEnd != null and createtimeEnd != '' ">  
+             and `createtime` &lt;= #{createtimeEnd}
+        </if> 
+        <if test="createtimeBegin != null and createtimeBegin != '' ">  
+             and `createtime` &gt;= #{createtimeBegin}
+        </if>   
+         <if test="createtimeEnd != null and createtimeEnd != '' ">  
+             and `createtime` &lt;= #{createtimeEnd}
+        </if> 
+  </select>
+   <select id="listByParams4Page" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_resource where 1=1
+        <if test="id != null and id != '' ">  
+           and `id` = #{id}
+        </if>  
+        <if test="pid != null and pid != '' ">  
+           and `pid` = #{pid}
+        </if>  
+        <if test="name != null and name != '' ">  
+           and `name` = #{name}
+        </if>  
+        <if test="nameLike != null and nameLike != '' ">  
+             and `name` like "%"#{nameLike}"%"
+        </if>   
+        <if test="code != null and code != '' ">  
+           and `code` = #{code}
+        </if>  
+        <if test="codeLike != null and codeLike != '' ">  
+             and `code` like "%"#{codeLike}"%"
+        </if>   
+        <if test="type != null and type != '' ">  
+           and `type` = #{type}
+        </if>  
+        <if test="typeLike != null and typeLike != '' ">  
+             and `type` like "%"#{typeLike}"%"
+        </if>   
+        <if test="url != null and url != '' ">  
+           and `url` = #{url}
+        </if>  
+        <if test="urlLike != null and urlLike != '' ">  
+             and `url` like "%"#{urlLike}"%"
+        </if>   
+        <if test="order != null and order != '' ">  
+           and `order` = #{order}
+        </if>  
+        <if test="status != null and status != '' ">  
+           and `status` = #{status}
+        </if>  
+        <if test="remark != null and remark != '' ">  
+           and `remark` = #{remark}
+        </if>  
+        <if test="remarkLike != null and remarkLike != '' ">  
+             and `remark` like "%"#{remarkLike}"%"
+        </if>   
+        <if test="createtime != null and createtime != '' ">  
+           and `createtime` = #{createtime}
+        </if>  
+        <if test="createtimeBegin != null and createtimeBegin != '' ">  
+             and `createtime` &gt;= #{createtimeBegin}
+        </if>   
+         <if test="createtimeEnd != null and createtimeEnd != '' ">  
+             and `createtime` &lt;= #{createtimeEnd}
+        </if> 
+  </select>
+   <select id="countByParams" parameterType="map" resultType="java.lang.Integer">
+    select 
+    count(1) 
+    from sys_resource where 1=1
+        <if test="id != null and id != '' ">  
+           and `id` = #{id}
+        </if>  
+        <if test="pid != null and pid != '' ">  
+           and `pid` = #{pid}
+        </if>  
+        <if test="name != null and name != '' ">  
+           and `name` = #{name}
+        </if>  
+        <if test="nameLike != null and nameLike != '' ">  
+             and `name` like "%"#{nameLike}"%"
+        </if>   
+        <if test="code != null and code != '' ">  
+           and `code` = #{code}
+        </if>  
+        <if test="codeLike != null and codeLike != '' ">  
+             and `code` like "%"#{codeLike}"%"
+        </if>   
+        <if test="type != null and type != '' ">  
+           and `type` = #{type}
+        </if>  
+        <if test="typeLike != null and typeLike != '' ">  
+             and `type` like "%"#{typeLike}"%"
+        </if>   
+        <if test="url != null and url != '' ">  
+           and `url` = #{url}
+        </if>  
+        <if test="urlLike != null and urlLike != '' ">  
+             and `url` like "%"#{urlLike}"%"
+        </if>   
+        <if test="order != null and order != '' ">  
+           and `order` = #{order}
+        </if>  
+        <if test="status != null and status != '' ">  
+           and `status` = #{status}
+        </if>  
+        <if test="remark != null and remark != '' ">  
+           and `remark` = #{remark}
+        </if>  
+        <if test="remarkLike != null and remarkLike != '' ">  
+             and `remark` like "%"#{remarkLike}"%"
+        </if>   
+        <if test="createtime != null and createtime != '' ">  
+           and `createtime` = #{createtime}
+        </if>  
+        <if test="createtimeBegin != null and createtimeBegin != '' ">  
+             and `createtime` &gt;= #{createtimeBegin}
+        </if>   
+         <if test="createtimeEnd != null and createtimeEnd != '' ">  
+             and `createtime` &lt;= #{createtimeEnd}
+        </if> 
+  </select>
+ <select id="countByOrParams" parameterType="map" resultType="java.lang.Integer">
+    select
+    count(1)
+    from sys_resource where 1!=1
+        <if test="id != null and id != '' ">
+           or `id` = #{id}
+        </if>
+        <if test="pid != null and pid != '' ">
+           or `pid` = #{pid}
+        </if>
+        <if test="name != null and name != '' ">
+           or `name` = #{name}
+        </if>
+        <if test="code != null and code != '' ">
+           or `code` = #{code}
+        </if>
+        <if test="type != null and type != '' ">
+           or `type` = #{type}
+        </if>
+        <if test="url != null and url != '' ">
+           or `url` = #{url}
+        </if>
+        <if test="order != null and order != '' ">
+           or `order` = #{order}
+        </if>
+        <if test="status != null and status != '' ">
+           or `status` = #{status}
+        </if>
+        <if test="remark != null and remark != '' ">
+           or `remark` = #{remark}
+        </if>
+        <if test="createtime != null and createtime != '' ">
+           or `createtime` = #{createtime}
+        </if>
+  </select>
+</mapper>

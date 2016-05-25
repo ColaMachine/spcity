@@ -1,0 +1,280 @@
+<div class="rgt_body">
+    <div class="body_title">| 用户</div>
+        <div class="body_top" >
+            <form class="form-inline app-search">
+        <label for="userid">userid</label>
+            <input type="text" id="useridLike" name="useridLike"  class="form-control input-sm"   maxlength="40" placeholder="userid" ></input>
+        <label for="loginname">登录名</label>
+            <input type="text" id="loginnameLike" name="loginnameLike"  class="form-control input-sm"   maxlength="40" placeholder="登录名" ></input>
+        <label for="nickname">昵称</label>
+            <input type="text" id="nicknameLike" name="nicknameLike"  class="form-control input-sm"   maxlength="40" placeholder="昵称" ></input>
+        <label for="pwd">密码</label>
+            <input type="text" id="pwdLike" name="pwdLike"  class="form-control input-sm"   maxlength="40" placeholder="密码" ></input>
+        <label for="email">邮箱地址</label>
+            <input type="text" id="emailLike" name="emailLike"  class="form-control input-sm"   maxlength="40" placeholder="邮箱地址" ></input>
+        <label for="username">姓名</label>
+            <input type="text" id="usernameLike" name="usernameLike"  class="form-control input-sm"   maxlength="45" placeholder="姓名" ></input>
+        <label for="telno">手机号码</label>
+        <label for="createtime">创建时间</label>
+        <div class="input-group">
+            <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间" ></input>
+            <label class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></label>        </div>
+        <label for="createtimeBegin">创建时间开始</label>
+        <div class="input-group">
+            <input type="text" id="createtimeBegin" name="createtimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间开始" ></input>
+            <label class="input-group-addon" for="createtimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
+        <label for="createtimeEnd">创建时间结束</label>
+        <div class="input-group">
+            <input type="text" id="createtimeEnd" name="createtimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间结束" ></input>
+            <label class="input-group-addon" for="createtimeEnd" ><i class="fa fa-calendar"></i></label>        </div>
+        <label for="status">状态</label>
+            <select id="status" name="status"  class="form-control input-sm"  >
+                <option value=''>-请选择-</option>
+                <option value=1>未激活</option>
+                <option value=2>正常</option>
+                <option value=3>禁用</option>
+            </select>
+
+ <!-- 
+        <div class="form-group">
+            <label for="exampleInputName2">userid</label>
+          
+            <input type="text" class="form-control" id="userid" name="userid" placeholder="userid">
+           
+        </div>
+  
+        <div class="form-group">
+            <label for="exampleInputName2">登录名</label>
+          
+            <input type="text" class="form-control" id="loginname" name="loginname" placeholder="登录名">
+           
+        </div>
+  
+        <div class="form-group">
+            <label for="exampleInputName2">昵称</label>
+          
+            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="昵称">
+           
+        </div>
+  
+        <div class="form-group">
+            <label for="exampleInputName2">密码</label>
+          
+            <input type="text" class="form-control" id="pwd" name="pwd" placeholder="密码">
+           
+        </div>
+  
+        <div class="form-group">
+            <label for="exampleInputName2">邮箱地址</label>
+          
+            <input type="text" class="form-control" id="email" name="email" placeholder="邮箱地址">
+           
+        </div>
+  
+        <div class="form-group">
+            <label for="exampleInputName2">姓名</label>
+          
+            <input type="text" class="form-control" id="username" name="username" placeholder="姓名">
+           
+        </div>
+  
+        <div class="form-group">
+            <label for="exampleInputName2">手机号码</label>
+          
+            <input type="text" class="form-control" id="telno" name="telno" placeholder="手机号码">
+           
+        </div>
+  
+        <div class="form-group">
+            <label for="exampleInputName2">创建时间</label>
+          
+            <input type="text" class="form-control" id="createtime" name="createtime" placeholder="创建时间">
+           
+        </div>
+  
+        <div class="form-group">
+            <label for="exampleInputName2">状态</label>
+          
+            <input type="text" class="form-control" id="status" name="status" placeholder="状态">
+           
+        </div>
+  -->
+  
+                <button type="button" onclick="search()" class="btn btn-default">查询</button>
+            </form>
+        <div >
+            <button class="btn" onclick="addInfo()">新增</button>
+            <button class="btn" onclick="multiDelete()">删除</button>
+            <button class="btn" onclick="exportExcel()">导出</button>
+        </div>
+    </div>
+    <div id="grid" class="grid"></div>
+    <div id="grid-pager" class="pager"></div>
+    <div class="modal" id="mymodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">模态弹出窗标题</h4>
+                </div>
+                <div class="modal-body">
+                    <p>模态弹出窗主体内容</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+<script>
+var gridParam = {
+    page:{
+        curPage : 1,
+        pageSize : 10
+    },
+    multiselect : true,
+    url : PATH+'/user/list.json',
+    grid_selector : "#grid",
+    pager_selector : "#grid-pager",
+    searchParams : {
+        name : ''
+    },
+    colNames : [
+     "userid","登录名","昵称","密码","邮箱地址","姓名","手机号码","创建时间","状态" , '操作' ],
+    colModel : [
+            {
+                name : 'userid',
+                width : 80,
+            } ,
+            {
+                name : 'loginname',
+                width : 80,
+            } ,
+            {
+                name : 'nickname',
+                width : 80,
+            } ,
+            {
+                name : 'pwd',
+                width : 80,
+            } ,
+            {
+                name : 'email',
+                width : 80,
+            } ,
+            {
+                name : 'username',
+                width : 80,
+            } ,
+            {
+                name : 'telno',
+                width : 80,
+            } ,
+            {
+                name : 'createtime',
+                width : 80,
+                 formatter : function(value, grid, rows) {
+                    return new Date(value).format("yyyy-MM-dd");
+                }
+            } ,
+            {
+                name : 'status',
+                width : 80,
+                formatter : function(value, grid, rows) {
+                    var map ={'3':'禁用','2':'正常','1':'未激活',};
+                    return map[value];
+                }
+            } 
+            ,
+            {
+                name : 'id',
+                width : 150,
+                formatter : function(value, grid, rows) {
+                    return getViewHtml(value)+getEditHtml(value)+getDelHtml(value);
+                }
+            } ]
+            /*
+             * ondblClickRow: function(id){
+             * 
+             * alert("双击选中"+id);
+             *  },
+             */
+         /*
+             * onSelectRow: function(id){ alert("单击选中"+id); },
+             */
+};
+var newWindow=false;
+var mygrid = $("#grid").jqGrid(this.gridParam); 
+function addInfo(){
+    showDialogue('/user/edit.htm');
+}
+
+function editInfo(id){
+    showDialogue("/user/edit.htm?id="+id);
+}
+function search(){
+    var jso = changeForm2Jso(".app-search");
+    mygrid.jqGrid("search",jso);
+}
+function deleteInfo(id){
+     //弹窗
+     zconfirm("确定删除数据:"+id,"删除",function(){
+        Post(PATH+"/user/del.json?userid="+id,function(result){
+            result=ajaxResultHandler(result);
+            if(result.r==AJAX_SUCC){
+                zalert("删除成功，数据："+id,"删除",function(){
+                $("#grid").jqGrid("reloadGrid");
+            });
+            }else {
+                zerror(result.msg,"提醒",function(){});
+            }
+        });
+    });
+}
+function viewInfo(id){
+    showDialogue("/user/view.htm?id="+id);
+}
+function search(){
+    var jso= changeForm2Jso(".app-search");
+    console.log(jso);
+    mygrid.search(jso);
+}
+function exportExcel(){
+    var jso= changeForm2Jso(".app-search");
+    GetJSON(PATH+"/user/export.json",jso,function(data){
+        if(data.r==AJAX_SUCC){
+            window.location=PATH+"/"+data.data;
+        }else{
+            zerror(data.msg,"导出失败",null);
+        }
+    })
+}
+function multiDelete(){
+    //获取ids字符串
+    var ids=$("#grid").jqGrid("getGridParam","selarrrow");
+    if(ids.length==0){
+        zalert("请勾选数据","提示");
+        return;
+    }
+    var data= $("#grid").jqGrid("getGridParam","data");
+    for(var i=0;i<ids.length;i++){
+        ids[i]=data[ids[i]]["id"]; 
+    }
+    //弹窗
+    zconfirm("确定删除数据:"+ids.join(","),"删除",function(){
+        Post(PATH+"/user/mdel.json?ids="+ids.join(","),function(result){
+            result=ajaxResultHandler(result);
+            if(result.r==AJAX_SUCC){
+                zalert("删除成功，数据："+ids.join(","),"删除",function(){
+                $("#grid").jqGrid("reloadGrid");
+            });
+            }else {
+                zerror(result.msg,"提醒",function(){});
+            }
+        });
+    });
+}
+</script>
+

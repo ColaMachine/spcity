@@ -1,0 +1,26 @@
+@charset "UTF-8";
+/**
+ * index
+ * @authors pingyf
+ * @date    2015-10-30 11:39:45
+ * @version $Id$
+ */
+
+/*用于获取更加体验*/
+
+.carousel-edit {
+	padding: 10px 0;
+}
+
+.focus span {
+	width: 10px;
+	height: 10px;
+	margin-right: 10px;
+	border-radius :50%;
+	background: #ffffff;
+	font-size: 0;
+}
+
+.focus span.current {
+	background: #FF7054;
+}

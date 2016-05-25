@@ -1,0 +1,208 @@
+ <div class="modal-content">
+    <form id="sysResourceEditForm" class="form-horizontal" method="post" action="/sysResource/save.json" enctype="multipart/form-data">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">资源配置编辑</h4>
+        </div>
+        <div class="modal-body">
+                <input type="hidden" id="id" name="id"  class="form-control input-sm" >
+    <div class="form-group">
+        <label for="pid" class="col-sm-2 control-label">父主键:</label>
+        <div class="col-sm-10">
+            <input type="number" id="pid" name="pid"  class="form-control input-sm"  maxlength="10" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">资源名称:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="name" name="name"  class="form-control input-sm"   maxlength="20"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="code" class="col-sm-2 control-label">资源代码:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="code" name="code"  class="form-control input-sm"   maxlength="20"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="type" class="col-sm-2 control-label">资源分类:</label>
+        <div class="col-sm-10">
+            <select  id="type" name="type"  class="form-control input-sm"  >
+                <option value=''>-请选择-</option>
+                <option value=menu>菜单</option>
+                <option value=unknow>非菜单</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="url" class="col-sm-2 control-label">资源对应URL:</label>
+        <div class="col-sm-10">
+            <textarea  id="url" name="url"  class="form-control input-sm"   maxlength="255"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="order" class="col-sm-2 control-label">排序id:</label>
+        <div class="col-sm-10">
+            <input type="number" id="order" name="order"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="status" class="col-sm-2 control-label">状态:</label>
+        <div class="col-sm-10">
+            <select  id="status" name="status"  class="form-control input-sm"  >
+                <option value=''>-请选择-</option>
+                <option value=1>启用</option>
+                <option value=2>禁用</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="remark" class="col-sm-2 control-label">备注:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="remark" name="remark"  class="form-control input-sm"   maxlength="20"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="createtime" class="col-sm-2 control-label">创建时间:</label>
+        <div class="col-sm-10 z-col-table">
+            <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  ></input>
+            <label class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></label>        </div>
+    </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button"  class="btn btn-primarys saveBtn">保存</button>
+            <button type="button" class="btn btn-default cancelBtn">取消</button>
+        </div>
+    </form>
+</div><!-- /.modal-content -->
+        
+<script type="text/javascript">
+var sysResourceEdit={
+    form:null,
+    modal:false,
+    formId:"#sysResourceEditForm",
+    validParam:{
+        rules: {
+                   id:{
+            digits:true
+        },
+        pid:{
+            digits:true,required:true
+        },
+        name:{
+            maxlength:20,required:true
+        },
+        code:{
+            maxlength:20,required:true
+        },
+        type:{
+            maxlength:20,required:true
+        },
+        url:{
+            maxlength:255
+        },
+        order:{
+            digits:true
+        },
+        status:{
+            CheckBox:["1","2"],digits:true,required:true
+        },
+        remark:{
+            maxlength:20
+        },
+        createtime:{
+            ymd:"yyyy-MM-dd HH:mm:ss"
+        },
+
+        },
+        messages:{
+                   id:{
+            digits:"必须输入整数"
+        },
+        pid:{
+            digits:"必须输入整数"
+        },
+        name:{
+            maxlength:"name不能多于20个字符"
+        },
+        code:{
+            maxlength:"code不能多于20个字符"
+        },
+        type:{
+            maxlength:"type不能多于20个字符"
+        },
+        url:{
+            maxlength:"url不能多于255个字符"
+        },
+        order:{
+            digits:"必须输入整数"
+        },
+        status:{
+            CheckBox:"必须输入'1','2'中的值",digits:"必须输入整数"
+        },
+        remark:{
+            maxlength:"remark不能多于20个字符"
+        },
+        createtime:{
+            ymd:"必须输入合法日期"
+        },
+
+        }
+    },
+    addEventListener:function(){
+        this.form.find(".saveBtn").click(this.saveInfo);
+        this.form.find(".cancelBtn").click(this.cancel);
+    },
+    init:function(){
+        this.form=$(this.formId);
+        this.addEventListener();
+        $("#sysResourceEditForm").validate(this.validParam);
+        Ajax.getJSON("sysResource/view.json?id="+getParam("id"),null,function(data){
+            if(data.r==AJAX_SUCC){
+            if(data.data.bean){
+                fillJso2Form("#sysResourceEditForm",data.data.bean);
+            }
+            }else{
+                dialog.error("获取信息失败"+data.msg,function(index){
+                    goPage("sysResource/list.htm");
+                   dialog.close(index);
+                });
+            }
+        });
+    },
+    saveInfo:function(){
+        if (!$("#sysResourceEditForm").valid())
+            return;
+        var jso = changeForm2Jso("#sysResourceEditForm");
+        var dialogId=dialog.showWait();
+        var that=this;
+        Ajax.post(PATH+$("#sysResourceEditForm").attr("action"),jso,function(data){
+            dialog.hideWait(dialogId);
+            if(data.r==0){
+                dialog.alert(data.msg||"保存成功",function(index){
+                    //goPage("sysResource/list.htm");
+                     sysResourceEdit.cancel();
+                    if(this.modal){
+                        $("#sysResourceGrid").jqGrid("reloadGrid");
+                    }
+                     dialog.close(index);
+                });
+            }else{
+                dialog.error(data.msg);
+            }
+        },'json');
+    },
+    cancel:function(){
+        if(this.modal){
+                $("#mymodal").modal("toggle");
+        }else{
+            goPage("sysResource/list.htm");
+        }
+    }
+}
+$(document).ready(function() {
+    //获取传入参数
+ sysResourceEdit.init();
+});
+</script>

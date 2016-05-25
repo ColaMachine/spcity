@@ -1,0 +1,121 @@
+body, div, dl, dt, dd, ul, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, blockquote {
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+	
+		text-transform: none !important;
+		letter-spacing: 0px !important;
+		font-family: 微软雅黑,Microsoft YaHei,Helvetica,Tahoma,StSun,宋体,SimSun,sans-serif !important;
+		font-style: normal !important;
+	}
+		div.curtain {
+			background: #3B5998;
+		}
+		div.wrapper {
+			overflow: hidden;
+			padding:20px 10px 10px 0;
+			margin: 0 auto;
+			width: 950px;
+			margin: 0px auto;
+			height:auto!important;  
+			height:62px;  
+			min-height:62px;
+		}
+		div.login {
+			width:350px;
+			color: #FFFFFF;
+			float: right;
+			margin: auto 0px auto auto;
+			margin-left:  0px;
+			height: 42;
+		}
+		div.logo {
+			margin: auto 0;
+			
+			text-align: center;
+			height: 42;
+			display: table-cell;
+			line-height: 100%;
+			vertical-align: middle;
+			float: left;
+			width: 200px;
+			font-size: 25px;
+			color: #FFFFFF;
+			font-weight: bold;
+		}
+
+		div.item-account {
+			float: left
+		}
+		div.item-password {
+			float: left;
+			margin-left: 5px
+		}
+		div.item-submit {
+			float: left;
+			vertical-align: middle;
+			height: 100%;
+			margin-left: 5px
+		}
+		fieldset.login-fie {
+			border: 0px
+		}
+		.login input{
+			height:24px;
+		}
+		.left-main{
+				display:block;
+			float:left;
+			width:60%;
+			height:60%;
+			
+			margin-top:0px;
+		}
+		.register-box{
+			
+			display:block;
+			float:right;
+			
+			width:40%;
+			height:60%;
+			margin:0px;
+			padding:0px;
+			
+		}
+		.main-content{
+			/*position:relative;
+			 	word-wrap:break-word; 
+			 	border:0;margin:0;border-collapse:collapse;border-spacing:0;
+			 * */
+			display:block;
+		
+			margin:0px;
+			padding:0px;
+			border:0;margin:0;border-collapse:collapse;border-spacing:0;
+			word-spacing:0px;
+			word-spacing:0px;
+		}
+		.tips{
+			color:red;
+		}
+		
+		
+		/*DL, DT, DD TAGS LIST DATA*/
+dl {
+margin-bottom:50px;
+}
+dl dt {
+background:#5f9be3;
+color:#fff;
+float:left;
+font-weight:bold;
+margin-right:10px;
+padding:5px;
+width:100px;
+}
+dl dd {
+margin:2px 0;
+padding:5px 0;
+} 

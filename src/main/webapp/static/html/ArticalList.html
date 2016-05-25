@@ -1,0 +1,284 @@
+
+<div id="ArticalList">
+    <div class="main-hd">
+        <h3> 新闻咨询</h3>
+
+       <!-- <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#">新建</a></li>
+            <li role="presentation"><a href="#">审核通过</a></li>
+            <li role="presentation"><a href="#">驳回</a></li>
+        </ul>-->
+
+    </div>
+
+
+<div class="main-bd">
+    <div class="body_top" >
+        <form class="form-inline app-search">
+            <label for="id">主键</label>
+            <input type="number" id="id" name="id"  class="form-control input-sm"  maxlength="15" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="主键"></input>
+            <label for="title">标题</label>
+            <input type="text" id="titleLike" name="titleLike"  class="form-control input-sm"   maxlength="40" placeholder="标题" ></input>
+            <label for="content">正文</label>
+            <input type="text" id="contentLike" name="contentLike"  class="form-control input-sm"   maxlength="4000" placeholder="正文" ></input>
+            <label for="type">类型</label>
+            <select id="type" name="type"  class="form-control input-sm"  >
+                <option value=''>-请选择-</option>
+                <option value=1>合作伙伴</option>
+                <option value=2>产业峰会</option>
+                <option value=3>案例分析</option>
+            </select>
+            <label for="status">状态</label>
+            <select id="status" name="status"  class="form-control input-sm"  >
+                <option value=''>-请选择-</option>
+                <option value=1>新建</option>
+                <option value=2>提交</option>
+                <option value=3>审核通过</option>
+                <option value=4>驳回</option>
+                <option value=5>删除</option>
+            </select>
+            <label for="remark">备注</label>
+            <input type="text" id="remarkLike" name="remarkLike"  class="form-control input-sm"   maxlength="200" placeholder="备注" ></input>
+            <label for="createtime">创建时间</label>
+            <div class="input-group">
+                <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间" ></input>
+                <label class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></label>        </div>
+            <label for="createtimeBegin">创建时间开始</label>
+            <div class="input-group">
+                <input type="text" id="createtimeBegin" name="createtimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间开始" ></input>
+                <label class="input-group-addon" for="createtimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
+            <label for="createtimeEnd">创建时间结束</label>
+            <div class="input-group">
+                <input type="text" id="createtimeEnd" name="createtimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间结束" ></input>
+                <label class="input-group-addon" for="createtimeEnd" ><i class="fa fa-calendar"></i></label>        </div>
+            <label for="updatetime">更新时间</label>
+            <div class="input-group">
+                <input type="text" id="updatetime" name="updatetime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间" ></input>
+                <label class="input-group-addon" for="updatetime" ><i class="fa fa-calendar"></i></label>        </div>
+            <label for="updatetimeBegin">更新时间开始</label>
+            <div class="input-group">
+                <input type="text" id="updatetimeBegin" name="updatetimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间开始" ></input>
+                <label class="input-group-addon" for="updatetimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
+            <label for="updatetimeEnd">更新时间结束</label>
+            <div class="input-group">
+                <input type="text" id="updatetimeEnd" name="updatetimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间结束" ></input>
+                <label class="input-group-addon" for="updatetimeEnd" ><i class="fa fa-calendar"></i></label>        </div>
+
+            <a type="button"  class="btn btn-default searchBtn">查询</a>
+        </form>
+       <!-- <div class="row">
+
+            <div class="col-lg-4">
+                <div class="input-group input-sm">
+                    <input type="text" class="form-control" placeholder="标题">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><i class="fa fa-search"></i>&nbsp;</button>
+      </span>
+                </div>&lt;!&ndash; /input-group &ndash;&gt;
+            </div>&lt;!&ndash; /.col-lg-6 &ndash;&gt;
+            <div class="col-md-3 col-md-offset-5">
+            <a   class="btn addBtn btn-success" ><i class="fa fa-plus"></i>新增新闻资讯</a>
+                </div>
+        </div>&lt;!&ndash; /.row &ndash;&gt;-->
+
+                <a   class="btn addBtn btn-success" ><i class="fa fa-plus"></i>新增新闻资讯</a>
+    </div>
+        <table id="ArticalGrid" class="grid"></table>
+        <div id="ArticalGrid-Pager" class="pager"></div>
+        <div id="content-row" class="row"></div>
+
+
+</div>
+<script>
+
+var articalList={
+    modal:false,
+    mygrid:null,
+    treeObj:null,
+    dqData:null,
+    root:$("#ArticalList"),
+    init:function(){
+        this.mygrid =this.root.find(".grid").jqGrid(this.gridParam);
+
+
+        this.addEventListener();
+
+    },
+    getData:function(){
+
+        Ajax.getJSON(PATH+"/artical/list.json",{curPage:1,pageSize:10},function(result){
+           var html='';
+            for(var i=0;i<result.data.length;i++){
+            var data =result.data[i];
+                html+=
+  '<div class="col-sm-6 col-md-4">'+
+    '<div class="thumbnail" style="overflow:hidden;">'+
+      '<img src="'+data.pic+'" alt="...">'+
+      '<div class="caption">'+
+      '  <h3>'+data.title+'</h3>'+
+     '   <p style="overflow:hidden;">'+data.content+'.</p>'+
+    '    <p><a href="#" class="btn btn-primary" role="button">编辑</a> <a href="#" class="btn btn-default" role="button">删除</a></p>'+
+   '   </div>'+
+  '  </div>'+
+ ' </div>'
+
+            }
+$('#content-row').append(html);
+        });
+
+    },
+    addEventListener:function(){
+        $(this.root).find(".addBtn").click(this.addInfo.Apply(this));
+        $(this.root).find(".editBtn").click(this.editInfo.Apply(this));
+        $(this.root).find(".deleteBtn").click(this.multiDelete.Apply(this));
+        $(this.root).find(".searchBtn").click(this.searchInfo.Apply(this));
+    },
+    gridParam:{
+        datatype: "json",
+        viewrecords: true, sortorder: "desc", caption:"",
+        rowNum:10,
+        rowList:[10,20,30],
+        multiselect : false,
+        url : PATH+'/artical/list.json',
+        autowidth:true,
+        grid:"#ArticalGrid",
+        pager:"#ArticalGrid-Pager",
+        jsonReader:jsonReader,
+        colNames : [
+        "编号","标题","正文","类型","状态","备注","创建时间","更新时间" , '操作' ],
+        colModel : [
+            {   name : 'id',width : 80,
+            } ,
+            {   name : 'title',width : 80,
+            } ,
+            {   name : 'content',width : 80,
+                formatter : function(value, grid, rows) {
+
+                  return value.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+                }
+
+            } ,
+            {   name : 'type',width : 80,
+                formatter : function(value, grid, rows) {
+                  var map ={'3':'案例分析','2':'产业峰会','1':'合作伙伴',};
+                  return map[value];
+                }
+            } ,
+            {   name : 'status',width : 80,
+                formatter : function(value, grid, rows) {
+                  var map ={'3':'审核通过','2':'提交','1':'新建','5':'删除','4':'驳回',};
+                  return map[value];
+                }
+            } ,
+            {   name : 'remark',width : 80,
+            } ,
+            {   name : 'createtime',width : 80,
+                formatter : function(value, grid, rows) {
+                  return new Date(value).format("yyyy-MM-dd");
+                }
+            } ,
+            {   name : 'updatetime',width : 80,
+                formatter : function(value, grid, rows) {
+                  return new Date(value).format("yyyy-MM-dd");
+                }
+            } 
+              ,
+            {   name : 'operation',
+                width : 150,
+                formatter : function(value, grid, rows) {
+                    var str= getViewHtml(rows.id,"articalList")+getEditHtml(rows.id,"articalList")+getDelHtml(rows.id,"articalList");
+                   // alert(rows.status);
+                   /* if(rows.status==1 && Auth.hasResource("Res_ArticalAuth")){
+                        str +=gridHelper.getAuditHtml(rows.id,"articalList");
+                    }*/
+                    return str;
+                }
+            }
+        ],
+        onSelectRow: function(id){ //alert("单击选中"+id);
+        },
+        loadComplete:function(data){
+            dqData=data;
+
+        }
+    },
+    saveInfo:function(){
+    },
+    addInfo:function (){
+        dialog.window('/artical/edit.htm',this.modal);
+    },
+    editInfo:function (id){
+        dialog.window("/artical/edit.htm?id="+id,this.modal);
+    },
+    auditInfo:function(id){
+    dialog.window("/artical/audit.htm?id="+id,this.modal);
+    },
+    searchInfo:function (){
+        var jso = changeForm2Jso(".app-search");
+
+        this.mygrid.jqGrid("setGridParam", { search: true ,"postData":jso}).trigger("reloadGrid", [{ page: 1}]);  //重载JQGrid
+
+    },
+
+    viewInfo:function (id){
+        dialog.window("/artical/view.htm?id="+id,this.modal);
+    },
+
+    exportInfo:function (){
+        var jso= changeForm2Jso(".app-search");
+        Ajax.getJSON(PATH+"/artical/export.json",jso,function(data){
+            if(data.r==AJAX_SUCC){
+                window.location=PATH+"/"+data.data;
+            }else{
+                dialog.error(data.msg,"导出失败",null);
+            }
+        })
+    },
+    deleteInfo:function (id){
+        var that =this;
+         //弹窗
+        dialog.confirm("确定删除数据:"+id,function(){
+            Ajax.post(PATH+"/artical/del.json",{id:id},function(result){
+                result=ajaxResultHandler(result);
+                if(result.r==AJAX_SUCC){
+                    var did=dialog.alert("删除成功，数据："+id,function(index){
+                    that.mygrid.trigger("reloadGrid");
+                    dialog.close(did);
+                });
+                }else {
+                    dialog.error(result.msg,"提醒");
+                }
+            });
+        });
+    },
+    multiDelete:function (){
+        //获取ids字符串
+        var ids=this.mygrid.jqGrid("getGridParam","selarrrow");
+        if(ids.length==0){
+            dialog.alert("请勾选数据");
+            return;
+        }
+        for(var i=0;i<ids.length;i++){
+            var data= this.mygrid.jqGrid("getRowData",ids[i]);
+            ids[i]=data["id"];
+        }
+        //弹窗
+        var that=this;
+        var dialogid= dialog.confirm("确定删除数据:"+ids.join(","),function(){
+            Ajax.post(PATH+"/artical/mdel.json?",{ids:ids.join(",")},function(result){
+                result=ajaxResultHandler(result);
+                if(result.r==AJAX_SUCC){
+                    dialogid=dialog.alert("删除成功，数据："+ids.join(","),function(index){
+                    that.mygrid.trigger("reloadGrid");
+                    dialog.close(dialogid);
+                });
+                }else {
+                    dialog.error(result.msg);
+                }
+            });
+        });
+    }
+};
+articalList.init()
+</script>
+

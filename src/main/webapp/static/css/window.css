@@ -1,0 +1,152 @@
+/* ==================== Window Modules ==================== */
+.window{color:black;border:5px solid #CCC;box-shadow: 0 3px 15px #333;background-color:#FFF;overflow:hidden;}
+.window-common{position:absolute;z-index:1;top:50%;left:50%;margin:-245px 0 0 -385px;width:760px;height:480px;}
+/* ==================== Window Modules ==================== */
+
+
+/* ==================== Window Title Bar ==================== */
+.window-title-bar{margin:0 auto;width:100%;height:30px;line-height:30px;border-bottom:2px solid #CCC;background-color:#F7F7F7;overflow:hidden;}
+.window-title-bar h2{margin:0 auto;margin-top:5px;width:100%;text-indent:8px;font-size:14px;text-align:left;overflow:hidden;}
+.window-title-buttons{position:absolute;z-index:2;top:7px;right:7px;height:16px;overflow:hidden;}
+.window-title-buttons a{float:left;width:16px;height:16px;text-indent:0px;cursor:pointer;overflow:hidden;}
+.window-title-buttons a,.window-title-buttons a:link,.window-title-buttons a:visited,.window-title-buttons a:active,.window-title-buttons a:hover{text-decoration:none;}
+.window-close-bar{background-image:url(http://www.yaohaixiao.com/img/icon/closebutton.gif);}
+/* ==================== Window Title Bar ==================== */
+
+
+/* ==================== Window Tools Pannel ==================== */
+.window-tools-pannel{margin:0 auto;width:750px;padding:5px;border-bottom:1px solid #CCC;height:26px;background-color:#F7F7F7;overflow:hidden;}
+
+.window-toolbar{margin:0;}
+
+.tool-button{float:left;width:22px;height:22px;margin:2px;display:inline;list-style-type:none;overflow:hidden;}
+.tool-button a{text-decoration:none;display:block;padding:2px;border:1px solid #F7F7F7;text-indent:-999px;cursor:pointer;}
+.window-toolbar .current a,.tool-button a:hover{border:1px solid #CCC;}
+.tool-button a,.tool-button span{display:block;width:16px;height:16px;overflow:hidden;}
+.tool-button span{background-image:url(http://www.yaohaixiao.com/img/tools.gif);background-repeat:no-repeat;}
+
+.tool-split{float:left;color:#C1AF87;width:10px;text-align:center;height:28px;line-height:24px;overflow:hidden;}
+
+.tool-w30{width:30px;}
+.tool-w30 a{width:24px;}
+.tool-w78{width:78px;}
+
+/* ========== Tool Buttons ========== */
+.btn-fontcolor span{background-position:0 -383px;}
+.btn-fontbg span{background-position:-2px -400px;}
+.btn-redo span{background-position:0 -64px;}
+.btn-undo span{background-position:0 -48px;}
+.btn-cut span{background-position:0 -80px;}
+.btn-copy span{background-position:0 -96px;}
+.btn-paste span{background-position:0 -112px;}
+.btn-headline span{background-position:0 -336px;}
+.btn-font span{background-position:2px -352px;}
+.btn-fontsize span{background-position:0 -368px;}
+.btn-headline,.btn-font,.btn-fontsize,.btn-headline span,.btn-font span,.btn-fontsize span{width:24px;}
+.btn-bold span{background-position:0 -416px;}
+.btn-italy span{background-position:0 -432px;}
+.btn-underline span{background-position:0 -448px;}
+.btn-deleteline span{background-position:0 -464px;}
+.btn-clearformat span{background-position:0 -480px;}
+.btn-addimg span{background-position:0 -496px;}
+.btn-addflash span{background-position:0 -512px;}
+.btn-addvedio span{background-position:0 -528px;}
+.btn-addface span{background-position:0 -608px;}
+.btn-deletelink span{background-position:0 -640px;}
+.btn-addlink span{background-position:0 -624px;}
+.tool-button .btn-history{width:72px;text-indent:0;overflow:hidden;}
+.btn-history span{float:left;margin-right:2px;display:inline;text-indent:-999px;}
+/* ========== Editor Buttons ========== */
+/* ==================== Window Tools Pannel ==================== */
+
+
+/* ==================== Window Content ==================== */
+.window-content{padding:10px;}
+.window-content,.window-buttons-bar,.window-status-bar{position:relative;z-index:1;margin:0 auto;clear:both;}
+/* ==================== Window Content ==================== */
+
+
+/* ==================== Window Buttons Bar ==================== */
+.window-buttons-bar{text-align:right;padding:5px;}
+.window-buttons-bar .button{margin-left:5px;width:80px;height:28px;cursor:pointer;}
+/* ==================== Window Buttons Bar ==================== */
+
+
+/* ==================== Window Header Selector ==================== */
+.window-head-selector{position:fixed;z-index:1025;top:50%;left:50%;margin:-170px 0 0 -320px;width:620px;height:320px;overflow:hidden;}
+.chat-head-content{margin:0;width:620px;height:240px;padding:5px 0;overflow:auto;}
+/* ========== Head List ========== */
+.chat-head-list{margin:0;width:600px;padding-left:3px;height:240px;}
+.chat-head-list li{position:relative;z-index:1;float:left;margin:5px;width:110px;height:110px;display:inline;}
+.chat-head-list a{display:block;overflow:hidden;}
+.chat-head-list img{border:1px solid #CCC;padding:3px;width:100px;height:100px;}
+.chat-head-list li.current img,.chat-head-list a:hover img{border-color:#C80000;}
+.chat-head-list li.current a{background-color:#F7F7F7;border:none;}
+.chat-head-checkbox{position:absolute;z-index:2;bottom:3px;right:3px;}
+/* ========== Head Uploader ========== */
+.chat-head-uploader{position:relative;z-index:1;width:620px;height:240px;overflow:hidden;}
+.chat-uploaded-image{position:absolute;z-index:2;top:0;left:0;width:172px;height:240px;padding-left:5px;padding-right:5px;border-right:1px solid #CCC;overflow:hidden;}
+.chat-upload-head{position:relative;z-index:1;margin:0 auto;padding:4px;border:1px solid #CCC;overflow:hidden;}
+.chat-upload-head,.chat-upload-head img{width:162px;height:162px;}
+.lnk-delete-image{position:absolute;z-index:2;right:4px;bottom:4px;width:16px;height:16px;background-image:url(http://www.yaohaixiao.com/img/icon/delete.jpg);text-indent:-999px;overflow:hidden;}
+.chat-uploaded-image h3{margin:8px 0;height:20px;line-height:20px;overflow:hidden;}
+.chat-uploaded-image h3,.frm-imgupload{text-align:center;}
+.btn-upload-image{margin-right:5px;}
+.chat-uploader-pannel{padding-left:188px;width:432px;height:240px;overflow:hidden;}
+.chat-my-uploade-title{margin:0;width:427px;padding:0 5px 5px;height:20px;line-height:20px;border-bottom:1px solid #CCC;text-align:left;overflow:hidden;}
+.chat-uploader-list{width:100%;height:170px;padding:5px 0;border-bottom:1px solid #CCC;overflow:auto;}
+.chat-my-upload-list{margin:0;overflow:hidden;}
+.chat-my-upload-list li{position:relative;z-index:1;float:left;margin:5px 3px 0 0;width:80px;height:80px;display:inline;overflow:hidden;}
+.chat-my-upload-list a{display:block;overflow:hidden;}
+.chat-my-upload-list img{width:72px;height:72px;padding:2px;border:1px solid #CCC;}
+.chat-my-upload-list li.current img,.chat-my-upload-list a:hover img{border-color:#C80000;}
+.chat-my-upload-list li.current a{background-color:#F7F7F7;border:none;}
+.chat-uploader-pannel p{padding:5px;height:23px;line-height:25px;overflow:hidden;}
+/* ========== Head Buttons ========== */
+.chat-head-buttons{padding-top:5px;height:30px;text-align:right;border-top:1px solid #CCC;}
+.chat-head-buttons button{margin-left:5px;width:80px;cursor:pointer;}
+/* ========== Head Tabs ========== */
+.chat-head-tabs{position:absolute;z-index:2;left:0;top:-1px;width:200px;border-bottom:none;}
+.chat-head-tabs li.current a,.tabs a:hover{border-top:1px solid #FFF;border-bottom:1px solid #CCC;}
+/* ==================== Window Header Selector ==================== */
+
+
+/* ==================== Window Dialog ==================== */
+.window-dialog{position:fixed;z-index:1025;left:50%;top:50%;margin-left:-190px;width:360px;overflow:hidden;}
+.window-dialog .window-content{padding:30px 20px 30px 64px;background:url(http://www.yaohaixiao.com/img/icon/help.png) 10px 26px no-repeat;overflow:hidden;}
+.window-dialog .window-content p{line-height:150%;margin:0;}
+
+.window-error .window-content{background-image:url(http://www.yaohaixiao.com/img/icon/error.png);}
+.window-info .window-content{background-image:url(http://www.yaohaixiao.com/img/icon/info.png);}
+.window-warn .window-content{background-image:url(http://www.yaohaixiao.com/img/icon/warning.png);}
+.window-correct .window-content{background-image:url(http://www.yaohaixiao.com/img/icon/correct.png);}
+
+.window-ie6-fixed{position:absolute;}
+.iframe-hack{margin:0 auto;width:100%;height:100%;border:0;filter:Alpha(opacity=0);opacity:0;overflow:hidden;}
+.draggable{cursor:move;}
+
+.shardow{position:absolute;z-index:1024;top:0;left:0;width:100%;height:100%;background-color:#333;filter:Alpha(opacity=50);opacity:0.5;overflow:hidden;}
+/* ==================== Window Dialog ==================== */
+
+
+
+
+/* jDialog */
+#jDialog_Overlay {background-color:#000;position:fixed;top:0;left:0;width:100%;height:100%;padding:0;margin:0;-moz-opacity:0.5;-khtml-opacity:0.5;opacity:0.5;filter:alpha(opacity=50);z-index:7999;}
+#jDialog {background-color:#fff;overflow:hidden;position:absolute;-moz-box-shadow:0 0 10px rgba(0,0,0,0.5);-webkit-box-shadow:0 0 10px rgba(0,0,0,0.5);box-shadow:0 0 10px rgba(0,0,0,0.5);z-index:8000;}
+#jDialog .jDialog-Title {background-color:#333;height:20px;padding:8px 8px 8px 12px;}
+#jDialog .jDialog-Title span {display:block;font-size:16px;line-height:20px;height:20px;color:#fff;float:left;}
+#jDialog .jDialog-Title a {display:block;background:url(images/jdialog_close.gif) no-repeat 50% 50%;text-align:center;text-decoration:none;color:#fff;line-height:20px;width:20px;height:20px;overflow:hidden;float:right;-moz-opacity:0.5;-khtml-opacity:0.5;opacity:0.5;filter:alpha(opacity=50);}
+#jDialog .jDialog-Title a:hover{-moz-opacity:1;-khtml-opacity:1;opacity:1;filter:alpha(opacity=100);}
+#jDialog .jDialog-Container {width:auto;overflow:hidden;}
+#jDialog .jDialog-Container span.jDialog-Text {display:block;font-size:14px;line-height:24px;padding:20px 30px;}
+#jDialog .jDialog-Container .loading {background:url(images/diag_loading.gif) no-repeat center center;width:100%;height:100%;}
+#jDialog .jDialog-Container .loadfailed {}
+#jDialog .jDialog-Container .winpage {width:auto;padding:20px;}
+#jDialog .jDialog-Container .winpage label {display:block;line-height:30px;height:30px;margin-right:15px;float:left;}
+#jDialog .jDialog-Container .loadfailed {padding:20px;}
+#jDialog .Scroll {overflow-x:hidden;overflow-y:auto;}
+#jDialog .jDialog-Buttons {height:24px;padding:15px;}
+#jDialog .jDialog-Buttons span {display:block;line-height:24px;height:24px;float:left;}
+#jDialog .jDialog-Buttons button {display:block;font-size:12px;line-height:22px;background-color:#fff;color:#24786b;width:60px;height:24px;margin:0 0 0 15px;border:1px solid #24786b;float:right;cursor:pointer;}
+#jDialog .jDialog-Buttons button:hover {background-color:#5497bb;color:#fff;}

@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/**
+ * password
+ * @authors pingyf
+ * @date    2015-10-27 16:37:49
+ * @version $Id$
+ */
+
+.container {
+	padding-top: 30px;
+	padding-bottom: 25px;
+}
+
+ .container input {
+    padding: 15px 0;
+    margin-bottom: 25px;
+ }
+ 
+.submit {
+	margin-top: 0px;
+}

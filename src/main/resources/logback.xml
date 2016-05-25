@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	debug="true" 	启动时输出配置加载信息
+	scan="true" 	默认每分钟自动扫描
+	scanPeriod="30 seconds" 	设置每30秒自动扫描,若没有指定具体单位则以milliseconds为标准(单位:milliseconds, seconds, minutes or hours)
+	这个应该是每过多少秒查看是否存在日志文件
+-->
+<configuration scan="true" scanPeriod="30 seconds">
+	 <contextName>MerchanManageLogging</contextName>
+	 
+	 <root level="ERROR">
+		<appender-ref ref="console" level="INFO"/>
+		<appender-ref ref="file"  level="INFO"/>
+	</root>
+	
+	<property name="tip" value="信息:" />
+	<!--tomcat 的log路径-->
+	<property name="logback.logs.path" value="${catalina.base}/logs/" />
+	<!--项目名-->
+	<property name="logback.project.name" value="MerchanManage" /> -->
+	<!--日志模块名-->
+	<property name="logback.logs.module.name" value="default" /> -->
+	
+	<timestamp key="byDay" datePattern="yyyyMMdd"/>
+	
+	<!--appender 模块-->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder charset="UTF-8">
+			<pattern>%n[%level] - %date - %logger#%line%n ${tip} %msg%n</pattern>
+		</encoder>
+		<target>System.err</target>
+	</appender>
+	
+	
+	<appender name="file" class="ch.qos.logback.core.FileAppender" >
+		<file>${logback.logs.path}${logback.project.name}/log_${byDay}.log</file>
+		<encoder charset="UTF-8">
+			<pattern>%n[%level] - %date - %logger#%line%n ${tip} %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	
+	<!--logger 模块-->
+	<!-- 	<logger name="com" level="DEBUG">
+		<appender-ref ref="console"  level="DEBUG"/>
+		<appender-ref ref="file" level="INFO"/>
+	</logger>
+	<logger name="com.merchant" level="DEBUG">
+		<appender-ref ref="console"  level="DEBUG"/>
+		<appender-ref ref="file" level="INFO"/>
+	</logger> -->
+
+	<!--pager-->
+	<!-- <logger name="com.merchant.test" level="DEBUG"/> -->
+	<!--service impl-->
+	<!-- <logger name="com.merchant.test" level="DEBUG"/> -->
+	
+	<!--SSH2-->
+<!-- 	<logger name="org.springframework" level="ERROR"/>
+	<logger name="org.hibernate" level="ERROR"/> -->
+	
+</configuration>

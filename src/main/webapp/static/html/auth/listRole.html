@@ -1,0 +1,96 @@
+<div class="rgt_body">
+<div class="body_title">| 权限管理</div>
+    <div class="body_top" >
+        <div  style="padding-left:3%">
+            <button class="btn" onclick="goEdit()">新增角色</button>    
+        </div>
+    </div>
+    <div id="grid" class="grid"></div>
+    <div id="grid-pager" class="pager"></div>
+</div>
+<script>
+var gridParam = {
+    
+    page:{
+        curPage : 1,
+        pageSize : 10
+    },
+    multiselect : false,
+    url : '/calendar/auth/role/list.json',
+    grid_selector : "#grid",
+    pager_selector : "#grid-pager",
+    searchParams : {
+        name : '',
+        curPage : 1,
+        pageSize : 2
+    },
+    colNames : [ 'ID', '角色名称', '角色描述', '操作' ],
+    colModel : [
+            {
+                name : 'id',
+                width : 80
+            },
+            {
+                name : 'name',
+                width : 130
+            },
+            {
+                name : 'remark',
+                width : 90,
+            },
+            
+            {
+                name : 'id',
+                width : 150,
+                formatter : function(value, grid, rows) {
+                	return getViewHtml(value)+getEditHtml(value)+getDelHtml(value,rows["name"]);
+                     /*    return "<a class='option' name='edit' onclick='viewInfo(\""+value+"\")' >查询</a>"
+                                + "<a class='option'  name='issue' onclick='editInfo(\""+value+"\")' >修改</a>"
+                                + "<a class='option'  name='market' onclick=\"delInfo('"+value+"','"+rows["name"]+"')\" >删除</a>"; */
+                    
+                }
+            } ]
+            
+            /*
+             * ondblClickRow: function(id){
+             * 
+             * alert("双击选中"+id);
+             *  },
+             */
+           
+         /*
+             * onSelectRow: function(id){ alert("单击选中"+id); },
+             */
+};
+this.mygrid = $("#grid").jqGrid(this.gridParam); 
+ function goEdit(){
+    goPage(PATH+'/auth/role/edit.htm');
+ }
+ function editInfo(id){
+	 goPage(PATH+"/auth/role/edit.htm?id="+id);
+ }
+ function deleteInfo(id,roleName){
+     //弹窗
+     zconfirm("确定删除角色名称:"+roleName,"删除",function(){
+        $.post(PATH+"/auth/role/del.json?id="+id,function(result){
+            result=ajaxResultHandler(result);
+            if(result.r==1){
+                zalert("删除成功，角色名："+roleName,"删除",function(){
+                    $("#grid").jqGrid("reloadGrid");
+                });
+                
+            }else {
+                zerror(result.msg,"提醒",function(){
+                });
+            }
+        });
+         
+     });
+     
+    // window.location="/role/del/"+id;
+ }
+ function viewInfo(id){
+     window.location="/role/viewPage/"+id;
+ }
+</script>
+

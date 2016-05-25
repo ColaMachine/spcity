@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<title>微网站</title>
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/comm.css">
+		<link rel="stylesheet" href="css/header.css">
+		<link rel="stylesheet" href="css/checkbox.css">
+		<link rel="stylesheet" href="css/information/main.css">
+		<link rel="stylesheet" href="css/footer.css">
+	</head>
+
+	<body>
+		<header class="header back-blue">
+			<nav>
+				<a href="index.html">
+					<div class="header-left center-text row-2-5 left small-text">
+						<img class="header-left-img" src="img/header/back.png">
+					</div>
+				</a>
+				<div class="center-text row-5 left normal-text">个人资料</div>
+				<a href="index.html">
+					<div class="header-right right-text row-2-5 left small-text">
+					
+					</div>
+				</a>
+			</nav>
+		</header>
+
+		<div class="container clr-fix">
+			<div class="row-9 info-avatar">
+				<div class="row-3 left small-text"><span>园区logo</span></div>
+				<div class="row-4 right">
+					<input class="info-avatar-file info-input display-alpha right" type="file">
+					<img class="info-avatar-img right row-5" src="img/messageboard/avatar.png" alt="头像">
+				</div>
+			</div>
+			<div class="row-9 normal-height info-nick">
+				<div class="row-3 left small-text"><span>园区名称</span></div>
+				<div class="row-7 left">
+					<input class="info-input small-height" type="text" readonly value="默认激活时信息"/></div>
+			</div>
+			<div class="row-9 normal-height info-nick">
+				<div class="row-3 left small-text"><span>园区地址</span></div>
+				<div class="row-7 left">
+					<input class="info-input small-height" type="text" readonly value="默认激活时信息"/></div>
+			</div>
+			<div class="row-9 normal-height info-nick">
+				<div class="row-3 left small-text"><span>园区电话</span></div>
+				<div class="row-7 left">
+					<input class="info-input small-height" type="text" readonly value="默认激活时信息"/></div>
+			</div>
+			<div class="row-9 normal-height info-nick">
+				<div class="row-3 left small-text"><span>管理员姓名</span></div>
+				<div class="row-7 left">
+					<input class="info-input small-height" type="text" placeholder="请输入姓名" />
+				</div>
+			</div>
+			<div class="row-9 normal-height info-nick">
+				<div class="row-3 left small-text"><span>管理员昵称</span></div>
+				<div class="row-7 left">
+					<input class="info-input small-height" type="text" placeholder="请输入昵称" />
+				</div>
+			</div>
+
+			<div class="row-9 normal-height info-sex">
+				<div class="row-3 left small-text"><span>性别</span></div>
+				<div class="row-7 left">
+					<div class="row-2-5 right">
+						<input class="info-input info-checkbox-female left small-height" type="checkbox" id="female">
+						<label class="left checkbox-label" for="female"></label>
+						<span class="small-text">女</span>
+					</div>
+					<div class="row-2-5 right">
+						<input class="info-input info-checkbox-male left small-height" type="checkbox" id="male">
+						<label class="left checkbox-label" for="male"></label>
+						<span class="small-text">男</span>
+					</div>
+					<div class="row-3-3 right">
+						<input class="info-input info-checkbox-secrect left small-height" type="checkbox" id="secrect">
+						<label class="left checkbox-label" for="secrect"></label>
+						<span class="small-text">保密</span>
+					</div>
+				</div>
+			</div>
+			<div class="row-9 normal-height clr-fix info-birthday clr-fix">
+				<div class="row-3 left small-text"><span>生日</span></div>
+				<div class="row-5 right right-text normal-text">
+					<input class="info-birthday-input info-input normal-height" type="date" placeholder="请选择">
+					<!-- <span id="birthday">请选择</span> -->
+				</div>
+			</div>
+
+			<div class="information-save row-10 ">
+				<div class="row-9">
+					<span class="errorMsg"></span>
+					<button class="back-orange" id="save">保存</button>
+				</div>
+			</div>
+		</div>
+
+		<footer class="row-10 footer light-gray-text">
+			<div class="row-9 center-text footer-top">
+				<span class="small-text">本系统由中国电信爱WiFi运营中心提供支持</span>
+			</div>
+			<div class="row-9 center-text footer-bottom">
+				<span class="small-text">400-8252-525</span>
+			</div>
+		</footer>
+
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="js/touch.js"></script>
+		<script type="text/javascript" src="js/comm/file.js"></script>
+		<script type="text/javascript" src="js/information/main.js"></script>
+	</body>
+
+</html>

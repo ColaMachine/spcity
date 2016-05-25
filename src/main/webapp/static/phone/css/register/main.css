@@ -1,0 +1,38 @@
+@charset "UTF-8";
+/**
+ * registre
+ * @authors pingyf
+ * @date    2015-10-28 11:24:54
+ * @version $Id$
+ */
+
+.container {
+	padding-top: 30px;
+	padding-bottom: 5px;
+}
+
+ .container input {
+    padding: 15px 0;
+    margin-bottom: 25px;
+ }
+
+.submit {
+	margin-top: 75px;
+}
+
+.checkbox {
+	visibility: hidden;
+	width: 28px;
+	height: 28px;
+	position: absolute;
+}
+
+.register-agree-text {
+	font-size: 1.3rem;
+}
+
+@media screen and (max-width:320px){
+	.register-agree-text {
+		font-size: 1.15rem;
+	}
+}

@@ -1,0 +1,200 @@
+<div id="SysRoleResourceMapperList" class="rgt_body ">
+    <div class="body_title">| 角色资源关系</div>
+        <div class="body_top" >
+            <form class="form-inline app-search">
+        <label for="id">主键</label>
+            <input type="number" id="id" name="id"  class="form-control input-sm"  maxlength="10" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="主键"></input>
+        <label for="name">角色名</label>
+            <input type="text" id="nameLike" name="nameLike"  class="form-control input-sm"   maxlength="20" placeholder="角色名" ></input>
+        <label for="code">角色代码</label>
+            <input type="text" id="codeLike" name="codeLike"  class="form-control input-sm"   maxlength="20" placeholder="角色代码" ></input>
+        <label for="order">排序</label>
+            <input type="number" id="order" name="order"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="排序"></input>
+        <label for="status">状态</label>
+            <select id="status" name="status"  class="form-control input-sm"  >
+                <option value=''>-请选择-</option>
+                <option value=1>正常</option>
+                <option value=2>禁用</option>
+            </select>
+        <label for="remark">备注</label>
+            <input type="text" id="remarkLike" name="remarkLike"  class="form-control input-sm"   maxlength="255" placeholder="备注" ></input>
+        <label for="createtime">创建时间</label>
+        <div class="input-group">
+            <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间" ></input>
+            <label class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></label>        </div>
+        <label for="createtimeBegin">创建时间开始</label>
+        <div class="input-group">
+            <input type="text" id="createtimeBegin" name="createtimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间开始" ></input>
+            <label class="input-group-addon" for="createtimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
+        <label for="createtimeEnd">创建时间结束</label>
+        <div class="input-group">
+            <input type="text" id="createtimeEnd" name="createtimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间结束" ></input>
+            <label class="input-group-addon" for="createtimeEnd" ><i class="fa fa-calendar"></i></label>        </div>
+
+                <button type="button" class="btn btn-default searchBtn">查询</button>
+            </form>
+        <div >
+             <button class="btn saveBtn" >保存</button>
+        </div>
+    </div>
+     <div class="col-sm-6 mapper-grid-parent-wrap" >
+    <table id="SysRoleResourceMapperGrid" class="grid"></table>
+    <div id="SysRoleResourceMapperGrid-Pager" class="pager"></div>
+    </div>
+     <div class="col-sm-6 mapper-grid-child-wrap">
+            <ul id="treeDemo" class="ztree"></ul>
+        </div>
+</div>
+<script>
+var sysRoleResourceList={
+    modal:false,
+    mygrid:null,
+    treeObj:null,
+    root:$("#SysRoleResourceMapperList"),
+    init:function(){
+        this.mygrid = $(this.root).find(".grid").jqGrid(this.gridParam);
+        this.addEventListener();
+        this.initTree();
+    },
+    initTree:function(){
+        var that =this;
+        Ajax.getJSON(PATH+"/sysResource/listAll.json",null,function(result){
+            if(result.r==AJAX_SUCC){
+                if(result.data){
+                     that.treeObj=$.fn.zTree.init($(that.root).find("#treeDemo"), setting, result.data);
+                }
+            }else{
+                dialog.error("获取信息失败"+data.msg);
+            }
+        });
+    },
+    addEventListener:function(){
+           $(this.root).find(".saveBtn").click(this.saveInfo.Apply(this));
+           $(this.root).find(".searchBtn").click(this.searchInfo.Apply(this));
+    },
+    gridParam:{
+                  datatype: "json",
+                          viewrecords: true, sortorder: "desc", caption:"",
+                          rowNum:10,
+                          rowList:[10,20,30],
+                  multiselect : true,
+                  url : PATH+'/sysRole/list.json',
+                  grid:"#SysRoleResourceMapperGrid",
+                  pager:"#SysRoleResourceMapperGrid-Pager",
+                  jsonReader:jsonReader,
+                   autowidth:true,
+                  colNames : [
+                   "主键","角色名","角色代码","排序","状态","备注","创建时间" /*, '操作'*/ ],
+                  colModel : [
+                          {
+                              name : 'id',
+                              width : 80,
+                          } ,
+                          {
+                              name : 'name',
+                              width : 80,
+                          } ,
+                          {
+                              name : 'code',
+                              width : 80,
+                          } ,
+                          {
+                              name : 'order',
+                              width : 80,
+                          } ,
+                          {
+                              name : 'status',
+                              width : 80,
+                              formatter : function(value, grid, rows) {
+                                  var map ={'1':'正常','2':'禁用',};
+                                  return map[value];
+                              }
+                          } ,
+                          {
+                              name : 'remark',
+                              width : 80,
+                          } ,
+                          {
+                              name : 'createtime',
+                              width : 80,
+                               formatter : function(value, grid, rows) {
+                                  return new Date(value).format("yyyy-MM-dd");
+                              }
+                          } 
+                         /* ,
+                          {
+                              name : 'operation',
+                              width : 150,
+                              formatter : function(value, grid, rows) {
+                                  return getViewHtml(rows.id,"sysRoleResourceList")+getEditHtml(rows.id,"sysRoleResourceList")+getDelHtml(rows.id,"sysRoleResourceList");
+                              }
+                          }*/
+                    ],
+
+                    onSelectRow: function(id){ //alert("单击选中"+id);
+                    var that =this;
+                  //  var treeObj = $.fn.zTree.getZTreeObj("tree");
+                     var celldata =sysRoleResourceList.mygrid.jqGrid('getRowData',id)["id"];
+                     //清空原来的选项
+                    sysRoleResourceList.treeObj.checkAllNodes(false);
+                      Ajax.getJSON(PATH+"/sysRoleResource/listAll.json",{"roleid":celldata},function(result){
+                           if(result.data){
+                                          for(var i=0;i<result.data.length;i++){
+                                              var node = sysRoleResourceList.treeObj.getNodeByParam("id",result.data[i].rid);
+                                             if(node!=null)
+                                              sysRoleResourceList.treeObj.checkNode(node,true,true);
+                                          }
+                                      }
+                      })
+                    },
+    },
+    saveInfo:function(){
+        //首先查出父节点勾选信息
+        var selarrrow =this.mygrid.jqGrid("getGridParam","selarrrow");
+        if(selarrrow==null || selarrrow.length==0){
+            selarrrow .push(this.mygrid.jqGrid('getGridParam','selrow'));
+        }
+        console.log(selarrrow);
+        //再查出子节点勾选信息
+        var childids=[];
+        var treeObj= this.treeObj;
+                         var checkedNodes= this.treeObj.getCheckedNodes(true);
+                         for(var i=0;i<checkedNodes.length;i++){
+                             var obj=checkedNodes[i];
+                             if(!checkedNodes[i].isParent){
+                                 childids.push(checkedNodes[i].id);
+                             }
+                         }
+        console.log(selarrrow.join(","));
+        var parentIdArray=new Array();
+        for(var i=0;i<selarrrow.length;i++){
+            parentIdArray.push( this.mygrid.jqGrid("getRowData",selarrrow[i])["id"]);
+        }
+
+        console.log(childids.join(","));
+         console.log(parentIdArray.join(","));
+        //进行保存
+
+        Ajax.post(PATH+"/sysRoleResource/msave.json",{"roleids":parentIdArray.join(","),"rids":childids.join(",")},function(result){
+            if(result.r==AJAX_SUCC){
+                dialog.alert("关联成功");
+            }else{
+                dialog.alert(result.msg);
+            }
+        })
+    },
+    searchInfo:function (){
+        var jso = changeForm2Jso(".app-search");
+        this.mygrid.jqGrid("setGridParam", { search: true ,"postData":jso}).trigger("reloadGrid", [{ page: 1}]);  //重载JQGrid
+    },
+    search:function (){
+        var jso= changeForm2Jso(".app-search");
+        console.log(jso);
+        this.mygrid.search(jso);
+    },
+
+
+};
+sysRoleResourceList.init()
+</script>
+

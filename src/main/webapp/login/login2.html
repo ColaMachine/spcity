@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link type="text/css" href="../css/base.css" rel="stylesheet">
+		<script type="text/javascript" src="../plugin/jquery.min.js"></script>
+		<script type="text/javascript" src="login2.js"></script>
+		<script type="text/javascript" src="../common/common.js"></script>
+	</head>
+	<body >
+
+		<style type="text/css">
+		</style>
+
+		<div class="co-mask"  ></div>
+		<div style="z-index: 10000; top: 80px; left: 162px; position: absolute;" id="inline-overlay" class="overlay overlay-borderless">
+			<div class="overlay-content">
+
+				<a class="close button-remove"><span>Close</span></a>
+
+				<ul class="tabs clear">
+					<li class="first active">
+						<a id="register-tab" href="#">注 册</a>
+					</li>
+					<li class="">
+						<a id="sign-in-tab" href="#">登 录</a>
+					</li>
+				</ul>
+
+				<div class="overlay-body clear">
+
+					<div id="register-tab-content" class="standard" style="display: block;">
+
+						<div class="register-message msg msg-embedded msg-info" style="display: none">
+							<p></p>
+						</div>
+						<form id="registration-form" class="login-registration-form" action="https://127.0.0.1：8080/calendar/join?from_page=https%3A%2F%2Fwww.etsy.com%2F" method="post" onsubmit="return validateRegistration();">
+
+							<div class="message-container message-container-connections" style="display:none"></div>
+
+							<div id="step-2-heading" style="display:none">
+								<h2>Create Your Etsy Account</h2>
+							</div>
+							<div id="ext-acct-connect" class="overlay-connect-wrap">
+								<div id="fb-register-container" class="fb-connect-container">
+									<a id="facebook-register" class="button-large button-fb button-large-disabled" href="#"><span> 通过第三方注册</span> </a>
+									<div class="fb-connect-container spinner-small" style="display: none;"></div>
+								</div>
+								<input name="external_account_id" value="" type="hidden">
+								<input name="external_avatar" value="" type="hidden">
+								<input name="external_username" value="" type="hidden">
+								<input name="external_account_type_name" value="" type="hidden">
+
+								<p>
+									通过第三方注册能让您更好的与以往的朋友相聚在我们的网站上，我们不会主动发送任何消息给对方。
+								</p>
+							</div>
+							<div class="or">
+								<span>or</span>
+							</div>
+
+							<div id="first-name-group">
+								<label for="first-name">姓</label>
+								<span style="display: none;" class="inline-notice" id="first-name-disclaimer">您的姓名将会是公开可见的,</br>您也可以选择跳过此项输入.</span>
+								<span style="display: none;" class="inline-input-error-message" id="first-name-error">姓氏中含有无效字符！</span>
+								<input class="text" name="first_name" id="first-name" maxlength="2" tabindex="1" type="text">
+							</div>
+
+							<div id="last-name-group">
+								<label for="last-name">名</label>
+								<span class="inline-input-error-message" id="last-name-error">名字中含有无效字符！</span>
+								<input class="text" name="last_name" id="last-name" maxlength="4" tabindex="2" type="text">
+							</div>
+
+							<div id="gender-group" class="inline-group">
+								<input id="female" name="gender" value="female" tabindex="3" type="radio">
+								<label for="female">女</label>
+
+								<input id="male" name="gender" value="male" type="radio">
+								<label for="male">男</label>
+
+								<input id="private" name="gender" value="private" type="radio">
+								<label for="private">就不告诉你</label>
+							</div>
+
+							<hr id="registration-dividing-line">
+
+							<div id="email-group">
+								<label for="email">邮箱地址</label>
+								<span class="inline-disclaimer-message" id="email-disclaimer"> <span id="pending-email-disclaimer">Your confirmation will be sent to your email address.</span> <span id="valid-email-disclaimer">Your confirmation will be sent to %email%.</span> </span>
+								<span class="inline-input-error-message" id="email-error">请填写有效的邮件地址！ </span>
+								<input autocorrect="off" autocapitalize="off" class="text" name="email" id="email" tabindex="4" type="email">
+							</div>
+
+							<div id="password-group">
+								<label for="password">密码</label>
+								<span class="inline-input-error-message" id="password-error"> 密码至少为6个字符！</span>
+								<input class="text" name="password" id="password" maxlength="20"  autocomplete="off" tabindex="5" type="password">
+							</div>
+
+							<div id="password-confirm-group">
+								<label for="password-repeat">密码确认</label>
+								<span class="inline-input-error-message" id="password-repeat-error"> 密码不匹配！</span>
+								<input class="text" name="password_repeat" maxlength="20"  id="password-repeat" autocomplete="off" tabindex="6" type="password">
+							</div>
+							
+							<div id="username-group">
+								<label for="username">用户名</label>
+								<span class="inline-input-error-message" id="username-error"> </span>
+								<input autocorrect="off" autocapitalize="off" class="text" name="username" id="username" maxlength="20" tabindex="7" type="text">
+								<div class="suggested-username-tip alternatives">
+									<span class="arrow"></span>
+									<span>Other suggestions:</span>
+								</div>
+								<div class="suggested-username-tip no-alternatives">
+									<span class="arrow"></span>
+									<span>Use our suggestion or enter your own</span>
+								</div>
+							</div>
+
+							<hr>
+
+							<p class="fineprint">
+								如果您点击注册，表示您已经我已经认真阅读并同意我们的<a target="_blank" href="/terms_of_use.php?ref=reg" title="Terms of Use">《使用协议》</a>。 
+							</p>
+							<div class="inline-group etsy-newsletter">
+								<input name="etsy_finds" id="etsy_finds" value="on" tabindex="8" style="vertical-align:top;" type="checkbox">
+								<label for="etsy_finds" style="width:94%;"> 我愿意接受推送邮件以获取帮助和最新的消息。</label>
+							</div>
+							<p class="submit">
+								<input name="from_page" value="https://www.etsy.com/" type="hidden">
+								<input name="from_action" value="" type="hidden">
+								<input class="hidden" name="from_overlay" value="1" type="hidden">
+								<input class="btn-primary submit-button" id="register_button" value="Register" type="submit">
+								<span class="spinner-small spinner-small-inline"></span>
+							</p>
+						</form>
+					</div>
+
+					<div style="display: none;" id="sign-in-tab-content">
+						<div class="signin-message msg msg-embedded msg-info" style="display: none">
+							<p></p>
+						</div>
+
+						<form id="signin-form" class="login-registration-form" action="https://www.etsy.com/signin?from_page=https%3A%2F%2Fwww.etsy.com%2F" method="post">
+							<div class="message-container message-container-connections msg msg-error" style="display:none"></div>
+							<div class="overlay-connect-wrap">
+								<div id="fb-signin-container" class="fb-connect-container">
+									<a id="facebook-signin" class="button-large button-fb button-large-disabled" href="#"><span> Sign In Using Facebook </span> </a>
+									<div class="fb-connect-container spinner-small" style="display: none;"></div>
+									<input name="external_account_id" value="" type="hidden">
+									<input name="external_account_type_name" value="" type="hidden">
+								</div>
+							</div>
+							<div class="or">
+								<span>or</span>
+							</div>
+							<div>
+								<label for="username-existing">Email or Username</label>
+								<span style="display: none;" class="inline-input-error-message" id="username-existing-error"> </span>
+								<input autocorrect="off" autocapitalize="off" class="text" maxlength="40" name="username" id="username-existing" tabindex="1" type="text">
+							</div>
+
+							<div>
+								<label for="password-existing">Password</label>
+								<span class="inline-input-error-message" id="password-existing-error"> </span>
+								<input class="text" name="password" id="password-existing" maxlength="20" tabindex="2" type="password">
+							</div>
+
+							<div class="inline-group">
+								<input id="persistent" name="persistent" value="1" tabindex="3" checked="checked" type="checkbox">
+								<label for="persistent">Stay signed in</label>
+							</div>
+
+							<p class="last clear submit">
+								<input name="from_page" value="https://www.etsy.com/" type="hidden">
+								<input name="from_action" value="" type="hidden">
+								<input name="connect_facebook" value="" type="hidden">
+								<input class="hidden" name="from_overlay" value="1" type="hidden">
+								<input class="btn-primary submit-button" id="signin-button" value="Sign In" tabindex="4" type="submit">
+								<span class="spinner-small spinner-small-inline"></span>
+							</p>
+
+							<hr class="clear no-top-margin">
+
+							<p class="forgot-password">
+								<a href="/forgot_password.php?ref=signin">Forgot your password?</a>
+							</p>
+							<p class="forgot-password last">
+								<a href="/help/article/18?ref=signin">Forgot your username or email?</a>
+							</p>
+							<p class="forgot-password last">
+								<a href="/reopen_account.php?ref=signin">Reopen your account?</a>
+							</p>
+
+							<iframe id="etsy-device-id-iframe" src="/security/edid/signin-form" tabindex="-1" style="display: none;" height="0" width="0"></iframe>
+							<input value="{&quot;a&quot;:&quot;Windows XP&quot;,&quot;b&quot;:&quot;Win32&quot;,&quot;c&quot;:8,&quot;d&quot;:&quot;24|917|734|917|710&quot;,&quot;e&quot;:&quot;af6516f36a7a7cba48393db886ab31ec&quot;,&quot;f&quot;:&quot;Firefox 29&quot;,&quot;g&quot;:&quot;d76d42613ae4505cf4e92620d48ef207&quot;,&quot;h&quot;:&quot;BRW=zh-CN|SYS=|USR=&quot;,&quot;i&quot;:&quot;13.0.0&quot;,&quot;j&quot;:&quot;Not Installed&quot;,&quot;k&quot;:0,&quot;l&quot;:1,&quot;m&quot;:&quot;d2c8bdffeba9cd5462190392dac80752&quot;,&quot;t&quot;:734}" name="etsy_device_id" type="hidden">
+						</form>
+						<form id="facebook-register-or-join-form" action="" method="post">
+							<input name="first_name" id="first-name" value="" type="hidden">
+							<input name="last_name" id="last-name" value="" type="hidden">
+							<input name="gender" id="gender" value="" type="hidden">
+							<input name="external_account_id" value="" type="hidden">
+							<input name="external_avatar" value="" type="hidden">
+							<input name="external_account_type_name" value="" type="hidden">
+							<input name="external_name" value="" type="hidden">
+							<input name="external_username" value="" type="hidden">
+							<input name="email" value="" type="hidden">
+							<input name="action" value="" type="hidden">
+							<input name="from_page" value="" type="hidden">
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>

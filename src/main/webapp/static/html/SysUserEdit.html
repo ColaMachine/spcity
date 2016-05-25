@@ -1,0 +1,313 @@
+ <div class="modal-content">
+    <form id="sysUserEditForm" class="form-horizontal" method="post" action="/sysUser/save.json" enctype="multipart/form-data">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">用户编辑</h4>
+        </div>
+        <div class="modal-body">
+                <input type="hidden" id="id" name="id"  class="form-control input-sm" >
+    <div class="form-group">
+        <label for="username" class="col-sm-2 control-label">用户名:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="username" name="username"  class="form-control input-sm"   maxlength="20"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password" class="col-sm-2 control-label">密码:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="password" name="password"  class="form-control input-sm"   maxlength="50"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="nkname" class="col-sm-2 control-label">昵称:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="nkname" name="nkname"  class="form-control input-sm"   maxlength="20"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="type" class="col-sm-2 control-label">类型:</label>
+        <div class="col-sm-10">
+            <input type="number" id="type" name="type"  class="form-control input-sm"  maxlength="4" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="status" class="col-sm-2 control-label">状态:</label>
+        <div class="col-sm-10">
+            <select  id="status" name="status"  class="form-control input-sm"  >
+                <option value=''>-请选择-</option>
+                <option value=1>正常</option>
+                <option value=2>禁用</option>
+                <option value=3>未激活</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="col-sm-2 control-label">邮箱地址:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="email" name="email"  class="form-control input-sm"   maxlength="50"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="telno" class="col-sm-2 control-label">手机号码:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="telno" name="telno"  class="form-control input-sm"   maxlength="11"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="idcard" class="col-sm-2 control-label">身份证号码:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="idcard" name="idcard"  class="form-control input-sm"   maxlength="18"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sex" class="col-sm-2 control-label">性别:</label>
+        <div class="col-sm-10">
+            <input type="number" id="sex" name="sex"  class="form-control input-sm"  maxlength="1" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="birth" class="col-sm-2 control-label">出生年月:</label>
+        <div class="col-sm-10 z-col-table">
+            <input type="text" id="birth" name="birth"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"  datatype="date" format="yyyy-MM-dd"  ></input>
+            <label class="input-group-addon" for="birth" ><i class="fa fa-calendar"></i></label>        </div>
+    </div>
+    <div class="form-group">
+        <label for="integral" class="col-sm-2 control-label">积分:</label>
+        <div class="col-sm-10">
+            <input type="number" id="integral" name="integral"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="address" class="col-sm-2 control-label">地址:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="address" name="address"  class="form-control input-sm"   maxlength="50"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="weichat" class="col-sm-2 control-label">微信:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="weichat" name="weichat"  class="form-control input-sm"   maxlength="20"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="qq" class="col-sm-2 control-label">qq:</label>
+        <div class="col-sm-10">
+            <input type="number" id="qq" name="qq"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="face" class="col-sm-2 control-label">头像:</label>
+        <div class="col-sm-10">
+            <textarea  id="face" name="face"  class="form-control input-sm"   maxlength="100"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="remark" class="col-sm-2 control-label">备注:</label>
+        <div class="col-sm-10">
+            <textarea  id="remark" name="remark"  class="form-control input-sm"   maxlength="200"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="createtime" class="col-sm-2 control-label">创建时间:</label>
+        <div class="col-sm-10 z-col-table">
+            <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  ></input>
+            <label class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></label>        </div>
+    </div>
+    <div class="form-group">
+        <label for="updatetime" class="col-sm-2 control-label">更新时间:</label>
+        <div class="col-sm-10 z-col-table">
+            <input type="text" id="updatetime" name="updatetime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  ></input>
+            <label class="input-group-addon" for="updatetime" ><i class="fa fa-calendar"></i></label>        </div>
+    </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button"  class="btn btn-primarys saveBtn">保存</button>
+            <button type="button" class="btn btn-default cancelBtn">取消</button>
+        </div>
+    </form>
+</div><!-- /.modal-content -->
+        
+<script type="text/javascript">
+var sysUserEdit={
+    form:null,
+    modal:false,
+    formId:"#sysUserEditForm",
+    validParam:{
+        rules: {
+                   id:{
+            digits:true
+        },
+        username:{
+            maxlength:20,required:true
+        },
+        password:{
+            maxlength:50,required:true
+        },
+        nkname:{
+            maxlength:20
+        },
+        type:{
+            digits:true
+        },
+        status:{
+            CheckBox:["1","2","3"],digits:true,required:true
+        },
+        email:{
+            maxlength:50,email:true
+        },
+        telno:{
+            maxlength:11,phone:true
+        },
+        idcard:{
+            maxlength:18
+        },
+        sex:{
+            digits:true
+        },
+        birth:{
+            dateISO:true
+        },
+        integral:{
+            digits:true
+        },
+        address:{
+            maxlength:50
+        },
+        weichat:{
+            maxlength:20
+        },
+        qq:{
+            digits:true
+        },
+        face:{
+            maxlength:100
+        },
+        remark:{
+            maxlength:200
+        },
+        createtime:{
+            ymd:"yyyy-MM-dd HH:mm:ss"
+        },
+        updatetime:{
+            ymd:"yyyy-MM-dd HH:mm:ss"
+        },
+
+        },
+        messages:{
+                   id:{
+            digits:"必须输入整数"
+        },
+        username:{
+            maxlength:"username不能多于20个字符"
+        },
+        password:{
+            maxlength:"password不能多于50个字符"
+        },
+        nkname:{
+            maxlength:"nkname不能多于20个字符"
+        },
+        type:{
+            digits:"必须输入整数"
+        },
+        status:{
+            CheckBox:"必须输入'1','2','3'中的值",digits:"必须输入整数"
+        },
+        email:{
+            maxlength:"email不能多于50个字符"
+        },
+        telno:{
+            maxlength:"telno不能多于11个字符"
+        },
+        idcard:{
+            maxlength:"idcard不能多于18个字符"
+        },
+        sex:{
+            digits:"必须输入整数"
+        },
+        birth:{
+            dateISO:"必须输入合法日期"
+        },
+        integral:{
+            digits:"必须输入整数"
+        },
+        address:{
+            maxlength:"address不能多于50个字符"
+        },
+        weichat:{
+            maxlength:"weichat不能多于20个字符"
+        },
+        qq:{
+            digits:"必须输入整数"
+        },
+        face:{
+            maxlength:"face不能多于100个字符"
+        },
+        remark:{
+            maxlength:"remark不能多于200个字符"
+        },
+        createtime:{
+            ymd:"必须输入合法日期"
+        },
+        updatetime:{
+            ymd:"必须输入合法日期"
+        },
+
+        }
+    },
+    addEventListener:function(){
+        this.form.find(".saveBtn").click(this.saveInfo);
+        this.form.find(".cancelBtn").click(this.cancel);
+    },
+    init:function(){
+        this.form=$(this.formId);
+        this.addEventListener();
+        $("#sysUserEditForm").validate(this.validParam);
+        Ajax.getJSON("sysUser/view.json?id="+getParam("id"),null,function(data){
+            if(data.r==AJAX_SUCC){
+            if(data.data.bean){
+                fillJso2Form("#sysUserEditForm",data.data.bean);
+            }
+            }else{
+                dialog.error("获取信息失败"+data.msg,function(index){
+                    goPage("sysUser/list.htm");
+                   dialog.close(index);
+                });
+            }
+        });
+    },
+    saveInfo:function(){
+        if (!$("#sysUserEditForm").valid())
+            return;
+        var jso = changeForm2Jso("#sysUserEditForm");
+        var dialogId=dialog.showWait();
+        var that=this;
+        Ajax.post(PATH+$("#sysUserEditForm").attr("action"),jso,function(data){
+            dialog.hideWait(dialogId);
+            if(data.r==0){
+                dialog.alert(data.msg||"保存成功",function(index){
+                    //goPage("sysUser/list.htm");
+                     sysUserEdit.cancel();
+                    if(this.modal){
+                        $("#sysUserGrid").jqGrid("reloadGrid");
+                    }
+                     dialog.close(index);
+                });
+            }else{
+                dialog.error(data.msg);
+            }
+        },'json');
+    },
+    cancel:function(){
+        if(this.modal){
+                $("#mymodal").modal("toggle");
+        }else{
+            goPage("sysUser/list.htm");
+        }
+    }
+}
+$(document).ready(function() {
+    //获取传入参数
+ sysUserEdit.init();
+});
+</script>

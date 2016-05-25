@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<link rel="stylesheet" href="/calendar/calendar/css/index.css" type="text/css" />
+	<script type="text/javascript" src="/calendar/calendar/scripts/jquery.min.js"></script>
+	<script type="text/javascript" src="/calendar/common/common.js"></script>
+	<script type="text/javascript" src="/calendar/calendar/scripts/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/calendar/calendar/index.js"></script>
+	<script type="text/javascript" src="/calendar/common/common.js"></script>
+	<body onload="init()">
+
+		<div class="curtain">
+			<div class="wrapper">
+				<div class="logo">
+					life on track
+				</div>
+				<div id="login-box" class="login">
+					<form  id="loginForm">
+						<fieldset class="login-fie">
+							<div	class="item-account">
+								<div class="lable-accunt">
+									<lable for="item-password">
+										电子邮件
+									</lable>
+								</div>
+
+								<input type="text" name="USERNAME" id="USERNAME" value=""/>
+								<div class="opt">
+									<lable for>
+										<input id="REMBERACCOUNT" name="REMBERACCOUNT" type="checkbox"/>
+										记住帐号
+									</lable>
+								</div>
+							</div>
+							<div	class="item-password">
+								<div class="lable-password">
+									<lable for="item-password">
+										密码
+									</lable>
+								</div>
+								<input type="password" name="PASSWORD" id="PASSWORD"/>
+								<div class="opt">
+									<lable for>
+										<a >忘记密码</a>
+									</lable>
+								</div>
+							</div>
+							<div	class="item-submit">
+								<br>
+
+								<button type="button" onclick="doLogin()" style="background-color:#5677BD;color:#FFFFFF;border:#000000;height:22px">
+									登录
+								</button>
+								<br>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		<div class="curtain">
+			<div class="wrapper">
+				<div class="logo">
+					life on track
+				</div>
+				<div>
+				<div>
+					<input type="text" />
+				</div>
+				<div>
+					<button ></button>
+				</div>
+				
+				</div>
+				
+				<div id="login-box" class="login">
+					<form  id="loginForm">
+						<fieldset class="login-fie">
+							<div	class="item-account">
+								<div class="lable-accunt">
+									<lable for="item-password">
+										电子邮件
+									</lable>
+								</div>
+
+								<input type="text" name="USERNAME" id="USERNAME" value=""/>
+								<div class="opt">
+									<lable for>
+										<input id="REMBERACCOUNT" name="REMBERACCOUNT" type="checkbox"/>
+										记住帐号
+									</lable>
+								</div>
+							</div>
+							<div	class="item-password">
+								<div class="lable-password">
+									<lable for="item-password">
+										密码
+									</lable>
+								</div>
+								<input type="password" name="PASSWORD" id="PASSWORD"/>
+								<div class="opt">
+									<lable for>
+										<a >忘记密码</a>
+									</lable>
+								</div>
+							</div>
+							<div	class="item-submit">
+								<br>
+
+								<button type="button" onclick="doLogin()" style="background-color:#5677BD;color:#FFFFFF;border:#000000;height:22px">
+									登录
+								</button>
+								<br>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+			
+			
+		</div>
+		<div class="main-content">
+			<div class="left-main">
+									
+			</div>
+			<div id="register-box" class="register-box">
+									<table>
+										<tr>
+											<td>姓名</td>
+											<td><input type="text" id="REG_USERNAME"/></td>
+											<td><span class="tips" id="REG_USERNAME_MSG"></span></td>
+										</tr>
+										<tr>
+											<td>邮件地址</td>
+											<td><input type="text" id="REG_MAILADDR"/></td>
+											<td><span class="tips" id="REG_MAILADDR_MSG"></span></td>
+										</tr>
+										<tr>
+											<td>密码</td>
+											<td><input type="password" id="REG_PASSWORD"/></td>
+											<td><span class="tips" id="REG_PASSWORD_MSG"></span></td>
+										</tr>
+										<tr>
+											<td><button id="register_btn" name="注册" onclick="register()">注册</button></td>
+											<td ><span class="tips" id="REG_RETURN_MSG"></span></td>
+										</tr>
+									</table>
+			</div>
+		</div>
+	</body>
+</html>

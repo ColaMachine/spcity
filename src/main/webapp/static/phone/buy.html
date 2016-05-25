@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<title>微网站</title>
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/comm.css">
+		<link rel="stylesheet" href="css/header.css">
+		<link rel="stylesheet" href="css/checkbox.css">
+		<link rel="stylesheet" href="css/buy/main.css">
+		<link rel="stylesheet" href="css/footer.css">
+	</head>
+
+	<body>
+		<header class="header back-blue">
+			<nav>
+				<a href="index.html">
+					<div class="header-left center-text row-2-5 left small-text">
+						<img class="header-left-img" src="img/header/back.png">
+					</div>
+				</a>
+				<div class="center-text row-5 left normal-text">套餐购买</div>
+				<a href="index.html">
+					<div class="header-right right-text row-2-5 left small-text">
+
+					</div>
+				</a>
+			</nav>
+		</header>
+
+		<div class="container clr-fix">
+			<div class="row-10  normal-text">
+				<div class="row-9 clr-fix" style="padding: 1.5rem 0;">
+					<div>
+						<div class="row-5 left">充值账户</div>
+						<div class="row-5 left right-text">13344445555</div>
+					</div>
+				</div>
+			</div>
+			<div class="title">
+				<span class="title-text nomal-text gray-text"></span>
+			</div>
+			<div class="title">
+				<span class="title-text nomal-text gray-text"></span>
+			</div>
+			<div class="row-10  normal-text">
+				<div class="row-9 clr-fix" style="padding: 1.5rem 0;">
+					<div>
+						<div class="row-5 left">
+							<span style="height: 3rem;line-height: 3rem;">1天</span> <span style="margin-left: 1rem;height: 1.5rem;line-height: 1.5rem;">售价一元</span>
+						</div>
+						<div class="row-5 left right-text" style="line-height: 3rem;">
+							<img src="img/buy/cut.png" style="width: 2rem;vertical-align: middle;" />
+							<input type="text" style=" width: 4rem;line-height: 24px;height: 2.5rem;vertical-align:middle;" />
+							<img src="img/buy/add.png" style="width: 2rem;vertical-align:middle;" />
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="title">
+				<span class="title-text nomal-text gray-text"></span>
+			</div>
+			<div class="title">
+				<span class="title-text nomal-text gray-text"></span>
+			</div>
+			<div class="back-light-gray">
+				<div class="row-10  small-text light-gray-text" style="padding: 2rem 1rem 0;">
+					<div>购买须知：上网时间将在充值成功后立即生效，若您在当</div>
+					<div>前上网套餐时长还未到期情况下继续充值，充值时长会累</div>
+					<div>加。请根据个人需求合理充值！</div>
+				</div>
+				<div class="information-save row-10 ">
+					<div class="row-9">
+						<button class="back-orange" id="buy">购买</button>
+					</div>
+				</div>
+			</div>
+
+			<footer class="row-10 footer light-gray-text " style="margin-top: 75px;">
+				<div class="row-9 center-text footer-top">
+					<span class="small-text">本系统由中国电信爱WiFi运营中心提供支持</span>
+				</div>
+				<div class="row-9 center-text footer-bottom">
+					<span class="small-text">400-8252-525</span>
+				</div>
+			</footer>
+		</div>
+		<div class="mask"></div>
+		<div class="modal">
+			<div class="row-9 " style="height: 50px;line-height: 50px;font-size: 1.7rem;">
+				<div class="row-4 left text-indent">充值账户</div>
+				<div class="row-6 left right-text">13344445555</div>
+			</div>
+			<div class="bottomline"></div>
+			<div class="row-9 " style="height: 50px;line-height: 50px;font-size: 1.7rem;">
+				<div class="row-4 left text-indent">充值金额</div>
+				<div class="row-6 left right-text"><span class="red-text">5</span>元</div>
+			</div>
+			<div class="bottomline"></div>
+			<div class="row-9 " style="height: 50px;line-height: 50px;font-size: 1.7rem;">
+				<div class="row-3 left text-indent">有效期</div>
+				<div class="row-7 left right-text">
+					<span>2015-12-1</span>至<span>12-6</span>
+				</div>
+			</div>
+			<div class="row-10 back-light-gray" style="height: 50px;line-height: 50px;font-size: 1.7rem;">
+				<div class="row-5 left center-text light-gray-text">
+				
+					<span id="cancel">取消</span> 
+				</div>
+					<div class="row-5 left center-text light-gray-text">
+						<span class="blue-text" id="surePay">确认支付</span>  
+					</div>
+				
+				
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="js/touch.js"></script>
+		<script type="text/javascript" src="js/comm/file.js"></script>
+		<script type="text/javascript" src="js/information/main.js"></script>
+		<script type="text/javascript" src="js/buy/buy.js" ></script>
+	</body>
+	<script>
+		//	$("#buy").on("click",function(){
+		//		alert("buy");
+		//	});
+	</script>
+
+</html>

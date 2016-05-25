@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/calendar/css/bootstrap.min.css" rel="stylesheet">
+<!-- http://cdn.bootcss.com/bootstrap/3.3.4 -->
+    <!-- Custom styles for this template -->
+    
+<script src="/calendar/js/jquery.min.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="/calendar/js/jquery.validate.js" type="text/javascript"
+	charset="utf-8"></script>
+
+ <!--    <link href="signin.css" rel="stylesheet"> -->
+<style type="text/css">
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+</style>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div id="login_form" class="container">
+      <form class="form-signin">
+        <h3 class="form-signin-heading"><span id="form_title">登录</span>  <a style="float:right" id="form_type"  onclick="changeForm()">注册</a></h3>  
+	      
+        <label for="email" class="sr-only">Email address</label>
+        <input type="email" id="email"  maxlength="50" class="form-control" placeholder="邮件地址" required autofocus>
+        <label for="pwd" class="sr-only">Password</label>
+        <input type="password" id="pwd"  maxlength="50"   class="form-control" placeholder="密码" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> 记住我
+          </label>
+          <a style="float:right">忘记密码</a>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+      </form>
+    </div> <!-- /container -->
+ <div id="register_form" style="display:none" class="container">
+      <form class="form-signin" actiion="/calendar/">
+        <h3 class="form-signin-heading"><span id="form_title">注册账号</span>  <a style="float:right" id="form_type"  onclick="changeForm()">登录</a></h3>  
+	        <label for="username" class="sr-only">姓名</label>
+	        <input  id="username"  maxlength="50" class="form-control" placeholder="姓名" required autofocus>
+        
+        <label for="email" class="sr-only">Email address</label>
+        <input type="email" id="email"  maxlength="50" class="form-control" placeholder="邮件地址" required autofocus>
+        <label for="pwd" class="sr-only">Password</label>
+        <input type="password" id="pwd"  maxlength="50"   class="form-control" placeholder="密码" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+      </form>
+    </div>
+
+  </body>
+  <script  type="text/javascript">
+ var path="calendar";
+	var form_type="login";
+	
+	function login(){
+		var jso = {};
+		jso.email=$("#email").val();
+		jso.pwd=$("#pwd").val();
+		 $.post(path+"/login",{},function(data){
+		 	if(data.result=="1"){
+		 		
+		 	}else{
+		 		alert(data.msg);
+		 	}
+		 });
+	}
+	function register(){
+		var jso = {};
+		jso.username=$("#username").val();
+		jso.email=$("#email").val();
+		jso.pwd=$("#pwd").val();
+	}
+	function changeForm(){
+	
+	
+		if(form_type=="login"){
+			
+			$("#register_form").show();
+			$("#login_form").hide();
+		 	form_type="register"
+		 		/*$("#form_title").text("注册账号");
+			$("#form_type").text("登录");
+			$("#username_span").show();	 */
+		}else{
+			form_type="login";
+			$("#register_form").hide();
+			$("#login_form").show();
+			/* 
+			$("#form_title").text("登录");
+			$("#form_type").text("注册");
+			form_type="login";
+			$("#username_span").hide(); */
+		}
+		
+		
+		
+	}
+  </script>
+</html>

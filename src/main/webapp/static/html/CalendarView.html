@@ -1,0 +1,305 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+	<HEAD>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<TITLE>New Document</TITLE>
+		<META NAME="Generator" CONTENT="EditPlus">
+		<META NAME="Author" CONTENT="">
+		<META NAME="Keywords" CONTENT="">
+		<META NAME="Description" CONTENT="">
+	 	<link id="css" rel="stylesheet" href="/static/css/CalendarView.css"
+			type="text/css" media="all" />
+		<link id="css" rel="stylesheet" href="/static/css/WorkBench.css"
+			type="text/css" media="all" />
+		<script src="/static/js/jsframework.js" charset="utf-8"></script>
+		<!-- <script src="/static/js/system/data/calendar1.js" charset="utf-8">
+		</script><script src="/static/js/jsframework.js" charset="utf-8"></script>-->
+
+     <!--  <script type="javascript">
+            includeCSS(["/static/css/CalendarView.css",
+"/static/css/WorkBench.css"
+]);
+includeJS(["/static/js/system/global.js",
+           "/static/js/system/action/Drag.js" ,
+            "/static/js/system/web/ui/webcontrols/calendarview1.js",
+            "/static/js/system/web/ui/webcontrols/property.js",
+          ]);
+        </script>-->
+
+        <script src="/static/js/jquery.min.js" charset="utf-8"></script>
+		<script src="/static/js/common.js" charset="utf-8"></script>
+		<script src="/static/js/system/global.js" charset="utf-8"></script>
+		<script src="/static/js/system/action/Drag.js" charset="utf-8"></script>
+		<script src="/static/js/DateUtils.js" charset="utf-8"></script>
+		<script src="/static/js/system/web/ui/webcontrols/calendarview1.js" charset="utf-8"></script>
+<!--		<script src="/static/js/system/data/calendar1.js" charset="utf-8"></script>
+
+		<script src="/static/js/system/web/ui/webcontrols/MiniCalendar.js" charset="utf-8"></script>-->
+		<!--<script src="/static/js/system/web/ui/webcontrols/property.js" charset="utf-8"></script>-->
+<style type="text/css">
+table{border:0;margin:0;border-collapse:collapse;}
+table td{padding:0;}
+</style>
+
+	</HEAD>
+
+	<BODY onclick="hiddenDialogue()" >
+	<!--<input type="text" id="bb"></input>
+	<input type="text" id="cc"></input>
+	<input type="text" id="dd"></input>
+	<input type="text" id="ee"></input>
+	</input>
+	-->
+		<div style="position: absolute; top: 500;display:none">
+			<input type="text" id="aa"></input>
+			<textarea id="codeInput"  rows="2" cols="50"></textarea>
+	<button type="button" onclick="writeNow()">Click Me!</button>
+		</div>
+
+		<div style="position: absolute; top: 500;display:none">
+			<ul>
+				<li>只显示此日历</li>
+				<li>日历设置</li>
+				<li>在此日历上创建活动</li>
+				<li>共享此日历</li>
+				<li>提醒和通知</li>
+			</ul>
+			<div class="calcolor-menuitem goog-menuitem" style="height:200px;width:203px">
+				<div class="calcolors" style="height:100%;width:100%">
+					<div id="calpalette" class="calpalette" style="height:100%;width:100%">
+						<div class="ccp-rb-color goog-inline-block">
+							<div class="bcp-selected">
+							</div>
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div><br>
+
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div><br>
+
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div><br>
+
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div>
+						<div class="ccp-rb-color goog-inline-block">
+						</div><br>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!--topcontainerwk start-->
+		<div id="tt"></div>
+		<!-- scrolltimedevents end -->
+		<div id="tubiaodiv" class="tubiaodiv" >123123</div>
+	<div id="editForm" style="display:none">123
+	<div class="editFormHead">
+		toubu
+	</div>
+		<form>
+			<div class="row">
+				<lable>
+					标题:
+				</lable>
+				<div><input type="text" /></div>
+				</div>
+			<div class="row">
+				<lable>
+					日期:
+				</lable>
+				<div><input type="text" onclick="MiniCalendar.redner(this)"/></div>
+			</div>
+			<div class="row">
+				<lable>
+					starttime:
+				</lable>
+				<input type="text" />
+				<lable>
+					endtime:
+				</lable>/
+				<input type="text" />
+			</div>
+		</form>
+		<div class="editFormFoot">
+			jiaobu
+			</div>
+	</div>
+	</BODY>
+	<script language="javascript">
+
+	//	var date=new Date(23320320*60000);
+	//	alert(date)
+	//	var startDateTime = Date.parse("2003-03-17T02:02:02");
+		//alert(startDateTime);
+		//var date=new Date(startDateTime);
+		//alert(date.getHours());
+	//var arr=[1];arr.splice(0,1);
+	//console.log(arr);
+	//Using("System.Web.UI.WebControls.CalendarView");
+
+	//judgeBrowser();
+	var global_weekdays;
+	var d = new CalendarView();
+	var ca =d;
+	//alert(d.render());
+	//$("tt").innerHTML = d.render();
+	d.attachTo("tt");
+	d.init();
+	var newEvent = {
+		id:79,
+		title : 1,
+		date : "2010-03-01",
+		startTime : "11:00",
+		endTime : "12:00"
+	};
+	document.onmousemove = function() {
+	}
+	window.onmousemove = function() {
+	}
+	//d.displaySingleEvent(newEvent);
+	Drag.init();
+	//Drag.displayMCalTypes();
+	function writeNow(){
+		var str=$("codeInput").value;
+		ca._eval(str);
+	}
+
+	function disableMouseSelection(element) {
+		if (element.onselectstart !== undefined) {
+			element.onselectstart = function() {
+				return false
+			};
+		} else if (element.style.MozUserSelect !== undefined) {
+			element.style.MozUserSelect = "none";
+		} else if (element.style.KhtmlUserSelect !== undefined) {
+
+			element.style.KhtmlUserSelect = "none";
+		} else {
+			element.onmousedown = function() {
+				return false
+			};
+		}
+		if (element.ondrag !== undefined) {
+			element.ondrag = function() {
+				return false
+			};
+		}
+	}
+	disableMouseSelection(document.documentElement);
+	window.onresize=findDimensions;
+	function hiddenDialogue(){
+console.log("hidedialogue");
+
+		document.getElementById("calendarEventDialog").style.display="none";
+
+		d.deleteEventDataService("newEvent");
+
+
+	d.deleteEventBarAction("newEvent");
+
+	}
+	  function findDimensions()
+   {
+   var winHeight=0;
+   var winWidth=0;
+
+   if (window.innerWidth)
+   winWidth = window.innerWidth;
+   else if ((document.body) && (document.body.clientWidth))
+   winWidth = document.body.clientWidth;
+
+   if (window.innerHeight)
+   winHeight = window.innerHeight;
+   else if ((document.body) && (document.body.clientHeight))
+   winHeight = document.body.clientHeight;
+   if (document.documentElement  && document.documentElement.clientHeight && document.documentElement.clientWidth)
+   {
+   winHeight = document.documentElement.clientHeight;
+   winWidth = document.documentElement.clientWidth;
+   }
+
+	document.getElementById("aa").value= window.innerHeight;
+	//document.getElementById("scrolltimedeventswk").style.height= window.innerHeight-120;
+
+   }
+   window.onload=function (){
+	//document.getElementById("scrolltimedeventswk").style.height= window.innerHeight-120;
+   }
+</script>
+
+<script>
+/*firefox*/
+function __firefox(){
+    HTMLElement.prototype.__defineGetter__("runtimeStyle", __element_style);
+    window.constructor.prototype.__defineGetter__("event", __window_event);
+    Event.prototype.__defineGetter__("srcElement", __event_srcElement);
+}
+function __element_style(){
+    return this.style;
+}
+function __window_event(){
+    return __window_event_constructor();
+}
+function __event_srcElement(){
+    return this.target;
+}
+function __window_event_constructor(){
+    if(document.all){
+        return window.event;
+    }
+    var _caller = __window_event_constructor.caller;
+    while(_caller!=null){
+        var _argument = _caller.arguments[0];
+        if(_argument){
+            var _temp = _argument.constructor;
+            if(_temp.toString().indexOf("Event")!=-1){
+                return _argument;
+            }
+        }
+        _caller = _caller.caller;
+    }
+    return null;
+}
+if(window.addEventListener){
+    __firefox();
+}
+/*end firefox*/
+</script>
+</HTML>

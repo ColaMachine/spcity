@@ -1,0 +1,177 @@
+
+<div id="ActivityList" class="rgt_body">
+    <div class="body_title">| 日历事项</div>
+        <div class="body_top" >
+            <form class="form-inline app-search">
+        <label for="id">主键</label>
+            <input type="number" id="id" name="id"  class="form-control input-sm"  maxlength="15" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="主键"></input>
+        <label for="title">名称</label>
+            <input type="text" id="titleLike" name="titleLike"  class="form-control input-sm"   maxlength="40" placeholder="名称" ></input>
+        <label for="startTime">开始时间</label>
+            <input type="number" id="startTime" name="startTime"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="开始时间"></input>
+        <label for="endTime">结束时间</label>
+            <input type="number" id="endTime" name="endTime"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="结束时间"></input>
+        <label for="address">地址</label>
+            <input type="text" id="addressLike" name="addressLike"  class="form-control input-sm"   maxlength="40" placeholder="地址" ></input>
+        <label for="userId">用户id</label>
+            <input type="number" id="userId" name="userId"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="用户id"></input>
+        <label for="description">详细描述</label>
+            <input type="text" id="descriptionLike" name="descriptionLike"  class="form-control input-sm"   maxlength="250" placeholder="详细描述" ></input>
+        <label for="privacy">是否公开</label>
+            <input type="number" id="privacy" name="privacy"  class="form-control input-sm"  maxlength="1" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="是否公开"></input>
+        <label for="busyLevel">是否紧急</label>
+            <input type="number" id="busyLevel" name="busyLevel"  class="form-control input-sm"  maxlength="1" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="是否紧急"></input>
+        <label for="type">类型</label>
+            <input type="number" id="type" name="type"  class="form-control input-sm"  maxlength="1" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="类型"></input>
+        <label for="isdel">是否已删除</label>
+            <input type="number" id="isdel" name="isdel"  class="form-control input-sm"  maxlength="1" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="是否已删除"></input>
+
+                <button type="button"  class="btn btn-default searchBtn">查询</button>
+            </form>
+        <div >
+            <button class="btn addBtn" >新增</button>
+            <button class="btn deleteBtn">删除</button>
+            <button class="btn exportBtn" >导出</button>
+        </div>
+    </div>
+    <table id="ActivityGrid" class="grid"></table>
+    <div id="ActivityGrid-Pager" class="pager"></div>
+</div>
+<script>
+
+var activityList={
+    modal:false,
+    mygrid:null,
+    treeObj:null,
+    root:$("#ActivityList"),
+    init:function(){
+        this.mygrid =this.root.find(".grid").jqGrid(this.gridParam);
+        this.addEventListener();
+
+    },
+    addEventListener:function(){
+        $(this.root).find(".addBtn").click(this.addInfo.Apply(this));
+        $(this.root).find(".editBtn").click(this.editInfo.Apply(this));
+        $(this.root).find(".deleteBtn").click(this.deleteInfo.Apply(this));
+        $(this.root).find(".searchBtn").click(this.searchInfo.Apply(this));
+    },
+    gridParam:{
+        datatype: "json",
+        viewrecords: true, sortorder: "desc", caption:"",
+        rowNum:10,
+        rowList:[10,20,30],
+        multiselect : true,
+        url : PATH+'/activity/list.json',
+         autowidth:true,
+        grid:"#ActivityGrid",
+        pager:"#ActivityGrid-Pager",
+        jsonReader:jsonReader,
+        colNames : [
+        "主键","名称","开始时间","结束时间","地址","用户id","详细描述","是否公开","是否紧急","类型","是否已删除" , '操作' ],
+        colModel : [
+            {   name : 'id',width : 80,
+            } ,
+            {   name : 'title',width : 80,
+            } ,
+            {   name : 'startTime',width : 80,
+            } ,
+            {   name : 'endTime',width : 80,
+            } ,
+            {   name : 'address',width : 80,
+            } ,
+            {   name : 'userId',width : 80,
+            } ,
+            {   name : 'description',width : 80,
+            } ,
+            {   name : 'privacy',width : 80,
+            } ,
+            {   name : 'busyLevel',width : 80,
+            } ,
+            {   name : 'type',width : 80,
+            } ,
+            {   name : 'isdel',width : 80,
+            } 
+              ,
+            {   name : 'operation',
+                width : 150,
+                formatter : function(value, grid, rows) {
+                    return getViewHtml(rows.id,"activityList")+getEditHtml(rows.id,"activityList")+getDelHtml(rows.id,"activityList");
+                }
+            }
+        ],
+        onSelectRow: function(id){ //alert("单击选中"+id);
+        },
+    },
+    saveInfo:function(){
+    },
+    addInfo:function (){
+        dialog.window('/activity/edit.htm',this.modal);
+    },
+    editInfo:function (id){
+        dialog.window("/activity/edit.htm?id="+id,this.modal);
+    },
+    searchInfo:function (){
+        var jso = changeForm2Jso(".app-search");
+
+        this.mygrid.jqGrid("setGridParam", { search: true ,"postData":jso}).trigger("reloadGrid", [{ page: 1}]);  //重载JQGrid
+    },
+    deleteInfo:function (id){
+         //弹窗
+        zconfirm("确定删除数据:"+id,"删除",function(){
+            Ajax.post(PATH+"/activity/del.json?id="+id,function(result){
+                result=ajaxResultHandler(result);
+                if(result.r==AJAX_SUCC){
+                    dialog.alert("删除成功，数据："+id,function(index){
+                    $("#grid").jqGrid("reloadGrid");
+                    dialog.close(index);
+                });
+                }else {
+                    dialog.error(result.msg,"提醒");
+                }
+            });
+        });
+    },
+    viewInfo:function (id){
+        dialog.window("/activity/view.htm?id="+id,this.modal);
+    },
+
+    exportInfo:function (){
+        var jso= changeForm2Jso(".app-search");
+        Ajax.getJSON(PATH+"/activity/export.json",jso,function(data){
+            if(data.r==AJAX_SUCC){
+                window.location=PATH+"/"+data.data;
+            }else{
+                dialog.error(data.msg,"导出失败",null);
+            }
+        })
+    },
+    multiDelete:function (){
+        //获取ids字符串
+        var ids=this.mygrid.jqGrid("getGridParam","selarrrow");
+        if(ids.length==0){
+            dialog.alert("请勾选数据");
+            return;
+        }
+        var data= this.mygrid.jqGrid("getGridParam","data");
+        for(var i=0;i<ids.length;i++){
+            ids[i]=data[ids[i]]["id"];
+        }
+        //弹窗
+        dialog.confirm("确定删除数据:"+ids.join(","),function(){
+            Ajax.post(PATH+"/activity/mdel.json?ids="+ids.join(","),function(result){
+                result=ajaxResultHandler(result);
+                if(result.r==AJAX_SUCC){
+                    dialog.alert("删除成功，数据："+ids.join(","),function(index){
+                    this.mygrid.jqGrid("reloadGrid");
+                    dialog.close(index);
+                });
+                }else {
+                    dialog.error(result.msg);
+                }
+            });
+        });
+    }
+};
+activityList.init()
+</script>
+

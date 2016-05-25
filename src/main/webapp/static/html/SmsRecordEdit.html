@@ -1,0 +1,155 @@
+
+ <div class="modal-content">
+    <form id="editForm" class="form-horizontal" method="post" action="/smsRecord/save.json" enctype="multipart/form-data">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">短信验证码发送历史编辑</h4>
+        </div>
+        <div class="modal-body">
+                <input type="hidden" id="id" name="id"  class="form-control input-sm" >
+    <div class="form-group">
+        <label for="phone" class="col-sm-2 control-label">手机号码:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="phone" name="phone"  class="form-control input-sm"   maxlength="11"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="systemNo" class="col-sm-2 control-label">系统名称:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="systemNo" name="systemNo"  class="form-control input-sm"   maxlength="13"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sendTime" class="col-sm-2 control-label">发送时间:</label>
+        <div class="col-sm-10 z-col-table">
+            <input type="text" id="sendTime" name="sendTime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  ></input>
+            <label class="input-group-addon" for="sendTime" ><i class="fa fa-calendar"></i></label>        </div>
+    </div>
+    <div class="form-group">
+        <label for="content" class="col-sm-2 control-label">内容:</label>
+        <div class="col-sm-10">
+            <textarea  id="content" name="content"  class="form-control input-sm"   maxlength="200"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="status" class="col-sm-2 control-label">发送状态:</label>
+        <div class="col-sm-10">
+            <select  id="status" name="status"  class="form-control input-sm"  >
+                <option value=''>-请选择-</option>
+                <option value=1>失败</option>
+                <option value=2>成功</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="reason" class="col-sm-2 control-label">失败原因:</label>
+        <div class="col-sm-10">
+            <textarea  id="reason" name="reason"  class="form-control input-sm"   maxlength="200"></textarea>
+        </div>
+    </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" onclick="save()" class="btn btn-primary">保存</button>
+            <button type="button" onclick="cancel()"  class="btn btn-default">取消</button>
+        </div>
+    </form>
+</div><!-- /.modal-content -->
+        
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $("#editForm").validate({
+        rules: {
+            id:{
+    digits:true
+},
+phone:{
+    maxlength:11,required:true,phone:true
+},
+systemNo:{
+    maxlength:13,required:true,alpha:true
+},
+sendTime:{
+    ymd:"yyyy-MM-dd HH:mm:ss",required:true
+},
+content:{
+    maxlength:200,required:true
+},
+status:{
+    
+},
+reason:{
+    maxlength:200
+},
+
+        },
+        messages:{
+            id:{
+    digits:"必须输入整数"
+},
+phone:{
+    maxlength:"phone不能多于11个字符"
+},
+systemNo:{
+    maxlength:"systemNo不能多于13个字符",alpha:"只能输入字母"
+},
+sendTime:{
+    ymd:"必须输入合法日期"
+},
+content:{
+    maxlength:"content不能多于200个字符"
+},
+status:{
+    
+},
+reason:{
+    maxlength:"reason不能多于200个字符"
+},
+
+        }
+    });
+    //获取传入参数
+    if(!StringUtil.isBlank(getParam("id"))){
+        GetJSON("smsRecord/view.json?id="+getParam("id"),function(data){
+            if(data.r==AJAX_SUCC){
+                if(data.data.bean){
+                    fillJso2Form("#editForm",data.data.bean);
+                }
+            }else{
+                zerror("获取信息失败"+data.msg,"错误",function(){
+                    goPage("smsRecord/list.htm");
+                });
+            }
+            
+        });
+        
+    }
+    
+});
+    function save(){
+           if (!$("#editForm").valid())
+                    return;
+                     var jso = changeForm2Jso("#editForm");
+                     showWait();
+                     Post(PATH+$("#editForm").attr("action"),jso,function(data){
+                     hideWait();
+                     if(data.r==0){
+                        zalert(data.msg||"保存成功","提示",function(){
+                            //goPage("smsRecord/list.htm");
+                            cancel();
+                            $("#grid").jqGrid("reloadGrid");
+                        });
+                     }else{
+                        zerror(data.msg, "失败");
+                     }
+                     },'json');
+    }
+    function cancel(){
+        if(newWindow){
+            $("#mymodal").modal("toggle");
+        }else{
+            goPage("smsRecord/list.htm");
+        }
+    }
+</script>

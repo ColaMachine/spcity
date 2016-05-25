@@ -1,0 +1,281 @@
+       <link rel="stylesheet" href="/calendar/static/css/zTreeStyle.css" type="text/css">
+ 
+    <script type="text/javascript" src="/calendar/static/js/jquery.ztree.core-3.5.js"></script>
+    <script type="text/javascript" src="/calendar/static/js/jquery.ztree.excheck-3.5.js"></script>
+
+<div class="rgt_body">
+<div class="body_title">| 权限管理</div>
+    
+   
+    <div class="login_form" >
+    
+    
+    
+        <div class="info_list">
+            <label>角色名称</label>
+            <div class="input_wrap">
+            <input type="hidden" id="id" />
+                <input type="text" id="roleName" maxlength=10 class="z_input"/>
+            </div><span class="error"></span>
+        </div>
+        
+        <div class="info_list">
+            <label>角色描述</label>
+            <div class="input_wrap">
+                <input type="text" id="remarks" maxlength=50  class="z_input"/>
+            </div><span class="error"></span>
+        </div>
+            <div class="zTreeDemoBackground left">
+        
+    </div>
+         <div class="info_list">
+            <label>权限设置</label>
+            <div class="input_wrap bg_gray">
+            <ul id="treeDemo" class="ztree"></ul>
+        
+              <!--   <ul id="permissions" style="display:none">
+                    <li><input type="checkbox" />业务统计
+                        <ul>
+                        <li>
+                        <input type="checkbox" value="1"   name="1"/>报表查看
+                        <li>
+                        <li>
+                        <input type="checkbox" value="2"  name="2"/>报表导出
+                        <li>
+                        </ul>
+                    </li>
+                    <li><input type="checkbox" value="3" name="3"/>新建受理</li>
+                    <li><input type="checkbox" value="4"  name="4"/>我的受理</li>
+                    <li><input type="checkbox" value="5" name="5"/>我的工单</li>
+                    <li><input type="checkbox" value="6" name="6"/>装维人员结算表</li>
+                    <li><input type="checkbox" value="7" name="7"/>营销人员结算表</li>
+                    <li><input type="checkbox" />我的管理
+                    
+                        <ul>
+                            <li><input type="checkbox" value="8" name="8"/>修改密码</li>
+                            <li><input type="checkbox" value="9" name="9"/>完善资料</li>
+                            <li><input type="checkbox" value="10" name="10"/>权限管理
+                                <ul>
+                                    <li><input type="checkbox" value="101" name="101"/>新增</li>
+                                    <li><input type="checkbox" value="102" name="102"/>修改</li>
+                                    <li><input type="checkbox" value="103" name="103"/>删除</li>
+                                    <li><input type="checkbox" value="104" name="104"/>查看</li>
+                                    
+                                </ul>
+                            </li>
+                            <li><input type="checkbox" value="11" name="11"/>人员管理
+                            <ul>
+                                    <li><input type="checkbox" value="111" name="111"/>新增</li>
+                                    <li><input type="checkbox" value="112" name="112"/>修改</li>
+                                    <li><input type="checkbox" value="113" name="113"/>删除</li>
+                                    <li><input type="checkbox" value="114" name="114"/>查看</li>
+                                    <li><input type="checkbox" value="115" name="115"/>重置密码</li>
+                                    
+                                </ul></li>
+                            <li><input type="checkbox" value="12" name="12"/>订单查询</li>
+                        </ul>
+                    </li>
+                </ul> -->
+            </div><span class="error"></span>
+        </div>
+          <div class="info_list">
+            <span class="allerror"></span>
+        </div>
+        <div class="info_list"><label>&nbsp</label>
+        <div class="input_wrap bg_bit_gray">
+            <button class="btn btn_ok" onclick="save()" type="button">保存</button>
+            <button class="btn btn_cancel" onclick="cancel()" type="button">取消</button> 
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+
+ function load(data){
+     $("#roleName").val(data.roleName);
+     $("#remarks").val(data.remarks);
+     var arr= data.permissions;
+     for(var i=0;i<arr.length;i++){
+        $("#permissions").find("input:checkbox[value="+arr.id+"]").prop("checked",true);
+     }
+ }
+ function save(){
+     var jso ={};
+     jso.roleName=$("#roleName").val();
+     jso.remarks=$("#remarks").val();
+     jso.id=$("#id").val();
+     var flag=true;
+     $(".error").html("");
+    if(jso.roleName.length>10 || jso.roleName.length<2){
+         $("#roleName").parent().parent().find(".error").text("请输入2-10位字符");
+            flag=false;
+     }
+     
+     if(jso.remarks.length>50 || jso.remarks.length<2){
+         $("#remarks").parent().parent().find(".error").text("请输入2-50位字符");
+         flag=false;
+     }
+     var auths=[];
+        var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+        var checkedNodes= treeObj.getCheckedNodes(true);
+        for(var i=0;i<checkedNodes.length;i++){
+            var obj=checkedNodes[i];
+            if(!checkedNodes[i].isParent){
+                
+                auths.push(checkedNodes[i].id);
+            }
+        }
+    /*  $("#permissions").find("input:checkbox:checked").each(function(i){
+         if($(this).val()!=null && $(this).val()!="on")
+        auths.push($(this).val()); 
+     }); */
+     if(auths.length==0){
+         $("#permissions").parent().parent().find(".error").text("请选择相应权限");
+         flag=false;
+     }
+     jso. permissions= auths.join(",");
+     if(!flag)return;showWait();
+     $.post(PATH+"/auth/role/save.json",jso,function(data){
+         hideWait();
+         var data =ajaxResultHandler(data);
+         if(data.r=="1"){
+             zalert("操作成功","提示",function(){ goPage(PATH+"/auth/role/list");});
+         }else{
+             zerror(data.msg,"提示",null);
+             if(data.data!=null ){
+                 for(var key in data.data){
+                     $("#"+key).parent().parent().find(".error").html(data.data[key]);
+                 }
+             }
+         }
+     });
+ }
+ function cancel(){
+     window.location="/role/list";
+ }
+ 
+ $("#permissions").find("input:checkbox").each(function(i){
+    $( this).change(function(){
+         //获取当前选中状态
+         var checkFlag=$(this).is(':checked');
+         //alert("checkFlag:"+checkFlag);
+        //判断是否叶子节点
+        
+        var leafFlag=true;
+        if($(this).parent().find("input:checkbox").length==1){
+            leafFlag=true;
+        }else{
+            leafFlag=false;
+        }
+        if(leafFlag){//alert("子节点变化");
+            //判断是否子节点是否都勾选了
+            if($(this).parent().parent().find("input:checkbox:checked").length==$(this).parent().parent().find("input:checkbox").length ){
+                
+                //进行父节点的勾选
+                $(this).parent().parent().parent().find("input:checkbox").eq(0).prop("checked",true);
+            }else{// if($(this).parent().parent().find("input:checkbox:checked").length==0){
+                    //判断究竟有没有父节点
+                    if($(this).parent().parent().attr("id")!="permissions")
+                    $(this).parent().parent().parent().find("input:checkbox").eq(0).prop("checked",false);
+            }
+        }else{//alert("父节点变化");
+            //父亲节点
+            $(this).parent().find("input:checkbox").prop("checked",checkFlag);
+            
+        }
+        //if(this.nextAll().find("input:check") )
+        
+     });
+ });
+ 
+ var setting = {
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            }
+        };
+ 
+
+ var zNodes =[
+            
+                    
+                            { id:"0", pId:"", name:"业务统计", open:true    },
+                            { id:"1", pId:"0", name:"报表查看", open:true   },
+                            { id:"2", pId:"0", name:"报表导出", open:true   },
+                            { id:"3", pId:"", name:"新建受理", open:true    },
+                            { id:"4", pId:"", name:"我的受理", open:true    },
+                            { id:"5", pId:"", name:"我的工单", open:true    },
+                            { id:"6", pId:"", name:"装维人员结算表", open:true },
+                            { id:"7", pId:"", name:"营销人员结算表", open:true },
+                            { id:"_8", pId:"", name:"我的管理", open:true   },
+                                { id:"8", pId:"_8", name:"修改密码", open:true  },
+                                { id:"9", pId:"_8", name:"完善资料", open:true  },
+                                { id:"10", pId:"_8", name:"权限管理", open:true },
+                                    { id:"101", pId:"10", name:"新增", open:true  },
+                                    { id:"102", pId:"10", name:"修改", open:true  },
+                                    { id:"103", pId:"10", name:"删除", open:true  },
+                                    { id:"104", pId:"10", name:"查看", open:true  },
+                            
+                                { id:"11", pId:"_8", name:"人员管理", open:true },
+                                    
+                                    { id:"111", pId:"11", name:"新增", open:true  },
+                                    { id:"112", pId:"11", name:"修改", open:true  },
+                                    { id:"113", pId:"11", name:"删除", open:true  },
+                                    { id:"114", pId:"11", name:"查看", open:true  },
+                                    { id:"115", pId:"11", name:"重置密码", open:true    },  
+                                   { id:"12", pId:"_8", name:"订单查询", open:true  },
+                                 { id:"13", pId:"", name:"设备解绑", open:true  },  
+                                  { id:"14", pId:"", name:"日志管理", open:true  },   
+                                 { id:"141", pId:"14", name:"请求日志", open:true  },   
+                                 { id:"142", pId:"14", name:"异常日志", open:true  },   
+            ];
+ var code;
+    
+    function setCheck() {
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+        py = $("#py").attr("checked")? "p":"",
+        sy = $("#sy").attr("checked")? "s":"",
+        pn = $("#pn").attr("checked")? "p":"",
+        sn = $("#sn").attr("checked")? "s":"",
+        type = { "Y":"ps", "N":"ps"};
+        zTree.setting.check.chkboxType = type;
+        showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+    }
+    function showCode(str) {
+        if (!code) code = $("#code");
+        code.empty();
+        code.append("<li>"+str+"</li>");
+    }
+    $(document).ready(function(){
+        var treeObj=$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        setCheck();
+        $("#py").bind("change", setCheck);
+        $("#sy").bind("change", setCheck);
+        $("#pn").bind("change", setCheck);
+        $("#sn").bind("change", setCheck);
+        if(!StringUtil.isBlank(getParam("roleId"))){
+            showWait();
+             $.get("/role/view.json?roleid="+getParam("roleId"),function(result){hideWait()
+                result=eval("("+result+")");
+                $("#id").val(result.data.id);
+                $("#roleName").val(result.data.roleName);
+                $("#remarks").val(result.data.remarks);
+                if(result.data.permissionids!=null){
+                    for(var i=0;i<result.data.permissionids.length;i++){
+                         var node = treeObj.getNodeByParam("id",result.data.permissionids[i]);
+                        treeObj.checkNode(node,true,true);
+                        //$("#permissions").find("input:checkbox[name='"+result.data.permissionids[i]+"']").prop("checked",true);
+                        //$("#permissions").find("input:checkbox[name='"+result.data.permissionids[i]+"']").trigger("change");
+                    }
+                }
+                });
+         }
+    });
+</script>
+

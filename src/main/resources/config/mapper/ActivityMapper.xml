@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cola.machine.dao.ActivityDao">
+
+	<resultMap id="BaseResultMap" type="cola.machine.bean.Activity">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="startTime" jdbcType="INTEGER" property="startTime" />
+		<result column="endTime" jdbcType="INTEGER" property="endTime" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="userId" jdbcType="BIGINT" property="userId" />
+		<result column="description" jdbcType="VARCHAR" property="description" />
+		<result column="privacy" jdbcType="TINYINT" property="privacy" />
+		<result column="busyLevel" jdbcType="TINYINT" property="busyLevel" />
+		<result column="type" jdbcType="TINYINT" property="type" />
+		<result column="isdel" jdbcType="TINYINT" property="isdel" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		`id` ,`title` ,`startTime` ,`endTime` ,`address` ,`userId` ,`description` ,`privacy` ,`busyLevel` ,`type` ,`isdel`
+
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from Activity
+		where id =   #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from Activity
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id"   parameterType="cola.machine.bean.Activity" >
+
+		insert into Activity (  <include refid="Base_Column_List" />)
+		values (
+		#{id,jdbcType=BIGINT}
+		,#{title,jdbcType=VARCHAR}
+		,#{startTime,jdbcType=INTEGER}
+		,#{endTime,jdbcType=INTEGER}
+		,#{address,jdbcType=VARCHAR}
+		,#{userId,jdbcType=BIGINT}
+		,#{description,jdbcType=VARCHAR}
+		,#{privacy,jdbcType=TINYINT}
+		,#{busyLevel,jdbcType=TINYINT}
+		,#{type,jdbcType=TINYINT}
+		,#{isdel,jdbcType=TINYINT}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cola.machine.bean.Activity" >
+		insert into Activity
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				`id`,
+			</if>
+			<if test="title != null" >
+				`title`,
+			</if>
+			<if test="startTime != null" >
+				`startTime`,
+			</if>
+			<if test="endTime != null" >
+				`endTime`,
+			</if>
+			<if test="address != null" >
+				`address`,
+			</if>
+			<if test="userId != null" >
+				`userId`,
+			</if>
+			<if test="description != null" >
+				`description`,
+			</if>
+			<if test="privacy != null" >
+				`privacy`,
+			</if>
+			<if test="busyLevel != null" >
+				`busyLevel`,
+			</if>
+			<if test="type != null" >
+				`type`,
+			</if>
+			<if test="isdel != null" >
+				`isdel`,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="title != null" >
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null" >
+				#{startTime,jdbcType=INTEGER},
+			</if>
+			<if test="endTime != null" >
+				#{endTime,jdbcType=INTEGER},
+			</if>
+			<if test="address != null" >
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null" >
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="description != null" >
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="privacy != null" >
+				#{privacy,jdbcType=TINYINT},
+			</if>
+			<if test="busyLevel != null" >
+				#{busyLevel,jdbcType=TINYINT},
+			</if>
+			<if test="type != null" >
+				#{type,jdbcType=TINYINT},
+			</if>
+			<if test="isdel != null" >
+				#{isdel,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cola.machine.bean.Activity" >
+		update Activity
+		<set >
+			<if test="id != null" >
+				`id`=#{id,jdbcType=BIGINT},
+			</if>
+			<if test="title != null" >
+				`title`=#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null" >
+				`startTime`=#{startTime,jdbcType=INTEGER},
+			</if>
+			<if test="endTime != null" >
+				`endTime`=#{endTime,jdbcType=INTEGER},
+			</if>
+			<if test="address != null" >
+				`address`=#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null" >
+				`userId`=#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="description != null" >
+				`description`=#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="privacy != null" >
+				`privacy`=#{privacy,jdbcType=TINYINT},
+			</if>
+			<if test="busyLevel != null" >
+				`busyLevel`=#{busyLevel,jdbcType=TINYINT},
+			</if>
+			<if test="type != null" >
+				`type`=#{type,jdbcType=TINYINT},
+			</if>
+			<if test="isdel != null" >
+				`isdel`=#{isdel,jdbcType=TINYINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cola.machine.bean.Activity" >
+		update Activity
+		set
+		`title`=#{title,jdbcType=VARCHAR},
+		`startTime`=#{startTime,jdbcType=INTEGER},
+		`endTime`=#{endTime,jdbcType=INTEGER},
+		`address`=#{address,jdbcType=VARCHAR},
+		`userId`=#{userId,jdbcType=BIGINT},
+		`description`=#{description,jdbcType=VARCHAR},
+		`privacy`=#{privacy,jdbcType=TINYINT},
+		`busyLevel`=#{busyLevel,jdbcType=TINYINT},
+		`type`=#{type,jdbcType=TINYINT},
+		`isdel`=#{isdel,jdbcType=TINYINT}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="listByParams" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from Activity where 1=1
+		<if test="id != null and id != '' ">
+			and `id` = #{id}
+		</if>
+		<if test="title != null and title != '' ">
+			and `title` = #{title}
+		</if>
+		<if test="titleLike != null and titleLike != '' ">
+			and `title` like "%"#{titleLike}"%"
+		</if>
+		<if test="startTime != null and startTime != '' ">
+			and `startTime` = #{startTime}
+		</if>
+		<if test="endTime != null and endTime != '' ">
+			and `endTime` = #{endTime}
+		</if>
+		<if test="address != null and address != '' ">
+			and `address` = #{address}
+		</if>
+		<if test="addressLike != null and addressLike != '' ">
+			and `address` like "%"#{addressLike}"%"
+		</if>
+		<if test="userId != null and userId != '' ">
+			and `userId` = #{userId}
+		</if>
+		<if test="description != null and description != '' ">
+			and `description` = #{description}
+		</if>
+		<if test="descriptionLike != null and descriptionLike != '' ">
+			and `description` like "%"#{descriptionLike}"%"
+		</if>
+		<if test="privacy != null and privacy != '' ">
+			and `privacy` = #{privacy}
+		</if>
+		<if test="busyLevel != null and busyLevel != '' ">
+			and `busyLevel` = #{busyLevel}
+		</if>
+		<if test="type != null and type != '' ">
+			and `type` = #{type}
+		</if>
+		<if test="isdel != null and isdel != '' ">
+			and `isdel` = #{isdel}
+		</if>
+	</select>
+	<select id="listByParams4Page" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from Activity where 1=1
+		<if test="id != null and id != '' ">
+			and `id` = #{id}
+		</if>
+		<if test="title != null and title != '' ">
+			and `title` = #{title}
+		</if>
+		<if test="titleLike != null and titleLike != '' ">
+			and `title` like "%"#{titleLike}"%"
+		</if>
+		<if test="startTime != null and startTime != '' ">
+			and `startTime` = #{startTime}
+		</if>
+		<if test="endTime != null and endTime != '' ">
+			and `endTime` = #{endTime}
+		</if>
+		<if test="address != null and address != '' ">
+			and `address` = #{address}
+		</if>
+		<if test="addressLike != null and addressLike != '' ">
+			and `address` like "%"#{addressLike}"%"
+		</if>
+		<if test="userId != null and userId != '' ">
+			and `userId` = #{userId}
+		</if>
+		<if test="description != null and description != '' ">
+			and `description` = #{description}
+		</if>
+		<if test="descriptionLike != null and descriptionLike != '' ">
+			and `description` like "%"#{descriptionLike}"%"
+		</if>
+		<if test="privacy != null and privacy != '' ">
+			and `privacy` = #{privacy}
+		</if>
+		<if test="busyLevel != null and busyLevel != '' ">
+			and `busyLevel` = #{busyLevel}
+		</if>
+		<if test="type != null and type != '' ">
+			and `type` = #{type}
+		</if>
+		<if test="isdel != null and isdel != '' ">
+			and `isdel` = #{isdel}
+		</if>
+	</select>
+	<select id="countByParams" parameterType="map" resultType="java.lang.Integer">
+		select
+		count(1)
+		from Activity where 1=1
+		<if test="id != null and id != '' ">
+			and `id` = #{id}
+		</if>
+		<if test="title != null and title != '' ">
+			and `title` = #{title}
+		</if>
+		<if test="titleLike != null and titleLike != '' ">
+			and `title` like "%"#{titleLike}"%"
+		</if>
+		<if test="startTime != null and startTime != '' ">
+			and `startTime` = #{startTime}
+		</if>
+		<if test="endTime != null and endTime != '' ">
+			and `endTime` = #{endTime}
+		</if>
+		<if test="address != null and address != '' ">
+			and `address` = #{address}
+		</if>
+		<if test="addressLike != null and addressLike != '' ">
+			and `address` like "%"#{addressLike}"%"
+		</if>
+		<if test="userId != null and userId != '' ">
+			and `userId` = #{userId}
+		</if>
+		<if test="description != null and description != '' ">
+			and `description` = #{description}
+		</if>
+		<if test="descriptionLike != null and descriptionLike != '' ">
+			and `description` like "%"#{descriptionLike}"%"
+		</if>
+		<if test="privacy != null and privacy != '' ">
+			and `privacy` = #{privacy}
+		</if>
+		<if test="busyLevel != null and busyLevel != '' ">
+			and `busyLevel` = #{busyLevel}
+		</if>
+		<if test="type != null and type != '' ">
+			and `type` = #{type}
+		</if>
+		<if test="isdel != null and isdel != '' ">
+			and `isdel` = #{isdel}
+		</if>
+	</select>
+
+	<select id="selectActivityBetween2Date" resultType="cola.machine.bean.Activity"
+		parameterType="java.util.Map">
+		SELECT * FROM Activity WHERE userId=#{userId} AND  (startTime BETWEEN #{startTime} AND #{endTime}
+		OR endTime BETWEEN #{startTime} AND #{endTime})
+	</select>
+	
+
+	
+	
+</mapper>

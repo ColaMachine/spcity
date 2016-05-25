@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cola.machine.dao.SysAuthMapper">
+ <resultMap id="BaseResultMap" type="cola.machine.bean.SysResource">
+      <id column="id" jdbcType="BIGINT" property="id" />
+      <id column="pid" jdbcType="BIGINT" property="pid" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="code" jdbcType="VARCHAR" property="code" />
+      <result column="type" jdbcType="VARCHAR" property="type" />
+      <result column="url" jdbcType="VARCHAR" property="url" />
+      <result column="order" jdbcType="INTEGER" property="order" />
+      <result column="status" jdbcType="INTEGER" property="status" />
+      <result column="remark" jdbcType="VARCHAR" property="remark" />
+      <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+    <select id="selectResourceByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select * from sys_resource sr where sr.id in (select rid from sys_role_resource where roleid in ( select roleid from sys_user_role where uid =#{userid}))
+        union (select * from sys_resource sr1 where sr1.id  in (select rid from sys_user_resource where uid =#{userid}))
+    </select>
+    <select id="selectMenuResourceByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select * from sys_resource sr where sr.type='menu' and sr.id in (select rid from sys_role_resource where roleid in ( select roleid from sys_user_role where uid =#{userid}))
+        union (select * from sys_resource sr1 where sr1.type='menu' and  sr1.id  in (select rid from sys_user_resource where uid =#{userid}))
+    </select>
+
+</mapper>

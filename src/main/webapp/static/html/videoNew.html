@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <img src="..." alt="...">
+            <div class="caption">
+                <h3>Thumbnail label</h3>
+                <h11 style="float:right">Thumbnail label</h11>
+                <p>...</p>
+                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+var lastTime =0;
+var curPage =0;
+function loadTV(){
+    if(new Date().getTime()-lastTime >500){
+    lastTime=new Date().getTime();
+    curPage++;
+
+    Ajax.getJSON(PATH+"/videoNew/list.json",{curPage:curPage,pageSize:10},function(result){
+        if(result.r==AJAX_SUCC){
+            for(var i=0;i<result.data.length;i++)
+            {var data=result.data[i];
+                $(".row").append(
+                '<div class=\"col-sm-6 col-md-4\">'+
+                    '<div class="thumbnail">'+
+                        '<a href="'+data.url+'" target="blank"><img src="'+data.img+'" alt="'+data.vname+'"></a>'+
+                        '<div class="caption">'+
+                            '<h3>'+data.vname+'</h3>'+
+                            '<p>'+data.viewnum+'</p>'+
+                            '<p><a href="#" class="btn btn-primary" role="button">收藏</a> <a href="#" class="btn btn-default" role="button">观看</a></p>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'
+
+                );
+            }
+        }
+    });
+     }
+}
+
+    var scrollDom =document.body;//document.getElementsByClassName("page")[0];
+        var scrollDom1 =document.getElementsByClassName("page")[0];
+scrollDom.onscroll=function(){
+
+var h =document.body.clientHeight;  //页面高度
+var c = ScollPostion().top; //滚动条top
+ var wh = $(window).height(); //页面可是区域高度
+ var s = h - (c + wh);
+ console.log(s/h);
+ if (  s/h==0 ) {
+    loadTV(); // 试试
+ }
+   //console.log($(".main-wrap").scrollTop());
+   /*console.log(document.documentElement.scrollTop +"/"+document.documentElement.offsetHeight);
+   if(document.documentElement.scrollTop /document.documentElement.offsetHeight >0.7){
+    loadTV();
+   }*/
+}
+   /** scrollDom.addEventListener("scroll", function(){alert(1);
+    console.log("scrolling");
+    });**/
+    loadTV();
+
+     function  ScollPostion() {//滚动条位置
+        var t, l, w, h;
+        if (document.documentElement && document.documentElement.scrollTop) {
+            t = document.documentElement.scrollTop;
+            l = document.documentElement.scrollLeft;
+            w = document.documentElement.scrollWidth;
+            h = document.documentElement.scrollHeight;
+        } else if (document.body) {
+            t = document.body.scrollTop;
+            l = document.body.scrollLeft;
+            w = document.body.scrollWidth;
+            h = document.body.scrollHeight;
+        }
+        return { top: t, left: l, width: w, height: h };
+    }
+
+</script>

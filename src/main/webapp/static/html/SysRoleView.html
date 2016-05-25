@@ -1,0 +1,140 @@
+ <div id="SysRoleView" class="modal-content">
+    <form id="editForm" class="form-horizontal" method="post" action="/sysRole/save.json" enctype="multipart/form-data">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">角色查看</h4>
+        </div>
+        <div class="modal-body">
+                <input type="hidden" id="id" name="id">
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">角色名:</label>
+        <div class="col-sm-10">
+            <span name="name" id="name"  class="form-control"  ></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="code" class="col-sm-2 control-label">角色代码:</label>
+        <div class="col-sm-10">
+            <span name="code" id="code"  class="form-control"  ></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="order" class="col-sm-2 control-label">排序:</label>
+        <div class="col-sm-10">
+            <span  name="order" id="order" class="form-control"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="status" class="col-sm-2 control-label">状态:</label>
+        <div class="col-sm-10">
+            <span  name="status" id="status" datatype="map" data="{'1':'正常','2':'禁用',}" class="form-control" ></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="remark" class="col-sm-2 control-label">备注:</label>
+        <div class="col-sm-10">
+            <span name="remark" id="remark"  class="form-control"  ></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="createtime" class="col-sm-2 control-label">创建时间:</label>
+        <div class="col-sm-10">
+            <span class="form-control" datatype="date" format="yyyy-MM-dd HH:mm:ss" name="createtime" id="createtime" ></span>
+        </div>
+    </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button"   class="btn btn-default cancelBtn">取消</button>
+        </div>
+    </form>
+</div><!-- /.modal-content -->
+
+<!--<div class="body_title">| 角色编辑</div>
+<form id="editForm" class="form-horizontal" method="post" action="/sysRole/save.json" enctype="multipart/form-data">
+     <input type="hidden" id="id" name="id">
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">角色名:</label>
+        <div class="col-sm-10">
+            <span name="name" id="name"  class="form-control"  ></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="code" class="col-sm-2 control-label">角色代码:</label>
+        <div class="col-sm-10">
+            <span name="code" id="code"  class="form-control"  ></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="order" class="col-sm-2 control-label">排序:</label>
+        <div class="col-sm-10">
+            <span  name="order" id="order" class="form-control"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="status" class="col-sm-2 control-label">状态:</label>
+        <div class="col-sm-10">
+            <span  name="status" id="status" datatype="map" data="{'1':'正常','2':'禁用',}" class="form-control" ></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="remark" class="col-sm-2 control-label">备注:</label>
+        <div class="col-sm-10">
+            <span name="remark" id="remark"  class="form-control"  ></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="createtime" class="col-sm-2 control-label">创建时间:</label>
+        <div class="col-sm-10">
+            <span class="form-control" datatype="date" format="yyyy-MM-dd HH:mm:ss" name="createtime" id="createtime" ></span>
+        </div>
+    </div>
+
+   <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+       <button type="button"   class="btn btn-default cancelBtn">返回</button>
+    </div>
+  </div>
+</form>
+</div>
+</div>-->
+<script type="text/javascript">
+var sysRoleView={
+    modal:false,
+    root:$("#SysRoleView"),
+    init:function(){
+    var that = this;
+        this.addEventListener();
+        //获取传入参数
+            if(!StringUtil.isBlank(getParam("id"))){
+                Ajax.getJSON("sysRole/view.json?id="+getParam("id"),null,function(data){
+                    if(data.r==AJAX_SUCC){
+                        fillJso2FormSpan("#SysRoleView",data.data.bean);
+                    }else{
+                        dialog.error("获取信息失败"+data.msg,function(index){
+                            that.cancel();
+                            dialog.close(index);
+                        });
+                    }
+
+                });
+
+            }
+    },
+    cancel:function(){
+        if(sysRoleView.modal){
+            dialog.closeWindow("sysRoleView");
+        }else{
+            goPage("sysRole/list.htm");
+        }
+    },
+    addEventListener:function(){
+        $(this.root).find(".cancelBtn").click(sysRoleView.cancel);
+    }
+}
+$(document).ready(function() {
+    sysRoleView.init();
+});
+   
+
+</script>

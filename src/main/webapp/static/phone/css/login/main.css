@@ -1,0 +1,66 @@
+@charset "UTF-8";
+/*登录页*/
+ .container input {
+    padding: 15px 0;
+    margin-bottom: 25px;
+ }
+
+.logo {
+	height: 155px;
+	margin-bottom: 5px;
+	/*box-shadow: 0 1px 0 #C5C5C5, 0 2px 0 #ECECEC;*/
+    box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+}
+
+@media screen and (max-width:320px){
+	.logo {
+		height: 135px;
+	}
+}
+
+.logo-back {
+	position: absolute;
+	top: 0;
+	height: 50px;
+}
+
+.logo-back-icon {
+	display: block;
+	position: absolute;
+	top: 17px;
+	left: 15px;
+    width: 15%;
+    max-width: 20px;
+}
+
+.logo-icon {
+	display: block;
+	position: relative;
+	top: 20%;
+	max-width: 230px;
+}
+
+.container {
+	margin-top: 0;
+    margin-bottom: 85px;
+}
+
+.forget {
+	margin-top: -10px;
+}
+
+.forget:before {
+	content: '999';
+	font-size: 1.2rem;
+	height: 100%;
+	margin-top: 5px;
+	background: url(../../src/img/login/forget.png) no-repeat center;
+	background-size: 70%;
+	color: transparent;
+}
+
+.button {
+	padding: 45px 0;
+}
+
+

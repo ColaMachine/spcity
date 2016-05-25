@@ -1,0 +1,27 @@
+@charset "UTF-8";
+/**
+ * photographs
+ * @authors Your Name (you@example.org)
+ * @date    2015-11-06 10:19:28
+ * @version $Id$
+ */
+
+.photographs-del {
+	display: block;
+	position: relative;
+	margin-top: -18%;
+	color: #ffffff;
+	padding: 5px 10px;
+	border-radius: 5px;
+	background: rgba(0,0,0,0.7);
+	margin-right: 10%;
+}
+
+.photographs-del-icon {
+	height: 10px;
+}
+
+#image {
+    position: absolute;
+    opacity: 0;
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- <typeAliases>
+		<typeAlias type="cola.machine.calendar.user.bean.User"
+			alias="User" />
+			<typeAlias type="cola.machine.calendar.user.bean.Active"
+			alias="Active" />
+		<typeAlias type="cola.machine.calendar.activity.bean.Activity.cfg"
+			alias="Activity.cfg" />
+	</typeAliases> -->
+
+	<!-- <mappers>
+		<mapper resource="config/mapper/UserMapper.xml"/>
+		<mapper resource="config/mapper/ActivityMapper.xml"/>
+	</mappers> -->
+
+</configuration>

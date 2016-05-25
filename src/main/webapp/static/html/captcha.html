@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<title></title>
+		<link rel="stylesheet" href="../css/awui.css" />
+		<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+	</head>
+
+	<body>
+		<div class="awui-main">
+
+<!--<div class="ui-row-90 awui-text-center" style="min-height: 28px"><span class=awui-red id=error></span></div>
+		<div class=awui-row-90>
+			<input class=awui-main-input id=username placeholder=请输入手机号 maxlength=11>
+		</div>
+		<div class=awui-row-90 id=captchaDiv>
+			<div class="awui-row-47 awui-left">
+				<input class="awui-row-47 awui-main-input" placeholder=请输入验证码 id=captcha maxlength=4>
+			</div>
+			<div class="awui-row-47 awui-right awui-text-center">
+				<img  src='img/forget.png'  id=getCaptcha class="awui-captchaPic"/>
+			</div>
+		</div>	
+		<div class="awui-row-90 awui-login-btngroup">
+				<button class="awui-back-orange awui-white awui-half-btn awui-text-center" id="sure">确认</button>
+			</div>-->
+		</div>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/awui_captcha.js"></script>
+	</body>
+	<script>
+$(document).ready(function(){
+Awifi_UI.captcha.init({
+    /**
+     * 必选
+     */
+    systemNo:'calendar',
+    mainContain: $(".awui-main"), //容器 JQuery对象
+    /**
+     * 以下可选
+     */
+    /**
+     * 请求地址
+     */
+    url: {
+        smsCaptchaUrl: '/code/sms/get.json',
+        picCaptchaUrl:'/code/img/get.json',
+        smsSureUrl:'/code/sms/valid.json',
+        picSureUrl:'/code/img/valid.json',
+        sureUrl: '/code/valid.json'
+    },
+    /**
+     * host
+     */
+    host:'http://127.0.0.1:8080/',
+    /**
+     *  参数
+     */
+    params: {
+        
+        appid: '1111',
+        timestamp: '1111111111111',
+        token: 'adcfgvftgf'
+    },
+    captchaType:'sms',// 'pic'表示图片验证码
+    captchaCutdownTime: 60 //验证码倒计时时间 默认60秒
+});
+})
+    </script>
+</html>

@@ -1,0 +1,428 @@
+html{-webkit-box-sizing: content-box;
+-moz-box-sizing: content-box;
+box-sizing: content-box;
+}
+*{-webkit-box-sizing: content-box;
+-moz-box-sizing: content-box;
+box-sizing: content-box;
+}
+.calHeader .zippy-arrow {
+	height: 12px;
+	position: relative;
+	vertical-align: middle;
+	width: 12px;
+}
+
+.zippy-arrow2 {
+	display: inline-block;
+	width: 11px;
+	height: 11px;
+	line-height: 10px;
+	vertical-align: middle;
+	background: url("combined_v43_vr.png") repeat scroll -153px -81px;
+	transparent;
+}
+
+.zippy-arrow {
+	display: inline-block;
+	width: 11px;
+	height: 11px;
+	line-height: 10px;
+	vertical-align: middle;
+	background: url("combined_v43_vr.png") repeat scroll -141px -81px
+		transparent;
+}
+
+.bubbleclose {
+	background: url("combined_v43_vr.png") repeat scroll -228px -48px
+		transparent;
+	cursor: pointer;
+	height: 13px;
+	right: 5px;
+	top: 5px;
+	width: 13px;
+	position: absolute;
+}
+
+.table2 { /*锟斤拷锟叫癸拷锟斤拷锟斤拷锟斤拷锟斤拷锟絫able*/
+	TABLE-LAYOUT: fixed;
+	height: 100px;
+	width: 100%;
+	border: solid 1px #A2BBDD;
+}
+
+.table2 tbody tr td {
+	border-right: 1px solid #DDDDDD;
+	position:relative;/**because in load html in chrome the div-tg-time 's 100% height doesn't work it's height is 0**/
+	/*display:inline-block;*/
+
+}
+
+/* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷*/
+.firsttable { /*border: solid 1px  #C3D9FF;*/
+	width: 1012px;
+}
+
+.wk-weektop { /*background-color: #C3D9FF; */
+	font-size: 12px;
+	color: blue;
+	/*border:1px solid red;*/
+	width: 100%;
+	border: red;
+	/* cellspacing:2;*/
+}
+
+.wk-weektop tr {
+	padding-top: 10px;
+}
+
+.wk-weektop tr td {
+	padding-bottom: 3px;
+	/*border:1px solid red;*/
+}
+
+.innertoptable {
+	height: 10px;
+	border-left: 1px solid #E8EEF7;
+	border-top: 1px solid #E8EEF7;
+	border-bottom: 1px solid #E8EEF7;
+	/*border:1px solid red;*/
+}
+
+.innertoptable tr td {
+	border-right: 1px solid #E8EEF7;
+	width: 129px;
+	height: 15px;
+	border-collapse: collapse;
+	empty-cells: show;
+	/*background-color:#E8EEF7;*/
+	/* bordercolorlight="#000000"; bordercolordark="#eeeeee" ;*/
+	/*border-left:solid 1px #E8EEF7;
+	border-right:solid 1px #E8EEF7;*/
+}
+
+.wk-allday {
+	width: 921px;
+}
+
+.dragTable {
+	font-size: 12px;
+	border-top: 1px solid #3366cc;
+	margin-bottom: 10px;
+	width: 100%;
+	background-color: #FFFFFF;
+}
+
+td {
+	vertical-align: top;
+}
+
+.dragTR {
+	cursor: move;
+	color: #7787cc;
+	background-color: #e5eef9;
+	height: 20px;
+	padding-left: 5px;
+	font-weight: bold;
+}
+
+.style1 {
+	color: #9966FF
+}
+
+.td-time-pri {
+	width: 75px;
+}
+
+.wk-tzlabel {
+	width: 75px;
+}
+
+.tg-time-pri {
+	background-color: #E8EEF7;
+	color: #446688;
+	border-bottom: 1px solid #DDDDDD;
+	/*border-right:1px solid #DDDDDD;*/
+	font-size: 12px;
+	padding-left: 18px;
+	padding-right: 3px;
+	height:39px;
+	/*padding-top:1px;
+	height: 40px;*/
+
+}
+
+.tg-time-pri div {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+.div-tg-time {
+	position: absolute;/**because in load html in chrome the div-tg-time 's 100% height doesn't work it's height is 0 the origin value is relative**/
+	width: 100%;
+	height: 100%;
+	padding: 0px 0px 0px 0px;
+	z-index: 1;
+}
+
+.td-time-pri-today { /*td锟斤拷锟斤拷锟斤拷锟缴拷锟斤拷锟�/
+	width: 100%;
+	height: 100%;
+	background: rgba(213, 202, 240, 0.2);
+	/*background-color:transparent;
+filter:alpha(opacity=30);*/ /* -moz-opacity:0.3;Moz + FF 透锟斤拷锟�0%*/
+	/*opacity: 0.3;  支锟斤拷CSS3锟斤拷锟斤拷锟斤拷锟紽F 1.5也支锟街ｏ拷透锟斤拷锟�0%*/
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr=
+		#11555555, endColorstr= #11555555, enabled= true, gradientType= '1');
+	/</
+	em
+	>
+	IE6
+	-
+	IE9
+	*/
+}
+
+.tg-col {
+	background-color: #E8EEF7;
+}
+
+.dateDIV { /*border-left:1px solid #DDDDDD;
+	border-right:1px solid #DDDDDD;
+	border-bottom:1px solid #DDDDDD;*/
+	height: 40px;
+	align: left;
+	width: 132px;
+	margin-left: -1px;
+	/*	//overflow:scroll; //++
+	//white-space:normal;word-break:break-all;table-layout:fixed
+	//padding:0px 0px 0px 0px;*/
+}
+
+.calendarEventDialog {
+	position: absolute;
+	display: none;
+	/*border:1px solid #0060C0;*/
+	background-color: #ffffff;
+	height: 80px;
+	z-index: 2000;
+	border: 1px solid #696;
+	padding: 8px;
+	text-align: center;
+	width: 200px;
+	/*
+border-radius: 8px;*/
+	box-shadow: #666 0px 0px 10px;
+	background: white;
+	width: 300px;
+	height: 90px;
+}
+
+.calendarEventDialog label {
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.calendarEventDialog>div {
+	text-align: left;
+	padding: 3px;
+}
+
+.btn {
+	margin-top: 5px;
+margin-bottom: 5px;
+margin-left:5px;
+color: #333;
+background-color: #FFF;
+
+border: 1px solid #CCC;
+box-sizing: border-box;
+border-radius: 4px;
+
+}
+.btn.focus, .btn:focus, .btn:hover {
+    color: #333;
+background-color: #E6E6E6;
+border-color: #ADADAD;
+}
+.calendarEventBar DT {
+	z-index: 1;
+	margin: 0px;
+	/*BACKGROUND-COLOR: #a32929;*/
+	width: 100%;
+
+}
+
+.calendarEventBar DT {
+	z-index: 1;
+	margin: 0px;
+	/*BACKGROUND-COLOR: #a32929;*/
+	width: 100%;
+}
+
+.calendarEventBar {
+	border: 0;
+	background-color: white;
+	width: 90%;
+	cursor:pointer;
+}
+
+.calendarEventBar dl {
+	alter: left;
+	border: 1px solid #a32929;
+	margin: 0px 0px 0px 0px;
+	width: 100%;
+	height: auto;/*100%;*/
+	font: normal 12px/22px "锟斤拷锟斤拷";
+	background-color: #F6C4CE;
+	/*height: 80;
+		box-shadow: 0px 0px 10px rgb(254, 254, 254);*/
+	/*	filter:alpha(opacity=80);*/ /* -moz-opacity:0.8;Moz + FF 透锟斤拷锟�0%*/
+	/*opacity: 0.8; 支锟斤拷CSS3锟斤拷锟斤拷锟斤拷锟紽F 1.5也支锟街ｏ拷透锟斤拷锟�0%*/
+}
+
+.calendarEventBar_side {
+	padding: 3px 3px 3px 3px;
+}
+
+.calendarEventBar DD {
+	text-align: left;
+	margin: 0px;
+	HEIGHT: 100% /*BACKGROUND-COLOR: #D89CA8;*/
+	 width: 100%;
+	left: -111px;
+	overflow: hidden;
+}
+
+.calendarEventBar DIV {
+	HEIGHT: 1px;
+	cursor: s-resize;
+	position: absolute;
+	bottom: 25px;
+	width: 100%;
+	text-align: center;
+	/*border:1px solid blue;*/
+}
+
+.tg-timedevents {
+	HEIGHT: 101px;
+	/*overflow:scroll;rightnow*/
+}
+
+.wk-scrolltimedevents {
+
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+.horizontal-line-container {
+	width: 100%;
+	height: 0px;
+	position: relative;
+	/*border:1px solid red;*/
+}
+
+.horizontal-line-container2 {
+	/*z-index: -5;*/
+	width: 100%;
+	position: absolute;
+	/*border:1px solid red;*/
+}
+
+.horizontal-line {
+	z-index: -14;
+height: 39px;
+	width: 100%;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+.horizontal-line div {
+	z-index: -3;
+	border-bottom: 1px dotted #DDDDDD;
+	/*height: 30px;*/
+}
+
+.bored {
+	border: 1px solid red;
+}
+/*.xb1, .xb2, .xb3, .xb4 {display:block; overflow:hidden; }
+.xb1, .xb2, .xb3 {height:1px;}
+.xb2, .xb3, .xb4 {background:#C3D9FF; border-left:1px solid #C3D9FF; border-right:1px solid #C3D9FF;}
+.xb1 {margin:0 5px; background:#C3D9FF;}
+.xb2 {margin:0 3px; border-width:0 2px;}
+.xb3 {margin:0 2px;}
+.xb4 {height:2px; margin:0 1px;}*/
+
+.ca-ty-ch-wrp a{
+    cursor:pointer;
+
+    padding-top:4px;
+    padding-left:5px;
+    padding-right:5px;
+    padding-bottom:4px;
+    border:1px solid #ddd;
+    color: #337ab7;
+    /*border-left:1px solid rgb(162, 187, 221);
+    border-top:1px solid rgb(162, 187, 221);
+    border-bottom:1px solid rgb(162, 187, 221);*/
+margin-left:-1px;
+}
+.ca-ty-ch-wrp a:hover{
+
+   background-color: #eee;
+   border-color: #ddd;
+}
+.ca-ty-ch-wrp a:first-child{
+border-top-left-radius: 4px;
+border-bottom-left-radius: 4px;
+
+  /*  border-right:1px solid rgb(162, 187, 221);*/
+
+}
+.ca-ty-ch-wrp a:last-child{
+border-top-right-radius: 4px;
+border-bottom-right-radius: 4px;
+
+  /*  border-right:1px solid rgb(162, 187, 221);*/
+
+}
+.active{
+z-index: 2;
+color: #fff ;
+cursor: default;
+background-color: #337ab7;
+border-color: #337ab7;
+}
+.ca-ty-ch-wrp .active{
+color: #fff ;
+}
+.ca-ty-ch-wrp .active:hover{
+
+background-color: #3aaaaa;
+}
+.wk_mv_table  td{
+border:1px solid #aaa;
+
+width:140px;
+height:150px;
+position:relative;
+/*padding-top:25px;*/
+}
+.wk_mv_table  td:hover{ background-color: #C3D9FF }
+.wk_mv_table{
+width:1012px;
+}
+
+
+#editForm{
+position:absolute;
+top:50px;
+left:50px;
+height:500px;
+background-color:#fff;
+widht:500px;
+border:1px solid red;
+z-index:2000;
+}

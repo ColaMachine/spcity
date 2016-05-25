@@ -1,0 +1,133 @@
+ <div class="modal-content">
+    <form id="configurationEditForm" class="form-horizontal" method="post" action="/configuration/save.json" enctype="multipart/form-data">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">系统配置表编辑</h4>
+        </div>
+        <div class="modal-body">
+                <div class="form-group">
+        <label for="key" class="col-sm-2 control-label">名称:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="key" name="key"  class="form-control input-sm"   maxlength="20"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="valuate" class="col-sm-2 control-label">对应值:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="valuate" name="valuate"  class="form-control input-sm"   maxlength="20"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="operator" class="col-sm-2 control-label">操作者:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="operator" name="operator"  class="form-control input-sm"   maxlength="20"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="createTime" class="col-sm-2 control-label">创建时间:</label>
+        <div class="col-sm-10 z-col-table">
+            <input type="text" id="createTime" name="createTime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  ></input>
+            <label class="input-group-addon" for="createTime" ><i class="fa fa-calendar"></i></label>        </div>
+    </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button"  class="btn btn-primarys saveBtn">保存</button>
+            <button type="button" class="btn btn-default cancelBtn">取消</button>
+        </div>
+    </form>
+</div><!-- /.modal-content -->
+        
+<script type="text/javascript">
+var configurationEdit={
+    form:null,
+    modal:false,
+    formId:"#configurationEditForm",
+    validParam:{
+        rules: {
+                   key:{
+            maxlength:20
+        },
+        valuate:{
+            maxlength:20,required:true
+        },
+        operator:{
+            maxlength:20,required:true
+        },
+        createTime:{
+            ymd:"yyyy-MM-dd HH:mm:ss",required:true
+        },
+
+        },
+        messages:{
+                   key:{
+            maxlength:"key不能多于20个字符"
+        },
+        valuate:{
+            maxlength:"valuate不能多于20个字符"
+        },
+        operator:{
+            maxlength:"operator不能多于20个字符"
+        },
+        createTime:{
+            ymd:"必须输入合法日期"
+        },
+
+        }
+    },
+    addEventListener:function(){
+        this.form.find(".saveBtn").click(this.saveInfo);
+        this.form.find(".cancelBtn").click(this.cancel);
+    },
+    init:function(){
+        this.form=$(this.formId);
+        this.addEventListener();
+        $("#configurationEditForm").validate(this.validParam);
+        Ajax.getJSON("configuration/view.json?id="+getParam("id"),null,function(data){
+            if(data.r==AJAX_SUCC){
+            if(data.data.bean){
+                fillJso2Form("#configurationEditForm",data.data.bean);
+            }
+            }else{
+                dialog.error("获取信息失败"+data.msg,function(index){
+                    goPage("configuration/list.htm");
+                   dialog.close(index);
+                });
+            }
+        });
+    },
+    saveInfo:function(){
+        if (!$("#configurationEditForm").valid())
+            return;
+        var jso = changeForm2Jso("#configurationEditForm");
+        var dialogId=dialog.showWait();
+        var that=this;
+        Ajax.post(PATH+$("#configurationEditForm").attr("action"),jso,function(data){
+            dialog.hideWait(dialogId);
+            if(data.r==0){
+                dialog.alert(data.msg||"保存成功",function(index){
+                    //goPage("configuration/list.htm");
+                     configurationEdit.cancel();
+                    if(this.modal){
+                        $("#configurationGrid").jqGrid("reloadGrid");
+                    }
+                     dialog.close(index);
+                });
+            }else{
+                dialog.error(data.msg);
+            }
+        },'json');
+    },
+    cancel:function(){
+        if(this.modal){
+                $("#mymodal").modal("toggle");
+        }else{
+            goPage("configuration/list.htm");
+        }
+    }
+}
+$(document).ready(function() {
+    //获取传入参数
+ configurationEdit.init();
+});
+</script>

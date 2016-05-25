@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cola.machine.dao.PartnerMapper">
+  <resultMap id="BaseResultMap" type="cola.machine.bean.Partner">
+      <id column="id" jdbcType="BIGINT" property="id" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="brief" jdbcType="VARCHAR" property="brief" />
+      <result column="address" jdbcType="VARCHAR" property="address" />
+      <result column="logo" jdbcType="VARCHAR" property="logo" />
+      <result column="remark" jdbcType="VARCHAR" property="remark" />
+      <result column="creator" jdbcType="BIGINT" property="creator" />
+      <result column="creatorname" jdbcType="VARCHAR" property="creatorname" />
+      <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+      <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    `id` ,`name` ,`brief` ,`address` ,`logo` ,`remark` ,`creator` ,`creatorname` ,`createtime` ,`updatetime` 
+   
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from partner
+    where id =   #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from partner
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id"   parameterType="cola.machine.bean.Partner" >
+
+    insert into partner (  <include refid="Base_Column_List" />)
+    values (
+#{id,jdbcType=BIGINT}
+,#{name,jdbcType=VARCHAR}
+,#{brief,jdbcType=VARCHAR}
+,#{address,jdbcType=VARCHAR}
+,#{logo,jdbcType=VARCHAR}
+,#{remark,jdbcType=VARCHAR}
+,#{creator,jdbcType=BIGINT}
+,#{creatorname,jdbcType=VARCHAR}
+,#{createtime,jdbcType=TIMESTAMP}
+,#{updatetime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+   <insert id="insertSelective" parameterType="cola.machine.bean.Partner" >
+    insert into partner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="id != null" >  
+           `id`, 
+        </if>  
+        <if test="name != null" >  
+           `name`, 
+        </if>  
+        <if test="brief != null" >  
+           `brief`, 
+        </if>  
+        <if test="address != null" >  
+           `address`, 
+        </if>  
+        <if test="logo != null" >  
+           `logo`, 
+        </if>  
+        <if test="remark != null" >  
+           `remark`, 
+        </if>  
+        <if test="creator != null" >  
+           `creator`, 
+        </if>  
+        <if test="creatorname != null" >  
+           `creatorname`, 
+        </if>  
+        <if test="createtime != null" >  
+           `createtime`, 
+        </if>  
+        <if test="updatetime != null" >  
+           `updatetime`, 
+        </if>  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="id != null" >  
+          #{id,jdbcType=BIGINT},
+        </if>  
+        <if test="name != null" >  
+          #{name,jdbcType=VARCHAR},
+        </if>  
+        <if test="brief != null" >  
+          #{brief,jdbcType=VARCHAR},
+        </if>  
+        <if test="address != null" >  
+          #{address,jdbcType=VARCHAR},
+        </if>  
+        <if test="logo != null" >  
+          #{logo,jdbcType=VARCHAR},
+        </if>  
+        <if test="remark != null" >  
+          #{remark,jdbcType=VARCHAR},
+        </if>  
+        <if test="creator != null" >  
+          #{creator,jdbcType=BIGINT},
+        </if>  
+        <if test="creatorname != null" >  
+          #{creatorname,jdbcType=VARCHAR},
+        </if>  
+        <if test="createtime != null" >  
+          #{createtime,jdbcType=TIMESTAMP},
+        </if>  
+        <if test="updatetime != null" >  
+          #{updatetime,jdbcType=TIMESTAMP},
+        </if>  
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cola.machine.bean.Partner" >
+    update partner
+    <set >
+        <if test="id != null" >  
+             `id`=#{id,jdbcType=BIGINT},
+        </if>  
+        <if test="name != null" >  
+             `name`=#{name,jdbcType=VARCHAR},
+        </if>  
+        <if test="brief != null" >  
+             `brief`=#{brief,jdbcType=VARCHAR},
+        </if>  
+        <if test="address != null" >  
+             `address`=#{address,jdbcType=VARCHAR},
+        </if>  
+        <if test="logo != null" >  
+             `logo`=#{logo,jdbcType=VARCHAR},
+        </if>  
+        <if test="remark != null" >  
+             `remark`=#{remark,jdbcType=VARCHAR},
+        </if>  
+        <if test="creator != null" >  
+             `creator`=#{creator,jdbcType=BIGINT},
+        </if>  
+        <if test="creatorname != null" >  
+             `creatorname`=#{creatorname,jdbcType=VARCHAR},
+        </if>  
+        <if test="createtime != null" >  
+             `createtime`=#{createtime,jdbcType=TIMESTAMP},
+        </if>  
+        <if test="updatetime != null" >  
+             `updatetime`=#{updatetime,jdbcType=TIMESTAMP},
+        </if>  
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cola.machine.bean.Partner" >
+    update partner
+    set 
+              `name`=#{name,jdbcType=VARCHAR},  
+              `brief`=#{brief,jdbcType=VARCHAR},  
+              `address`=#{address,jdbcType=VARCHAR},  
+              `logo`=#{logo,jdbcType=VARCHAR},  
+              `remark`=#{remark,jdbcType=VARCHAR},  
+              `creator`=#{creator,jdbcType=BIGINT},  
+              `creatorname`=#{creatorname,jdbcType=VARCHAR},  
+              `createtime`=#{createtime,jdbcType=TIMESTAMP},  
+              `updatetime`=#{updatetime,jdbcType=TIMESTAMP}  
+where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="listByParams" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from partner where 1=1
+        <if test="id != null and id != '' ">  
+           and `id` = #{id}
+        </if>  
+        <if test="name != null and name != '' ">  
+           and `name` = #{name}
+        </if>  
+        <if test="nameLike != null and nameLike != '' ">  
+             and `name` like "%"#{nameLike}"%"
+        </if>   
+        <if test="brief != null and brief != '' ">  
+           and `brief` = #{brief}
+        </if>  
+        <if test="briefLike != null and briefLike != '' ">  
+             and `brief` like "%"#{briefLike}"%"
+        </if>   
+        <if test="address != null and address != '' ">  
+           and `address` = #{address}
+        </if>  
+        <if test="addressLike != null and addressLike != '' ">  
+             and `address` like "%"#{addressLike}"%"
+        </if>   
+        <if test="logo != null and logo != '' ">  
+           and `logo` = #{logo}
+        </if>  
+        <if test="logoLike != null and logoLike != '' ">  
+             and `logo` like "%"#{logoLike}"%"
+        </if>   
+        <if test="remark != null and remark != '' ">  
+           and `remark` = #{remark}
+        </if>  
+        <if test="remarkLike != null and remarkLike != '' ">  
+             and `remark` like "%"#{remarkLike}"%"
+        </if>   
+        <if test="creator != null and creator != '' ">  
+           and `creator` = #{creator}
+        </if>  
+        <if test="creatorname != null and creatorname != '' ">  
+           and `creatorname` = #{creatorname}
+        </if>  
+        <if test="creatornameLike != null and creatornameLike != '' ">  
+             and `creatorname` like "%"#{creatornameLike}"%"
+        </if>   
+        <if test="createtime != null and createtime != '' ">  
+           and `createtime` = #{createtime}
+        </if>  
+        <if test="createtimeBegin != null and createtimeBegin != '' ">  
+             and `createtime` &gt;= #{createtimeBegin}
+        </if>   
+         <if test="createtimeEnd != null and createtimeEnd != '' ">  
+             and `createtime` &lt;= #{createtimeEnd}
+        </if> 
+        <if test="createtimeBegin != null and createtimeBegin != '' ">  
+             and `createtime` &gt;= #{createtimeBegin}
+        </if>   
+         <if test="createtimeEnd != null and createtimeEnd != '' ">  
+             and `createtime` &lt;= #{createtimeEnd}
+        </if> 
+        <if test="updatetime != null and updatetime != '' ">  
+           and `updatetime` = #{updatetime}
+        </if>  
+        <if test="updatetimeBegin != null and updatetimeBegin != '' ">  
+             and `updatetime` &gt;= #{updatetimeBegin}
+        </if>   
+         <if test="updatetimeEnd != null and updatetimeEnd != '' ">  
+             and `updatetime` &lt;= #{updatetimeEnd}
+        </if> 
+        <if test="updatetimeBegin != null and updatetimeBegin != '' ">  
+             and `updatetime` &gt;= #{updatetimeBegin}
+        </if>   
+         <if test="updatetimeEnd != null and updatetimeEnd != '' ">  
+             and `updatetime` &lt;= #{updatetimeEnd}
+        </if> 
+  </select>
+   <select id="listByParams4Page" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from partner where 1=1
+        <if test="id != null and id != '' ">  
+           and `id` = #{id}
+        </if>  
+        <if test="name != null and name != '' ">  
+           and `name` = #{name}
+        </if>  
+        <if test="nameLike != null and nameLike != '' ">  
+             and `name` like "%"#{nameLike}"%"
+        </if>   
+        <if test="brief != null and brief != '' ">  
+           and `brief` = #{brief}
+        </if>  
+        <if test="briefLike != null and briefLike != '' ">  
+             and `brief` like "%"#{briefLike}"%"
+        </if>   
+        <if test="address != null and address != '' ">  
+           and `address` = #{address}
+        </if>  
+        <if test="addressLike != null and addressLike != '' ">  
+             and `address` like "%"#{addressLike}"%"
+        </if>   
+        <if test="logo != null and logo != '' ">  
+           and `logo` = #{logo}
+        </if>  
+        <if test="logoLike != null and logoLike != '' ">  
+             and `logo` like "%"#{logoLike}"%"
+        </if>   
+        <if test="remark != null and remark != '' ">  
+           and `remark` = #{remark}
+        </if>  
+        <if test="remarkLike != null and remarkLike != '' ">  
+             and `remark` like "%"#{remarkLike}"%"
+        </if>   
+        <if test="creator != null and creator != '' ">  
+           and `creator` = #{creator}
+        </if>  
+        <if test="creatorname != null and creatorname != '' ">  
+           and `creatorname` = #{creatorname}
+        </if>  
+        <if test="creatornameLike != null and creatornameLike != '' ">  
+             and `creatorname` like "%"#{creatornameLike}"%"
+        </if>   
+        <if test="createtime != null and createtime != '' ">  
+           and `createtime` = #{createtime}
+        </if>  
+        <if test="createtimeBegin != null and createtimeBegin != '' ">  
+             and `createtime` &gt;= #{createtimeBegin}
+        </if>   
+         <if test="createtimeEnd != null and createtimeEnd != '' ">  
+             and `createtime` &lt;= #{createtimeEnd}
+        </if> 
+        <if test="updatetime != null and updatetime != '' ">  
+           and `updatetime` = #{updatetime}
+        </if>  
+        <if test="updatetimeBegin != null and updatetimeBegin != '' ">  
+             and `updatetime` &gt;= #{updatetimeBegin}
+        </if>   
+         <if test="updatetimeEnd != null and updatetimeEnd != '' ">  
+             and `updatetime` &lt;= #{updatetimeEnd}
+        </if> 
+  </select>
+   <select id="countByParams" parameterType="map" resultType="java.lang.Integer">
+    select 
+    count(1) 
+    from partner where 1=1
+        <if test="id != null and id != '' ">  
+           and `id` = #{id}
+        </if>  
+        <if test="name != null and name != '' ">  
+           and `name` = #{name}
+        </if>  
+        <if test="nameLike != null and nameLike != '' ">  
+             and `name` like "%"#{nameLike}"%"
+        </if>   
+        <if test="brief != null and brief != '' ">  
+           and `brief` = #{brief}
+        </if>  
+        <if test="briefLike != null and briefLike != '' ">  
+             and `brief` like "%"#{briefLike}"%"
+        </if>   
+        <if test="address != null and address != '' ">  
+           and `address` = #{address}
+        </if>  
+        <if test="addressLike != null and addressLike != '' ">  
+             and `address` like "%"#{addressLike}"%"
+        </if>   
+        <if test="logo != null and logo != '' ">  
+           and `logo` = #{logo}
+        </if>  
+        <if test="logoLike != null and logoLike != '' ">  
+             and `logo` like "%"#{logoLike}"%"
+        </if>   
+        <if test="remark != null and remark != '' ">  
+           and `remark` = #{remark}
+        </if>  
+        <if test="remarkLike != null and remarkLike != '' ">  
+             and `remark` like "%"#{remarkLike}"%"
+        </if>   
+        <if test="creator != null and creator != '' ">  
+           and `creator` = #{creator}
+        </if>  
+        <if test="creatorname != null and creatorname != '' ">  
+           and `creatorname` = #{creatorname}
+        </if>  
+        <if test="creatornameLike != null and creatornameLike != '' ">  
+             and `creatorname` like "%"#{creatornameLike}"%"
+        </if>   
+        <if test="createtime != null and createtime != '' ">  
+           and `createtime` = #{createtime}
+        </if>  
+        <if test="createtimeBegin != null and createtimeBegin != '' ">  
+             and `createtime` &gt;= #{createtimeBegin}
+        </if>   
+         <if test="createtimeEnd != null and createtimeEnd != '' ">  
+             and `createtime` &lt;= #{createtimeEnd}
+        </if> 
+        <if test="updatetime != null and updatetime != '' ">  
+           and `updatetime` = #{updatetime}
+        </if>  
+        <if test="updatetimeBegin != null and updatetimeBegin != '' ">  
+             and `updatetime` &gt;= #{updatetimeBegin}
+        </if>   
+         <if test="updatetimeEnd != null and updatetimeEnd != '' ">  
+             and `updatetime` &lt;= #{updatetimeEnd}
+        </if> 
+  </select>
+ <select id="countByOrParams" parameterType="map" resultType="java.lang.Integer">
+    select
+    count(1)
+    from partner where 1!=1
+        <if test="id != null and id != '' ">
+           or `id` = #{id}
+        </if>
+        <if test="name != null and name != '' ">
+           or `name` = #{name}
+        </if>
+        <if test="brief != null and brief != '' ">
+           or `brief` = #{brief}
+        </if>
+        <if test="address != null and address != '' ">
+           or `address` = #{address}
+        </if>
+        <if test="logo != null and logo != '' ">
+           or `logo` = #{logo}
+        </if>
+        <if test="remark != null and remark != '' ">
+           or `remark` = #{remark}
+        </if>
+        <if test="creator != null and creator != '' ">
+           or `creator` = #{creator}
+        </if>
+        <if test="creatorname != null and creatorname != '' ">
+           or `creatorname` = #{creatorname}
+        </if>
+        <if test="createtime != null and createtime != '' ">
+           or `createtime` = #{createtime}
+        </if>
+        <if test="updatetime != null and updatetime != '' ">
+           or `updatetime` = #{updatetime}
+        </if>
+  </select>
+</mapper>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cola.machine.dao.SysRoleResourceMapper">
+  <resultMap id="BaseResultMap" type="cola.machine.bean.SysRoleResource">
+      <id column="id" jdbcType="BIGINT" property="id" />
+      <result column="roleid" jdbcType="BIGINT" property="roleid" />
+      <result column="rid" jdbcType="BIGINT" property="rid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    `id` ,`roleid` ,`rid` 
+   
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role_resource
+    where id =   #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_role_resource
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+   <delete id="deleteExtra" parameterType="map">
+          delete from sys_role_resource
+          where roleid in
+          <foreach collection="roleids" item="item" index="index"
+                   open="(" separator="," close=")"> #{item}</foreach>
+         <if test="rids != null and id != '' " >
+          and rid not in
+          <foreach collection="rids" item="item" index="index"
+                   open="(" separator="," close=")"> #{item}</foreach>
+       </if>
+      </delete>
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id"   parameterType="cola.machine.bean.SysRoleResource" >
+
+    insert into sys_role_resource (  <include refid="Base_Column_List" />)
+    values (
+#{id,jdbcType=BIGINT}
+,#{roleid,jdbcType=BIGINT}
+,#{rid,jdbcType=BIGINT}
+    )
+  </insert>
+   <insert id="insertSelective" parameterType="cola.machine.bean.SysRoleResource" >
+    insert into sys_role_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="id != null" >  
+           `id`, 
+        </if>  
+        <if test="roleid != null" >  
+           `roleid`, 
+        </if>  
+        <if test="rid != null" >  
+           `rid`, 
+        </if>  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="id != null" >  
+          #{id,jdbcType=BIGINT},
+        </if>  
+        <if test="roleid != null" >  
+          #{roleid,jdbcType=BIGINT},
+        </if>  
+        <if test="rid != null" >  
+          #{rid,jdbcType=BIGINT},
+        </if>  
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cola.machine.bean.SysRoleResource" >
+    update sys_role_resource
+    <set >
+        <if test="id != null" >  
+             `id`=#{id,jdbcType=BIGINT},
+        </if>  
+        <if test="roleid != null" >  
+             `roleid`=#{roleid,jdbcType=BIGINT},
+        </if>  
+        <if test="rid != null" >  
+             `rid`=#{rid,jdbcType=BIGINT},
+        </if>  
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cola.machine.bean.SysRoleResource" >
+    update sys_role_resource
+    set 
+              `roleid`=#{roleid,jdbcType=BIGINT},  
+              `rid`=#{rid,jdbcType=BIGINT}  
+where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="listByParams" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role_resource where 1=1
+        <if test="id != null and id != '' ">  
+           and `id` = #{id}
+        </if>  
+        <if test="roleid != null and roleid != '' ">  
+           and `roleid` = #{roleid}
+        </if>  
+        <if test="rid != null and rid != '' ">  
+           and `rid` = #{rid}
+        </if>  
+  </select>
+   <select id="listByParams4Page" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role_resource where 1=1
+        <if test="id != null and id != '' ">  
+           and `id` = #{id}
+        </if>  
+        <if test="roleid != null and roleid != '' ">  
+           and `roleid` = #{roleid}
+        </if>  
+        <if test="rid != null and rid != '' ">  
+           and `rid` = #{rid}
+        </if>  
+  </select>
+   <select id="countByParams" parameterType="map" resultType="java.lang.Integer">
+    select 
+    count(1) 
+    from sys_role_resource where 1=1
+        <if test="id != null and id != '' ">  
+           and `id` = #{id}
+        </if>  
+        <if test="roleid != null and roleid != '' ">  
+           and `roleid` = #{roleid}
+        </if>  
+        <if test="rid != null and rid != '' ">  
+           and `rid` = #{rid}
+        </if>  
+  </select>
+ <select id="countByOrParams" parameterType="map" resultType="java.lang.Integer">
+    select
+    count(1)
+    from sys_role_resource where 1!=1
+        <if test="id != null and id != '' ">
+           or `id` = #{id}
+        </if>
+        <if test="roleid != null and roleid != '' ">
+           or `roleid` = #{roleid}
+        </if>
+        <if test="rid != null and rid != '' ">
+           or `rid` = #{rid}
+        </if>
+  </select>
+</mapper>

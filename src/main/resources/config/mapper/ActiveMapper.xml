@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cola.machine.dao.ActiveMapper">
+ 	
+<!--  新增记录  --> 
+	<resultMap type="cola.machine.bean.Active" id="activeMap">
+	 <id property="activeid" column="activeid" />        
+   		<result property="userid" column="userid" /> 
+   		<result property="actived" column="actived" /> 
+ 		<result property="activedtime" column="activedtime" /> 
+			<result property="createdtime" column="createdtime" /> 
+   </resultMap>
+  	<insert id="insertActive" parameterType="cola.machine.bean.Active">
+  		insert into active(activeid,userid,actived,activedtime) values(#{activeid},#{userid},#{actived},#{activedtime})
+  	</insert>
+  	  <select id="countAll" resultType="int">
+        select count(*) c from active;
+    </select>
+<!--  查询单条记录	-->
+	<select id="selectActiveById" parameterType="string" resultType="cola.machine.bean.Active">
+		select * from active where activeid = #{activeid}
+  	</select>
+  	
+  
+<!--  修改记录	-->
+  	<update id="updateActive" parameterType="cola.machine.bean.Active">
+  		update active set actived = 1  ,activedtime=CURRENT_TIMESTAMP()  where activeid = #{activeid}
+  	</update>
+<!--  查询所有记录，查询多条记录即返回结果是一个集合的时候，resultType不是集合类型，而是集合所包含的类型	-->
+  
+<!--  删除记录	-->
+	<delete id="deleteActive" parameterType="java.lang.String">
+		delete from active where activeid = #{activeid}
+	</delete>
+</mapper>

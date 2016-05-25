@@ -1,0 +1,55 @@
+
+    <link rel="stylesheet" href="/static/css/grid.css" />
+    <link rel="stylesheet" href="/static/css/widget.css" />
+
+
+<div class="rgt_body">
+<div class="body_title">| 权限管理</div>
+    <div class="body_top" >
+        <div  style="padding-left:3%">
+            <button class="btn" onclick="goEdit()">新增角色</button>    
+        </div>
+
+       
+    </div>
+
+    <div id="grid" class="grid"></div>
+    <div id="grid-pager" class="pager"></div>
+
+
+
+</div>
+
+<div class="mask" > </div>
+<div class="widget"> </div>
+<div class="wait" style="display:none;position:absolute;left:50%;top:50%;font-size:30px;" >
+<i class="fa fa-spinner fa -spin" ></i>
+</div>
+
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">Home</a></li>
+        <li role="presentation"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>
+    </ul>
+
+    <div class="col-xs-12 col-sm-9 ChinaArea"  id="ChinaArea">
+        <form:hidden path="province" />
+        <form:hidden path="city" />
+        <form:hidden path="county" />
+
+        <select  id="provinceSelect"  name="provinceSelect" class="col-sm-2"></select>
+        <select  id="citySelect"  name="citySelect" class="col-sm-2"></select>
+        <select id="countySelect"  name="countySelect" class="col-sm-2"></select>
+
+    </div>
+<script type="text/javascript">
+
+
+$("#ChinaArea").jChinaArea({
+    aspnet : false,
+    s1 :'${adplan.province}',//默认选中的省名
+    s2 :'${adplan.city}',//默认选中的市名
+    s3 :'${adplan.county}'//默认选中的县区名
+});
+</script>
+

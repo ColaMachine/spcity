@@ -1,0 +1,212 @@
+ <div class="modal-content">
+    <form id="activityEditForm" class="form-horizontal" method="post" action="/activity/save.json" enctype="multipart/form-data">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">日历事项编辑</h4>
+        </div>
+        <div class="modal-body">
+                <input type="hidden" id="id" name="id"  class="form-control input-sm" >
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">名称:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="title" name="title"  class="form-control input-sm"   maxlength="40"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="startTime" class="col-sm-2 control-label">开始时间:</label>
+        <div class="col-sm-10">
+            <input type="number" id="startTime" name="startTime"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="endTime" class="col-sm-2 control-label">结束时间:</label>
+        <div class="col-sm-10">
+            <input type="number" id="endTime" name="endTime"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="address" class="col-sm-2 control-label">地址:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="address" name="address"  class="form-control input-sm"   maxlength="40"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="userId" class="col-sm-2 control-label">用户id:</label>
+        <div class="col-sm-10">
+            <input type="number" id="userId" name="userId"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="description" class="col-sm-2 control-label">详细描述:</label>
+        <div class="col-sm-10">
+            <textarea  id="description" name="description"  class="form-control input-sm"   maxlength="250"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="privacy" class="col-sm-2 control-label">是否公开:</label>
+        <div class="col-sm-10">
+            <input type="number" id="privacy" name="privacy"  class="form-control input-sm"  maxlength="1" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="busyLevel" class="col-sm-2 control-label">是否紧急:</label>
+        <div class="col-sm-10">
+            <input type="number" id="busyLevel" name="busyLevel"  class="form-control input-sm"  maxlength="1" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="type" class="col-sm-2 control-label">类型:</label>
+        <div class="col-sm-10">
+            <input type="number" id="type" name="type"  class="form-control input-sm"  maxlength="1" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="isdel" class="col-sm-2 control-label">是否已删除:</label>
+        <div class="col-sm-10">
+            <input type="number" id="isdel" name="isdel"  class="form-control input-sm"  maxlength="1" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button"  class="btn btn-primarys saveBtn">保存</button>
+            <button type="button" class="btn btn-default cancelBtn">取消</button>
+        </div>
+    </form>
+</div><!-- /.modal-content -->
+        
+<script type="text/javascript">
+var activityEdit={
+    form:null,
+    modal:false,
+    formId:"#activityEditForm",
+    validParam:{
+        rules: {
+                   id:{
+            digits:true
+        },
+        title:{
+            maxlength:40,required:true
+        },
+        startTime:{
+            digits:true,required:true
+        },
+        endTime:{
+            digits:true
+        },
+        address:{
+            maxlength:40
+        },
+        userId:{
+            digits:true,required:true
+        },
+        description:{
+            maxlength:250
+        },
+        privacy:{
+            digits:true
+        },
+        busyLevel:{
+            digits:true
+        },
+        type:{
+            digits:true
+        },
+        isdel:{
+            digits:true
+        },
+
+        },
+        messages:{
+                   id:{
+            digits:"必须输入整数"
+        },
+        title:{
+            maxlength:"title不能多于40个字符"
+        },
+        startTime:{
+            digits:"必须输入整数"
+        },
+        endTime:{
+            digits:"必须输入整数"
+        },
+        address:{
+            maxlength:"address不能多于40个字符"
+        },
+        userId:{
+            digits:"必须输入整数"
+        },
+        description:{
+            maxlength:"description不能多于250个字符"
+        },
+        privacy:{
+            digits:"必须输入整数"
+        },
+        busyLevel:{
+            digits:"必须输入整数"
+        },
+        type:{
+            digits:"必须输入整数"
+        },
+        isdel:{
+            digits:"必须输入整数"
+        },
+
+        }
+    },
+    addEventListener:function(){
+        this.form.find(".saveBtn").click(this.saveInfo);
+        this.form.find(".cancelBtn").click(this.cancel);
+    },
+    init:function(){
+        this.form=$(this.formId);
+        this.addEventListener();
+        $("#activityEditForm").validate(this.validParam);
+        Ajax.getJSON("activity/view.json?id="+getParam("id"),null,function(data){
+            if(data.r==AJAX_SUCC){
+            if(data.data.bean){
+                fillJso2Form("#activityEditForm",data.data.bean);
+            }
+            }else{
+                dialog.error("获取信息失败"+data.msg,function(index){
+                    goPage("activity/list.htm");
+                   dialog.close(index);
+                });
+            }
+        });
+    },
+    saveInfo:function(){
+        if (!$("#activityEditForm").valid())
+            return;
+        var jso = changeForm2Jso("#activityEditForm");
+        showWait();
+        var that=this;
+        Ajax.post(PATH+$("#activityEditForm").attr("action"),jso,function(data){
+            hideWait();
+            if(data.r==0){
+                dialog.alert(data.msg||"保存成功",function(index){
+                    //goPage("activity/list.htm");
+                     activityEdit.cancel();
+                    if(this.modal){
+                        $("#activityGrid").jqGrid("reloadGrid");
+                    }
+                     dialog.close(index);
+                });
+            }else{
+                dialog.error(data.msg);
+            }
+        },'json');
+    },
+    cancel:function(){
+        if(this.modal){
+                $("#mymodal").modal("toggle");
+        }else{
+            goPage("activity/list.htm");
+        }
+    }
+}
+$(document).ready(function() {
+    //获取传入参数
+ activityEdit.init();
+});
+</script>

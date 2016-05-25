@@ -1,0 +1,240 @@
+
+
+
+.dp_table {
+	/*border: solid 10px  #C3D9FF;*/
+
+	font-family:Tahoma;
+	cursor:pointer;
+	width:160px;
+	text-align:center;
+}
+.dp_table tr{
+	height: 20px;
+}
+/* ����calendar ��һ���ϵ���������ʽ*/
+.dp_table  th {
+	width:14.2%;
+	/*background-color: #C3D9FF;*/
+	font-weight:normal;
+
+}
+.dp_ym_th {
+
+	text-align:left;
+}
+.dp_ym_th span{
+	font-size:15px;
+	text-align:left;
+}
+
+.dp_prev_month {
+	background: url("combined_v43_vr.png") no-repeat scroll -243px -35px
+		transparent;
+	cursor: pointer;
+	height: 15px;
+	width: 15px;
+background-repeat:no-repeat;
+	 display:block;
+}
+
+.dp_next_month {
+	background-position: -258px -35px;
+}
+/* ����calendar ��һ��tr������ƶ��ı���ɫ*/
+.dp_title_tr:hover{background-color:#C3D9FF;}
+
+/* ����calendar �ڶ���*/
+.dp_week_title_tr th {
+	font-size: 12px;
+	text-align:center;
+
+}
+
+
+.dp_table  td {
+
+	font-size: 12px;
+}
+/*.dp_table*/ .othermonth{
+	color: gray;
+}
+.dp_table tr td:hover{ background-color: #C3D9FF }
+
+.selectedTr {
+	background-color: #AACCEE;
+}
+.todayTd{
+	/*border:1 solid black;*/
+	background-color: yellow;
+}
+.selectedTd{
+	background-color: #557799;
+	color: white;
+}
+
+/*.mouseOverTd{
+	background-color: green;
+}
+.selectedday{
+	background-color: #557799;
+	color: white;
+}
+
+*/
+/***����������ڸ�***/
+.dp_canopy_div{
+	font-weight: normal;
+	font-size: 15px;
+	text-align: left;
+	font-family: Tahoma;
+	cursor: pointer;
+	width:160px;
+	height:20px;
+}
+.dp_canopy_div:hover{background-color:#C3D9FF;}
+
+
+/*********�ҵ�����***********/
+.mycal_h2{
+	font-weight: normal;
+	font-size: 15px;
+	text-align: left;
+	font-family: Tahoma;
+	cursor: pointer;
+	width:160px;
+	height:20px;
+	position:relative;
+	margin-top:0px;
+}
+.mycal_arrow_sp {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    line-height: 10px;
+    vertical-align: middle;
+    background: url("combined_v43_vr.png") repeat scroll -141px -81px  transparent;
+}
+.mycal_title_sp {
+
+}
+.clstMenu {
+    background: url("combined_v43_vr.png") repeat scroll -217px 0px transparent;
+    border: 1px solid rgb(181, 181, 181);
+    border-radius: 1px 1px 1px 1px;
+    height: 11px;
+    font-size: 1px;
+    overflow: hidden;
+    position: absolute;
+    right: 5px;
+    text-indent: -100px;
+    top: 5px;
+    width: 11px;
+    display:inline-block;
+}
+
+.mycal_h2:hover{background-color:#C3D9FF;}
+
+
+.dp_types_div {
+	width:130px;
+	margin-top:-10px;
+	margin-left: 12px;
+}
+.dp_types_div div {
+	width:130px;
+	display:inline-block;
+	height:20px;
+	line-height: 20px;
+	font-size:12px;
+}
+.dp_types_div div:hover{background-color:#C3D9FF;}
+.dp_types_div span{
+	display:inline-block;
+	vertical-align:middle;
+}
+.dp_types_icon_sp{
+	width:15px;
+	height:15px;
+	background-color:red;
+	border-radius: 2px 2px 2px 2px;
+
+}
+
+/*********************�˵�***/
+
+.ccp-rb-color {
+    border: 1px solid white;
+    cursor: pointer;
+    height: 14px;
+    margin: 0px 4px 4px 0px;
+    width: 14px;
+    vertical-align: top;
+}
+.ccp-rb-color:hover {border:1px solid black}
+
+.goog-inline-block {
+    position: relative;
+    display: inline-block;
+}
+
+.goog-filterobsmenuitem {
+    color: rgb(51, 51, 51);
+    cursor: pointer;
+    list-style: none outside none;
+    white-space: nowrap;
+}
+
+
+.calcolor-menuitem {
+    border-top: 1px solid rgb(235, 235, 235);
+    padding-top: 17px;
+    padding-bottom: 5px;
+}
+.goog-menuitem, .goog-tristatemenuitem, .goog-filterobsmenuitem {
+    position: relative;
+    color: rgb(51, 51, 51);
+    cursor: pointer;
+    list-style: none outside none;
+    margin: 0px;
+    padding: 6px 8em 6px 30px;
+    white-space: nowrap;
+}
+.goog-menuitem {
+    color: rgb(51, 51, 51);
+    cursor: pointer;
+    list-style: none outside none;
+    margin: 0px;
+    padding: 6px 44px 6px 16px;
+    white-space: nowrap;
+    transition: background 0.13s ease 0s;
+}
+/* * {
+    font-weight: normal !important;
+} */
+
+.gcal-popup {
+    visibility: hidden;
+}
+.goog-menu {
+    cursor: default;
+    font-size: 13px;
+}
+.goog-menu {
+    white-space: nowrap;
+}
+body {
+    font: small Arial,sans-serif;
+}
+
+.bcp-selected {
+    background: url("combined_v43_vr.png") repeat scroll -95px -50px transparent;
+    height: 10px;
+    width: 10px;
+    left: -1px;
+    top: -1px;
+    margin: 3px;
+    overflow: hidden;
+    position: relative;
+    vertical-align: top;
+}

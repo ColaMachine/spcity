@@ -1,0 +1,72 @@
+@charset "UTF-8";
+/**
+ * header
+ * @authors Ping YF (koakumaping@163.com)
+ * @date    2015-10-27 14:14:26
+ * @version $Id$
+ */
+
+.header {
+	height: 60px;
+	line-height: 60px;
+	color: #ffffff;
+  /*box-shadow: 0 2px 0 #2372CC, 0 1px 0 #438EE4;*/
+    box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+}
+
+@media screen and (min-width: 1024px) {
+    .header {
+        width: 740px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.header-left,
+.header-right {
+	/*background: url(../img/header/back.png) no-repeat 15px center;*/
+	/*background-size: 20%;*/
+	/*color: transparent;*/
+	/*padding: 30px 0;*/
+	height: 60px;
+	line-height: 60px;
+	color: #ffffff;
+}
+
+.header-left-img {
+	display: block;
+    position: relative;
+    top: 30%;
+    left: 10%;
+    height: 40%;
+}
+
+.header-left-span {
+    position: relative;
+    top: -24px;
+    color: #ffffff;
+    padding-left: 42px;
+}
+
+@media screen and (min-width:700px){
+	.header-left-span {
+	    padding-left: 0;
+	}
+}
+
+.header-right-img {
+    display: block;
+    position: relative;
+    top: 30%;
+    height: 40%;
+    right: 15px;
+}
+
+.header-right-span {
+	margin-right: 15px;
+}

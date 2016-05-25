@@ -1,0 +1,208 @@
+
+<div id="ExpertList">
+    <div class="main-hd">| 专家</div>
+
+
+
+    <div class="main-bd">
+        <div class="body_top" >
+            <form class="form-inline app-search">
+                <label for="id">主键</label>
+                <input type="number" id="id" name="id"  class="form-control input-sm"  maxlength="15" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="主键"></input>
+                <label for="username">用户名</label>
+                <input type="text" id="usernameLike" name="usernameLike"  class="form-control input-sm"   maxlength="20" placeholder="用户名" ></input>
+                <label for="face">头像</label>
+                <input type="text" id="faceLike" name="faceLike"  class="form-control input-sm"   maxlength="100" placeholder="头像" ></input>
+                <label for="title">职称</label>
+                <input type="text" id="titleLike" name="titleLike"  class="form-control input-sm"   maxlength="40" placeholder="职称" ></input>
+                <label for="baike">百科地址</label>
+                <input type="text" id="baikeLike" name="baikeLike"  class="form-control input-sm"   maxlength="40" placeholder="百科地址" ></input>
+
+                <label for="remark">备注</label>
+                <input type="text" id="remarkLike" name="remarkLike"  class="form-control input-sm"   maxlength="200" placeholder="备注" ></input>
+                <label for="createtime">创建时间</label>
+                <div class="input-group">
+                    <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间" ></input>
+                    <label class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></label>        </div>
+                <label for="createtimeBegin">创建时间开始</label>
+                <div class="input-group">
+                    <input type="text" id="createtimeBegin" name="createtimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间开始" ></input>
+                    <label class="input-group-addon" for="createtimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
+                <label for="createtimeEnd">创建时间结束</label>
+                <div class="input-group">
+                    <input type="text" id="createtimeEnd" name="createtimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间结束" ></input>
+                    <label class="input-group-addon" for="createtimeEnd" ><i class="fa fa-calendar"></i></label>        </div>
+                <label for="updatetime">更新时间</label>
+                <div class="input-group">
+                    <input type="text" id="updatetime" name="updatetime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间" ></input>
+                    <label class="input-group-addon" for="updatetime" ><i class="fa fa-calendar"></i></label>        </div>
+                <label for="updatetimeBegin">更新时间开始</label>
+                <div class="input-group">
+                    <input type="text" id="updatetimeBegin" name="updatetimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间开始" ></input>
+                    <label class="input-group-addon" for="updatetimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
+                <label for="updatetimeEnd">更新时间结束</label>
+                <div class="input-group">
+                    <input type="text" id="updatetimeEnd" name="updatetimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间结束" ></input>
+                    <label class="input-group-addon" for="updatetimeEnd" ><i class="fa fa-calendar"></i></label>        </div>
+
+                <button type="button"  class="btn btn-default searchBtn">查询</button>
+            </form>
+            <div >
+
+                <a class="btn addBtn btn-success"><i class="fa fa-plus"></i>新增</a>
+                <!--<button class="btn deleteBtn">删除</button>
+                <button class="btn exportBtn" >导出</button>-->
+            </div>
+            </div>
+    <table id="ExpertGrid" class="grid"></table>
+    <div id="ExpertGrid-Pager" class="pager"></div>
+    </div>
+</div>
+<script>
+
+var expertList={
+    modal:false,
+    mygrid:null,
+    treeObj:null,
+    dqData:null,
+    root:$("#ExpertList"),
+    init:function(){
+        this.mygrid =this.root.find(".grid").jqGrid(this.gridParam);
+        this.addEventListener();
+
+    },
+    addEventListener:function(){
+        $(this.root).find(".addBtn").click(this.addInfo.Apply(this));
+        $(this.root).find(".editBtn").click(this.editInfo.Apply(this));
+        $(this.root).find(".deleteBtn").click(this.multiDelete.Apply(this));
+        $(this.root).find(".searchBtn").click(this.searchInfo.Apply(this));
+    },
+    gridParam:{
+        datatype: "json",
+        viewrecords: true, sortorder: "desc", caption:"",
+        rowNum:10,
+        rowList:[10,20,30],
+        multiselect : false,
+        url : PATH+'/expert/list.json',
+        autowidth:true,
+        grid:"#ExpertGrid",
+        pager:"#ExpertGrid-Pager",
+        jsonReader:jsonReader,
+        colNames : [
+        "主键","用户名","头像","职称","百科地址","备注","创建时间","更新时间" , '操作' ],
+        colModel : [
+            {   name : 'id',width : 80,
+            } ,
+            {   name : 'username',width : 80,
+            } ,
+            {   name : 'face',width : 80,
+                formatter : function(value, grid, rows) {
+                  return "<img class='img-thumbnail' src='"+PATH+"/"+value+"'></img>";
+                }
+            } ,
+               {   name : 'title',width : 80,
+            } ,
+            {   name : 'baike',width : 80,
+            } ,
+            {   name : 'remark',width : 80,
+            } ,
+            {   name : 'createtime',width : 80,
+                formatter : function(value, grid, rows) {
+                  return new Date(value).format("yyyy-MM-dd");
+                }
+            } ,
+            {   name : 'updatetime',width : 80,
+                formatter : function(value, grid, rows) {
+                  return new Date(value).format("yyyy-MM-dd");
+                }
+            } 
+              ,
+            {   name : 'operation',
+                width : 150,
+                formatter : function(value, grid, rows) {
+                    return getViewHtml(rows.id,"expertList")+getEditHtml(rows.id,"expertList")+getDelHtml(rows.id,"expertList");
+                }
+            }
+        ],
+        onSelectRow: function(id){ //alert("单击选中"+id);
+        },
+        loadComplete:function(data){
+            dqData=data;
+        }
+    },
+    saveInfo:function(){
+    },
+    addInfo:function (){
+        dialog.window('/expert/edit.htm',this.modal);
+    },
+    editInfo:function (id){
+        dialog.window("/expert/edit.htm?id="+id,this.modal);
+    },
+    searchInfo:function (){
+        var jso = changeForm2Jso(".app-search");
+
+        this.mygrid.jqGrid("setGridParam", { search: true ,"postData":jso}).trigger("reloadGrid", [{ page: 1}]);  //重载JQGrid
+    },
+
+    viewInfo:function (id){
+        dialog.window("/expert/view.htm?id="+id,this.modal);
+    },
+
+    exportInfo:function (){
+        var jso= changeForm2Jso(".app-search");
+        Ajax.getJSON(PATH+"/expert/export.json",jso,function(data){
+            if(data.r==AJAX_SUCC){
+                window.location=PATH+"/"+data.data;
+            }else{
+                dialog.error(data.msg,"导出失败",null);
+            }
+        })
+    },
+    deleteInfo:function (id){
+        var that =this;
+         //弹窗
+        dialog.confirm("确定删除数据:"+id,function(){
+            Ajax.post(PATH+"/expert/del.json",{id:id},function(result){
+                result=ajaxResultHandler(result);
+                if(result.r==AJAX_SUCC){
+                    var did=dialog.alert("删除成功，数据："+id,function(index){
+                    that.mygrid.trigger("reloadGrid");
+                    dialog.close(did);
+                });
+                }else {
+                    dialog.error(result.msg,"提醒");
+                }
+            });
+        });
+    },
+    multiDelete:function (){
+        //获取ids字符串
+        var ids=this.mygrid.jqGrid("getGridParam","selarrrow");
+        if(ids.length==0){
+            dialog.alert("请勾选数据");
+            return;
+        }
+        for(var i=0;i<ids.length;i++){
+            var data= this.mygrid.jqGrid("getRowData",ids[i]);
+            ids[i]=data["id"];
+        }
+        //弹窗
+        var that=this;
+        var dialogid= dialog.confirm("确定删除数据:"+ids.join(","),function(){
+            Ajax.post(PATH+"/expert/mdel.json?",{ids:ids.join(",")},function(result){
+                result=ajaxResultHandler(result);
+                if(result.r==AJAX_SUCC){
+                    dialogid=dialog.alert("删除成功，数据："+ids.join(","),function(index){
+                    that.mygrid.trigger("reloadGrid");
+                    dialog.close(dialogid);
+                });
+                }else {
+                    dialog.error(result.msg);
+                }
+            });
+        });
+    }
+};
+expertList.init()
+</script>
+

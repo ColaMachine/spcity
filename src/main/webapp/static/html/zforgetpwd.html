@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>登录</title>
+    <script src="/static/js/common.js" type="text/javascript"
+            charset="utf-8"></script>
+
+    <script type="text/javascript">
+    includeJS(["/static/js/jquery-1.11.0.js",
+               "/static/js/zlogin.js",
+               "/static/js/jquery.validate.js" ,
+               "/static/js/additional-methods.js",
+               "/static/js/bootstrap.min.js",
+               /*"/static/js/widget.js",*/
+                 "/static/js/layer.js",
+              ]);
+    includeCSS(["/static/css/bootstrap.min.css",
+                "/static/css/main.css",
+                "/static/css/widget.css",
+                "/static/css/login.css",
+                   "/static/css/layer.css",
+                ]);
+
+
+    </script>
+    <style type="text/css">
+
+            /*body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #eee;
+            }
+
+            .form-signin {
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+            }
+
+            .form-signin .form-signin-heading, .form-signin .checkbox {
+            margin-bottom: 10px;
+            }
+
+            .form-signin .checkbox {
+            font-weight: normal;
+            }
+
+            .form-signin .form-control {
+            position: relative;
+            height: auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 16px;
+            }
+
+            .form-signin .form-control:focus {
+            z-index: 2;
+            }
+
+            .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            }
+
+            .form-signin input[type="password"] {
+            /*margin-bottom: 10px;*/
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            }
+
+            .failure {
+            color: red;
+            }*/
+    </style>
+</head>
+
+<body>
+<div id="login-wrap" class="container ">
+    <div class="container col-sm-4 center">
+        <!-- 登录form -->
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"><a href="#login"  data-toggle="tab">登录 </a></li>
+            <li style="display:none" role="presentation"><a href="#register"  data-toggle="tab">注册</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="login">
+                <form id="login_form" class="form-signin" action="/loginPost"
+                      method="post">
+
+                    <div class="form-group">
+                        <label for="email" class="sr-only">邮箱地址/手机号码</label>
+                        <input id="login-email" type="text" name="email" maxlength="50"
+                               class="form-control username" placeholder="邮件地址" required autofocus/>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd" class="sr-only">密码</label>
+                        <input type="password" id="loginpwd" name="pwd" maxlength="50" class="form-control" placeholder="密码"
+                               required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="picCaptcha" class="sr-only">图片验证码</label>
+                        <div class="input-group">
+                            <div style="position:relative;overflow:hidden">
+                            <input type="text" id="loginPicCaptchaInput" name="picCaptcha" class="form-control" placeholder="图片验证码">
+                           </div>
+                            <span  class="input-group-addon bg-white"><img id="loginPicCaptchaImg"
+                                    src="" alt="点击刷新验证码"/></span>
+                        </div>
+                    </div>
+
+
+                </form>
+
+
+
+                <button class="btn btn-primary btn-block" id="loginBtn"
+                        type="button">登录
+                </button>
+
+                <div class="checkbox">
+                    <label> <input type="checkbox" id="rememberme">
+                        记住我
+                    </label> <a id="forgetLink" href="javascript:goUrl('/forgetpwd.htm')" style="float: right">忘记密码</a>
+                </div>
+
+                <div class="failure">
+                    <ul class="">
+
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane fade " id="register">
+                <!-- - 注册 -->
+                <form id="registerForm" style="" class="form-signin"
+                      action="<%=path %>/pwdrestPost" method="post">
+
+                    <div class="form-group">
+                        <label for="username" class="sr-only">姓名</label>
+                        <input type="text" id="username"
+                                name="username" maxlength="50" class="form-control"
+                                placeholder="姓名" required autofocus/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email"
+                               class="sr-only">邮件地址/手机号码</label>
+                        <input type="text" id="email" name="email"
+                               maxlength="50" class="form-control" placeholder="邮件地址/手机号码" required
+                               autofocus/>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd" class="sr-only">密码</label>
+                        <input
+                                type="password" id="pwd" name="pwd" maxlength="50"
+                                class="form-control" placeholder="密码" required/>
+                    </div>
+                    <div class="form-group">
+                        <label
+                                for="pwdrepeat" class="sr-only">再次输入密码</label> <input
+                            type="password" id="pwdrepeat" name="pwdrepeat" maxlength="50"
+                            class="form-control" placeholder="请再次输入密码" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPicCaptchaInput" class="sr-only">图片验证码</label>
+                        <div class="input-group">
+                            <div style="position:relative;overflow:hidden">
+                            <input type="text" id="regPicCaptchaInput" name="picCaptcha" class="form-control" placeholder="图片验证码">
+                            </div>
+                            <span  class="input-group-addon bg-white"><img id="regPicCaptchaImg"
+                                    src="" alt="点击获取验证码"/></span>
+                    </div>
+                    </div>
+
+
+                </form>
+                <button class="btn  btn-primary btn-block" id="registerBtn"
+                        type="button">注册
+                </button>
+                <div class="failure">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="smsValidForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-dialog-small" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title center" id="modalTitle">验证手机</h4>
+                    <h6 class="modal-title center" id="modalDescri">请输入你收到的6位数字短信验证码</h6>
+                </div>
+                <div class="modal-body">
+                    <form id="registerEnterForm" style="" class="form-signin"
+                          action="<%=path %>/pwdrestPost" method="post">
+                    <div class="form-group">
+                        <label for="username" class="sr-only">手机号码</label>
+                        <span   id="phone"
+                                name="phone"  class="form-control"
+                                  ></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="sr-only">手机验证码</label>
+                        <div class="input-group">
+                            <div style="position:relative;overflow:hidden">
+                            <input type="text" id="smsCaptcha" name="smsCaptcha" class="form-control" placeholder="手机验证码">
+                            </div>
+                            <a id="smsCaptchaBtn" class="input-group-addon bg-white ">发送验证码</a>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" id="smsValidBtn" class="btn btn-primary center">点击进入</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

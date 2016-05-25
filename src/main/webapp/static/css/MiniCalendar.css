@@ -1,0 +1,58 @@
+.table_CalendarView {
+	/*border: solid 10px  #C3D9FF;*/
+	font-size: 19px;
+	font-family:Tahoma;
+	cursor:pointer;
+	width:160px
+
+}
+	
+.table_CalendarView tr{
+	height: 20px;
+}
+/* 迷你calendar 第一行上的年月日样式*/ 
+.table_CalendarView tr th{ 
+	width:90px;
+	/*background-color: #C3D9FF;*/
+	font-weight:normal;
+	font-size: 15px;
+	text-align:left;
+}
+
+
+/* 迷你calendar 第二行*/ 
+.table_CalendarView .calendar-table-title  th { 
+	font-size: 12px;
+	text-align:center;
+}
+
+.table_CalendarView tr  .othermonth{
+	color: gray;
+}
+.table_CalendarView tr td {
+	text-align:center;
+	font-size: 12px;
+}
+.table_CalendarView tr td:hover{ background-color: #C3D9FF }
+
+.selectedTr {
+	background-color: #AACCEE;
+}
+.todayTd{
+	
+	/*border:1 solid black;*/
+	background-color: yellow;
+	
+}
+.mouseOverTd{
+	background-color: green;
+}
+.selectedTd{
+	background-color: #557799;
+	color: white;
+}
+.selectedday{
+	background-color: #557799;
+	color: white;
+}
+

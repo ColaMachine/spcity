@@ -1,0 +1,139 @@
+.wk-weektop{ 
+	background-color: #C3D9FF; 
+	font-size:12px; 
+	color:blue; 
+	width:101%; 
+}
+.table2{ 
+TABLE-LAYOUT: fixed; overflow:scroll;height:100px;
+	width:100%; 
+	border:solid 1px #A2BBDD;
+
+}
+/* 日历工作区的最外层*/
+.firsttable{
+	border: solid 9px  #C3D9FF;
+	width:1012px; 
+}
+
+.wk-weektop tr { 
+	padding-top:-10px;
+ } 
+
+.innertoptable{
+	height:10px
+}
+.innertoptable tr td{ 
+	background-color:#E8EEF7;
+	height:10px; 
+	height:18px;
+	border-left:solid 1px #DDDDDD;
+	border-right:solid 1px #DDDDDD;
+ }
+.dragTable{
+   font-size:12px;
+   border-top:1px solid #3366cc;
+   margin-bottom: 10px;
+   width:100%;
+   background-color:#FFFFFF;
+}
+td{
+	vertical-align:top;
+}
+.dragTR{
+   cursor:move;
+   color:#7787cc;
+   background-color:#e5eef9;
+   height:20px;
+   padding-left:5px;
+   font-weight:bold;
+}
+
+
+.style1 {
+	color: #9966FF
+}
+.wk-weektop tr td{ 
+	padding-bottom:3px
+ }
+
+
+.tg-time-pri{ 
+	background-color:#E8EEF7;
+	color: #446688;
+	border-bottom:1px solid #DDDDDD;
+    border-right:1px solid #DDDDDD;
+	font-size:12px;
+	padding-left:18px;
+    padding-right:3px;
+	padding-top:1px;
+	height:40px;
+}
+
+.tg-col{
+	background-color:#E8EEF7;
+}
+
+.dateDIV{
+	border-left:1px solid #DDDDDD;
+	border-right:1px solid #DDDDDD;
+	border-bottom:1px solid #DDDDDD;
+	height:41px;
+	align:left;	
+	width:132px; margin-left:-1px;
+/*	//overflow:scroll; //++
+	//white-space:normal;word-break:break-all;table-layout:fixed
+	//padding:0px 0px 0px 0px;*/
+}
+.calendarEventDialog{
+	position:absolute;
+	border:1px solid #0060C0;
+	width:300px;
+	height:100px;
+	background-color:#ffffff;
+	z-index:100;
+}
+.calendarEventBar DT{
+	BACKGROUND-COLOR: #a32929;
+	width:100%;
+}
+.calendarEventBar{
+alert:left;
+	z-index:1;
+	border:1px solid #a32929;
+	/*margin:0px 0px 0px 0px;*/
+	width:100%;
+}
+.calendarEventBar DD{
+	HEIGHT:100%
+	BACKGROUND-COLOR: #D89CA8;
+	width:100%;
+}
+
+.calendarEventBar DIV{
+	HEIGHT:1px;
+	cursor:s-resize;
+	position:absolute;
+	bottom:25px;
+	
+	width:100%;
+	text-align:center;
+	/*border:1px solid blue;*/
+}
+.tg-timedevents {
+	HEIGHT:101px;
+	overflow:scroll;
+}
+.wk-scrolltimedevents{
+height:400px;
+overflow:scroll;border:1px solid red;
+	overflow:scroll;
+}
+
+.xb1, .xb2, .xb3, .xb4 {display:block; overflow:hidden; }
+.xb1, .xb2, .xb3 {height:1px;}
+.xb2, .xb3, .xb4 {background:#C3D9FF; border-left:1px solid #C3D9FF; border-right:1px solid #C3D9FF;}
+.xb1 {margin:0 5px; background:#C3D9FF;}
+.xb2 {margin:0 3px; border-width:0 2px;}
+.xb3 {margin:0 2px;}
+.xb4 {height:2px; margin:0 1px;}

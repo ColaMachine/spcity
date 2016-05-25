@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<script type="text/javascript" src="scripts/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="index2.css" type="text/css" />
+	
+	<body onload="init()">
+	<div id="curtain" class="head-back">
+		<div class="head-front">
+			<div class="logo">
+				ColaMachine
+			</div>
+			<div class="search">
+				<div class="search-input">
+					<input type="text"/>
+				</div>
+				<div class="search-button">
+					<button >搜索</button>
+				</div>
+			</div>
+
+			<ul class="keyword">
+				<li><a href="http://www.baidu.com">电子产品</a></li>
+				<li><a href="">生活&居家</a></li>
+				<li><a href="">艺术品</a></li>
+				<li><a href="">女人</a></li>
+				<li><a href="">男人</a></li>
+				<li><a href="">儿童</a></li>
+			</ul>
+
+			<ul class="reg">
+				<li>help</li>
+				<li>注册</li>
+				<li>登录</li>
+				<li>购物车</li>
+				
+			</ul>
+		</div>
+
+	<div>
+<div id="menu">
+<ul>
+<li><a href="">菜单一</a>
+<ul>
+<li><a href="">子菜单1</a></li>
+<li><a href="">子菜单2</a>
+<ul><li><a href="">子菜单7</a></li></ul>
+</li>
+<li><a href="">子菜单3</a></li>
+</ul>
+</li>
+<li><a href="">菜单二</a>
+<ul>
+<li><a href="">子菜单4</a></li>
+<li><a href="">子菜单5</a></li>
+<li><a href="">子菜单6</a></li>
+</ul>
+</li>
+</ul>
+</div> 
+
+<script>
+$(document).ready(function()
+{
+/* 菜单初始化 */
+$('#menu>ul>li>ul').find('li:has(ul:not(:empty))>a').append("<span class='arrow'>></span>"); // 为有子菜单的菜单项添加'>'符号
+$("#menu>ul>li").bind('mouseover',function() // 顶级菜单项的鼠标移入操作
+{
+$(this).children('ul').slideDown('fast');
+}).bind('mouseleave',function() // 顶级菜单项的鼠标移出操作
+{
+$(this).children('ul').slideUp('fast');
+});
+$('#menu>ul>li>ul li').bind('mouseover',function() // 子菜单的鼠标移入操作
+{
+$(this).children('ul').slideDown('fast');
+}).bind('mouseleave',function() // 子菜单的鼠标移出操作
+{
+$(this).children('ul').slideUp('fast');
+});
+}); 
+</script>
+	</body>
+</html>

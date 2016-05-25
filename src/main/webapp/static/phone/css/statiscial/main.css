@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/**
+ * visit
+ * @authors Ping YF (koakumaping@163.com)
+ * @date    2015-11-05 11:02:18
+ * @version $Id$
+ */
+ .container {
+ 	padding-bottom: 70px;
+ }
+
+ .visit-border-top {
+	border-top: 1px solid #F0F0F0;
+}
+
+/*.visit-border-left {
+	border-left: 1px solid #F9F9F9;
+}*/
+
+.visit-top-number {
+	margin-top: 30px;
+	font-size: 4rem;
+}
+
+.visit-top-text {
+	margin-bottom: 30px;
+}
+
+.visit-top-border-left {
+	border-left: 1px solid #D8D8D8;
+}
+
+.visit-padding {
+	padding: 10px 0;
+}
+
+.visit-top-padding {
+	padding: 8px 0;
+}
+
+/*.visit-back-gray {
+	background: #F7F7F7;
+}*/
+
+.visit-next {
+    /* width: 7%; */
+    margin-top: -4px;
+    padding-left: 10px;
+    vertical-align: middle;
+    height: 1.6rem;
+    opacity: 0.4;
+}
+
+.visit-more {
+	color: #ffffff;
+	background: #5B5D62;
+}
+
+.visit-more-right {
+	padding-left: 15px;
+}
