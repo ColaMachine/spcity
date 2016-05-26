@@ -1,6 +1,6 @@
 
 <div id="ExpertList">
-    <div class="main-hd">| 专家</div>
+    <div class="main-hd">专家</div>
 
 
 
@@ -18,7 +18,7 @@
                 <label for="baike">百科地址</label>
                 <input type="text" id="baikeLike" name="baikeLike"  class="form-control input-sm"   maxlength="40" placeholder="百科地址" ></input>
 
-                <label for="remark">备注</label>
+               <!-- <label for="remark">备注</label>
                 <input type="text" id="remarkLike" name="remarkLike"  class="form-control input-sm"   maxlength="200" placeholder="备注" ></input>
                 <label for="createtime">创建时间</label>
                 <div class="input-group">
@@ -44,7 +44,7 @@
                 <div class="input-group">
                     <input type="text" id="updatetimeEnd" name="updatetimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间结束" ></input>
                     <label class="input-group-addon" for="updatetimeEnd" ><i class="fa fa-calendar"></i></label>        </div>
-
+-->
                 <button type="button"  class="btn btn-default searchBtn">查询</button>
             </form>
             <div >
@@ -89,7 +89,7 @@ var expertList={
         pager:"#ExpertGrid-Pager",
         jsonReader:jsonReader,
         colNames : [
-        "主键","用户名","头像","职称","百科地址","备注","创建时间","更新时间" , '操作' ],
+        "主键","用户名","头像","职称","百科地址","备注"/*,"创建时间","更新时间"*/ , '操作' ],
         colModel : [
             {   name : 'id',width : 80,
             } ,
@@ -106,7 +106,7 @@ var expertList={
             } ,
             {   name : 'remark',width : 80,
             } ,
-            {   name : 'createtime',width : 80,
+           /* {   name : 'createtime',width : 80,
                 formatter : function(value, grid, rows) {
                   return new Date(value).format("yyyy-MM-dd");
                 }
@@ -116,7 +116,7 @@ var expertList={
                   return new Date(value).format("yyyy-MM-dd");
                 }
             } 
-              ,
+              ,*/
             {   name : 'operation',
                 width : 150,
                 formatter : function(value, grid, rows) {

@@ -1480,7 +1480,8 @@ var BaseValidator={
             					},
 
             					errorPlacement : function(error, element) {
-            						error.insertAfter(element);
+            					    $(element).closest('.form-group').append(error);
+            						//error.insertAfter(element);
             					},
 
             					submitHandler : function(form) {

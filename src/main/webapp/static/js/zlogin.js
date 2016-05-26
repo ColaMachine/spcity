@@ -53,10 +53,23 @@ var loginForm={
     },
     addEventListener:function(){
         //注册按钮
+        var that=this;
         this.doms.submitBtn.click(this.submit.Apply(this) );
         this.doms.picCaptchaImg.click(this.getPicCaptcha.Apply(this));
         this.doms.forgetLink.click(this.forgetLink.Apply(this));
-         this.doms.picCaptchaImg.trigger("click");
+        this.doms.picCaptchaImg.trigger("click");
+        this.picCaptchaInput[0].onkeydown=function(e){
+            var keycode=document.all?event.keyCode:e.which;
+            if(keycode==13){
+                that.submit();
+            }
+        }
+         this.doms.pwd[0].onkeydown=function(e){
+            var keycode=document.all?event.keyCode:e.which;
+            if(keycode==13){
+                that.submit();
+            }
+        }
     },
     forgetLink:function(){
 

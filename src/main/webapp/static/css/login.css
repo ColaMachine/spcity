@@ -50,7 +50,7 @@ label {
 }
 
 .fade.in {
-    opacity: 1;
+    /*opacity: 1;*/
 }
 .fade {
     opacity: 0;
