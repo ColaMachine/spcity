@@ -5,7 +5,7 @@
 	<artifactId>spcity</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>calendar Maven Webapp</name>
+	<name>spcity Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<org.springframework.version>3.2.3.RELEASE</org.springframework.version>
@@ -440,7 +440,7 @@
 	</dependencies>
 	<build>
 		<!-- <directory>src/main/webtarget</directory> -->
-		<finalName>calendar</finalName>
+		<finalName>spcity</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
