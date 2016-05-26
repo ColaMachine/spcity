@@ -1308,6 +1308,8 @@
                         if(!this.p.searchParams){
                            this.p.searchParams={};
                         }
+                        this.p.postData.curPage =this.p.page;
+                        this.p.postData.pageSize=this.p.rowNum;
 						this.p.searchParams.curPage = this.p.page;
 						this.p.searchParams.pageSize = this.p.rowNum;
 						//alert(this.p.rowNum);
@@ -1718,7 +1720,13 @@
 								//一般是显示5个页数
 								//从 curPage -2 开始 到 curPage+2
 								var total = 1;
-								var pageHtml = "<nav class=\"nav\"> <ul class=\"pagination pagination-sm\"><li><a href=\"javascript:void(0)\" class=\"page_bg pre \" aria-label=\"Previous\">上一页</a>";
+								var pageHtml = "<nav class=\"nav\"> <ul class=\"pagination pagination-sm\"><li>";
+
+								if(page==1){
+                                pageHtml+="<span href=\"javascript:void(0)\" class=\"page_bg pre \" aria-label=\"Previous\">上一页</span>";
+								}else{
+								pageHtml+="<a href=\"javascript:void(0)\" class=\"page_bg pre \" aria-label=\"Previous\">上一页</a>";
+								}
 
 								var min = 0, max = totalPage;
 								var middel = page;
@@ -1770,7 +1778,12 @@
 										break;
 								}*/
 								//console.log(page);
-								pageHtml += "<li><a href=\"javascript:void(0)\" class=\"page_bg next\" aria-label=\"Next\">下一页</a></li><span>共"+totalPage+"页，"+this.p.records+"条信息</span></ul></nav>";
+								if(page==totalPage){
+                                pageHtml+="<li><span href=\"javascript:void(0)\" class=\"page_bg next\" aria-label=\"Next\">下一页</span>";
+                                }else{
+                                pageHtml+="<li><a href=\"javascript:void(0)\" class=\"page_bg next\" aria-label=\"Next\">下一页</a>";
+                                }
+								pageHtml += "</li><span>共"+totalPage+"页，"+this.p.records+"条信息</span></ul></nav>";
 
 								$(this.p.pager).html(pageHtml);
 								$(this.p.pager).find(".pre")
