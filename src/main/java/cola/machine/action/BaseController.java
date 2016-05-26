@@ -56,7 +56,7 @@ public class BaseController extends ResultAction{
 //		Gson gson =new Gson();
 //		NDC.push("params:"+gson.toJson(request.getParameterMap()));
 		logger.error("",e);
-		saveExceptionLog(request,e);
+		//saveExceptionLog(request,e);
 //		handleReturn();
 //		redirectResponse();
 //		NDC.pop();
