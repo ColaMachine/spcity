@@ -98,6 +98,7 @@ function AjaxClass()
                 XmlHttp.setRequestHeader("Content-Type","application/json");
 
             }
+            var that =this;
         XmlHttp.onreadystatechange = function()
         {
             if (XmlHttp.readyState==4)
@@ -106,6 +107,9 @@ function AjaxClass()
                 if (XmlHttp.status==200)
                 {
                     Result = XmlHttp.responseText;
+                    if(that.dataType=="JSON"){
+                        Result=eval('('+Result+')');
+                    }
                 }
                 XmlHttp = null;
                 //alert(typeof Result)
@@ -138,6 +142,7 @@ function AjaxClass()
         document.body.appendChild(obj);
     }
 }
+
 function ajax(options){
 
 
@@ -231,7 +236,9 @@ var Ajax={
          	};
          	delete options['inputData'];
          	//ajax(options);
-         	$.ajax(options);
+         	ajax(options);
+
+
          }
 };
 /*function Get(url,data,callback){
@@ -858,12 +865,12 @@ function getUnLockHtml1(value) {
 //var aiwifi = {};
 //aiwifi.alert = bootbox.alert;
 //aiwifi.confirm = bootbox.confirm;
-function showMask() {
+/*function showMask() {
 	$("#maskModal").modal('show');
 }
 function hideMask() {
-	$("#maskModal").modal('hide');
-}
+	document.getElementByClassId("maskModal").style.display=none;
+}*/
 
 /*function showMsg(caption, contenttext) {
 	$("#errormsg").remove();
@@ -1048,7 +1055,7 @@ function pageinit(){
 	$("*[data-toggle='modal']").each(function(){
 		if($(this).attr("data-target")){
 			$(this).on("click",function(){
-				showMask();
+				dialog.showMask();
 				$($(this).attr("data-target")).show();
 			});
 		}
@@ -1057,7 +1064,7 @@ function pageinit(){
 	
 	$("*[data-dismiss='modal']").each(function(){
 		$(this).on("click",function(){
-		hideMask();
+		dialog.hideMask();
 		$(this).closest(".modal").hide();
 		});
 		
@@ -1127,10 +1134,16 @@ function ajaxResultHandler(result){
 }
 
 function showMask(){
-	if($(".mask").length==0){
-		$("body").append($("<div class=\"mask\" > </div>"));
+
+
+	if(document.getElementsByClassName("mask").length==0){
+
+        var div =document.createElement("div");
+        div.setAttribute("class","mask");
+		document.body.appendChild(div);
 	}
-	$(".mask").show()
+	document.getElementsByClassName("mask")[0].style.display="block";
+	//$(".mask").show()
 }
 
 function showModal(id,w,h){
@@ -1139,7 +1152,7 @@ function showModal(id,w,h){
 	if(typeof w !='undefined' && w!=null )
 	$(id).css("width",w);
 	$(id).show();
-	showMask();
+	dialog.showMask();
 }
 
 
@@ -1181,7 +1194,7 @@ function hideWaitTrue(){
 
 
 function zWidgetBase(){
-	showMask();
+	dialog.showMask();
 	if($(".widget").length>0){
 		
 	}else{
@@ -1218,6 +1231,18 @@ function zdialogue(msg,title,src,fontcolor,fn){
 	if (typeof(fn) != "undefined") 
 	$(html).find(".zbutton_wrap").find("a").click(fn);
 }*/
+var layer={
+alert:function(msg,fn){
+    zalert(msg,"",fn);
+},
+confirm:function(msg,fn){
+    zconfirm(msg,"",fn);
+},
+load:function(){
+dialog.showWait();
+}
+}
+
 var dialog={
     alert:function(msg,fn){
         if(typeof fn != 'undefined'){
@@ -1244,9 +1269,24 @@ var dialog={
     },
      showWait:function(msg){
 
-    	//showMask();
-    	//$(".wait").show();
-    	return layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+    	this.showMask();
+    	//$(".wait").style.display="block";
+    	//return layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+    },
+    hideMask:function () {
+    	document.getElementsByClassName("mask")[0].style.display="none";
+    },
+     showMask:function(){
+
+
+    	if(document.getElementsByClassName("mask").length==0){
+
+            var div =document.createElement("div");
+            div.setAttribute("class","mask");
+    		document.body.appendChild(div);
+    	}
+    	document.getElementsByClassName("mask")[0].style.display="block";
+    	//$(".mask").show()
     },
      hideWait:function(index){
     	//hideWaitTrue();
@@ -1295,11 +1335,11 @@ var dialog={
     }
 }
 function zdialogue(jso){
-	showMask()
+	dialog.showMask()
 	if(StringUtil.isBlank(jso.title)){
 		jso.title="提示";
 	}
-	var html=$("<div class=\"zwidget_wrap \">"+
+	var html="<div class=\"zwidget_wrap \">"+
 	"<div class=\"zwidget_header\"><span>"+jso.title+"</span> <a class='zclose'  onclick=\"$(this).parent().parent().hide();$('.mask').hide()\"><i class=' fa fa-close'></i></a></div>"+
 	"<div class=\"zbody \">"+
 	"<div class=\"zinfo-icon\"><i  class='"+jso.icon+"'></i></div>"+//<img src=\""+jso.src+"\"/>
@@ -1308,26 +1348,38 @@ function zdialogue(jso){
 	(jso.type== "confirm"?"<button type=\"button\" class=\"col-xs-5 pull-left btn btn-primary\" >确定</button><button type=\"button\" class=\"col-xs-5 pull-right btn btn-default\" >取消</button>":
 		"<button class='col-xs-12 btn btn-primary' >确定</button>")+
 	"</div></div>"+
-	"</div>");
-	if($(".widget").length>0){
-		$(".widget").html(html);
+	"</div>";
+	var widget =null;
+	var widgets= document.getElementsByClassName("widget");
+	if(widgets.length>0){
+
+	    widget= widgets[0];
+		widget.innerHTML=html;
 	}else{
-		$("body").append(html);
+
+	   widget=document.createElement("div");
+	    widget.setAttribute("class","widget");
+	    widget.innerHTML=html;
+	      document.body.appendChild(widget);
+		//$("body").append(html);
 	}
 	
 	if (typeof(jso.okfn) != "undefined") {
-		$(html).find(".zbutton_wrap").find(".btn-primary").click(jso.okfn);
+
+	    widget.getElementsByClassName("zbutton_wrap")[0].getElementsByClassName("btn-primary").onclick=function(){jso.okfn.call(this);widget.style.display="none";};
+		//$(html).find(".zbutton_wrap").find(".btn-primary").click(jso.okfn);
 	}
-		
-	$(html).find(".btn").click(function(){$(html).fadeOut();$(".mask").fadeOut()});
+		widget.getElementsByClassName("btn")[0].onclick=function(){dialog.hideMask();widget.style.display="none"};
+			widget.getElementsByClassName("zclose")[0].onclick=function(){dialog.hideMask();widget.style.display="none"};
+	//$(html).find(".btn").click(function(){$(html).fadeOut();$(".mask").fadeOut()});
 	
-	if (typeof(jso.cancelfn) != "undefined") {
+	/*if (typeof(jso.cancelfn) != "undefined") {
 		$(html).find(".zbutton_wrap").find(".btn-default").click(jso.okfn);
 		$(html).find(".zwidget_header").find(".zclose").click(jso.cancelfn);
 		$(html).find(".zwidget_header").find(".zclose").click(function(){$(html).fadeOut();$(".mask").fadeOut()});
 	}else{
 		$(html).find(".zwidget_header").find(".zclose").click(function(){$(html).fadeOut();$(".mask").fadeOut()});
-	}
+	}*/
 }
 /*
 function zalert(msg,title,fn){
@@ -1462,35 +1514,402 @@ var setting = {
                }
            }
        };
+var globalValidator={
+messages:{},
+methods:{},
+}
+function validator(form,cfg){
 
+
+
+var _validator= {
+    cfg :{},
+    messages:{
+    },
+    optional: function( element ) {
+        if(this.cfg.rules[element.name].required)
+            return false;
+        return true;
+    },
+    getLength: function( value, element ) {
+    			switch ( element.nodeName.toLowerCase() ) {
+    			case "select":
+    				return $( "option:selected", element ).length;
+    			case "input":
+    				if (  element.type=="checkbox") {
+    					return this.findByName( element.name ).filter( ":checked" ).length;
+    				}
+    			}
+    			return value.length;
+    		},
+    methods:{
+// http://jqueryvalidation.org/required-method/
+        required: function( value, element, param ) {
+
+            if ( element.tagName.toLowerCase() === "select" ) {
+                // could be an array for select-multiple or a string, both are fine this way
+                var index=element.selectedIndex ;
+                return index > 0;
+            }
+            /*if ( this.checkable( element ) ) {
+                return this.getLength( value, element ) > 0;
+            }*/
+
+            return  value.trim().length > 0;
+        },
+
+
+    // http://jqueryvalidation.org/email-method/
+        email: function( value, element ) {
+            // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
+            // Retrieved 2014-01-14
+            // If you have a problem with this implementation, report a bug against the above spec
+            // Or use custom methods to implement your own email validation
+            return this.optional( element ) || /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( value );
+        },
+
+        // http://jqueryvalidation.org/url-method/
+        url: function( value, element ) {
+            // contributed by Scott Gonzalez: http://projects.scottsplayground.com/iri/
+            return this.optional( element ) || /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test( value );
+        },
+
+        // http://jqueryvalidation.org/date-method/
+        date: function( value, element ) {
+            return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
+        },
+
+        // http://jqueryvalidation.org/dateISO-method/
+        dateISO: function( value, element ) {
+            return this.optional( element ) || /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test( value );
+        },
+
+        // http://jqueryvalidation.org/number-method/
+        number: function( value, element ) {
+            return this.optional( element ) || /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test( value );
+        },
+
+        // http://jqueryvalidation.org/digits-method/
+        digits: function( value, element ) {
+            return this.optional( element ) || /^\d+$/.test( value );
+        },
+
+        // http://jqueryvalidation.org/creditcard-method/
+        // based on http://en.wikipedia.org/wiki/Luhn/
+        creditcard: function( value, element ) {
+            if ( this.optional( element ) ) {
+                return "dependency-mismatch";
+            }
+            // accept only spaces, digits and dashes
+            if ( /[^0-9 \-]+/.test( value ) ) {
+                return false;
+            }
+            var nCheck = 0,
+                nDigit = 0,
+                bEven = false,
+                n, cDigit;
+
+            value = value.replace( /\D/g, "" );
+
+            // Basing min and max length on
+            // http://developer.ean.com/general_info/Valid_Credit_Card_Types
+            if ( value.length < 13 || value.length > 19 ) {
+                return false;
+            }
+
+            for ( n = value.length - 1; n >= 0; n--) {
+                cDigit = value.charAt( n );
+                nDigit = parseInt( cDigit, 10 );
+                if ( bEven ) {
+                    if ( ( nDigit *= 2 ) > 9 ) {
+                        nDigit -= 9;
+                    }
+                }
+                nCheck += nDigit;
+                bEven = !bEven;
+            }
+
+            return ( nCheck % 10 ) === 0;
+        },
+
+    		// http://jqueryvalidation.org/minlength-method/
+        minlength: function( value, element, param ) {
+            var length = $.isArray( value ) ? value.length : this.getLength( value, element );
+            return this.optional( element ) || length >= param;
+        },
+
+        // http://jqueryvalidation.org/maxlength-method/
+        maxlength: function( value, element, param ) {
+            var length = $.isArray( value ) ? value.length : this.getLength( value, element );
+            return this.optional( element ) || length <= param;
+        },
+
+        // http://jqueryvalidation.org/rangelength-method/
+        rangelength: function( value, element, param ) {
+            var length =  value instanceof Array ? value.length : this.getLength( value, element );
+            return this.optional( element ) || ( length >= param[ 0 ] && length <= param[ 1 ] );
+        },
+
+        // http://jqueryvalidation.org/min-method/
+        min: function( value, element, param ) {
+            return this.optional( element ) || value >= param;
+        },
+
+        // http://jqueryvalidation.org/max-method/
+        max: function( value, element, param ) {
+            return this.optional( element ) || value <= param;
+        },
+
+        // http://jqueryvalidation.org/range-method/
+        range: function( value, element, param ) {
+            return this.optional( element ) || ( value >= param[ 0 ] && value <= param[ 1 ] );
+        },
+
+        // http://jqueryvalidation.org/equalTo-method/
+        equalTo: function( value, element, param ) {
+            // bind to the blur event of the target in order to revalidate whenever the target field is updated
+            // TODO find a way to bind the event just once, avoiding the unbind-rebind overhead
+            var target = $( param );
+            if ( this.settings.onfocusout ) {
+                target.unbind( ".validate-equalTo" ).bind( "blur.validate-equalTo", function() {
+                    $( element ).valid();
+                });
+            }
+            return value === target.val();
+        },
+
+        // http://jqueryvalidation.org/remote-method/
+        remote: function( value, element, param ) {
+            if ( this.optional( element ) ) {
+                return "dependency-mismatch";
+            }
+
+            var previous = this.previousValue( element ),
+                validator, data;
+
+            if (!this.settings.messages[ element.name ] ) {
+                this.settings.messages[ element.name ] = {};
+            }
+            previous.originalMessage = this.settings.messages[ element.name ].remote;
+            this.settings.messages[ element.name ].remote = previous.message;
+
+            param = typeof param === "string" && { url: param } || param;
+
+            if ( previous.old === value ) {
+                return previous.valid;
+            }
+
+            previous.old = value;
+            validator = this;
+            this.startRequest( element );
+            data = {};
+            data[ element.name ] = value;
+            $.ajax( $.extend( true, {
+                url: param,
+                mode: "abort",
+                port: "validate" + element.name,
+                dataType: "json",
+                data: data,
+                context: validator.currentForm,
+                success: function( response ) {
+                    var valid = response === true || response === "true",
+                        errors, message, submitted;
+
+                    validator.settings.messages[ element.name ].remote = previous.originalMessage;
+                    if ( valid ) {
+                        submitted = validator.formSubmitted;
+                        validator.prepareElement( element );
+                        validator.formSubmitted = submitted;
+                        validator.successList.push( element );
+                        delete validator.invalid[ element.name ];
+                        validator.showErrors();
+                    } else {
+                        errors = {};
+                        message = response || validator.defaultMessage( element, "remote" );
+                        errors[ element.name ] = previous.message = $.isFunction( message ) ? message( value ) : message;
+                        validator.invalid[ element.name ] = true;
+                        validator.showErrors( errors );
+                    }
+                    previous.valid = valid;
+                    validator.stopRequest( element, valid );
+                }
+            }, param ) );
+            return "pending";
+        }
+
+    },
+    validator:function (form,cfg){
+        this.cfg=cfg;
+        var that =this;
+        for(var inputName in cfg.rules){
+            var input = getChildByName(form,inputName);
+            if(input ){
+                //input ;
+                //var rules= cfg.rules[inputName];
+                input.onblur=function(){
+                    for(var ruleName in cfg.rules[this.name]){console.log(ruleName);
+                        if(that.methods[ruleName]){
+                           var bool= that. methods[ruleName].call(that,getVal(this),this,cfg.rules[this.name][ruleName]);
+                           if(bool){
+                              var errorElement=form.getElementsByClassName(that.cfg["errorClass"]);
+                              for(var i=0;i<errorElement.length;i++){
+                                  if(errorElement[i].getAttribute("for")==this.name){
+                                        errorElement[i].parentNode.removeChild(errorElement[i]);
+                                  }
+                              }
+                                //消除提示框
+                           }else{
+                                //var div ="<div class='"+that.cfg.erroClass+"'>"+that.cfg.messages[ruleName]+"</div>";
+                                var errorElement=form.getElementsByClassName(that.cfg["errorClass"]);
+                                for(var i=0;i<errorElement.length;i++){
+                                    if(errorElement[i].getAttribute("for")==this.name){
+                                          errorElement[i].parentNode.removeChild(errorElement[i]);
+                                    }
+                                }
+
+                                var div =document.createElement(that.cfg.errorElement);
+                                var className = that.cfg["errorClass"];
+                                div.setAttribute("class",className);
+                                 div.setAttribute("for",this.name);
+                              //  div.attributes["for"]=inputName;
+
+                                var msg = that.cfg.messages[this.name][ruleName];
+                                if(!msg){
+                                    msg=that.messages[ruleName];
+                                }
+                                 div.innerText=msg;
+                                 that.cfg.errorPlacement.call(that,div,this);
+                                //显示错误提示框
+
+                                break;
+                           }
+                        };//input
+                    }
+                }
+            }
+        }
+           return this;
+    },
+      valid:function (form){
+
+            var that =this;
+            for(var inputName in this.cfg.rules){
+                var input = getChildByName(form,inputName);
+                if(input ){
+                    //input ;
+                    //var rules= cfg.rules[inputName];
+                        for(var ruleName in this.cfg.rules[input.name]){
+                            if(that.methods[ruleName]){
+                               var bool= that. methods[ruleName].call(that,getVal(input),input,this.cfg.rules[input.name][ruleName]);
+                               if(bool){
+                                  var errorElement=form.getElementsByClassName(that.cfg["errorClass"]);
+                                  for(var i=0;i<errorElement.length;i++){
+                                      if(errorElement[i].getAttribute("for")==input.name){
+                                            errorElement[i].parentNode.removeChild(errorElement[i]);
+                                      }
+                                  }
+                                    //消除提示框
+                               }else{
+                                    //var div ="<div class='"+that.cfg.erroClass+"'>"+that.cfg.messages[ruleName]+"</div>";
+                                    var errorElement=form.getElementsByClassName(that.cfg["errorClass"]);
+                                    for(var i=0;i<errorElement.length;i++){
+                                        if(errorElement[i].getAttribute("for")==input.name){
+                                              errorElement[i].parentNode.removeChild(errorElement[i]);
+                                        }
+                                    }
+
+                                    var div =document.createElement(that.cfg.errorElement);
+                                    var className = that.cfg["errorClass"];
+                                    div.setAttribute("class",className);
+                                     div.setAttribute("for",input.name);
+                                  //  div.attributes["for"]=inputName;
+
+                                    var msg = that.cfg.messages[input.name][ruleName];
+                                    if(!msg){
+                                        msg=that.messages[ruleName];
+                                    }
+                                     div.innerText=msg;
+                                     that.cfg.errorPlacement.call(that,div,input);
+                                    //显示错误提示框
+
+                                   return false;
+                               }
+                            };//input
+                        }
+                }
+                return true;
+            }
+
+        },
+    addMethod:function(name,fn,message){
+        this.methods[name]=fn;
+        this.messages[name]=message;
+    }
+}
+_validator.addMethod("isemailorphone", function(value, element) {/*console.log(element);*/
+	return this.optional(element) ||  /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/.test(value)
+	||/^[1][345678][0-9]{9}$/.test(value);
+	}, "请输入有效的邮箱地址或者手机号");
+_validator.addMethod("regex",function( value, element, param ) {
+	var re=new RegExp(param);
+    return this.optional(element) ||re.test(value);
+},"格式不正确");
+_validator.addMethod("phone",function( value, element, param ) {
+	var re=new RegExp("^[1][3578][0-9]{9}$");
+    return this.optional(element) ||re.test(value);
+},"手机格式不正确");
+_validator.addMethod("ymd",function( value, element, param ) {
+	param=param.replace(/[yMdHms]/g,"\\d");
+	var re=new RegExp(param);
+	 return this.optional(element) ||re.test(value);
+},"格式不正确");
+_validator.addMethod("alpha",function( value, element, param ) {
+	var re= /^[A-Za-z]+$/;
+    return this.optional(element) ||re.test(value);
+},"格式不正确");
+_validator.addMethod("idcard",function( value, element, param ) {
+	var re= /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+	 return this.optional(element) ||re.test(value);
+},"身份证格式不正确");
+return _validator.validator(form,cfg);
+}
 var BaseValidator={
 	errorElement : 'div',
-            					errorClass : 'help-block-left-animation',
-            					focusInvalid : true,
+    errorClass : 'help-block-left-animation',
+    focusInvalid : true,
+    highlight : function(element) {
+        /*$(element).closest('.form-signin').removeClass(
+                'has-info').addClass('has-error');*/
+    },
 
-                                highlight : function(element) {
-            						/*$(element).closest('.form-signin').removeClass(
-            								'has-info').addClass('has-error');*/
-            					},
+    success : function(e) {
+       /* $(e).closest('.form-signin').removeClass('has-error')
+                .addClass('has-info');*/
+        $(e).remove();
+    },
 
-            					success : function(e) {
-            						$(e).closest('.form-signin').removeClass('has-error')
-            								.addClass('has-info');
-            						$(e).remove();
-            					},
+    errorPlacement : function(error, element) {
+       // $(element).closest('.form-group').append(error);
+      // console.log(element.parentNode.getAttribute("class"));
+      var form_group=element;
+      for(var i=0;i<10;i++){
+        form_group=form_group.parentNode;
+        if(form_group.getAttribute("class") && form_group.getAttribute("class").indexOf("form-group")!=-1){
+        form_group.appendChild(error);
+        break;
+        }
+      }
 
-            					errorPlacement : function(error, element) {
-            					    $(element).closest('.form-group').append(error);
-            						//error.insertAfter(element);
-            					},
+        //error.insertAfter(element);
+    },
 
-            					submitHandler : function(form) {
-            						register();
+    submitHandler : function(form) {
+      //  register();
 
-            					},
-            					invalidHandler : function(form) {
+    },
+    invalidHandler : function(form) {
 
-            					}
+    }
 }
 
 function zImageUtil(config) {
@@ -2180,3 +2599,75 @@ function zImageUtil(config) {
 	}
 
 })();
+function extend(obj1,obj2){
+    for (i in obj2)
+    		obj1[i] = obj2[i];
+}
+function trim(str){
+     return str.replace(/(^\s*)|(\s*$)/g,'');
+}
+
+function getVal(str){
+    var element =null;
+    if(typeof str =="string"){
+         element = document.getElementById(id);
+
+    }else if(typeof str =="object"){
+        element=str;
+    }
+       if(element.tagName.toLowerCase=="select"){
+                var  myselect=element.selectedIndex;
+                return element.options[index].value;
+        }
+            return element.value;
+}
+function getChildByName(parentNode,name){
+
+    if(parentNode){
+    if(!parentNode.childNodes)
+         return null;
+    }else{
+        console.log("parentNode is null:"+name);
+        return null;
+    }
+    for(var i =0;i<parentNode.childNodes.length;i++){
+        if(parentNode.childNodes[i].name==name){
+            return parentNode.childNodes[i];
+        }else{
+            var element=getChildByName(parentNode.childNodes[i],name);
+            if(element){
+                return element;
+            }
+        }
+    }
+    return null;
+
+}
+function getChild(parentNode,name){
+    if(!parentNode.childNodes)
+    return null;
+    for(var i =0;i<parentNode.childNodes.length;i++){
+        var _name =name;
+        var attr="";
+        if(name[0]=="#"){
+           attr=parentNode.childNodes[i].id;
+           _name=name.substr(1);
+        }else if(name[0]=="."){
+             attr=parentNode.childNodes[i].className;
+              _name=name.substr(1);
+        }else{
+            attr=parentNode.childNodes[i].id;
+
+        }
+        if(attr==_name){
+            return parentNode.childNodes[i];
+        }else{
+            var element=getChild(parentNode.childNodes[i],name);
+            if(element){
+                return element;
+            }
+        }
+    }
+    return null;
+
+}

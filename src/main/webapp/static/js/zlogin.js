@@ -38,17 +38,18 @@ var loginForm={
             submitBtn:"#loginBtn",
         };
 
-        $.extend(this.ids,cfg);
+        extend(this.ids,cfg);
         for(var i in this.ids){
             this.doms[i]=$(this.ids[i]);
-            if(this.doms[i].length==0){
+            if(!this.doms[i]){
                 console.log(this.ids[i] +"doesn't find ");
             }
         }
 
-        $.extend(this.valid,BaseValidator);
-        this.doms.form.validate(this.valid);
-        this.doms.submitBtn.removeAttr("disabled");
+        extend(this.valid,BaseValidator);
+       this.validator= validator(this.doms.form,this.valid);
+        //this.doms.form.validate(this.valid);
+        this.doms.submitBtn.removeAttribute("disabled");
         this.addEventListener();
     },
     addEventListener:function(){
@@ -57,14 +58,15 @@ var loginForm={
         this.doms.submitBtn.click(this.submit.Apply(this) );
         this.doms.picCaptchaImg.click(this.getPicCaptcha.Apply(this));
         this.doms.forgetLink.click(this.forgetLink.Apply(this));
-        this.doms.picCaptchaImg.trigger("click");
-        this.picCaptchaInput[0].onkeydown=function(e){
+       // this.doms.picCaptchaImg.trigger("click");
+        this.getPicCaptcha();
+        this.doms.picCaptchaInput.onkeydown=function(e){
             var keycode=document.all?event.keyCode:e.which;
             if(keycode==13){
                 that.submit();
             }
         }
-         this.doms.pwd[0].onkeydown=function(e){
+         this.doms.pwd.onkeydown=function(e){
             var keycode=document.all?event.keyCode:e.which;
             if(keycode==13){
                 that.submit();
@@ -79,7 +81,7 @@ var loginForm={
     },
     //登录按扭提交
     submit:function(){
-        if(!this.doms.form.valid()){
+        if(!this.validator.valid(this.doms.form)){
             return;
         }
         var dialogId = dialog.showWait();
@@ -95,7 +97,7 @@ var loginForm={
             setCookie('username', jso.email, 365);
             setCookie('password', jso.password, 365);
         }
-        $.post(PATH + "/loginPost.json", jso, function(data) {
+        Ajax.post(PATH + "/loginPost.json", jso, function(data) {
             if (data[AJAX_RESULT] == AJAX_SUCC) {
                 window.location = PATH + "/index.htm";
             } else {
@@ -112,7 +114,7 @@ var loginForm={
                 }*/
 
             }
-            $("#loginBtn").removeAttr("disabled", "");
+            $("#loginBtn").removeAttribute("disabled", "");
         });
     },
     //获取验证码图片点击事件
@@ -120,7 +122,7 @@ var loginForm={
         that =this;
         Ajax.getJSON(PATH+"/code/img/request.json",null,function(result){
             if(result.r==AJAX_SUCC){
-               that.doms.picCaptchaImg.prop("src","data:image/png;base64,"+result.data.imgdata);
+               that.doms.picCaptchaImg.setAttribute("src","data:image/png;base64,"+result.data.imgdata);
             }else{
                 dialog.error(result.msg);
             }
@@ -191,16 +193,18 @@ var registerForm={
                     submitBtn:"#registerBtn",
                 };
 
-                $.extend(this.ids,cfg);
+                extend(this.ids,cfg);
                 for(var i in this.ids){
                     this.doms[i]=$(this.ids[i]);
-                    if(this.doms[i].length==0){
+                    if(!this.doms[i]){
                         console.log(this.ids[i] +"doesn't find ");
                     }
                 }
-                $.extend(this.valid,BaseValidator);
-                this.doms.form.validate(this.valid);
-                this.doms.submitBtn.removeAttr("disabled");
+                extend(this.valid,BaseValidator);
+                this.validator= validator(this.doms.form,this.valid);
+
+                //this.doms.form.validate(this.valid);
+                this.doms.submitBtn.removeAttribute("disabled");
                 this.addEventListener();
 
         //this.doms.form=$("#registerForm");
@@ -210,10 +214,10 @@ var registerForm={
        // this.registerBtn=this.doms.form.find("#registerBtn");
 
         //this.registerEnterBtn=this.modal.find("#registerEnterBtn");
-         //this.registerBtn.removeAttr("disabled");
-       // this.registerEnterBtn.removeAttr("disabled");
+         //this.registerBtn.removeAttribute("disabled");
+       // this.registerEnterBtn.removeAttribute("disabled");
        // this.addEventListener();
-         //  $.extend(this.valid,BaseValidator);
+         //  extend(this.valid,BaseValidator);
            //     this.doms.form.validate(this.valid);
 
     },
@@ -232,7 +236,7 @@ var registerForm={
         that =this;
         Ajax.getJSON(PATH+"/code/img/request.json",null,function(result){
             if(result.r==AJAX_SUCC){
-               that.doms.picCaptchaImg.prop("src","data:image/png;base64,"+result.data.imgdata);
+               that.doms.picCaptchaImg.setAttribute("src","data:image/png;base64,"+result.data.imgdata);
             }else{
                 dialog.error(result.msg);
             }
@@ -240,14 +244,15 @@ var registerForm={
     },
 
     submit:function () {
-    	if (!this.doms.form.valid()) {
+     if(!this.validator.valid(this.doms.form)){
+    	//if (!this.doms.form.valid()) {
     		return;
     	}
     	var _this=this;
     	this.doms.submitBtn.attr("disabled", "disabled");
         var jso=changeForm2Jso(this.ids.form);
-        $.post(PATH + "/registerPost.json", jso, function(data) {
-             _this.doms.submitBtn.removeAttr("disabled");
+        Ajax.post(PATH + "/registerPost.json", jso, function(data) {
+             _this.doms.submitBtn.removeAttribute("disabled");
            if (data[AJAX_RESULT] == AJAX_SUCC) {
                 //如果是用手机注册的就弹出手机验证码 发送窗口
                 if(StringUtil.isPhone(jso.email)){
@@ -376,19 +381,21 @@ var smsValidForm={
         };
 
 
-        $.extend(this.ids,cfg);
+        extend(this.ids,cfg);
         this.doms.root=$(this.ids["root"]);
-        for(var i in this.ids){
+        for(var i in this.ids){if(i=="root")continue;
            var dom= this.doms.root.find(this.ids[i]);
-            if(dom.length==0){
+            if(!dom){
                 console.log(this.ids[i] +" doesn't find ");
             }else{
                  this.doms[i]=dom;
             }
         }
-        $.extend(this.valid,BaseValidator);
-        this.doms.form.validate(this.valid);
-        this.doms.submitBtn.removeAttr("disabled");
+        extend(this.valid,BaseValidator);
+        //this.doms.form.validate(this.valid);
+        this.validator= validator(this.doms.form,this.valid);
+
+        this.doms.submitBtn.removeAttribute("disabled");
         this.addEventListener();
 
     },
@@ -405,7 +412,7 @@ var smsValidForm={
             } else {
                 window.clearInterval(sI);
                 self.text('重新获取');
-                self.removeAttr("disabled");
+                self.removeAttribute("disabled");
             }
         }, 1000);
     },
@@ -434,13 +441,13 @@ var smsValidForm={
         this.doms.phone.text(phone);
     },
     show:function(){
-
+        
         this.doms.root.modal("show");
     },
     addEventListener:function(){
 
         var _this=this;
-        // this.registerEnterBtn.removeAttr("disabled");
+        // this.registerEnterBtn.removeAttribute("disabled");
         this.doms.submitBtn.click(this.submit.Apply(this));
         this.doms.smsCaptchaBtn.click(function(){
             _this.captchaCutdown(this);
@@ -537,21 +544,23 @@ var forgetPwdForm={
 
         };
 
-        $.extend(this.ids,cfg);
+        extend(this.ids,cfg);
         this.doms.root=$(this.ids["root"]);
         for(var i in this.ids){
+            if(i=="root")continue;
            var dom= this.doms.root.find(this.ids[i]);
-            if(dom.length==0){
+            if(!dom){
                 console.log(this.ids[i] +" doesn't find ");
             }else{
                  this.doms[i]=dom;
             }
         }
-        $.extend(this.valid,BaseValidator);
+        extend(this.valid,BaseValidator);
 
-        this.doms.form.validate(this.valid);
+        //this.doms.form.validate(this.valid);
+        this.validator= validator(this.doms.form,this.valid);
 
-        this.doms.submitBtn.removeAttr("disabled");
+        this.doms.submitBtn.removeAttribute("disabled");
         this.addEventListener();
 
 
@@ -569,7 +578,7 @@ var forgetPwdForm={
             } else {
                 window.clearInterval(sI);
                 self.text('重新获取');
-                self.removeAttr("disabled");
+                self.removeAttribute("disabled");
             }
         }, 1000);
     },
@@ -608,7 +617,7 @@ var forgetPwdForm={
     addEventListener:function(){
 
         var _this=this;
-        // this.registerEnterBtn.removeAttr("disabled");
+        // this.registerEnterBtn.removeAttribute("disabled");
         this.doms.submitBtn.click(this.submit.Apply(this));
         this.doms.smsCaptchaBtn.click(function(){
             _this.captchaCutdown(this);
@@ -644,8 +653,8 @@ function doRegister() {
 var form_type = "login";
 //切换登录表单和注册表单
 /*function changeForm() {
-	$("#registerBtn").removeAttr("disabled");
-	$("#loginBtn").removeAttr("disabled");
+	$("#registerBtn").removeAttribute("disabled");
+	$("#loginBtn").removeAttribute("disabled");
 	if (form_type == "login") {
 		$("#register_form").show();
 		$("#login_form").hide();
@@ -688,13 +697,13 @@ function setCookie(c_name, value, expiredays) {console.log("expiredays:"+expired
 
 function checkCookie() {
 	var username = getCookie('username')
-	$("#login-email").val(username);
+	$("#login-email").value=username;
 	//alert(username+$("#login-email").val());
 	//return;
 	if (username != null && username != "") {//alert('Welcome again '+username+'!')
 		document.getElementById("login-email").value = username;
 
-		$("#login-email").val(username);
+		$("#login-email").value=username;
 	}
 
 	else {
@@ -822,31 +831,32 @@ var emailValidForm={
             submitBtn:"#smsValidBtn",
         };
 
-        $.extend(this.ids,cfg);
+        extend(this.ids,cfg);
         for(var i in this.ids){
             this.doms[i]=$(this.ids[i]);
-            if(this.doms[i].length==0){
+            if(!this.doms[i]){
                 console.log(this.ids[i] +"doesn't find ");
             }
         }
 
 
 
-        $.extend(this.ids,cfg);
+        extend(this.ids,cfg);
         this.doms.root=$(this.ids["root"]);
-        for(var i in this.ids){
+        for(var i in this.ids){if(i=="root")continue;
            var dom= this.doms.root.find(this.ids[i]);
-            if(dom.length==0){
+            if(!dom){
                 console.log(this.ids[i] +" doesn't find ");
             }else{
                  this.doms[i]=dom;
             }
         }
-        $.extend(this.valid,BaseValidator);
+        extend(this.valid,BaseValidator);
 
-        this.doms.form.validate(this.valid);
+ //       this.doms.form.validate(this.valid);
+        this.validator= validator(this.doms.form,this.valid);
 
-        this.doms.submitBtn.removeAttr("disabled");
+        this.doms.submitBtn.removeAttribute("disabled");
         this.addEventListener();
 
     },
@@ -863,7 +873,7 @@ var emailValidForm={
             } else {
                 window.clearInterval(sI);
                 self.text('重新获取');
-                self.removeAttr("disabled");
+                self.removeAttribute("disabled");
             }
         }, 1000);
     },
@@ -905,7 +915,7 @@ var emailValidForm={
     addEventListener:function(){
 
         var _this=this;
-        // this.registerEnterBtn.removeAttr("disabled");
+        // this.registerEnterBtn.removeAttribute("disabled");
         this.doms.submitBtn.click(this.submit.Apply(this));
         this.doms.smsCaptchaBtn.click(function(){
             _this.captchaCutdown(this);
@@ -921,22 +931,34 @@ var emailValidForm={
         });
     }
 };
-/*
+
 
 jQuery=function( selector, context){
-   	return new jQuery.fn.init( selector, context );
+   	return  jQuery.fn.init( selector, context );
 }
 
 
 jQuery.fn=jQuery.prototype={
 
-init:function(selector){
-if(selector[0]=='#'){
-    return document.getElementById(selector.replace("#"));
-}
-if(selector[0]=='.'){
-   return document.getElementsByClassName(selector.replace("."));
-}
+init:function(selector,context){
+
+    if(selector[0]=='#'){
+        var dom = document.getElementById(selector.replace("#",''));
+        if(dom){
+            dom.find=find;
+        }
+        return dom;
+    }
+    if(selector[0]=='.'){
+        var dom = document.getElementById(selector.replace(".",''));
+                if(dom){
+                    dom[0].find=find;
+                    return dom[0];
+                }
+                return dom;
+    }
+
+
 }
 }
 
@@ -950,5 +972,22 @@ jQuery.extend = jQuery.fn.extend = function(obj1,obj2){
     }
 
 }
-
-$=jQuery;*/
+function find(selector){
+     if(selector[0]=='#'){
+            var dom = getChild(this,selector);
+            if(dom){
+                dom.find=find;
+            }
+            return dom;
+        }
+        if(selector[0]=='.'){
+         var dom =getChild(this,selector);
+         if(dom){
+                         dom[0].find=find;
+                          return dom[0];
+                     }
+           return dom;
+        }
+}
+$=jQuery;
+var str ='{"r":0,"data":{"img":"static/vc/calendar0F03AE992B5BAAEB4477304316A90173.jpg","imgdata":"123","sessionid":"0F03AE992B5BAAEB4477304316A90173"},"msg":null,"page":null,"other":null,"right":true}';
