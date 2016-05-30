@@ -107,7 +107,7 @@ function AjaxClass()
                 if (XmlHttp.status==200)
                 {
                     Result = XmlHttp.responseText;
-                    if(that.dataType=="JSON"){
+                    if(XmlHttp.getResponseHeader("Content-Type").indexOf("application/json")!=-1){
                         Result=eval('('+Result+')');
                     }
                 }
