@@ -282,12 +282,28 @@ function changeForm2JsoTemp(formId) {
 
 
 
-function changeForm2Jso(formId) {
+function changeForm2JsoTemp(formId) {
+
 	var jso = {};
 	var arr = $( formId).serializeArray();
 	for (var i = 0; i < arr.length; i++) {
 		jso["" + arr[i].name] = arr[i].value;
 	}
+	return jso;
+}
+
+function changeForm2Jso(formId) {
+    var form = $(formId);
+    var jso={};
+    var elements = form.getElementsByTagName("input");
+    for(var i = 0;i<elements.length;i++){
+        jso[elements[i].name]=getVal(elements[i]);
+    }
+     var elements = form.getElementsByTagName("select");
+        for(var i = 0;i<elements.length;i++){
+            jso[elements[i].name]=getVal(elements[i]);
+        }
+
 	return jso;
 }
 function fillJso2Form(formId,jso){
@@ -1240,6 +1256,9 @@ confirm:function(msg,fn){
 },
 load:function(){
 dialog.showWait();
+},
+close:function(){
+    dialog.hideMask();
 }
 }
 

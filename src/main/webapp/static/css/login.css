@@ -50,7 +50,7 @@ label {
 }
 
 .fade.in {
-    /*opacity: 1;*/
+    opacity: 1;
 }
 .fade {
     opacity: 0;
@@ -97,7 +97,7 @@ label {
     margin-bottom: 0;
 }
 .input-group-addon {
-    padding: 6px 12px;
+   /* padding: 6px 12px;*/
     font-size: 14px;
     font-weight: 400;
     line-height: 1;

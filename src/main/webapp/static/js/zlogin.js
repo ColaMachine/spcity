@@ -88,10 +88,10 @@ var loginForm={
         var jso = changeForm2Jso("#login_form");
         //jso.password=$.md5(jso.password);
         //先禁用按钮
-        $("#loginBtn").attr("disabled", "disabled");
+        $("#loginBtn").setAttribute("disabled", "disabled");
         //alert($("#rememberme").attr("checked"));
         //判断是否使用记住功能
-        if ($("#rememberme").attr("checked") == 'checked') {//alert("选中了记住我");
+        if ($("#rememberme").getAttribute("checked") == 'checked') {//alert("选中了记住我");
         /*	console.log("选中了记住我" );*/
             console.log("username:" + jso.email);
             setCookie('username', jso.email, 365);
@@ -249,7 +249,7 @@ var registerForm={
     		return;
     	}
     	var _this=this;
-    	this.doms.submitBtn.attr("disabled", "disabled");
+    	this.doms.submitBtn.setAttribute("disabled", "disabled");
         var jso=changeForm2Jso(this.ids.form);
         Ajax.post(PATH + "/registerPost.json", jso, function(data) {
              _this.doms.submitBtn.removeAttribute("disabled");
@@ -402,7 +402,7 @@ var smsValidForm={
 
     captchaCutdown:function(smsBtn){
         var self =$(smsBtn);
-        self.attr('disabled', true);
+        self.setAttribute('disabled', true);
         self.text('发送中');
         var time =  60;
         var sI = setInterval(function() {
@@ -568,7 +568,7 @@ var forgetPwdForm={
 
     captchaCutdown:function(smsBtn){
         var self =$(smsBtn);
-        self.attr('disabled', true);
+        self.setAttribute('disabled', true);
         self.text('发送中');
         var time =  60;
         var sI = setInterval(function() {
@@ -863,7 +863,7 @@ var emailValidForm={
 
     captchaCutdown:function(smsBtn){
         var self =$(smsBtn);
-        self.attr('disabled', true);
+        self.setAttribute('disabled', true);
         self.text('发送中');
         var time =  60;
         var sI = setInterval(function() {
@@ -990,4 +990,3 @@ function find(selector){
         }
 }
 $=jQuery;
-var str ='{"r":0,"data":{"img":"static/vc/calendar0F03AE992B5BAAEB4477304316A90173.jpg","imgdata":"123","sessionid":"0F03AE992B5BAAEB4477304316A90173"},"msg":null,"page":null,"other":null,"right":true}';
