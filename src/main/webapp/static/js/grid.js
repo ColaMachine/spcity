@@ -1199,11 +1199,11 @@
 				},
 				setGridParam : function(newParams) {console.log("setGridParam new Params");console.log(newParams);
 				console.log(this.length);
-					return this.each(function() {console.log(this.grid  );console.log(typeof newParams );
-						if (this.grid && typeof newParams === 'object') {
+					return this.each(function() {//console.log(this.grid  );console.log(typeof newParams );
+						if (this.p && typeof newParams === 'object') {
 							$.extend(true, this.p, newParams);
-							console.log("after setGridParam new Params")
-							console.log(this.p.postData);
+							//console.log("after setGridParam new Params")
+							//console.log(this.p.postData);
 //							alert(2)
 						}
 					});
