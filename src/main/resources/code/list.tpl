@@ -19,7 +19,6 @@
     </div>
 </div>
 <script>
-
 var ${abc}List={
     modal:false,
     mygrid:null,
@@ -29,7 +28,6 @@ var ${abc}List={
     init:function(){
         this.mygrid =this.root.find(".grid").jqGrid(this.gridParam);
         this.addEventListener();
-
     },
     addEventListener:function(){
         $(this.root).find(".addBtn").click(this.addInfo.Apply(this));
@@ -43,7 +41,6 @@ var ${abc}List={
         rowNum:10,
         rowList:[10,20,30],
         multiselect : true,
-
         url : PATH+'/${abc}/list.json',
         autowidth:true,
         grid:"#${table.name}Grid",
@@ -62,9 +59,12 @@ var ${abc}List={
                 </#if>
                 <#if col.type=="timestamp">
                 formatter : function(value, grid, rows) {
-                  return new Date(value).format("yyyy-MM-dd");
-                }
-                  </#if>
+                    if(value){
+                        return new Date(value).format("yyyy-MM-dd");
+                    }else{
+                        return "";
+                    }
+                }</#if>
             } <#if col_index<table.cols?size-1>,</#if>
                </#list>
               ,
@@ -94,11 +94,9 @@ var ${abc}List={
 
         this.mygrid.jqGrid("setGridParam", { search: true ,"postData":jso}).trigger("reloadGrid", [{ page: 1}]);  //重载JQGrid
     },
-
     viewInfo:function (id){
         dialog.window("/${abc}/view.htm?id="+id,this.modal);
     },
-
     exportInfo:function (){
         var jso= changeForm2Jso(".app-search");
         Ajax.getJSON(PATH+"/${abc}/export.json",jso,function(data){

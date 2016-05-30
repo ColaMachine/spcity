@@ -137,14 +137,16 @@ label {
 }
 
 .btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open>.dropdown-toggle.btn-primary {
-    color: #fff;
-    background-color: #286090;
+/*    color: #fff;
+
+   */
     border-color: #204d74;
+     background-color: #286090;
 }
 
 .btn.focus, .btn:focus, .btn:hover {
-    color: #333;
-    text-decoration: none;
+  /*  color: #333;
+    text-decoration: none;*/
 }
 .btn-block {
     display: block;

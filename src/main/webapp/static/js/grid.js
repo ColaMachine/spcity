@@ -1640,11 +1640,16 @@
 													+ this.p.colNames[j]
 													+ "</td>";
 										} else if (typeof (this.p.colModel[j].formatter) != 'undefined') {
+
+										    var _content = this.p.colModel[j].formatter.call(this,value,this.p,this.p.data[i]);
+										    if(_content){
+										        _content=_content.replace(/\'/g,"").replace(/(<.*>)/g,"")
+										    }
 											html += "<td width=\""
 													+ this.p.colModel[j].width
 													/ this.p.width_sum
 													* 100
-													+ "%\"><span title ='"+this.p.colModel[j].formatter.call(this,value,this.p,this.p.data[i]).replace(/\'/g,"")+"'>"
+													+ "%\"><span title ='"+_content+"'>"
 													+ this.p.colModel[j].formatter.call(this,value,this.p,this.p.data[i]);
 											+"</span></td>";
 										} else

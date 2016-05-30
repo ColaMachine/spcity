@@ -8,6 +8,8 @@
 
 package cola.machine.service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,9 +79,10 @@ public class PartnerService extends BaseService {
        
        //判断是更新还是插入
         if (partner.getId()==null) {
-               
+            partner.setCreatetime(new Timestamp(new Date().getTime()));
             partnerMapper.insert(partner);
         } else {
+            partner.setUpdatetime(new Timestamp(new Date().getTime()));
              partnerMapper.updateByPrimaryKeySelective(partner);
         }
         return ResultUtil.getSuccResult();

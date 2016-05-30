@@ -93,11 +93,11 @@ public class ${Abc}Service extends BaseService {
      */
     public ResultDTO save(${Abc} ${abc}) {
         // 进行字段验证
-       ValidateUtil<${Abc}> vu = new ValidateUtil<${Abc}>();
+      /* ValidateUtil<${Abc}> vu = new ValidateUtil<${Abc}>();
         ResultDTO result = vu.valid(${abc});
         if (result.getR() != 1) {
             return result;
-        }
+        }*/
          //逻辑业务判断判断
        //判断是否有uq字段
        <#if distinctCheck??>
@@ -108,11 +108,12 @@ public class ${Abc}Service extends BaseService {
             <#if table.pk.type?starts_with("varchar")>
                 ${abc}.set${table.pk.name[0]?upper_case}${table.pk.name[1..]}(UUIDUtil.getUUID());
             <#else>
-               
             </#if>
+            ${abc}.setCreatetime(new Timestamp(new Date().getTime()));
             ${abc}Mapper.insert(${abc});
         } else {
-             ${abc}Mapper.updateByPrimaryKeySelective(${abc});
+            ${abc}.setUpdatetime(new Timestamp(new Date().getTime()));
+            ${abc}Mapper.updateByPrimaryKeySelective(${abc});
         }
         return ResultUtil.getSuccResult();
     }

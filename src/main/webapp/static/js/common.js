@@ -282,7 +282,7 @@ function changeForm2JsoTemp(formId) {
 
 
 
-function changeForm2JsoTemp(formId) {
+function changeForm2Jso(formId) {
 
 	var jso = {};
 	var arr = $( formId).serializeArray();
@@ -292,20 +292,6 @@ function changeForm2JsoTemp(formId) {
 	return jso;
 }
 
-function changeForm2Jso(formId) {
-    var form = $(formId);
-    var jso={};
-    var elements = form.getElementsByTagName("input");
-    for(var i = 0;i<elements.length;i++){
-        jso[elements[i].name]=getVal(elements[i]);
-    }
-     var elements = form.getElementsByTagName("select");
-        for(var i = 0;i<elements.length;i++){
-            jso[elements[i].name]=getVal(elements[i]);
-        }
-
-	return jso;
-}
 function fillJso2Form(formId,jso){
 	var arr = $(formId).serializeArray();
 	for (var i = 0; i < arr.length; i++) {
@@ -888,6 +874,7 @@ function hideMask() {
 	document.getElementByClassId("maskModal").style.display=none;
 }*/
 
+
 /*function showMsg(caption, contenttext) {
 	$("#errormsg").remove();
 	var str = "<div id='errormsg' class='alert alert-warning' id='errormsg' >"
@@ -1149,18 +1136,6 @@ function ajaxResultHandler(result){
 	return result;
 }
 
-function showMask(){
-
-
-	if(document.getElementsByClassName("mask").length==0){
-
-        var div =document.createElement("div");
-        div.setAttribute("class","mask");
-		document.body.appendChild(div);
-	}
-	document.getElementsByClassName("mask")[0].style.display="block";
-	//$(".mask").show()
-}
 
 function showModal(id,w,h){
 	if(typeof h !='undefined' && h!=null )
@@ -1194,7 +1169,7 @@ function clearErrorMsg(formid){
 
 function showWait(msg){
 	
-	//showMask();
+	showMask();
 	//$(".wait").show();
 	return layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
 }
@@ -1255,10 +1230,12 @@ confirm:function(msg,fn){
     zconfirm(msg,"",fn);
 },
 load:function(){
-dialog.showWait();
+    dialog.showMask();
 },
 close:function(){
-    dialog.hideMask();
+   dialog.hideMask();
+   dialog.hideWidget();
+
 }
 }
 
@@ -1287,32 +1264,44 @@ var dialog={
             }
     },
      showWait:function(msg){
-
-    	this.showMask();
+    	//this.showMask();
     	//$(".wait").style.display="block";
-    	//return layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+    	return layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
     },
     hideMask:function () {
-    	document.getElementsByClassName("mask")[0].style.display="none";
+        var mask=   document.getElementsByClassName("mask");
+        if(mask.lenth>0){
+            mask[0].style.display="none";
+        }
     },
-     showMask:function(){
+    hideWidget: function (){
+        var widget=   document.getElementsByClassName("widget");
+        if(widget.lenth>0){
+            widget[0].style.display="none";
+        }
+    },
+    showMask:function(){
+        var mask = document.getElementsByClassName("mask");
 
-
-    	if(document.getElementsByClassName("mask").length==0){
+        if(mask.length==0){
 
             var div =document.createElement("div");
             div.setAttribute("class","mask");
-    		document.body.appendChild(div);
-    	}
-    	document.getElementsByClassName("mask")[0].style.display="block";
-    	//$(".mask").show()
+            document.body.appendChild(div);
+        }
+        mask[0].style.display="block";
+        mask[0].onclick=function(){
+           dialog.hideWidget();
+           dialog.hideMask();
+        }
+    //$(".mask").show()
     },
-     hideWait:function(index){
+    hideWait:function(index){
     	//hideWaitTrue();
     	///setTimeout("hideWaitTrue()",100);
+        dialog.hideMask();
     	layer.close(index);
-    }
-,
+    },
     window:function(url,flag){
         window.data={};
         //截取参数
@@ -1359,13 +1348,13 @@ function zdialogue(jso){
 		jso.title="提示";
 	}
 	var html="<div class=\"zwidget_wrap \">"+
-	"<div class=\"zwidget_header\"><span>"+jso.title+"</span> <a class='zclose'  onclick=\"$(this).parent().parent().hide();$('.mask').hide()\"><i class=' fa fa-close'></i></a></div>"+
-	"<div class=\"zbody \">"+
-	"<div class=\"zinfo-icon\"><i  class='"+jso.icon+"'></i></div>"+//<img src=\""+jso.src+"\"/>
-	"<div class=\"zinfo\" style=\"color:"+jso.fontcolor+"\">"+jso.msg+"</div>"+
-	"</div><div class='zfooter' ><div class=\"zbutton_wrap row\">"+
-	(jso.type== "confirm"?"<button type=\"button\" class=\"col-xs-5 pull-left btn btn-primary\" >确定</button><button type=\"button\" class=\"col-xs-5 pull-right btn btn-default\" >取消</button>":
-		"<button class='col-xs-12 btn btn-primary' >确定</button>")+
+	"<div class=\"zwidget_hd\"><span>"+jso.title+"</span> <a class='zclose'  onclick=\"this.parentNode.parentNode.style.display='none';document.getElementsByClassName('mask')[0].style.display='none'\">X</a></div>"+//<i class=' fa fa-close'>X</i>
+	"<div class=\"zwidget_bd \">"+
+/*	"<div class=\"zinfo-icon\"><i  class='"+jso.icon+"'></i></div>"+*///<img src=\""+jso.src+"\"/>
+	"<div class=\"zinfo\" style=\"color:"+jso.fontcolor+"\">"+jso.msg+"</div></div>"+
+	"<div class='zwidget_ft' ><div class=\"zbutton_wrap \">"+
+	(jso.type== "confirm"?"<button type=\"button\" class=\"sure btn btn-primary\" >确定</button><button type=\"button\" class=\"cancel btn btn-default\" >取消</button>":
+		"<button class='sure btn btn-primary' >确定</button>")+
 	"</div></div>"+
 	"</div>";
 	var widget =null;
@@ -1374,6 +1363,7 @@ function zdialogue(jso){
 
 	    widget= widgets[0];
 		widget.innerHTML=html;
+		widget.style.display="block";
 	}else{
 
 	   widget=document.createElement("div");
@@ -1382,14 +1372,26 @@ function zdialogue(jso){
 	      document.body.appendChild(widget);
 		//$("body").append(html);
 	}
-	
+	var sure = widget.getElementsByClassName("sure");
+	var mask =document.getElementsByClassName("mask");
 	if (typeof(jso.okfn) != "undefined") {
-
-	    widget.getElementsByClassName("zbutton_wrap")[0].getElementsByClassName("btn-primary").onclick=function(){jso.okfn.call(this);widget.style.display="none";};
+	    sure[0].onclick=function(){jso.okfn.call(this);widget.style.display="none";mask[0].style.display="none";};
+	   //  widget.getElementsByClassName("sure")[0].onclick=function(){jso.okfn.call(this);widget.style.display="none";};
 		//$(html).find(".zbutton_wrap").find(".btn-primary").click(jso.okfn);
+	}else{
+	     sure[0].onclick=function(){widget.style.display="none";mask[0].style.display="none";};
 	}
-		widget.getElementsByClassName("btn")[0].onclick=function(){dialog.hideMask();widget.style.display="none"};
-			widget.getElementsByClassName("zclose")[0].onclick=function(){dialog.hideMask();widget.style.display="none"};
+    var cancel = widget.getElementsByClassName("cancel");
+        //$(html).find(".zbutton_wrap").find(".btn-primary").click(jso.okfn);
+    if(cancel.length>0){
+            if (typeof(jso.cancelfn) != "undefined") {
+                cancel[0].onclick=function(){jso.cancelfn.call(this);widget.style.display="none";mask[0].style.display="none";};
+            }else{
+                 cancel[0].onclick=function(){widget.style.display="none";mask[0].style.display="none";};
+            }
+    }
+   //widget.getElementsByClassName("btn")[0].onclick=function(){dialog.hideMask();widget.style.display="none"};
+   // widget.getElementsByClassName("zclose")[0].onclick=function(){dialog.hideMask();widget.style.display="none"};
 	//$(html).find(".btn").click(function(){$(html).fadeOut();$(".mask").fadeOut()});
 	
 	/*if (typeof(jso.cancelfn) != "undefined") {
@@ -1931,111 +1933,6 @@ var BaseValidator={
     }
 }
 
-function zImageUtil(config) {
-	var o = {
-		imgDom: null, //回显的image的id
-		maxHeight: null, //预设的最大高度
-		maxWidth: null, //预设的最大宽度
-		inputDom:null,
-		postUrl: null, //提交的url"/calendar/image/upload.json"
-		preShow: true,
-		callback: null,
-
-		fileChange: function(e) {//
-			var f = e.files[0]; //一次只上传1个文件，其实可以上传多个的
-			var FR = new FileReader();//创建fileReader
-			var _this = this;
-
-			FR.onload = function(f) {//fr  readAsDataURL 的时候触发方法
-
-				_this.compressImg(this.result, 300, function(data) { //压缩完成后执行的callback
-					console.log("压缩完成后执行的callback");
-					//document.getElementById('imgData').value = data;//写到form元素待提交服务器
-					//document.getElementById('myImg').src = data;//压缩结果验证
-					if (_this.preShow) {
-						console.log("img pre show");
-						_this.imgDom.src = data;
-						console.log(_this.imgDom);
-
-					}
-					console.log("begin send img");
-					var json = {};
-					// json.imageName= "myImage.png";
-					data = data.substring(22);
-					// alert(data)
-					json.imageData = encodeURIComponent(data);
-					console.log("begin post");
-
-					Ajax.post(_this.postUrl,
-						json,
-						function(data) {
-							if (data.r == 1) {
-								_this.imgDom.src = PATH+"/" + data.data;
-								$(_this).parent().find("#picurl")
-								console.log("imgUrl:" + data.data);
-							} else {
-								//	                        		zalert(data.msg);
-							}
-							if (_this.callback != null)
-								_this.callback(data);
-						}
-					);
-				});
-			};
-			FR.readAsDataURL(f); //先注册onload，再读取文件内容，否则读取内容是空的
-		},
-		compressImg: function(imgData, maxHeight, onCompress) {
-			var _this = this;
-			if (!imgData)
-				return;
-			onCompress = onCompress || function() {};
-			maxHeight = maxHeight || this.maxHeight; //默认最大高度200px
-			var canvas = document.createElement('canvas');
-			var img = new Image();
-			console.log("maxHeight:" + maxHeight);
-			img.onload = function() {
-				if (img.height > maxHeight) { //按最大高度等比缩放
-					img.width *= maxHeight / img.height;
-					img.height = maxHeight;
-				}
-				canvas.width = img.width;
-				canvas.height = img.height;
-				var ctx = canvas.getContext("2d");
-
-				ctx.clearRect(0, 0, canvas.width, canvas.height); // canvas清屏
-
-				//重置canvans宽高 canvas.width = img.width; canvas.height = img.height;
-				console.log("width:" + img.width + "height:" + img.height);
-				ctx.drawImage(img, 0, 0, img.width, img.height); // 将图像绘制到canvas上
-				console.log("begin compress img");
-				onCompress(canvas.toDataURL("image/png")); //必须等压缩完才读取canvas值，否则canvas内容是黑帆布
-			};
-			// 记住必须先绑定事件，才能设置src属性，否则img没内容可以画到canvas
-			console.log("begin origin data load:");
-			img.src = imgData;
-
-		},
-		init: function(jso) {
-		var _this =this;
-			this.imgDom = jso.imgDom;
-			this.maxHeight = jso.maxHeight;
-			this.maxWidth = jso.maxWidth;
-			this.postUrl = jso.postUrl;
-			this.callback = jso.callback;
-			this.inputDom=jso.inputDom;
-			var _this =this;
-			$(this.imgDom).click(function(){
-                $(_this.inputDom).trigger("click");
-			})
-
-				$(this.inputDom).change(function(){
-            			    _this.fileChange(_this.inputDom);
-                })
-		},
-	};
-	o.init(config);
-	return o;
-}
   function intNum(val,defval) {
 			val = parseInt(val,10);
 			if (isNaN(val)) { return defval || 0;}
@@ -2084,6 +1981,7 @@ function zImageUtil(config) {
 					var json = {};
 					// json.imageName= "myImage.png";
 					data = data.substring(22);
+					//alert(data.substring(0,100));
 					// alert(data)
 					json.imageData = encodeURIComponent(data);
 					console.log("begin post");

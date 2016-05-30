@@ -8,6 +8,8 @@
 
 package cola.machine.service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,9 +79,10 @@ public class ExpertService extends BaseService {
        
        //判断是更新还是插入
         if (expert.getId()==null) {
-               
+            expert.setCreatetime(new Timestamp(new Date().getTime()));
             expertMapper.insert(expert);
         } else {
+            expert.setUpdatetime(new Timestamp(new Date().getTime()));
              expertMapper.updateByPrimaryKey(expert);
         }
         return ResultUtil.getSuccResult();

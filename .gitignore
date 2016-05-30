@@ -25,5 +25,4 @@ src\main\webapp\static\upload
 src/main/webapp/static/upload/*
 */.svn/*
 *.svn-base
-
-
+src/main/webapp/upload

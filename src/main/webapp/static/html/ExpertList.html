@@ -89,7 +89,7 @@ var expertList={
         pager:"#ExpertGrid-Pager",
         jsonReader:jsonReader,
         colNames : [
-        "主键","用户名","头像","职称","百科地址","备注"/*,"创建时间","更新时间"*/ , '操作' ],
+        "主键","用户名","头像","职称","百科地址","备注","创建时间","更新时间" , '操作' ],
         colModel : [
             {   name : 'id',width : 80,
             } ,
@@ -106,17 +106,25 @@ var expertList={
             } ,
             {   name : 'remark',width : 80,
             } ,
-           /* {   name : 'createtime',width : 80,
+            {   name : 'createtime',width : 80,
                 formatter : function(value, grid, rows) {
-                  return new Date(value).format("yyyy-MM-dd");
+                  if(value){
+                        return new Date(value).format("yyyy-MM-dd");
+                    }else{
+                        return "";
+                    }
                 }
             } ,
             {   name : 'updatetime',width : 80,
                 formatter : function(value, grid, rows) {
-                  return new Date(value).format("yyyy-MM-dd");
+                 if(value){
+                        return new Date(value).format("yyyy-MM-dd");
+                    }else{
+                        return "";
+                    }
                 }
             } 
-              ,*/
+              ,
             {   name : 'operation',
                 width : 150,
                 formatter : function(value, grid, rows) {

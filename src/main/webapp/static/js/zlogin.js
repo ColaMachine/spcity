@@ -55,9 +55,9 @@ var loginForm={
     addEventListener:function(){
         //注册按钮
         var that=this;
-        this.doms.submitBtn.click(this.submit.Apply(this) );
-        this.doms.picCaptchaImg.click(this.getPicCaptcha.Apply(this));
-        this.doms.forgetLink.click(this.forgetLink.Apply(this));
+        this.doms.submitBtn.onclick=this.submit.Apply(this) ;
+        this.doms.picCaptchaImg.onclick=this.getPicCaptcha.Apply(this);
+        this.doms.forgetLink.onclick=this.forgetLink.Apply(this);
        // this.doms.picCaptchaImg.trigger("click");
         this.getPicCaptcha();
         this.doms.picCaptchaInput.onkeydown=function(e){
@@ -990,3 +990,18 @@ function find(selector){
         }
 }
 $=jQuery;
+
+function changeForm2Jso(formId) {
+    var form = $(formId);
+    var jso={};
+    var elements = form.getElementsByTagName("input");
+    for(var i = 0;i<elements.length;i++){
+        jso[elements[i].name]=getVal(elements[i]);
+    }
+     var elements = form.getElementsByTagName("select");
+        for(var i = 0;i<elements.length;i++){
+            jso[elements[i].name]=getVal(elements[i]);
+        }
+
+	return jso;
+}

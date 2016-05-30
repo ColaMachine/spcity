@@ -85,9 +85,7 @@ public class ArticalService extends BaseService {
             articalMapper.insert(artical);
 
         } else {
-
-
-
+            artical.setUpdatetime(new Timestamp(new Date().getTime()));
              articalMapper.updateByPrimaryKeySelective(artical);
         }
         return ResultUtil.getSuccResult();

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name=”viewport” content=”width=device-width, initial-scale=1, maximum-scale=1″>
-<title>Insert title here</title>
+<title>后台管理系统</title>
 <script type="text/javascript" src="${path}/static/js/jquery.js"></script>
 <script type="text/javascript" src="${path}/static/js/common.js"></script>
 <script type="text/javascript" >
@@ -26,8 +26,8 @@ includeCSS(["/static/css/bootstrap.min.css",
  "/static/css/grid.css",
   "/static/css/head.css",
    "/static/css/global.css",
-   /* "/static/css/widget.css",
-    "/static/css/window.css",*/
+    "/static/css/widget.css",
+    /*"/static/css/window.css",*/
     "/static/css/zTreeStyle.css",
    /*  "/static/css/layer.css"*/
   
@@ -52,7 +52,7 @@ includeJS(["/static/js/menu.js" ,
             "/static/js/dialog.js",
             "/static/js/jquery.ztree.core-3.5.js",
             "/static/js/jquery.ztree.excheck-3.5.js",
-              "/static/js/layer.js",
+             /* "/static/js/layer.js",*/
              "/static/js/location.js",
                "/static/js/ueditor/ueditor.config.js",
                  "/static/js/ueditor/ueditor.all.min.js",
@@ -107,7 +107,7 @@ includeJS(["/static/js/menu.js" ,
                         class="avatar w-32"><img src="static/img/a0.jpg"
                             alt="..."> <i class="on b-white bottom"></i></span></a>
                             <ul id="menu1" class="pull-right dropdown-menu" aria-labelledby="drop4">
-                                <li><a href="/logout.htm" id="logout">登出</a></li>
+                                <li><a href="${path}/logout.htm" id="logout">登出</a></li>
                                     <!--<li role="separator" class="divider"></li>
                             <li><a href="#">修改资料</a></li>-->
                             </ul>
