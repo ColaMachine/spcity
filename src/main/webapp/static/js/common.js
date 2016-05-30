@@ -1139,17 +1139,27 @@ function ajaxResultHandler(result){
 
 function showModal(id,w,h){
 	if(typeof h !='undefined' && h!=null )
-	$(id).css("height",h);
+	$(id).style.height=h;
 	if(typeof w !='undefined' && w!=null )
-	$(id).css("width",w);
-	$(id).show();
+	$(id).style.width=w;
+	$(id).style.display="block";
+	var t=$(id);
+	$(id).find(".close").onclick=function(){
+	    hideModal(t);
+	}
+
+
+	$(id).setAttribute("class",($(id).getAttribute("class")||"")+" in");
+	//alert($(id).style.display);
 	dialog.showMask();
 }
 
 
 function hideModal(id){
-	$(id).hide();
-	$(".mask").hide()
+	//$(id).hide();
+	$(id).style.display="none";
+
+	dialog.hideMask();
 }
 
 function showErrorMsg(formid,msg){
@@ -1270,13 +1280,13 @@ var dialog={
     },
     hideMask:function () {
         var mask=   document.getElementsByClassName("mask");
-        if(mask.lenth>0){
+        if(mask.length>0){
             mask[0].style.display="none";
         }
     },
     hideWidget: function (){
         var widget=   document.getElementsByClassName("widget");
-        if(widget.lenth>0){
+        if(widget.length>0){
             widget[0].style.display="none";
         }
     },
@@ -1290,7 +1300,7 @@ var dialog={
             document.body.appendChild(div);
         }
         mask[0].style.display="block";
-        mask[0].onclick=function(){
+        mask[0].onclick=function(){alert(0);
            dialog.hideWidget();
            dialog.hideMask();
         }
@@ -1691,12 +1701,12 @@ var _validator= {
             // bind to the blur event of the target in order to revalidate whenever the target field is updated
             // TODO find a way to bind the event just once, avoiding the unbind-rebind overhead
             var target = $( param );
-            if ( this.settings.onfocusout ) {
+           /* if ( this.settings.onfocusout ) {
                 target.unbind( ".validate-equalTo" ).bind( "blur.validate-equalTo", function() {
                     $( element ).valid();
                 });
-            }
-            return value === target.val();
+            }*/
+            return value === target.value;
         },
 
         // http://jqueryvalidation.org/remote-method/
@@ -2400,17 +2410,17 @@ function zImageUtil(config) {
 		 * @param {Object} self
 		 */
 		captchaCutdown: function(self) {
-			self.attr('disabled', true);
-			self.text('发送中');
+			self.setAttribute('disabled', true);
+			self.innerText='发送中';
 			var time = this.captchaCutdownTime || 60;
 			var sI = setInterval(function() {
 				time = time - 1;
 				if (time > 0) {
-					self.text(time + '秒后重试');
+					self.innerText=time + '秒后重试';
 				} else {
 					window.clearInterval(sI);
-					self.text('重新获取');
-					self.removeAttr("disabled");
+					self.innerText('重新获取');
+					self.removeAttribute("disabled");
 				}
 			}, 1000);
 		},

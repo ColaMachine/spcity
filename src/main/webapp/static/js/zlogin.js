@@ -223,8 +223,8 @@ var registerForm={
     },
     addEventListener:function(){
 
-         this.doms.submitBtn.click(this.submit.Apply(this) );
-        this.doms.picCaptchaImg.click(this.getPicCaptcha.Apply(this));
+         this.doms.submitBtn.onclick=this.submit.Apply(this );
+        this.doms.picCaptchaImg.onclick=this.getPicCaptcha.Apply(this);
         //注册按钮
 
 
@@ -403,15 +403,15 @@ var smsValidForm={
     captchaCutdown:function(smsBtn){
         var self =$(smsBtn);
         self.setAttribute('disabled', true);
-        self.text('发送中');
+        self.innerText='发送中';
         var time =  60;
         var sI = setInterval(function() {
             time = time - 1;
             if (time > 0) {
-                self.text(time + '秒后重试');
+                self.innerText=time + '秒后重试';
             } else {
                 window.clearInterval(sI);
-                self.text('重新获取');
+                self.innerText='重新获取';
                 self.removeAttribute("disabled");
             }
         }, 1000);
@@ -419,8 +419,8 @@ var smsValidForm={
    submit:function(){
 
     	var jso={};
-    	jso.smsCaptcha=this.doms.smsCaptchaInput.val();
-    	jso.phone=this.doms.phone.text();
+    	jso.smsCaptcha=this.doms.smsCaptchaInput.value;
+    	jso.phone=this.doms.phone.innerText;
     	if(StringUtil.isBlank(jso.smsCaptcha)|| jso.smsCaptcha.length<4){
     	    dialog.alert("请输入验证码");
     	    return;
@@ -438,7 +438,7 @@ var smsValidForm={
 
     },
     setPhone:function(phone){
-        this.doms.phone.text(phone);
+        this.doms.phone.innerText=phone;
     },
     show:function(){
         
@@ -448,18 +448,18 @@ var smsValidForm={
 
         var _this=this;
         // this.registerEnterBtn.removeAttribute("disabled");
-        this.doms.submitBtn.click(this.submit.Apply(this));
-        this.doms.smsCaptchaBtn.click(function(){
+        this.doms.submitBtn.onclick=this.submit.Apply(this);
+        this.doms.smsCaptchaBtn.onclick=function(){
             _this.captchaCutdown(this);
             //发送短信
-            Ajax.getJSON(PATH+"/code/sms/request.json",{"phone":_this.doms.phone.text()},function(result){
+            Ajax.getJSON(PATH+"/code/sms/request.json",{"phone":_this.doms.phone.innerText},function(result){
                 if(result.r==AJAX_SUCC){
                    dialog.alert("发送成功");
                 }else{
                     dialog.error(result.msg);
                 }
             });
-        });
+        };
     }
 };
 
@@ -467,7 +467,7 @@ var smsValidForm={
 
 
 var forgetPwdForm={
- ids:{
+ ids:{      root:null,
             form:null,//form id
             smsCaptchaInput:null,//短信验证码输入框id
             smsCaptchaBtn:null,//短信验证码获取按钮
@@ -490,7 +490,7 @@ var forgetPwdForm={
             },
             forgetPwdCaptcha : {
                 required : true,
-                rangelength : [ 3,32 ]
+                rangelength : [ 3,50 ]
             },
             forgetPwdpwd : {
                 stringCheck : true,
@@ -514,7 +514,7 @@ var forgetPwdForm={
             },
             forgetPwdCaptcha : {
                 required : "请填写短信验证码",
-                rangelength : "长度应在3~6个字符"
+                rangelength : "长度应在3~50个字符"
             },
 
             forgetPwdpwd : {
@@ -569,29 +569,32 @@ var forgetPwdForm={
     captchaCutdown:function(smsBtn){
         var self =$(smsBtn);
         self.setAttribute('disabled', true);
-        self.text('发送中');
+        self.innerText='发送中';
         var time =  60;
         var sI = setInterval(function() {
             time = time - 1;
             if (time > 0) {
-                self.text(time + '秒后重试');
+                self.innerText=time + '秒后重试';
             } else {
                 window.clearInterval(sI);
-                self.text('重新获取');
+                self.innerText='重新获取';
                 self.removeAttribute("disabled");
             }
         }, 1000);
     },
    submit:function(){
-
+        if(! this.validator.valid(this.doms.form)){
+            return;
+        }
     	var jso={};
-    	jso.code=this.doms.smsCaptchaInput.val();
-    	jso.account=this.doms.phone.val();
-    	jso.pwd=this.doms.pwd.val();
+    	jso.code=this.doms.smsCaptchaInput.value;
+    	jso.account=this.doms.phone.value;
+    	jso.pwd=this.doms.pwd.value;
     	if(StringUtil.isBlank(jso.code)|| jso.code.length<4){
     	    dialog.alert("请输入验证码");
     	    return;
     	}
+
         Ajax.post(PATH+"/pwdrst/save.json",jso,function(result){
             if(result.r==AJAX_SUCC){
                 // window.location=PATH+"/index.htm";
@@ -606,33 +609,33 @@ var forgetPwdForm={
 
     },
     setPhone:function(phone){
-        this.doms.phone.text(phone);
+        this.doms.phone.innerText=phone;
     },
     show:function(){
-        this.doms.root.modal("show");
+        showModal(this.doms.root);
     },
-     hide:function(){
-            this.doms.root.modal("hide");
-        },
+    hide:function(){
+            hideModal(this.doms.root);
+    },
     addEventListener:function(){
 
         var _this=this;
         // this.registerEnterBtn.removeAttribute("disabled");
-        this.doms.submitBtn.click(this.submit.Apply(this));
-        this.doms.smsCaptchaBtn.click(function(){
+        this.doms.submitBtn.onclick=this.submit.Apply(this);
+        this.doms.smsCaptchaBtn.onclick=function(){
             _this.captchaCutdown(this);
            // forgetpwd/save.json
-            if(StringUtil.isEmail(_this.doms.phone.val())){
-                 Ajax.post(PATH+"/forgetpwd/save.json",{"phone":_this.doms.phone.val()},function(result){
+            if(StringUtil.isEmail(_this.doms.phone.value)){
+                 Ajax.post(PATH+"/forgetpwd/save.json",{"phone":_this.doms.phone.value},function(result){
                                     if(result.r==AJAX_SUCC){
                                        dialog.alert("发送成功");
                                     }else{
                                         dialog.error(result.msg);
                                     }
                                 });
-            }else if(StringUtil.isPhone(_this.doms.phone.val())){
+            }else if(StringUtil.isPhone(_this.doms.phone.value)){
                   //发送短信
-                Ajax.getJSON(PATH+"/code/sms/request.json",{"phone":_this.doms.phone.val()},function(result){
+                Ajax.getJSON(PATH+"/code/sms/request.json",{"phone":_this.doms.phone.value},function(result){
                     if(result.r==AJAX_SUCC){
                        dialog.alert("发送成功");
                     }else{
@@ -641,7 +644,7 @@ var forgetPwdForm={
                 });
             }
 
-        });
+        };
     }
 };
 
@@ -864,15 +867,15 @@ var emailValidForm={
     captchaCutdown:function(smsBtn){
         var self =$(smsBtn);
         self.setAttribute('disabled', true);
-        self.text('发送中');
+        self.innerText='发送中';
         var time =  60;
         var sI = setInterval(function() {
             time = time - 1;
             if (time > 0) {
-                self.text(time + '秒后重试');
+                self.innerText=time + '秒后重试';
             } else {
                 window.clearInterval(sI);
-                self.text('重新获取');
+                self.innerText='重新获取';
                 self.removeAttribute("disabled");
             }
         }, 1000);
@@ -880,8 +883,8 @@ var emailValidForm={
    submit:function(){
 
     	var jso={};
-    	jso.code=this.doms.smsCaptchaInput.val();
-    	jso.email=this.doms.phone.text();
+    	jso.code=this.doms.smsCaptchaInput.value;
+    	jso.email=this.doms.phone.innerText;
 
     	if(StringUtil.isBlank(jso.code)|| jso.code.length<4){
     	    dialog.alert("请输入验证码");
@@ -907,7 +910,7 @@ var emailValidForm={
 
     },
     setEmail:function(phone){
-        this.doms.phone.text(phone);
+        this.doms.phone.innerText=phone;
     },
     show:function(){
         this.doms.root.modal("show");
@@ -916,11 +919,11 @@ var emailValidForm={
 
         var _this=this;
         // this.registerEnterBtn.removeAttribute("disabled");
-        this.doms.submitBtn.click(this.submit.Apply(this));
-        this.doms.smsCaptchaBtn.click(function(){
+        this.doms.submitBtn.onclick=this.submit.Apply(this);
+        this.doms.smsCaptchaBtn.onclick=function(){
             _this.captchaCutdown(this);
             //发送短信
-            Ajax.post(PATH+"/forgetpwd/save.json",{"phone":_this.doms.phone.text()},function(result){
+            Ajax.post(PATH+"/forgetpwd/save.json",{"phone":_this.doms.phone.innerText},function(result){
                                                 if(result.r==AJAX_SUCC){
                                                    dialog.alert("发送成功");
                                                 }else{
@@ -928,7 +931,7 @@ var emailValidForm={
                                                 }
                                             });
 
-        });
+        };
     }
 };
 
@@ -941,7 +944,10 @@ jQuery=function( selector, context){
 jQuery.fn=jQuery.prototype={
 
 init:function(selector,context){
-
+    if(typeof selector=="object"){
+     selector.find=find;
+        return selector;
+    }
     if(selector[0]=='#'){
         var dom = document.getElementById(selector.replace("#",''));
         if(dom){
@@ -952,8 +958,8 @@ init:function(selector,context){
     if(selector[0]=='.'){
         var dom = document.getElementById(selector.replace(".",''));
                 if(dom){
-                    dom[0].find=find;
-                    return dom[0];
+                    dom.find=find;
+                    return dom;
                 }
                 return dom;
     }
@@ -983,8 +989,8 @@ function find(selector){
         if(selector[0]=='.'){
          var dom =getChild(this,selector);
          if(dom){
-                         dom[0].find=find;
-                          return dom[0];
+                         dom.find=find;
+                          return dom;
                      }
            return dom;
         }

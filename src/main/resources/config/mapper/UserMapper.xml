@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cola.machine.dao.UserMapper">
+ 	<resultMap id="BaseResultMap" type="cola.machine.bean.SysUser">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="nkname" jdbcType="VARCHAR" property="nkname" />
+        <result column="type" jdbcType="INTEGER" property="type" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="telno" jdbcType="VARCHAR" property="telno" />
+        <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+        <result column="sex" jdbcType="INTEGER" property="sex" />
+        <result column="birth" jdbcType="DATE" property="birth" />
+        <result column="integral" jdbcType="INTEGER" property="integral" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="weichat" jdbcType="VARCHAR" property="weichat" />
+        <result column="qq" jdbcType="BIGINT" property="qq" />
+        <result column="face" jdbcType="VARCHAR" property="face" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+        <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+      `id` ,`username` ,`password` ,`nkname` ,`type` ,`status` ,`email` ,`telno` ,`idcard` ,`sex` ,`birth` ,`integral` ,`address` ,`weichat` ,`qq` ,`face` ,`remark` ,`createtime` ,`updatetime`
+  </sql>
+
+  	  <select id="countAll" resultType="java.lang.Integer">
+        select count(*) c from user;
+    </select>
+<!--  查询单条记录	-->
+
+  	
+  	<select id="selectUserByEmail" parameterType="string" resultMap="BaseResultMap">
+		select * from sys_user where email = #{email}
+  	</select>
+    <select id="selectUserByTelno" parameterType="string" resultMap="BaseResultMap">
+        select * from sys_user where telno = #{telno}
+    </select>
+  	<select id="selectUserByUserName" parameterType="string" resultMap="BaseResultMap">
+	
+		SELECT * FROM sys_user where username=#{loginname}
+  	</select>
+<!--  修改记录	-->
+
+  	
+  		<update id="resetPwd" parameterType="cola.machine.bean.SysUser">
+  		update sys_user set password = #{password}  where id = #{id}
+  	</update>
+<!--  查询所有记录，查询多条记录即返回结果是一个集合的时候，resultType不是集合类型，而是集合所包含的类型	-->
+  	<select id="selectAll" resultType="cola.machine.bean.SysUser">
+  		select * from sys_user
+  	</select>
+<!--  模糊查询	-->
+  	<select id="fuzzyQuery" resultType="cola.machine.bean.SysUser" parameterType="java.lang.String">
+  		select * from sys_user where username like "%"#{username}"%"
+  	</select>
+
+    <update id="updateStatus" parameterType="cola.machine.bean.SysUser">
+        update sys_user set status = #{status} where id = #{id}
+    </update>
+
+
+
+</mapper>
