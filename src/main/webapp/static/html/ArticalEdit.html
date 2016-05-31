@@ -186,7 +186,13 @@ var articalEdit={
         });
     },
     saveInfo:function(){
-    $("#content").val(UE.getEditor('editor').getContent());
+    $("#content").val(encodeURIComponent(UE.getEditor('editor').getContent()));
+    var count = UE.getEditor('editor').getContentLength(true);
+
+    if(count>4000){
+    dialog.alert("你输入的字符个数已经超出最大允许值！");
+    return;
+    }
         if (!$("#articalEditForm").valid())
             return;
         var jso = changeForm2Jso("#articalEditForm");

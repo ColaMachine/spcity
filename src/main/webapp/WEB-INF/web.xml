@@ -61,7 +61,7 @@
 		</init-param>
 		<init-param>
 			<param-name>notCheckURLList</param-name>
-			<param-value>/weixin/.*;/validEmail.json;/artical/list.json;/artical/view.json;/expert/view.json;/expert/list.json;/partner/list.json;/partner/view.json;/register/captcha.json;/login.htm;/code/.*;/static/.*;/login.htm;/register.htm;/loginPost.json;/registerPost.json;/pwdreset.htm;/active/\w*;/img/.*
+			<param-value>/upload/.*;/weixin/.*;/validEmail.json;/artical/list.json;/artical/view.json;/expert/view.json;/expert/list.json;/partner/list.json;/partner/view.json;/register/captcha.json;/login.htm;/code/.*;/static/.*;/login.htm;/register.htm;/loginPost.json;/registerPost.json;/pwdreset.htm;/active/\w*;/img/.*
 			;/forgetpwd.htm;/pwdresetPost.json;/forgetpwd/save.json.*;/pwdrst/save.json;/pwdrst/edit.htm;/pwdrst;/.*\.jpg;/validatecode;/share/qq;
 			</param-value>
 		</init-param>

@@ -35,9 +35,9 @@ public class Length extends Rule{
 	@Override
 	public boolean valid() throws Exception{
 		if(this.getValue() != null && !this.getValue().equals("")){
-			if(this.getValue().getBytes(charset).length<minLength 
-					|| this.getValue().getBytes(charset).length>maxLength){
-				message = "字符长度不符";
+			if(this.getValue().length()<minLength
+					|| this.getValue().length()>maxLength){
+				message = "字符长度"+this.getValue().length()+" 应控制在"+minLength+"~"+maxLength+"个字符";
 				return false;
 			}else {
 				return true;

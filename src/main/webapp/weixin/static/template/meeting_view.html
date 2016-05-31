@@ -1,0 +1,18 @@
+<style>
+    body {
+        background-color: #ffffff;
+        background-image: none;
+    }
+</style>
+
+<section id="meeting_view">
+    <h2 class="meeting_title">{{ expert.title }}</h2>
+    <ul class="meeting_subtitle">
+        <li class="meeting_date">{{ expert.createtime }}</li>
+        <li class="meeting_author">海绵城市</li>
+    </ul>
+    <div class="meeting_summary">
+        {{ expert.remark }}
+    </div>
+    <div class="meeting_content" ng-bind-html="expert.content"></div>
+</section>

@@ -1,0 +1,259 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+ul, ol {
+    list-style: none;
+}
+img {
+    vertical-align: bottom;
+}
+body {
+    /*background: url("../image/bg.png") repeat 0 0;*/
+    /*font-size: 100rem;*/
+}
+
+#expert_head {
+    margin: .55rem auto 1.5rem;
+    overflow: hidden;
+    background: url("../image/expert_left.png") no-repeat 15% center;
+    background-size: .95rem .14rem;
+}
+
+#expert_head h1 {
+    color: #00edfd;
+    font-size: .5rem;
+    text-align: center;
+    background: url("../image/expert_right.png") no-repeat 85% center;
+    background-size: .95rem .14rem;
+}
+
+.expert_wrap {
+    float: left;
+    width: 50%;
+}
+
+.expert_wrap a {
+    text-decoration: none;
+}
+
+.expert {
+    /*width: calc(100% - .075rem);*/
+    position: relative;
+    margin: .1rem .08rem 1.5rem .16rem;
+    background-color: #21213b;
+    color: #fff;
+    padding: 1.48rem 0 .4rem 0;
+    border-radius: .2rem;
+}
+.expert_wrap:nth-child(even) .expert {
+    margin: .1rem .16rem 1.5rem .08rem;
+}
+
+.expert_avatar {
+    position: absolute;
+    left: 50%;
+    top: -.9rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    margin-left: -.9rem;
+}
+
+.expert_avatar img {
+    width: 100%;
+    height: 100%;
+    border: .12rem solid #00d3ff;
+    border-radius: 50%;
+    margin: -.2rem;
+}
+
+.expert_name {
+    width: 85%;
+    margin: 0 auto .2rem;
+    font-size: .4rem;
+    padding: 0 0 .25rem;
+    border-bottom: .04rem solid #0f1427;
+    text-align: center;
+}
+
+.expert_title {
+    font-size: .24rem;
+    text-align: center;
+    height: 1rem;
+}
+
+.expert_wrap:hover .expert_avatar img {
+    border-color: #fff;
+}
+
+.expert_wrap:hover .expert {
+    background-color: #00d3ff;
+}
+
+.expert_wrap:hover .expert_name {
+    color: #232137;
+    border-bottom-color: #0f1427;
+}
+
+.expert_wrap:hover .expert_title {
+    color: #232139;
+}
+
+/*峰会*/
+#meeting_logo {
+    width: 1.6rem;
+    margin: .56rem auto .26rem;
+}
+#meeting_logo img {
+    width: 100%;
+    border-radius: 50%;
+    /*border: .1rem solid #fff;*/
+    /*margin: -.1rem;*/
+}
+.meeting_name {
+    width: 100%;
+    text-align: center;
+    font-size: .32em;
+    margin-bottom: .6rem;
+    color: #3d3d3d;
+}
+.meeting_item {
+    padding: 0 0 .5rem;
+    border-bottom: 1px solid #ddd;
+    display: block;
+    background-color: #fff;
+}
+.meeting_item .meeting_cover {
+    width: 100%;
+}
+.meeting_item .meeting_cover img {
+    width: 100%;
+    height: 4rem;
+}
+.meeting_item .meeting_title {
+    font-size: .42rem;
+    color: #2f2f33;
+    text-indent: .3rem;
+    margin:.42rem 0 .2rem 0;
+}
+.meeting_item a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+.meeting_item .meeting_date {
+    height: .32rem;
+    line-height: .32rem;
+    font-size: .22rem;
+    text-indent: .75rem;
+    color: #8e8e8e;
+    background: url("../image/date.png") no-repeat .3rem 0;
+    background-size: .3rem .3rem;
+}
+
+/*查看峰会*/
+#meeting_view {
+    padding: .4rem;
+}
+#meeting_view .meeting_title {
+    font-size: .42rem;
+    color: #1f2024;
+    margin-bottom: .25rem;
+}
+#meeting_view .meeting_subtitle {
+    margin-bottom: .65rem;
+    overflow: hidden;
+}
+#meeting_view .meeting_subtitle li {
+    float: left;
+    margin-right: .3rem;
+}
+#meeting_view .meeting_date {
+    font-size: .32rem;
+    color: #979797;
+}
+#meeting_view .meeting_author {
+    color: #6b87ad;
+    font-size: .32rem;
+}
+#meeting_view .meeting_summary {
+    clear: both;
+    font-size: .28rem;
+    color: #878787;
+    background: #f1f1f1 url("../image/summary.png") no-repeat .25rem .25rem;
+    line-height: 1.6;
+    margin-bottom: .5rem;
+    padding: .2rem .2rem .2rem .8rem;
+    background-size: .35rem .34rem;
+}
+
+#meeting_view .meeting_content {
+    font-size: .32rem;
+    color: #191919;
+}
+#meeting_view .meeting_content p {
+    text-indent: 2em;
+    margin: .2rem 0;
+    line-height: 1.6;
+}
+#meeting_view .meeting_content img {
+    width: 100%;
+}
+
+/* 合作伙伴 */
+#top_logo {
+    width: 1.8rem;
+    margin: .56rem auto .26rem;
+}
+#top_logo img {
+    width: 100%;
+}
+#nav {
+    height: .9rem;
+    line-height: .9rem;
+    background-color: #484848;
+    font-size: .36rem;
+    color: #fff;
+    padding: 0 .3rem;
+}
+#nav .more {
+    float: right;
+    display: block;
+    width: .36rem;
+    height: .36rem;
+    border-bottom: 2px solid #fff;
+    border-right: 2px solid #fff;
+    margin-top: .24rem;
+}
+#nav .more:after {
+    content: "";
+    display: block;
+    width: .44rem;
+    height: 2px;
+    transform: rotate(45deg);
+    background-color: #fff;
+    margin-top: .2rem;
+}
+.partner_item {
+    overflow: hidden;
+    padding: .24rem;
+    border-bottom: 1px solid #9d9d9d;
+}
+.partner_item .partner_logo {
+    float: left;
+    width: 1.8rem;
+    text-align: center;
+}
+.partner_item .partner_logo img {
+    width: .8rem;
+    height: .8rem;
+    vertical-align: top;
+}
+.partner_item .partner_title {
+    float: left;
+    height: .8rem;
+    line-height: .8rem;
+    font-size: .32rem;
+    color: #1b1b1b;
+}

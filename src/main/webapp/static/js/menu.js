@@ -136,6 +136,9 @@ var zMenu = {
 		    url="/"+url;
 		}
 		Ajax.get(PATH+url, null, function(data) {
+            if(data.indexOf("504")!=-1){
+                window.location="/spcity/login.htm";return;
+            }
 			$('.main').html(data);
 			if (typeof fun == 'function') fun();
 		});

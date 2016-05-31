@@ -434,7 +434,7 @@ public class ArticalController extends BaseController{
         String validStr="";
         vu.add("id", id, "主键",  new Rule[]{new Digits(15,0)});
         vu.add("title", title, "标题",  new Rule[]{new Length(40),new NotEmpty()});
-        vu.add("content", content, "正文",  new Rule[]{new Length(4000),new NotEmpty()});
+        vu.add("content", content, "正文",  new Rule[]{new Length(10000),new NotEmpty()});
         vu.add("type", type, "类型",  new Rule[]{new Digits(11,0),new CheckBox(new String[]{"1","2","3"})});
         vu.add("status", status, "状态",  new Rule[]{new Digits(11,0),new CheckBox(new String[]{"1","2","3","4","5"})});
         vu.add("remark", remark, "备注",  new Rule[]{new Length(200)});
@@ -456,9 +456,9 @@ public class ArticalController extends BaseController{
         artical.setUpdatetime(new Timestamp(new Date().getTime()));
 
         String html = artical.getContent()+artical.getTitle();
-        if(MGCUtil.contain(html)){
+       /* if(MGCUtil.contain(html)){
             return ResultUtil.getResult(302,"含敏感词");
-        }
+        }*/
        // artical.setCreator(user.getId());
         //artical.setCreatorname(user.getUsername());
 

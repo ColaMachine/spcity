@@ -1,0 +1,23 @@
+<style>
+    body {
+        background: url("static/image/bg.png") repeat 0 0;
+    }
+</style>
+
+<header id="expert_head">
+    <h1>海绵城市专家</h1>
+</header>
+
+<section>
+    <div class="expert_wrap" ng-repeat="item in expertList">
+        <a href="{{ item.baike }}">
+            <div class="expert">
+                <div class="expert_avatar">
+                    <img src="../{{ item.face }}" alt="{{ item.username }}" />
+                </div>
+                <h2 class="expert_name">{{ item.username }}</h2>
+                <div class="expert_title">{{ item.title }}</div>
+            </div>
+        </a>
+    </div>
+</section>

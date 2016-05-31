@@ -1,0 +1,35 @@
+<style>
+body {
+    background-color: #fff;
+    background-image: none;
+}
+</style>
+
+<div id="top_logo">
+    <img src="static/image/partnet_logo.jpg" alt="海绵城市">
+</div>
+
+<nav id="nav">
+    合作伙伴 PARTNER
+    <span class="more"></span>
+</nav>
+
+<section class="partner_body">
+    <div class="partner_item" ng-repeat="item in partnerList">
+        <div class="partner_logo">
+            <img src="{{ item.logo ? '/' + item.logo : 'static/image/zanwu.jpg' }}" alt="{{ item.name }}">
+        </div>
+        <div class="partner_title">
+            {{ item.name }}
+        </div>
+    </div>
+
+    <!--div class="partner_item">
+        <div class="partner_logo">
+            <img src="static/image/avatar1.jpg" alt="">
+        </div>
+        <div class="partner_title">
+            浙江电信爱WIFI无线营运中心
+        </div>
+    </div-->
+</section>
