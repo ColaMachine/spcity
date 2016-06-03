@@ -36,7 +36,7 @@
 	<!-- 数据库配置 -->
 	<import resource="app-context-database.xml" />
 	<!-- 必要的bean配置 -->
-	<import resource="app-context-bean.xml" />
+<!--	<import resource="app-context-bean.xml" />-->
 	<!-- <context:annotation-config /> -->
 	
 </beans>

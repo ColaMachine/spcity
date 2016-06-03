@@ -53,6 +53,7 @@ function AjaxClass()
     this.Arg = "";
     this.dataType="";
     this.data=null;
+
     this.CallBack = function(){};
     this.Loading = function(){};
 
@@ -112,7 +113,6 @@ function AjaxClass()
                     }
                 }
                 XmlHttp = null;
-                //alert(typeof Result)
                 me.CallBack(Result);
             }
              else
