@@ -40,7 +40,7 @@ var loginForm={
 
         extend(this.ids,cfg);
         for(var i in this.ids){
-            this.doms[i]=$(this.ids[i]);
+            this.doms[i]=$$(this.ids[i]);
             if(!this.doms[i]){
                 console.log(this.ids[i] +"doesn't find ");
             }
@@ -86,12 +86,12 @@ var loginForm={
         }
         var dialogId = dialog.showWait();
         var jso = changeForm2Jso("#login_form");
-        //jso.password=$.md5(jso.password);
+        //jso.password=$$.md5(jso.password);
         //先禁用按钮
-        $("#loginBtn").setAttribute("disabled", "disabled");
-        //alert($("#rememberme").attr("checked"));
+        $$("#loginBtn").setAttribute("disabled", "disabled");
+        //alert($$("#rememberme").attr("checked"));
         //判断是否使用记住功能
-        if ($("#rememberme").getAttribute("checked") == 'checked') {//alert("选中了记住我");
+        if ($$("#rememberme").getAttribute("checked") == 'checked') {//alert("选中了记住我");
         /*	console.log("选中了记住我" );*/
             console.log("username:" + jso.email);
             setCookie('username', jso.email, 365);
@@ -103,7 +103,7 @@ var loginForm={
             } else {
             dialog.close(dialogId);
             dialog.alert(data.msg);
-              /*  var ul = $("#login_form").find(".failure").find("ul");
+              /*  var ul = $$("#login_form").find(".failure").find("ul");
                 ul.empty();
                 ul.append("<li>" + data[AJAX_MSG] + "</li>");
                 if (data[AJAX_ERRORS] && data[AJAX_ERRORS].length > 0) {
@@ -114,7 +114,7 @@ var loginForm={
                 }*/
 
             }
-            $("#loginBtn").removeAttribute("disabled", "");
+            $$("#loginBtn").removeAttribute("disabled", "");
         });
     },
     //获取验证码图片点击事件
@@ -195,7 +195,7 @@ var registerForm={
 
                 extend(this.ids,cfg);
                 for(var i in this.ids){
-                    this.doms[i]=$(this.ids[i]);
+                    this.doms[i]=$$(this.ids[i]);
                     if(!this.doms[i]){
                         console.log(this.ids[i] +"doesn't find ");
                     }
@@ -207,9 +207,9 @@ var registerForm={
                 this.doms.submitBtn.removeAttribute("disabled");
                 this.addEventListener();
 
-        //this.doms.form=$("#registerForm");
-        // this.modal=$("#registerEnterModal");
-         //this.registerEnterForm=$("#registerEnterForm");
+        //this.doms.form=$$("#registerForm");
+        // this.modal=$$("#registerEnterModal");
+         //this.registerEnterForm=$$("#registerEnterForm");
 
        // this.registerBtn=this.doms.form.find("#registerBtn");
 
@@ -382,7 +382,7 @@ var smsValidForm={
 
 
         extend(this.ids,cfg);
-        this.doms.root=$(this.ids["root"]);
+        this.doms.root=$$(this.ids["root"]);
         for(var i in this.ids){if(i=="root")continue;
            var dom= this.doms.root.find(this.ids[i]);
             if(!dom){
@@ -401,7 +401,7 @@ var smsValidForm={
     },
 
     captchaCutdown:function(smsBtn){
-        var self =$(smsBtn);
+        var self =$$(smsBtn);
         self.setAttribute('disabled', true);
         self.innerText='发送中';
         var time =  60;
@@ -545,7 +545,7 @@ var forgetPwdForm={
         };
 
         extend(this.ids,cfg);
-        this.doms.root=$(this.ids["root"]);
+        this.doms.root=$$(this.ids["root"]);
         for(var i in this.ids){
             if(i=="root")continue;
            var dom= this.doms.root.find(this.ids[i]);
@@ -567,7 +567,7 @@ var forgetPwdForm={
     },
 
     captchaCutdown:function(smsBtn){
-        var self =$(smsBtn);
+        var self =$$(smsBtn);
         self.setAttribute('disabled', true);
         self.innerText='发送中';
         var time =  60;
@@ -656,16 +656,16 @@ function doRegister() {
 var form_type = "login";
 //切换登录表单和注册表单
 /*function changeForm() {
-	$("#registerBtn").removeAttribute("disabled");
-	$("#loginBtn").removeAttribute("disabled");
+	$$("#registerBtn").removeAttribute("disabled");
+	$$("#loginBtn").removeAttribute("disabled");
 	if (form_type == "login") {
-		$("#register_form").show();
-		$("#login_form").hide();
+		$$("#register_form").show();
+		$$("#login_form").hide();
 		form_type = "register"
 	} else {
 		form_type = "login";
-		$("#register_form").hide();
-		$("#login_form").show();
+		$$("#register_form").hide();
+		$$("#login_form").show();
 	}
 }*/
 
@@ -700,13 +700,13 @@ function setCookie(c_name, value, expiredays) {console.log("expiredays:"+expired
 
 function checkCookie() {
 	var username = getCookie('username')
-	$("#login-email").value=username;
-	//alert(username+$("#login-email").val());
+	$$("#login-email").value=username;
+	//alert(username+$$("#login-email").val());
 	//return;
 	if (username != null && username != "") {//alert('Welcome again '+username+'!')
 		document.getElementById("login-email").value = username;
 
-		$("#login-email").value=username;
+		$$("#login-email").value=username;
 	}
 
 	else {
@@ -723,7 +723,7 @@ function checkCookie() {
 
 window.onload=function(){
 
-	//$("#loginBtn").bind('click',function(){alert('tt!')});
+	//$$("#loginBtn").bind('click',function(){alert('tt!')});
 	//登录表单验证器初始化
 	loginForm.init();
 	//loginValidator.init();
@@ -749,7 +749,7 @@ window.onload=function(){
 
 }
 /*
-$(document).ready(function() {
+$$(document).ready(function() {
 
 
 
@@ -836,7 +836,7 @@ var emailValidForm={
 
         extend(this.ids,cfg);
         for(var i in this.ids){
-            this.doms[i]=$(this.ids[i]);
+            this.doms[i]=$$(this.ids[i]);
             if(!this.doms[i]){
                 console.log(this.ids[i] +"doesn't find ");
             }
@@ -845,7 +845,7 @@ var emailValidForm={
 
 
         extend(this.ids,cfg);
-        this.doms.root=$(this.ids["root"]);
+        this.doms.root=$$(this.ids["root"]);
         for(var i in this.ids){if(i=="root")continue;
            var dom= this.doms.root.find(this.ids[i]);
             if(!dom){
@@ -865,7 +865,7 @@ var emailValidForm={
     },
 
     captchaCutdown:function(smsBtn){
-        var self =$(smsBtn);
+        var self =$$(smsBtn);
         self.setAttribute('disabled', true);
         self.innerText='发送中';
         var time =  60;
@@ -936,12 +936,12 @@ var emailValidForm={
 };
 
 
-jQuery=function( selector, context){
-   	return  jQuery.fn.init( selector, context );
+zzw=function( selector, context){
+   	return  zzw.fn.init( selector, context );
 }
 
 
-jQuery.fn=jQuery.prototype={
+zzw.fn=zzw.prototype={
 
 init:function(selector,context){
     if(typeof selector=="object"){
@@ -968,11 +968,11 @@ init:function(selector,context){
 }
 }
 
-jQuery.extend=function(obj1,obj2){
+zzw.extend=function(obj1,obj2){
 
 }
-jQuery.fn.init.prototype = jQuery.fn;
-jQuery.extend = jQuery.fn.extend = function(obj1,obj2){
+zzw.fn.init.prototype = zzw.fn;
+zzw.extend = zzw.fn.extend = function(obj1,obj2){
     for(var key in obj2){
         obj1[key]=obj2[key];
     }
@@ -995,10 +995,10 @@ function find(selector){
            return dom;
         }
 }
-$=jQuery;
+$$=zzw;
 
 function changeForm2Jso(formId) {
-    var form = $(formId);
+    var form = $$(formId);
     var jso={};
     var elements = form.getElementsByTagName("input");
     for(var i = 0;i<elements.length;i++){

@@ -236,7 +236,7 @@ var Ajax={
          	};
          	delete options['inputData'];
          	//ajax(options);
-         	ajax(options);
+         	$.ajax(options);
 
 
          }
@@ -1300,7 +1300,7 @@ var dialog={
             document.body.appendChild(div);
         }
         mask[0].style.display="block";
-        mask[0].onclick=function(){alert(0);
+        mask[0].onclick=function(){
            dialog.hideWidget();
            dialog.hideMask();
         }

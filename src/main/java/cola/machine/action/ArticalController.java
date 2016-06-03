@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import cola.machine.bean.SysUser;
+import cola.machine.mng.PathManager;
 import cola.machine.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -300,6 +301,11 @@ public class ArticalController extends BaseController{
         HashMap<String,Object> result =new HashMap<String,Object>();
         if(!StringUtil.isBlank(id)){
             Artical bean = articalService.selectByPrimaryKey(Long.valueOf(id));
+          /*  try {
+                bean.setContent(FileUtil.readFile2Str(bean.getContent()));
+            }catch(Exception e){
+                e.printStackTrace();
+            }*/
             result.put("bean", bean);
         }
         return this.getResult(result);
@@ -434,7 +440,7 @@ public class ArticalController extends BaseController{
         String validStr="";
         vu.add("id", id, "主键",  new Rule[]{new Digits(15,0)});
         vu.add("title", title, "标题",  new Rule[]{new Length(40),new NotEmpty()});
-        vu.add("content", content, "正文",  new Rule[]{new Length(10000),new NotEmpty()});
+        vu.add("content", content, "正文",  new Rule[]{new Length(100000),new NotEmpty()});
         vu.add("type", type, "类型",  new Rule[]{new Digits(11,0),new CheckBox(new String[]{"1","2","3"})});
         vu.add("status", status, "状态",  new Rule[]{new Digits(11,0),new CheckBox(new String[]{"1","2","3","4","5"})});
         vu.add("remark", remark, "备注",  new Rule[]{new Length(200)});
@@ -445,6 +451,10 @@ public class ArticalController extends BaseController{
         if(StringUtil.isNotEmpty(validStr)) {
             return ResultUtil.getResult(302,validStr);
         }
+       /* String filename = UUIDUtil.getUUID()+".txt";
+        File file = PathManager.getInstance().getWebRootPath().resolve(filename).toFile();
+        FileUtil.writeFile(file,artical.getContent());
+        artical.setContent(filename);*/
         SysUser user =(SysUser)request.getSession().getAttribute("user");
 
         if(StringUtil.isBlank(id)){

@@ -23,7 +23,27 @@ public class FileUtil {
         }
         return templateStr.toString();
     }
+    public static void writeFile(File file ,String content) throws IOException {
+        try {
 
+            //if file doesnt exists, then create it
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            //true = append file
+            FileWriter fileWritter = new FileWriter(file.getName(), true);
+            BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+            bufferWritter.write(content);
+            bufferWritter.close();
+
+            System.out.println("Done");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
     public static void main(String args[]){
 try {
     FileReader fr = new FileReader("G://V2.2.7.txt");
