@@ -3,7 +3,7 @@
 #login-wrap{
     margin: auto ;
     width:400px;
-   padding:0px 0px;
+    padding:0px 0px;
  /*   height:300px;*/
     margin-top:111px;
     vertical-align: middle;
@@ -14,8 +14,8 @@
           /*  padding: 20px;*/
             font-size: 14px;
             background-color: #fff;
-            border:20px solid rgba(0,0,0,0.2);
-   background-color:rgb(160,197,232);
+            border:20px solid rgba(0,0,0,0.03);
+/*   background-color:rgb(160,197,232);*/
 
 
 
@@ -39,7 +39,7 @@ background-color:rgb(244,199,152);
 /* filter: alpha(opacity=1);
             opacity: 1;*/
     background-color:white;
-   background-color:rgb(160,197,232);
+/*   background-color:rgb(160,197,232);*/
 }
 /**tab**/
 

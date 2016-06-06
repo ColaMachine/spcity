@@ -64,12 +64,14 @@ var loginForm={
             var keycode=document.all?event.keyCode:e.which;
             if(keycode==13){
                 that.submit();
+                this.blur();
             }
         }
          this.doms.pwd.onkeydown=function(e){
             var keycode=document.all?event.keyCode:e.which;
             if(keycode==13){
                 that.submit();
+                this.blur();
             }
         }
     },

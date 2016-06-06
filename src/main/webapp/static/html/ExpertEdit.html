@@ -32,7 +32,7 @@
     <div class="form-group">
         <label for="baike" class="col-sm-2 control-label">百科地址:</label>
         <div class="col-sm-10">
-            <input  type="text"  id="baike" name="baike"  class="form-control input-sm"   maxlength="40"></input>
+            <input  type="text"  id="baike" name="baike"  class="form-control input-sm"   maxlength="100"></input>
         </div>
     </div>
 
@@ -84,7 +84,7 @@ var expertEdit={
             maxlength:40
         },
         baike:{
-            maxlength:40
+            maxlength:100
         },
         remark:{
             maxlength:200
@@ -102,19 +102,19 @@ var expertEdit={
             digits:"必须输入整数"
         },
         username:{
-            maxlength:"username不能多于20个字符"
+            maxlength:"姓名不能多于20个字符"
         },
         face:{
-            maxlength:"face不能多于100个字符"
+            maxlength:"头像不能多于100个字符"
         },
         title:{
-            maxlength:"title不能多于40个字符"
+            maxlength:"头衔不能多于40个字符"
         },
         baike:{
-            maxlength:"baike不能多于40个字符"
+            maxlength:"百科不能多于100个字符"
         },
         remark:{
-            maxlength:"remark不能多于200个字符"
+            maxlength:"备注不能多于200个字符"
         },
         createtime:{
             ymd:"必须输入合法日期"

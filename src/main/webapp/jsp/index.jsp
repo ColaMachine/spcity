@@ -7,22 +7,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name=”viewport” content=”width=device-width, initial-scale=1, maximum-scale=1″>
 <title>后台管理系统</title>
+  <link rel="stylesheet" type="text/css" href="/spcity/static/css/bootstrap.min.css" >
+   <link rel="stylesheet" type="text/css" href="/spcity/static/css/main.css" >
+    <link rel="stylesheet" type="text/css" href="/spcity/static/css/menu.css" >
+
+
+
 <script type="text/javascript" src="${path}/static/js/jquery.js"></script>
 <script type="text/javascript" src="${path}/static/js/common.js"></script>
+<script type="text/javascript" src="${path}/static/js/menu.js"></script>
 <script type="text/javascript" >
 var WEBCONTEXT="${path}";
 var PATH="${path}"; 
-includeCSS(["/static/css/bootstrap.min.css",
+includeCSS([
 "/static/css/font-awesome.css",
-"/static/css/main.css",
-"/static/css/menu.css",
 
-/*"/static/css/form.css",
-"/static/css/col.css",
-"/static/css/font.css",
-*/
-  /*"/static/css/jqgrid.css",
- "/static/css/ui.jqgrid.css",*/
+
+
  "/static/css/grid.css",
   "/static/css/head.css",
    "/static/css/global.css",
@@ -54,9 +55,7 @@ includeJS(["/static/js/menu.js" ,
             "/static/js/jquery.ztree.excheck-3.5.js",
              /* "/static/js/layer.js",*/
              "/static/js/location.js",
-               "/static/js/ueditor/ueditor.config.js",
-                 "/static/js/ueditor/ueditor.all.min.js",
-                 "/static/js/ueditor/lang/zh-cn/zh-cn.js"
+
 
           ]);
 </script>

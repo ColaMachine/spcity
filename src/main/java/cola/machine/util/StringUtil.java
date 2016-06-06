@@ -142,6 +142,7 @@ public class StringUtil {
 	
 	/**随机字母池  **/
 	public static String randAlphaString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//随机产生的字符串
+	public static String randAlphaDigitString = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";//随机产生的字符串
 	public static String getRandomString(int len){
 		String code ="";
 		for(int i=0;i<len;i++){
@@ -161,6 +162,21 @@ public class StringUtil {
 		String code ="";
 		for(int i=0;i<len;i++){
 			code+=randAlphaString.charAt((int)(Math.random()*randAlphaString.length()));
+		}
+		return code;
+	}
+	/**
+	 * 说明:得到随机字母字符串
+	 * @param len
+	 * @return
+	 * @return String
+	 * @author dozen.zhang
+	 * @date 2016年3月18日下午9:07:32
+	 */
+	public static String getRandomAlphaDigitString(int len){
+		String code ="";
+		for(int i=0;i<len;i++){
+			code+=randAlphaString.charAt((int)(Math.random()*randAlphaDigitString.length()));
 		}
 		return code;
 	}
