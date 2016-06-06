@@ -14,7 +14,7 @@
     <aritle class="meeting_item" ng-repeat="item in articalList">
         <a href="#/meeting/view?id={{ item.id }}">
             <div class="meeting_cover">
-                <img src="{{ item.pic ? '/' + item.pic : 'static/image/zanwu.jpg' }}" alt="{{ item.title }}">
+                <img src="{{ item.pic ? '../' + item.pic : 'static/image/zanwu.jpg' }}" alt="{{ item.title }}">
             </div>
             <h2 class="meeting_title">{{ item.title }}</h2>
             <div class="meeting_date"> {{ item.createtime }}</div>

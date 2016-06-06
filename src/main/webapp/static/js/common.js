@@ -205,6 +205,11 @@ var Ajax={
  AjaxFun:function (url, inputData, callback, options, callbackOnError) {
          	var contextUrl = window.location.href;
          	options = options || {};
+         	if(url.indexOf("?")!=-1){
+         	    url+="&r="+Math.floor(Math.random() * ( 1000 + 1));
+         	}else{
+         	     url+="?r="+Math.floor(Math.random() * ( 1000 + 1));
+         	}
          	options.url =  url;
          	options.type = options.type||"POST";
          	options.data = inputData;

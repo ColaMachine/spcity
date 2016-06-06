@@ -14,17 +14,13 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import cola.machine.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import cola.machine.bean.SysUser;
 import cola.machine.dao.SysUserMapper;
-import cola.machine.util.CacheUtil;
-import cola.machine.util.ResultUtil;
-import cola.machine.util.UUIDUtil;
-import cola.machine.util.ValidateUtil;
-import cola.machine.util.StringUtil;
 import core.page.Page;
 import core.action.ResultDTO;
 
@@ -83,7 +79,7 @@ public class SysUserService extends BaseService {
 
        //判断是更新还是插入
         if (sysUser.getId()==null) {
-               
+
             sysUserMapper.insert(sysUser);
         } else {
              sysUserMapper.updateByPrimaryKey(sysUser);

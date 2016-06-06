@@ -24,9 +24,8 @@
             <label for="type">类型</label>
             <select id="type" name="type"  class="form-control input-sm"  >
                 <option value=''>-请选择-</option>
-                <option value=1>合作伙伴</option>
-                <option value=2>产业峰会</option>
-                <option value=3>案例分析</option>
+                <option value=1>新闻资讯</option>
+
             </select>
             <label for="status">状态</label>
             <select id="status" name="status"  class="form-control input-sm"  >
@@ -160,7 +159,7 @@ $('#content-row').append(html);
             } ,
             {   name : 'type',width : 80,
                 formatter : function(value, grid, rows) {
-                  var map ={'3':'案例分析','2':'产业峰会','1':'合作伙伴',};
+                  var map ={'1':'新闻资讯',};
                   return map[value];
                 }
             } ,

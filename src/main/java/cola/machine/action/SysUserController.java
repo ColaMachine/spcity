@@ -18,6 +18,7 @@ import java.util.LinkedHashMap;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import cola.machine.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +32,13 @@ import org.springframework.http.MediaType;
 
 import cola.machine.service.SysUserService;
 import cola.machine.bean.SysUser;
-import cola.machine.util.ResultUtil;
-import cola.machine.util.ValidateUtil;
 import cola.machine.util.rules.*;
 import core.page.Page;
 
-import cola.machine.util.StringUtil;
 import cola.machine.util.ValidateUtil;
 import core.util.RequestUtil;
 import core.action.ResultDTO;
-import cola.machine.util.DateUtil;
+
 @Controller
 @RequestMapping("/sysUser")
 public class SysUserController extends BaseController{
@@ -713,6 +711,12 @@ public class SysUserController extends BaseController{
         vu.add("createtime", createtime, "创建时间",  new Rule[]{new DateValue("yyyy-MM-dd HH:mm:ss")});
         vu.add("updatetime", updatetime, "更新时间",  new Rule[]{new DateValue("yyyy-MM-dd HH:mm:ss")});
         validStr = vu.validateString();
+        if(StringUtil.isNotEmpty(sysUser.getPassword())){
+        try {
+            sysUser.setPassword(MD5Util.getStringMD5String(sysUser.getPassword()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }}
         if(StringUtil.isNotEmpty(validStr)) {
             return ResultUtil.getResult(302,validStr);
         }
