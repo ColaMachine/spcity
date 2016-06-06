@@ -86,6 +86,11 @@ public class LoginFilter implements Filter {
         // VIP Auto-generated method stub
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+        String path = request.getServletPath();
+        if(path!=null && !path.endsWith(".json") && !path.endsWith(".htm")){
+            filterChain.doFilter(request, response);
+            return;
+        }
         // 过滤器 判断是否登录
         HttpSession session = request.getSession();
         if (sessionKey == null) {

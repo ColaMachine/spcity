@@ -77,6 +77,7 @@ static final int[]phonesizes={
     public Object upload(HttpServletRequest request) throws IOException {
         String imageName = request.getParameter("imageName");
         String imageData = request.getParameter("imageData");
+        //imageData=URLDecoder.decode(imageData);
      //  imageData= URLEncoder.encode(imageData);
        ResultDTO result = ImageUtil.saveImage(PathManager.getInstance().getImagePath().toFile().getAbsolutePath(), "", imageData);
        result.setData(Config.getInstance().getImage().getServerUrl()+"/"+result.getData()); 
