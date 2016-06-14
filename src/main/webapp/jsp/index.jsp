@@ -9,11 +9,11 @@
 <title>后台管理系统</title>
   <link rel="stylesheet" type="text/css" href="/spcity/static/css/bootstrap.min.css" >
    <link rel="stylesheet" type="text/css" href="/spcity/static/css/main.css" >
-    <link rel="stylesheet" type="text/css" href="/spcity/static/css/menu.css" >
+    <link rel="stylesheet" type="text/css" href="/spcity/static/css/menu2.css" >
 
 
 
-<script type="text/javascript" src="${path}/static/js/jquery.js"></script>
+<script type="text/javascript" src="${path}/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}/static/js/common.js"></script>
 <script type="text/javascript" src="${path}/static/js/menu.js"></script>
 <script type="text/javascript" >

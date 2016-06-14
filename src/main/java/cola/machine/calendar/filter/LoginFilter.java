@@ -87,7 +87,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String path = request.getServletPath();
-        if(path!=null && !path.endsWith(".json") && !path.endsWith(".htm")){
+        if(StringUtil.isNotEmpty(path)&&!"/".equals(path)&&path!=null && !path.endsWith(".json") && !path.endsWith(".htm")){
             filterChain.doFilter(request, response);
             return;
         }

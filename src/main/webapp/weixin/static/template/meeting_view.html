@@ -11,7 +11,7 @@
         <li class="meeting_date">{{ expert.createtime }}</li>
         <li class="meeting_author">海绵城市</li>
     </ul>
-    <div class="meeting_summary">
+    <div class="meeting_summary" ng-if="expert.remark">
         {{ expert.remark }}
     </div>
     <div class="meeting_content" ng-bind-html="expert.content"></div>

@@ -79,7 +79,7 @@ app.controller('ExpertController', function ($scope, Page, $http) {
 
 // 行业峰会
 app.controller('MeetingController', function ($scope, Page, $http) {
-    Page.setTitle('行业峰会');
+    Page.setTitle('新闻资讯');
 
     $http.get(BASE_PATH + '/artical/list.json').success(function (resp, status, headers, config) {
         if (resp.r != 0) {
@@ -101,7 +101,7 @@ app.controller('MeetingController', function ($scope, Page, $http) {
 
 // 查看行业峰会
 app.controller('MeetingViewController', function ($scope, Page, $http, $location, $sce) {
-    Page.setTitle('查看行业峰会');
+    Page.setTitle('查看新闻资讯');
 
     var id = $location.search()['id'];
 

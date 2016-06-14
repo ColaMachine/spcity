@@ -134,7 +134,7 @@ body {
 .meeting_item .meeting_title {
     font-size: .42rem;
     color: #2f2f33;
-    text-indent: .3rem;
+    padding:0 .3rem;
     margin:.42rem 0 .2rem 0;
 }
 .meeting_item a {

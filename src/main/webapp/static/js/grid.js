@@ -1550,7 +1550,7 @@
 							return;
 							var dReader= this.p.jsonReader;
 						this.p.data = $.jgrid.getAccessor(result,dReader.root);
-                        console.log("this.p.data");
+                       /* console.log("this.p.data");
                         console.log(this.p.data);
                          console.log("this.id");
                           console.log(this.id);
@@ -1558,7 +1558,7 @@
                            console.log(this.tagName);
 
                              console.log("this.p");
-                           console.log(this.p);
+                           console.log(this.p);*/
 						this.p.page = intNum($.jgrid.getAccessor(result,dReader.page), this.p.page);
 
                         this.p.lastpage = intNum($.jgrid.getAccessor(result,dReader.total), 1);
