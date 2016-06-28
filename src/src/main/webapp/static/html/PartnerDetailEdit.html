@@ -1,0 +1,132 @@
+ <div class="modal-content">
+    <form id="partnerDetailEditForm" class="form-horizontal" method="post" action="/partnerDetail/save.json" enctype="multipart/form-data">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">合作伙伴介绍编辑</h4>
+        </div>
+        <div class="modal-body">
+                <input type="hidden" id="id" name="id"  class="form-control input-sm" >
+    <div class="form-group">
+        <label for="partnerId" class="col-sm-2 control-label">合作伙伴:</label>
+        <div class="col-sm-10">
+            <select  id="partnerId" name="partnerId"  class="form-control input-sm"  >
+                <option value=''>-请选择-</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="content" class="col-sm-2 control-label">内容:</label>
+        <div class="col-sm-10">
+ <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>            <textarea  id="content" name="content"  class="form-control input-sm"   maxlength="50000"></textarea>
+        </div>
+    </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button"  class="btn btn-primarys saveBtn">保存</button>
+            <button type="button" class="btn btn-default cancelBtn">取消</button>
+        </div>
+    </form>
+</div><!-- /.modal-content -->
+        
+<script type="text/javascript">
+
+
+
+var partnerDetailEdit={
+    form:null,
+    modal:false,
+    formId:"#partnerDetailEditForm",
+       ue:null,
+    validParam:{
+        rules: {
+                   id:{
+            digits:true
+        },
+        partnerId:{
+            digits:true,required:true
+        },
+        content:{
+            maxlength:50000
+        },
+
+        },
+        messages:{
+                   id:{
+            digits:"必须输入整数"
+        },
+        partnerId:{
+            digits:"必须输入整数"
+        },
+        content:{
+            maxlength:"内容不能多于50000个字符"
+        },
+
+        }
+    },
+    addEventListener:function(){
+        this.form.find(".saveBtn").click(this.saveInfo.Apply(this));
+        this.form.find(".cancelBtn").click(this.cancel.Apply(this));
+    },
+    init:function(){
+        this.form=$(this.formId);
+        this.addEventListener();
+        $("#partnerDetailEditForm").validate(this.validParam);
+        Ajax.getJSON(PATH+"/partnerDetail/view.json?id="+getParam("id"),null,function(data){
+            if(data.r==AJAX_SUCC){
+            if(data.data.bean){
+                fillJso2Form("#partnerDetailEditForm",data.data.bean);
+                this.ue.setContent(data.data.bean.content);
+            }
+            }else{
+                dialog.error("获取信息失败"+data.msg,function(index){
+                    goPage("partnerDetail/list.htm");
+                   dialog.close(index);
+                });
+            }
+        });
+            this.ue=UE.getEditor('editor'),
+        this.loadData();
+    },
+    loadData:function(){
+        Ajax.getJSON(PATH+"partner/list.json",{},function(data){
+            fillSelectWithJso("partnerId",data.data,"id","name");
+        });
+    },
+    saveInfo:function(){
+        $("#content").val(this.ue.getContent());
+        if (!$("#partnerDetailEditForm").valid())
+            return;
+        var jso = changeForm2Jso("#partnerDetailEditForm");
+        var dialogId=dialog.showWait();
+        var that=this;
+        Ajax.post(PATH+$("#partnerDetailEditForm").attr("action"),jso,function(data){
+            dialog.hideWait(dialogId);
+            if(data.r==0){
+                dialog.alert(data.msg||"保存成功",function(index){
+                    //goPage("partnerDetail/list.htm");
+                     partnerDetailEdit.cancel();
+                    if(this.modal){
+                        $("#partnerDetailGrid").jqGrid("reloadGrid");
+                    }
+                    dialog.close(index);
+                });
+            }else{
+                dialog.error(data.msg);
+            }
+        },'json');
+    },
+    cancel:function(){
+        if(this.modal){
+            $("#mymodal").modal("toggle");
+        }else{
+            goPage("partnerDetail/list.htm");
+        }
+    }
+}
+$(document).ready(function() {
+    //获取传入参数
+    partnerDetailEdit.init();
+
+});
+</script>

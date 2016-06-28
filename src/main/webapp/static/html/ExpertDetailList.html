@@ -1,0 +1,163 @@
+
+<div id="ExpertDetailList">
+    <div class="main-hd">| 专家介绍</div>
+
+
+    <div class="main-bd">
+        <div class="body_top" >
+            <form class="form-inline app-search">
+                    <label for="id">编号</label>
+            <input type="number" id="id" name="id"  class="form-control input-sm"  maxlength="15" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="编号"></input>
+        <label for="expertId">专家id</label>
+            <select id="expertId" name="expertId"  class="form-control input-sm"  >
+                <option value=''>-请选择-</option>
+            </select>
+        <label for="content">介绍</label>
+            <input type="text" id="contentLike" name="contentLike"  class="form-control input-sm"   maxlength="50000" placeholder="介绍" ></input>
+
+            <button type="button"  class="btn btn-default searchBtn">查询</button>
+            </form>
+
+            <button class="btn addBtn" >新增</button>
+            <button class="btn deleteBtn">删除</button>
+            <button class="btn exportBtn" >导出</button>
+        </div>
+        <table id="ExpertDetailGrid" class="grid"></table>
+        <div id="ExpertDetailGrid-Pager" class="pager"></div>
+    </div>
+</div>
+<script>
+var expertDetailList={
+    modal:false,
+    mygrid:null,
+    treeObj:null,
+    dqData:null,
+    root:$("#ExpertDetailList"),
+    init:function(){
+        this.mygrid =this.root.find(".grid").jqGrid(this.gridParam);
+        this.addEventListener();
+            this.loadData();
+    },
+    loadData:function(){
+        Ajax.getJSON(PATH+"/expert/list.json",{},function(data){
+            fillSelectWithJso("expertId",data.data,"id","username");
+        });
+    },
+    addEventListener:function(){
+        $(this.root).find(".addBtn").click(this.addInfo.Apply(this));
+        $(this.root).find(".editBtn").click(this.editInfo.Apply(this));
+        $(this.root).find(".deleteBtn").click(this.multiDelete.Apply(this));
+        $(this.root).find(".searchBtn").click(this.searchInfo.Apply(this));
+    },
+    gridParam:{
+        datatype: "json",
+        viewrecords: true, sortorder: "desc", caption:"",
+        rowNum:10,
+        rowList:[10,20,30],
+        multiselect : true,
+        url : PATH+'/expertDetail/list.json',
+        autowidth:true,
+        grid:"#ExpertDetailGrid",
+        pager:"#ExpertDetailGrid-Pager",
+        jsonReader:jsonReader,
+        colNames : [
+        "编号","专家id","介绍" , '操作' ],
+        colModel : [
+            {   name : 'id',width : 80,
+
+            } ,
+            {   name : 'expertId',width : 80,
+
+            } ,
+            {   name : 'content',width : 80,
+
+            } 
+              ,
+            {   name : 'operation',
+                width : 150,
+                formatter : function(value, grid, rows) {
+                    return gridHelper.getViewHtml(rows.id,"expertDetailList")+gridHelper.getEditHtml(rows.id,"expertDetailList")+gridHelper.getDelHtml(rows.id,"expertDetailList");
+                }
+            }
+        ],
+        onSelectRow: function(id){ //alert("单击选中"+id);
+        },
+        loadComplete:function(data){
+            dqData=data;
+        }
+    },
+
+    saveInfo:function(){
+    },
+    addInfo:function (){
+        dialog.window('/expertDetail/edit.htm',this.modal);
+    },
+    editInfo:function (id){
+        dialog.window("/expertDetail/edit.htm?id="+id,this.modal);
+    },
+    searchInfo:function (){
+        var jso = changeForm2Jso(".app-search");
+
+        this.mygrid.jqGrid("setGridParam", { search: true ,"postData":jso}).trigger("reloadGrid", [{ page: 1}]);  //重载JQGrid
+    },
+    viewInfo:function (id){
+        dialog.window("/expertDetail/view.htm?id="+id,this.modal);
+    },
+    exportInfo:function (){
+        var jso= changeForm2Jso(".app-search");
+        Ajax.getJSON(PATH+"/expertDetail/export.json",jso,function(data){
+            if(data.r==AJAX_SUCC){
+                window.location=PATH+"/"+data.data;
+            }else{
+                dialog.error(data.msg,"导出失败",null);
+            }
+        })
+    },
+    deleteInfo:function (id){
+        var that =this;
+         //弹窗
+        dialog.confirm("确定删除数据:"+id,function(){
+            Ajax.post(PATH+"/expertDetail/del.json",{id:id},function(result){
+                result=ajaxResultHandler(result);
+                if(result.r==AJAX_SUCC){
+                    var did=dialog.alert("删除成功，数据："+id,function(index){
+                    that.mygrid.trigger("reloadGrid");
+                    dialog.close(did);
+                });
+                }else {
+                    dialog.error(result.msg,"提醒");
+                }
+            });
+        });
+    },
+    multiDelete:function (){
+        //获取ids字符串
+        var ids=this.mygrid.jqGrid("getGridParam","selarrrow");
+        if(ids.length==0){
+            dialog.alert("请勾选数据");
+            return;
+        }
+        for(var i=0;i<ids.length;i++){
+            var data= this.mygrid.jqGrid("getRowData",ids[i]);
+            ids[i]=data["id"];
+        }
+        //弹窗
+        var that=this;
+        var dialogid= dialog.confirm("确定删除数据:"+ids.join(","),function(){
+            Ajax.post(PATH+"/expertDetail/mdel.json?",{ids:ids.join(",")},function(result){
+                result=ajaxResultHandler(result);
+                if(result.r==AJAX_SUCC){
+                    dialogid=dialog.alert("删除成功，数据："+ids.join(","),function(index){
+                    that.mygrid.trigger("reloadGrid");
+                    dialog.close(dialogid);
+                });
+                }else {
+                    dialog.error(result.msg);
+                }
+            });
+        });
+    }
+};
+expertDetailList.init()
+</script>
+

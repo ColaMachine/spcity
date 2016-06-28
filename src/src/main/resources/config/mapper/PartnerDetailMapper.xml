@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cola.machine.dao.PartnerDetailMapper">
+  <resultMap id="BaseResultMap" type="cola.machine.bean.PartnerDetail">
+      <id column="id" jdbcType="BIGINT" property="id" />
+      <result column="partnerId" jdbcType="BIGINT" property="partnerId" />
+      <result column="content" jdbcType="VARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    `id` ,`partnerId` ,`content` 
+   
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from partner_detail
+    where id =   #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from partner_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id"   parameterType="cola.machine.bean.PartnerDetail" >
+
+    insert into partner_detail (  <include refid="Base_Column_List" />)
+    values (
+#{id,jdbcType=BIGINT}
+,#{partnerId,jdbcType=BIGINT}
+,#{content,jdbcType=VARCHAR}
+    )
+  </insert>
+   <insert id="insertSelective" parameterType="cola.machine.bean.PartnerDetail" >
+    insert into partner_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="id != null" >  
+           `id`, 
+        </if>  
+        <if test="partnerId != null" >  
+           `partnerId`, 
+        </if>  
+        <if test="content != null" >  
+           `content`, 
+        </if>  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="id != null" >  
+          #{id,jdbcType=BIGINT},
+        </if>  
+        <if test="partnerId != null" >  
+          #{partnerId,jdbcType=BIGINT},
+        </if>  
+        <if test="content != null" >  
+          #{content,jdbcType=VARCHAR},
+        </if>  
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cola.machine.bean.PartnerDetail" >
+    update partner_detail
+    <set >
+        <if test="id != null" >  
+             `id`=#{id,jdbcType=BIGINT},
+        </if>  
+        <if test="partnerId != null" >  
+             `partnerId`=#{partnerId,jdbcType=BIGINT},
+        </if>  
+        <if test="content != null" >  
+             `content`=#{content,jdbcType=VARCHAR},
+        </if>  
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cola.machine.bean.PartnerDetail" >
+    update partner_detail
+    set 
+              `partnerId`=#{partnerId,jdbcType=BIGINT},  
+              `content`=#{content,jdbcType=VARCHAR}  
+where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="listByParams" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from partner_detail where 1=1
+        <if test="id != null and id != '' ">  
+           and `id` = #{id}
+        </if>  
+        <if test="partnerId != null and partnerId != '' ">  
+           and `partnerId` = #{partnerId}
+        </if>  
+        <if test="content != null and content != '' ">  
+           and `content` = #{content}
+        </if>  
+        <if test="contentLike != null and contentLike != '' ">  
+             and `content` like "%"#{contentLike}"%"
+        </if>   
+  </select>
+   <select id="listByParams4Page" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from partner_detail where 1=1
+        <if test="id != null and id != '' ">  
+           and `id` = #{id}
+        </if>  
+        <if test="partnerId != null and partnerId != '' ">  
+           and `partnerId` = #{partnerId}
+        </if>  
+        <if test="content != null and content != '' ">  
+           and `content` = #{content}
+        </if>  
+        <if test="contentLike != null and contentLike != '' ">  
+             and `content` like "%"#{contentLike}"%"
+        </if>   
+  </select>
+   <select id="countByParams" parameterType="map" resultType="java.lang.Integer">
+    select 
+    count(1) 
+    from partner_detail where 1=1
+        <if test="id != null and id != '' ">  
+           and `id` = #{id}
+        </if>  
+        <if test="partnerId != null and partnerId != '' ">  
+           and `partnerId` = #{partnerId}
+        </if>  
+        <if test="content != null and content != '' ">  
+           and `content` = #{content}
+        </if>  
+        <if test="contentLike != null and contentLike != '' ">  
+             and `content` like "%"#{contentLike}"%"
+        </if>   
+  </select>
+ <select id="countByOrParams" parameterType="map" resultType="java.lang.Integer">
+    select
+    count(1)
+    from partner_detail where 1!=1
+        <if test="id != null and id != '' ">
+           or `id` = #{id}
+        </if>
+        <if test="partnerId != null and partnerId != '' ">
+           or `partnerId` = #{partnerId}
+        </if>
+        <if test="content != null and content != '' ">
+           or `content` = #{content}
+        </if>
+  </select>
+</mapper>
