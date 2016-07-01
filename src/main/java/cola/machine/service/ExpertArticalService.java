@@ -78,10 +78,9 @@ public class ExpertArticalService extends BaseService {
        
        //判断是更新还是插入
         if (expertArtical.getId()==null) {
-            //expertArtical.setCreatetime(new Timestamp(new Date().getTime()));
+
             expertArticalMapper.insert(expertArtical);
         } else {
-            //expertArtical.setUpdatetime(new Timestamp(new Date().getTime()));
             expertArticalMapper.updateByPrimaryKeySelective(expertArtical);
         }
         return ResultUtil.getSuccResult();

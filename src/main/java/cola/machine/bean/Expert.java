@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class Expert {
-    /**主键**/
+    /**编号**/
     private Long id;
     public Long getId(){
         return id;
@@ -34,12 +34,6 @@ public class Expert {
         return title;
     }    public void setTitle(String title){
         this.title=title;
-    }/**百科地址**/
-    private String baike;
-    public String getBaike(){
-        return baike;
-    }    public void setBaike(String baike){
-        this.baike=baike;
     }/**备注**/
     private String remark;
     public String getRemark(){

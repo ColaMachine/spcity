@@ -1,16 +1,15 @@
-<div id="SysUserResourceMapperList" class="rgt_body ">
-    <div class="body_title">| 用户资源关系</div>
+<div id="SysUserResourceMapperList" class="col-lg-12 ibox float-e-margins ">
+    <!--<div class="body_title">| 用户资源关系</div>-->
+    <div class="main-bd ibox-content clearfix" >
         <div class="body_top" >
             <form class="form-inline app-search">
-        <label for="id">主键</label>
-            <input type="number" id="id" name="id"  class="form-control input-sm"  maxlength="15" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="主键"></input>
+        <label for="id">编号</label>
+            <input type="number" id="id" name="id"  class="form-control input-sm"  maxlength="15" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="编号"></input>
         <label for="username">用户名</label>
             <input type="text" id="usernameLike" name="usernameLike"  class="form-control input-sm"   maxlength="20" placeholder="用户名" ></input>
-        <!--<label for="password">密码</label>
-            <input type="text" id="passwordLike" name="passwordLike"  class="form-control input-sm"   maxlength="50" placeholder="密码" ></input>
-        --><label for="nkname">昵称</label>
+        <label for="nkname">昵称</label>
             <input type="text" id="nknameLike" name="nknameLike"  class="form-control input-sm"   maxlength="20" placeholder="昵称" ></input>
-      <!--  <label for="type">类型</label>
+        <label for="type">类型</label>
             <input type="number" id="type" name="type"  class="form-control input-sm"  maxlength="4" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="类型"></input>
         <label for="status">状态</label>
             <select id="status" name="status"  class="form-control input-sm"  >
@@ -18,77 +17,30 @@
                 <option value=1>正常</option>
                 <option value=2>禁用</option>
                 <option value=3>未激活</option>
-            </select>-->
+            </select>
         <label for="email">邮箱地址</label>
             <input type="text" id="emailLike" name="emailLike"  class="form-control input-sm"   maxlength="50" placeholder="邮箱地址" ></input>
         <label for="telno">手机号码</label>
             <input type="text" id="telnoLike" name="telnoLike"  class="form-control input-sm"   maxlength="11" placeholder="手机号码" ></input>
         <label for="idcard">身份证号码</label>
             <input type="text" id="idcardLike" name="idcardLike"  class="form-control input-sm"   maxlength="18" placeholder="身份证号码" ></input>
-        <label for="sex">性别</label>
-            <input type="number" id="sex" name="sex"  class="form-control input-sm"  maxlength="1" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="性别"></input>
-       <!-- <label for="birth">出生年月</label>
-        <div class="input-group">
-            <input type="text" id="birth" name="birth"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"  datatype="date" format="yyyy-MM-dd"  placeholder="出生年月" ></input>
-            <label class="input-group-addon" for="birth" ><i class="fa fa-calendar"></i></label>        </div>
-        <label for="birthBegin">出生年月开始</label>
-        <div class="input-group">
-            <input type="text" id="birthBegin" name="birthBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"  datatype="date" format="yyyy-MM-dd"  placeholder="出生年月开始" ></input>
-            <label class="input-group-addon" for="birthBegin" ><i class="fa fa-calendar"></i></label>        </div>
-        <label for="birthEnd">出生年月结束</label>
-        <div class="input-group">
-            <input type="text" id="birthEnd" name="birthEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"  datatype="date" format="yyyy-MM-dd"  placeholder="出生年月结束" ></input>
-            <label class="input-group-addon" for="birthEnd" ><i class="fa fa-calendar"></i></label>        </div>
-        <label for="integral">积分</label>
-            <input type="number" id="integral" name="integral"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="积分"></input>
-        <label for="address">地址</label>
-            <input type="text" id="addressLike" name="addressLike"  class="form-control input-sm"   maxlength="50" placeholder="地址" ></input>
-        <label for="weichat">微信</label>
-            <input type="text" id="weichatLike" name="weichatLike"  class="form-control input-sm"   maxlength="20" placeholder="微信" ></input>
-        <label for="qq">qq</label>
-            <input type="number" id="qq" name="qq"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="qq"></input>
         <label for="face">头像</label>
             <input type="text" id="faceLike" name="faceLike"  class="form-control input-sm"   maxlength="100" placeholder="头像" ></input>
-        <label for="remark">备注</label>
-            <input type="text" id="remarkLike" name="remarkLike"  class="form-control input-sm"   maxlength="200" placeholder="备注" ></input>
-        <label for="createtime">创建时间</label>
-        <div class="input-group">
-            <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间" ></input>
-            <label class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></label>        </div>
-        <label for="createtimeBegin">创建时间开始</label>
-        <div class="input-group">
-            <input type="text" id="createtimeBegin" name="createtimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间开始" ></input>
-            <label class="input-group-addon" for="createtimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
-        <label for="createtimeEnd">创建时间结束</label>
-        <div class="input-group">
-            <input type="text" id="createtimeEnd" name="createtimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间结束" ></input>
-            <label class="input-group-addon" for="createtimeEnd" ><i class="fa fa-calendar"></i></label>        </div>
-        <label for="updatetime">更新时间</label>
-        <div class="input-group">
-            <input type="text" id="updatetime" name="updatetime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间" ></input>
-            <label class="input-group-addon" for="updatetime" ><i class="fa fa-calendar"></i></label>        </div>
-        <label for="updatetimeBegin">更新时间开始</label>
-        <div class="input-group">
-            <input type="text" id="updatetimeBegin" name="updatetimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间开始" ></input>
-            <label class="input-group-addon" for="updatetimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
-        <label for="updatetimeEnd">更新时间结束</label>
-        <div class="input-group">
-            <input type="text" id="updatetimeEnd" name="updatetimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间结束" ></input>
-            <label class="input-group-addon" for="updatetimeEnd" ><i class="fa fa-calendar"></i></label>        </div>-->
 
                 <button type="button" class="btn btn-default searchBtn">查询</button>
             </form>
-        <div >
-             <button class="btn saveBtn" >保存</button>
+
+             <button class="btn btn-success saveBtn" ><i class="fa fa-floppy-o" aria-hidden="true"></i>保存</button>
+        </div>
+
+        <div class="col-sm-8 mapper-grid-parent-wrap" >
+        <table id="SysUserResourceMapperGrid" class="grid"></table>
+        <div id="SysUserResourceMapperGrid-Pager" class="pager"></div>
+        </div>
+        <div class="col-sm-4 mapper-grid-child-wrap">
+                <ul id="treeDemo" class="ztree"></ul>
         </div>
     </div>
-     <div class="col-sm-6 mapper-grid-parent-wrap" >
-    <table id="SysUserResourceMapperGrid" class="grid"></table>
-    <div id="SysUserResourceMapperGrid-Pager" class="pager"></div>
-    </div>
-     <div class="col-sm-6 mapper-grid-child-wrap">
-            <ul id="treeDemo" class="ztree"></ul>
-        </div>
 </div>
 <script>
 var sysUserResourceList={
@@ -129,7 +81,7 @@ var sysUserResourceList={
                   jsonReader:jsonReader,
                    autowidth:true,
                   colNames : [
-                   "主键","用户名","密码","昵称","类型","状态","邮箱地址","手机号码",/*"身份证号码","性别","出生年月","积分","地址","微信","qq","头像","备注","创建时间","更新时间" ,*/ '操作' ],
+                   "编号","用户名","昵称","类型","状态","邮箱地址","手机号码","身份证号码","头像", ],
                   colModel : [
                           {
                               name : 'id',
@@ -137,10 +89,6 @@ var sysUserResourceList={
                           } ,
                           {
                               name : 'username',
-                              width : 80,
-                          } ,
-                          {
-                              name : 'password',
                               width : 80,
                           } ,
                           {
@@ -155,7 +103,7 @@ var sysUserResourceList={
                               name : 'status',
                               width : 80,
                               formatter : function(value, grid, rows) {
-                                  var map ={'1':'正常','2':'禁用','3':'未激活',};
+                                  var map ={'3':'未激活','2':'禁用','1':'正常',};
                                   return map[value];
                               }
                           } ,
@@ -167,77 +115,29 @@ var sysUserResourceList={
                               name : 'telno',
                               width : 80,
                           } ,
-                         /* {
+                          {
                               name : 'idcard',
-                              width : 80,
-                          } ,
-                          {
-                              name : 'sex',
-                              width : 80,
-                          } ,
-                          {
-                              name : 'birth',
-                              width : 80,
-                          } ,
-                          {
-                              name : 'integral',
-                              width : 80,
-                          } ,
-                          {
-                              name : 'address',
-                              width : 80,
-                          } ,
-                          {
-                              name : 'weichat',
-                              width : 80,
-                          } ,
-                          {
-                              name : 'qq',
                               width : 80,
                           } ,
                           {
                               name : 'face',
                               width : 80,
                           } ,
-                          {
-                              name : 'remark',
-                              width : 80,
-                          } ,
-                          {
-                              name : 'createtime',
-                              width : 80,
-                               formatter : function(value, grid, rows) {
-                                  return new Date(value).format("yyyy-MM-dd");
-                              }
-                          } ,
-                          {
-                              name : 'updatetime',
-                              width : 80,
-                               formatter : function(value, grid, rows) {
-                                  return new Date(value).format("yyyy-MM-dd");
-                              }
-                          } 
-                          ,*/
-                          {
-                              name : 'operation',
-                              width : 150,
-                              formatter : function(value, grid, rows) {
-                                  return getViewHtml(rows.id,"sysUserResourceList")+getEditHtml(rows.id,"sysUserResourceList")+getDelHtml(rows.id,"sysUserResourceList");
-                              }
-                          }
+
+
                     ],
 
                     onSelectRow: function(id){ //alert("单击选中"+id);
                     var that =this;
                   //  var treeObj = $.fn.zTree.getZTreeObj("tree");
-                     var celldata =sysUserResourceList.mygrid.jqGrid('getRowData',id)["id"];
+                     var celldata =$(sysUserResourceList.mygrid).jqGrid('getRowData',id)["id"];
                      //清空原来的选项
                     sysUserResourceList.treeObj.checkAllNodes(false);
                       Ajax.getJSON(PATH+"/sysUserResource/listAll.json",{"uid":celldata},function(result){
                            if(result.data){
                                           for(var i=0;i<result.data.length;i++){
                                               var node = sysUserResourceList.treeObj.getNodeByParam("id",result.data[i].rid);
-                                               if(node!=null)
+                                              if(node!=null)
                                               sysUserResourceList.treeObj.checkNode(node,true,true);
                                           }
                                       }
@@ -246,7 +146,7 @@ var sysUserResourceList={
     },
     saveInfo:function(){
         //首先查出父节点勾选信息
-        var selarrrow =this.mygrid.jqGrid("getGridParam","selarrrow");
+        var selarrrow =$(this.mygrid).jqGrid("getGridParam","selarrrow");
         if(selarrrow==null || selarrrow.length==0){
             selarrrow .push(this.mygrid.jqGrid('getGridParam','selrow'));
         }
@@ -264,7 +164,7 @@ var sysUserResourceList={
         console.log(selarrrow.join(","));
         var parentIdArray=new Array();
         for(var i=0;i<selarrrow.length;i++){
-            parentIdArray.push( this.mygrid.jqGrid("getRowData",selarrrow[i])["id"]);
+            parentIdArray.push( $(this.mygrid).jqGrid("getRowData",selarrrow[i])["id"]);
         }
 
         console.log(childids.join(","));
@@ -281,7 +181,7 @@ var sysUserResourceList={
     },
     searchInfo:function (){
         var jso = changeForm2Jso(".app-search");
-        this.mygrid.jqGrid("setGridParam", { search: true ,"postData":jso}).trigger("reloadGrid", [{ page: 1}]);  //重载JQGrid
+        $(this.mygrid).jqGrid("setGridParam", { search: true ,"postData":jso}).trigger("reloadGrid", [{ page: 1}]);  //重载JQGrid
     },
     search:function (){
         var jso= changeForm2Jso(".app-search");

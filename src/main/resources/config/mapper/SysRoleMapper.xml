@@ -11,14 +11,13 @@
       <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
   </resultMap>
   <sql id="Base_Column_List">
-    `id` ,`name` ,`code` ,`order` ,`status` ,`remark` ,`createtime` 
-   
+    sys_role.`id` ,sys_role.`name` ,sys_role.`code` ,sys_role.`order` ,sys_role.`status` ,sys_role.`remark` ,sys_role.`createtime` 
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_role
-    where id =   #{id,jdbcType=BIGINT}
+    where sys_role.id =   #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_role
@@ -174,42 +173,44 @@ where id = #{id,jdbcType=BIGINT}
    <select id="listByParams4Page" parameterType="map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sys_role where 1=1
+    from sys_role
+
+    where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and sys_role.`id` = #{id}
         </if>  
         <if test="name != null and name != '' ">  
-           and `name` = #{name}
+           and sys_role.`name` = #{name}
         </if>  
         <if test="nameLike != null and nameLike != '' ">  
-             and `name` like "%"#{nameLike}"%"
+             and sys_role.`name` like "%"#{nameLike}"%"
         </if>   
         <if test="code != null and code != '' ">  
-           and `code` = #{code}
+           and sys_role.`code` = #{code}
         </if>  
         <if test="codeLike != null and codeLike != '' ">  
-             and `code` like "%"#{codeLike}"%"
+             and sys_role.`code` like "%"#{codeLike}"%"
         </if>   
         <if test="order != null and order != '' ">  
-           and `order` = #{order}
+           and sys_role.`order` = #{order}
         </if>  
         <if test="status != null and status != '' ">  
-           and `status` = #{status}
+           and sys_role.`status` = #{status}
         </if>  
         <if test="remark != null and remark != '' ">  
-           and `remark` = #{remark}
+           and sys_role.`remark` = #{remark}
         </if>  
         <if test="remarkLike != null and remarkLike != '' ">  
-             and `remark` like "%"#{remarkLike}"%"
+             and sys_role.`remark` like "%"#{remarkLike}"%"
         </if>   
         <if test="createtime != null and createtime != '' ">  
-           and `createtime` = #{createtime}
+           and sys_role.`createtime` = #{createtime}
         </if>  
         <if test="createtimeBegin != null and createtimeBegin != '' ">  
-             and `createtime` &gt;= #{createtimeBegin}
+             and sys_role.`createtime` &gt;= #{createtimeBegin}
         </if>   
          <if test="createtimeEnd != null and createtimeEnd != '' ">  
-             and `createtime` &lt;= #{createtimeEnd}
+             and sys_role.`createtime` &lt;= #{createtimeEnd}
         </if> 
   </select>
    <select id="countByParams" parameterType="map" resultType="java.lang.Integer">
@@ -217,40 +218,40 @@ where id = #{id,jdbcType=BIGINT}
     count(1) 
     from sys_role where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and sys_role.`id` = #{id}
         </if>  
         <if test="name != null and name != '' ">  
-           and `name` = #{name}
+           and sys_role.`name` = #{name}
         </if>  
         <if test="nameLike != null and nameLike != '' ">  
-             and `name` like "%"#{nameLike}"%"
+             and sys_role.`name` like "%"#{nameLike}"%"
         </if>   
         <if test="code != null and code != '' ">  
-           and `code` = #{code}
+           and sys_role.`code` = #{code}
         </if>  
         <if test="codeLike != null and codeLike != '' ">  
-             and `code` like "%"#{codeLike}"%"
+             and sys_role.`code` like "%"#{codeLike}"%"
         </if>   
         <if test="order != null and order != '' ">  
-           and `order` = #{order}
+           and sys_role.`order` = #{order}
         </if>  
         <if test="status != null and status != '' ">  
-           and `status` = #{status}
+           and sys_role.`status` = #{status}
         </if>  
         <if test="remark != null and remark != '' ">  
-           and `remark` = #{remark}
+           and sys_role.`remark` = #{remark}
         </if>  
         <if test="remarkLike != null and remarkLike != '' ">  
-             and `remark` like "%"#{remarkLike}"%"
+             and sys_role.`remark` like "%"#{remarkLike}"%"
         </if>   
         <if test="createtime != null and createtime != '' ">  
-           and `createtime` = #{createtime}
+           and sys_role.`createtime` = #{createtime}
         </if>  
         <if test="createtimeBegin != null and createtimeBegin != '' ">  
-             and `createtime` &gt;= #{createtimeBegin}
+             and sys_role.`createtime` &gt;= #{createtimeBegin}
         </if>   
          <if test="createtimeEnd != null and createtimeEnd != '' ">  
-             and `createtime` &lt;= #{createtimeEnd}
+             and sys_role.`createtime` &lt;= #{createtimeEnd}
         </if> 
   </select>
  <select id="countByOrParams" parameterType="map" resultType="java.lang.Integer">

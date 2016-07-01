@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class SysRole {
-    /**主键**/
+    /**编号**/
     private Long id;
     public Long getId(){
         return id;

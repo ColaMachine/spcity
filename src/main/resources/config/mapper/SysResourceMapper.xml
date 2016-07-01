@@ -12,16 +12,19 @@
       <result column="status" jdbcType="INTEGER" property="status" />
       <result column="remark" jdbcType="VARCHAR" property="remark" />
       <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="sys_resource_name" jdbcType="VARCHAR" property="sys_resource_name" />
   </resultMap>
   <sql id="Base_Column_List">
-    `id` ,`pid` ,`name` ,`code` ,`type` ,`url` ,`order` ,`status` ,`remark` ,`createtime` 
-   
+    sys_resource.`id` ,sys_resource.`pid` ,sys_resource.`name` ,sys_resource.`code` ,sys_resource.`type` ,sys_resource.`url` ,sys_resource.`order` ,sys_resource.`status` ,sys_resource.`remark` ,sys_resource.`createtime` 
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
+                ,sys_resource1.name as SysResource_name
     from sys_resource
-    where id =   #{id,jdbcType=BIGINT}
+               left join sys_resource sys_resource1
+                 on sys_resource.pid = sys_resource1.id
+    where sys_resource.id =   #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_resource
@@ -225,57 +228,63 @@ where id = #{id,jdbcType=BIGINT}
    <select id="listByParams4Page" parameterType="map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sys_resource where 1=1
+           ,sys_resource1.name as SysResource_name
+    from sys_resource
+
+    left join sys_resource sys_resource1
+      on sys_resource.pid = sys_resource1.id
+
+    where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and sys_resource.`id` = #{id}
         </if>  
         <if test="pid != null and pid != '' ">  
-           and `pid` = #{pid}
+           and sys_resource.`pid` = #{pid}
         </if>  
         <if test="name != null and name != '' ">  
-           and `name` = #{name}
+           and sys_resource.`name` = #{name}
         </if>  
         <if test="nameLike != null and nameLike != '' ">  
-             and `name` like "%"#{nameLike}"%"
+             and sys_resource.`name` like "%"#{nameLike}"%"
         </if>   
         <if test="code != null and code != '' ">  
-           and `code` = #{code}
+           and sys_resource.`code` = #{code}
         </if>  
         <if test="codeLike != null and codeLike != '' ">  
-             and `code` like "%"#{codeLike}"%"
+             and sys_resource.`code` like "%"#{codeLike}"%"
         </if>   
         <if test="type != null and type != '' ">  
-           and `type` = #{type}
+           and sys_resource.`type` = #{type}
         </if>  
         <if test="typeLike != null and typeLike != '' ">  
-             and `type` like "%"#{typeLike}"%"
+             and sys_resource.`type` like "%"#{typeLike}"%"
         </if>   
         <if test="url != null and url != '' ">  
-           and `url` = #{url}
+           and sys_resource.`url` = #{url}
         </if>  
         <if test="urlLike != null and urlLike != '' ">  
-             and `url` like "%"#{urlLike}"%"
+             and sys_resource.`url` like "%"#{urlLike}"%"
         </if>   
         <if test="order != null and order != '' ">  
-           and `order` = #{order}
+           and sys_resource.`order` = #{order}
         </if>  
         <if test="status != null and status != '' ">  
-           and `status` = #{status}
+           and sys_resource.`status` = #{status}
         </if>  
         <if test="remark != null and remark != '' ">  
-           and `remark` = #{remark}
+           and sys_resource.`remark` = #{remark}
         </if>  
         <if test="remarkLike != null and remarkLike != '' ">  
-             and `remark` like "%"#{remarkLike}"%"
+             and sys_resource.`remark` like "%"#{remarkLike}"%"
         </if>   
         <if test="createtime != null and createtime != '' ">  
-           and `createtime` = #{createtime}
+           and sys_resource.`createtime` = #{createtime}
         </if>  
         <if test="createtimeBegin != null and createtimeBegin != '' ">  
-             and `createtime` &gt;= #{createtimeBegin}
+             and sys_resource.`createtime` &gt;= #{createtimeBegin}
         </if>   
          <if test="createtimeEnd != null and createtimeEnd != '' ">  
-             and `createtime` &lt;= #{createtimeEnd}
+             and sys_resource.`createtime` &lt;= #{createtimeEnd}
         </if> 
   </select>
    <select id="countByParams" parameterType="map" resultType="java.lang.Integer">
@@ -283,55 +292,55 @@ where id = #{id,jdbcType=BIGINT}
     count(1) 
     from sys_resource where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and sys_resource.`id` = #{id}
         </if>  
         <if test="pid != null and pid != '' ">  
-           and `pid` = #{pid}
+           and sys_resource.`pid` = #{pid}
         </if>  
         <if test="name != null and name != '' ">  
-           and `name` = #{name}
+           and sys_resource.`name` = #{name}
         </if>  
         <if test="nameLike != null and nameLike != '' ">  
-             and `name` like "%"#{nameLike}"%"
+             and sys_resource.`name` like "%"#{nameLike}"%"
         </if>   
         <if test="code != null and code != '' ">  
-           and `code` = #{code}
+           and sys_resource.`code` = #{code}
         </if>  
         <if test="codeLike != null and codeLike != '' ">  
-             and `code` like "%"#{codeLike}"%"
+             and sys_resource.`code` like "%"#{codeLike}"%"
         </if>   
         <if test="type != null and type != '' ">  
-           and `type` = #{type}
+           and sys_resource.`type` = #{type}
         </if>  
         <if test="typeLike != null and typeLike != '' ">  
-             and `type` like "%"#{typeLike}"%"
+             and sys_resource.`type` like "%"#{typeLike}"%"
         </if>   
         <if test="url != null and url != '' ">  
-           and `url` = #{url}
+           and sys_resource.`url` = #{url}
         </if>  
         <if test="urlLike != null and urlLike != '' ">  
-             and `url` like "%"#{urlLike}"%"
+             and sys_resource.`url` like "%"#{urlLike}"%"
         </if>   
         <if test="order != null and order != '' ">  
-           and `order` = #{order}
+           and sys_resource.`order` = #{order}
         </if>  
         <if test="status != null and status != '' ">  
-           and `status` = #{status}
+           and sys_resource.`status` = #{status}
         </if>  
         <if test="remark != null and remark != '' ">  
-           and `remark` = #{remark}
+           and sys_resource.`remark` = #{remark}
         </if>  
         <if test="remarkLike != null and remarkLike != '' ">  
-             and `remark` like "%"#{remarkLike}"%"
+             and sys_resource.`remark` like "%"#{remarkLike}"%"
         </if>   
         <if test="createtime != null and createtime != '' ">  
-           and `createtime` = #{createtime}
+           and sys_resource.`createtime` = #{createtime}
         </if>  
         <if test="createtimeBegin != null and createtimeBegin != '' ">  
-             and `createtime` &gt;= #{createtimeBegin}
+             and sys_resource.`createtime` &gt;= #{createtimeBegin}
         </if>   
          <if test="createtimeEnd != null and createtimeEnd != '' ">  
-             and `createtime` &lt;= #{createtimeEnd}
+             and sys_resource.`createtime` &lt;= #{createtimeEnd}
         </if> 
   </select>
  <select id="countByOrParams" parameterType="map" resultType="java.lang.Integer">

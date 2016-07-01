@@ -7,20 +7,25 @@
  */
 
 package cola.machine.service;
-
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
-import cola.machine.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import cola.machine.bean.SysUser;
 import cola.machine.dao.SysUserMapper;
+import cola.machine.util.CacheUtil;
+import cola.machine.util.ResultUtil;
+import cola.machine.util.UUIDUtil;
+import cola.machine.util.ValidateUtil;
+import cola.machine.util.StringUtil;
 import core.page.Page;
 import core.action.ResultDTO;
 
@@ -63,11 +68,11 @@ public class SysUserService extends BaseService {
      */
     public ResultDTO save(SysUser sysUser) {
         // 进行字段验证
-       ValidateUtil<SysUser> vu = new ValidateUtil<SysUser>();
+      /* ValidateUtil<SysUser> vu = new ValidateUtil<SysUser>();
         ResultDTO result = vu.valid(sysUser);
         if (result.getR() != 1) {
             return result;
-        }
+        }*/
          //逻辑业务判断判断
        //判断是否有uq字段
                HashMap params =new HashMap();
@@ -82,7 +87,8 @@ public class SysUserService extends BaseService {
 
             sysUserMapper.insert(sysUser);
         } else {
-             sysUserMapper.updateByPrimaryKey(sysUser);
+            sysUser.setUpdatetime(new Timestamp(new Date().getTime()));
+            sysUserMapper.updateByPrimaryKeySelective(sysUser);
         }
         return ResultUtil.getSuccResult();
     }

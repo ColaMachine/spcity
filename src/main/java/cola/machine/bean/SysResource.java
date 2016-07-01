@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class SysResource {
-    /**主键**/
+    /**编号**/
     private Long id;
     public Long getId(){
         return id;
@@ -22,6 +22,11 @@ public class SysResource {
         return pid;
     }    public void setPid(Long pid){
         this.pid=pid;
+    }    private String SysResource_name;
+    public String getSysResource_name(){
+        return SysResource_name;
+    }    public void setSysResource_name(String SysResource_name){
+        this.SysResource_name=SysResource_name;
     }/**资源名称**/
     private String name;
     public String getName(){

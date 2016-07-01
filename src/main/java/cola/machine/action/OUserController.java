@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.*;
 
 import cola.machine.bean.SysResource;
 import cola.machine.bean.SysUser;
@@ -52,8 +53,10 @@ public class OUserController extends BaseController {
         // logger.debug("s");
         // System.out.println(123);
         //getJedis().set("1","2");
+        request.setAttribute("path", SysConfig.PATH);
+
         System.out.println("登录页面");
-        return "/static/html/zlogin.html";
+        return "/jsp/login.jsp";
     }
 
    /* @RequestMapping(value = "/user/listTree.json", method = RequestMethod.GET)
@@ -84,7 +87,7 @@ public class OUserController extends BaseController {
 
     /**
      * 说明:登录提交
-     * 
+     *
      * @param request
      * @return
      * @author dozen.zhang
@@ -129,7 +132,7 @@ public class OUserController extends BaseController {
 
     /**
      * 说明:转到注册页面
-     * 
+     *
      * @param request
      * @return
      * @author dozen.zhang
@@ -137,13 +140,13 @@ public class OUserController extends BaseController {
      */
     @RequestMapping(value = "/register.htm", method = RequestMethod.GET)
     public String registerGet(HttpServletRequest request) {
-        return "static/html/zregisterByEmail.html";
+        request.setAttribute("path", SysConfig.PATH);return "/jsp/register.jsp";
     }
 
 
     /**
      * 说明:注册提交
-     * 
+     *
      * @param request
      * @return
      * @author dozen.zhang
@@ -164,7 +167,7 @@ public class OUserController extends BaseController {
         String password = request.getParameter("pwd");
         String imgCaptcha = request.getParameter("picCaptcha");
 
-       // String smsCaptcha = request.getParameter("smsCaptcha");
+        // String smsCaptcha = request.getParameter("smsCaptcha");
         String sessionid = request.getRequestedSessionId();
 
         ValidateUtil vu = new ValidateUtil();
@@ -200,12 +203,12 @@ public class OUserController extends BaseController {
         if(!result.isRight()){
             return result;
         }
-         result = this.userService.saveRegisterUser(user);// .loginValid(loginName,
-                                                                   // pwd);
+        result = this.userService.saveRegisterUser(user);// .loginValid(loginName,
+        // pwd);
         if (result.isRight()) {
             HttpSession session = request.getSession();
             user.setPassword("");
-           // user.setStatus(1);
+            // user.setStatus(1);
             session.setAttribute("user", user);
         }
         return result;
@@ -270,7 +273,7 @@ public class OUserController extends BaseController {
             return ResultUtil.getResult(301,"手机号未填写");
         }
         String phone =user.getTelno();
-       // String phone = request.getParameter("phone");
+        // String phone = request.getParameter("phone");
         String smsCaptcha = request.getParameter("smsCaptcha");
         if(StringUtil.isBlank(smsCaptcha)||smsCaptcha.length()<4||smsCaptcha.length()>12 ){
             return ResultUtil.getResult(301,"请填写正确验证码");
@@ -301,7 +304,7 @@ public class OUserController extends BaseController {
 
     /**
      * 说明:等待激活页面
-     * 
+     *
      * @param request
      * @return
      * @author dozen.zhang
@@ -314,7 +317,7 @@ public class OUserController extends BaseController {
 
     /**
      * 说明:激活邮件回跳页面
-     * 
+     *
      * @param request
      * @return
      * @author dozen.zhang
@@ -421,7 +424,7 @@ public class OUserController extends BaseController {
 
     /**
      * 说明:从密码重置链接中跳转到系统的密码重置页面
-     * 
+     *
      * @param id
      * @param request
      * @return
@@ -459,7 +462,7 @@ public class OUserController extends BaseController {
     @RequestMapping(value = "/logout.htm", method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("user");
-        return "/static/html/zlogin.html";
+        return "/jsp/login.jsp";
     }
 
     @RequestMapping(value = "/user/edit.htm", method = RequestMethod.GET)
@@ -481,16 +484,16 @@ public class OUserController extends BaseController {
         request.setAttribute("user", user);
         return "/user/viewUser";
     }*/
-    
-   
- 
-  
-    
+
+
+
+
+
     public static void main(String[] args) {
         ApplicationContext ac = new FileSystemXmlApplicationContext("C:\\Users\\dozen.zhang\\Documents\\calendar\\src\\main\\resources\\config\\xml\\applicationContext.xml");
         Object object = ac.getBean("validCodeService");
         System.out.println(object);
     }
-    
-   
+
+
 }

@@ -23,14 +23,13 @@
       <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
   </resultMap>
   <sql id="Base_Column_List">
-    `id` ,`username` ,`password` ,`nkname` ,`type` ,`status` ,`email` ,`telno` ,`idcard` ,`sex` ,`birth` ,`integral` ,`address` ,`weichat` ,`qq` ,`face` ,`remark` ,`createtime` ,`updatetime` 
-   
+    sys_user.`id` ,sys_user.`username` ,sys_user.`password` ,sys_user.`nkname` ,sys_user.`type` ,sys_user.`status` ,sys_user.`email` ,sys_user.`telno` ,sys_user.`idcard` ,sys_user.`sex` ,sys_user.`birth` ,sys_user.`integral` ,sys_user.`address` ,sys_user.`weichat` ,sys_user.`qq` ,sys_user.`face` ,sys_user.`remark` ,sys_user.`createtime` ,sys_user.`updatetime` 
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_user
-    where id =   #{id,jdbcType=BIGINT}
+    where sys_user.id =   #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_user
@@ -387,105 +386,107 @@ where id = #{id,jdbcType=BIGINT}
    <select id="listByParams4Page" parameterType="map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sys_user where 1=1
+    from sys_user
+
+    where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and sys_user.`id` = #{id}
         </if>  
         <if test="username != null and username != '' ">  
-           and `username` = #{username}
+           and sys_user.`username` = #{username}
         </if>  
         <if test="usernameLike != null and usernameLike != '' ">  
-             and `username` like "%"#{usernameLike}"%"
+             and sys_user.`username` like "%"#{usernameLike}"%"
         </if>   
         <if test="password != null and password != '' ">  
-           and `password` = #{password}
+           and sys_user.`password` = #{password}
         </if>  
         <if test="passwordLike != null and passwordLike != '' ">  
-             and `password` like "%"#{passwordLike}"%"
+             and sys_user.`password` like "%"#{passwordLike}"%"
         </if>   
         <if test="nkname != null and nkname != '' ">  
-           and `nkname` = #{nkname}
+           and sys_user.`nkname` = #{nkname}
         </if>  
         <if test="nknameLike != null and nknameLike != '' ">  
-             and `nkname` like "%"#{nknameLike}"%"
+             and sys_user.`nkname` like "%"#{nknameLike}"%"
         </if>   
         <if test="type != null and type != '' ">  
-           and `type` = #{type}
+           and sys_user.`type` = #{type}
         </if>  
         <if test="status != null and status != '' ">  
-           and `status` = #{status}
+           and sys_user.`status` = #{status}
         </if>  
         <if test="email != null and email != '' ">  
-           and `email` = #{email}
+           and sys_user.`email` = #{email}
         </if>  
         <if test="emailLike != null and emailLike != '' ">  
-             and `email` like "%"#{emailLike}"%"
+             and sys_user.`email` like "%"#{emailLike}"%"
         </if>   
         <if test="telno != null and telno != '' ">  
-           and `telno` = #{telno}
+           and sys_user.`telno` = #{telno}
         </if>  
         <if test="telnoLike != null and telnoLike != '' ">  
-             and `telno` like "%"#{telnoLike}"%"
+             and sys_user.`telno` like "%"#{telnoLike}"%"
         </if>   
         <if test="idcard != null and idcard != '' ">  
-           and `idcard` = #{idcard}
+           and sys_user.`idcard` = #{idcard}
         </if>  
         <if test="idcardLike != null and idcardLike != '' ">  
-             and `idcard` like "%"#{idcardLike}"%"
+             and sys_user.`idcard` like "%"#{idcardLike}"%"
         </if>   
         <if test="sex != null and sex != '' ">  
-           and `sex` = #{sex}
+           and sys_user.`sex` = #{sex}
         </if>  
         <if test="birth != null and birth != '' ">  
-           and `birth` = #{birth}
+           and sys_user.`birth` = #{birth}
         </if>  
         <if test="integral != null and integral != '' ">  
-           and `integral` = #{integral}
+           and sys_user.`integral` = #{integral}
         </if>  
         <if test="address != null and address != '' ">  
-           and `address` = #{address}
+           and sys_user.`address` = #{address}
         </if>  
         <if test="addressLike != null and addressLike != '' ">  
-             and `address` like "%"#{addressLike}"%"
+             and sys_user.`address` like "%"#{addressLike}"%"
         </if>   
         <if test="weichat != null and weichat != '' ">  
-           and `weichat` = #{weichat}
+           and sys_user.`weichat` = #{weichat}
         </if>  
         <if test="weichatLike != null and weichatLike != '' ">  
-             and `weichat` like "%"#{weichatLike}"%"
+             and sys_user.`weichat` like "%"#{weichatLike}"%"
         </if>   
         <if test="qq != null and qq != '' ">  
-           and `qq` = #{qq}
+           and sys_user.`qq` = #{qq}
         </if>  
         <if test="face != null and face != '' ">  
-           and `face` = #{face}
+           and sys_user.`face` = #{face}
         </if>  
         <if test="faceLike != null and faceLike != '' ">  
-             and `face` like "%"#{faceLike}"%"
+             and sys_user.`face` like "%"#{faceLike}"%"
         </if>   
         <if test="remark != null and remark != '' ">  
-           and `remark` = #{remark}
+           and sys_user.`remark` = #{remark}
         </if>  
         <if test="remarkLike != null and remarkLike != '' ">  
-             and `remark` like "%"#{remarkLike}"%"
+             and sys_user.`remark` like "%"#{remarkLike}"%"
         </if>   
         <if test="createtime != null and createtime != '' ">  
-           and `createtime` = #{createtime}
+           and sys_user.`createtime` = #{createtime}
         </if>  
         <if test="createtimeBegin != null and createtimeBegin != '' ">  
-             and `createtime` &gt;= #{createtimeBegin}
+             and sys_user.`createtime` &gt;= #{createtimeBegin}
         </if>   
          <if test="createtimeEnd != null and createtimeEnd != '' ">  
-             and `createtime` &lt;= #{createtimeEnd}
+             and sys_user.`createtime` &lt;= #{createtimeEnd}
         </if> 
         <if test="updatetime != null and updatetime != '' ">  
-           and `updatetime` = #{updatetime}
+           and sys_user.`updatetime` = #{updatetime}
         </if>  
         <if test="updatetimeBegin != null and updatetimeBegin != '' ">  
-             and `updatetime` &gt;= #{updatetimeBegin}
+             and sys_user.`updatetime` &gt;= #{updatetimeBegin}
         </if>   
          <if test="updatetimeEnd != null and updatetimeEnd != '' ">  
-             and `updatetime` &lt;= #{updatetimeEnd}
+             and sys_user.`updatetime` &lt;= #{updatetimeEnd}
         </if> 
   </select>
    <select id="countByParams" parameterType="map" resultType="java.lang.Integer">
@@ -493,103 +494,103 @@ where id = #{id,jdbcType=BIGINT}
     count(1) 
     from sys_user where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and sys_user.`id` = #{id}
         </if>  
         <if test="username != null and username != '' ">  
-           and `username` = #{username}
+           and sys_user.`username` = #{username}
         </if>  
         <if test="usernameLike != null and usernameLike != '' ">  
-             and `username` like "%"#{usernameLike}"%"
+             and sys_user.`username` like "%"#{usernameLike}"%"
         </if>   
         <if test="password != null and password != '' ">  
-           and `password` = #{password}
+           and sys_user.`password` = #{password}
         </if>  
         <if test="passwordLike != null and passwordLike != '' ">  
-             and `password` like "%"#{passwordLike}"%"
+             and sys_user.`password` like "%"#{passwordLike}"%"
         </if>   
         <if test="nkname != null and nkname != '' ">  
-           and `nkname` = #{nkname}
+           and sys_user.`nkname` = #{nkname}
         </if>  
         <if test="nknameLike != null and nknameLike != '' ">  
-             and `nkname` like "%"#{nknameLike}"%"
+             and sys_user.`nkname` like "%"#{nknameLike}"%"
         </if>   
         <if test="type != null and type != '' ">  
-           and `type` = #{type}
+           and sys_user.`type` = #{type}
         </if>  
         <if test="status != null and status != '' ">  
-           and `status` = #{status}
+           and sys_user.`status` = #{status}
         </if>  
         <if test="email != null and email != '' ">  
-           and `email` = #{email}
+           and sys_user.`email` = #{email}
         </if>  
         <if test="emailLike != null and emailLike != '' ">  
-             and `email` like "%"#{emailLike}"%"
+             and sys_user.`email` like "%"#{emailLike}"%"
         </if>   
         <if test="telno != null and telno != '' ">  
-           and `telno` = #{telno}
+           and sys_user.`telno` = #{telno}
         </if>  
         <if test="telnoLike != null and telnoLike != '' ">  
-             and `telno` like "%"#{telnoLike}"%"
+             and sys_user.`telno` like "%"#{telnoLike}"%"
         </if>   
         <if test="idcard != null and idcard != '' ">  
-           and `idcard` = #{idcard}
+           and sys_user.`idcard` = #{idcard}
         </if>  
         <if test="idcardLike != null and idcardLike != '' ">  
-             and `idcard` like "%"#{idcardLike}"%"
+             and sys_user.`idcard` like "%"#{idcardLike}"%"
         </if>   
         <if test="sex != null and sex != '' ">  
-           and `sex` = #{sex}
+           and sys_user.`sex` = #{sex}
         </if>  
         <if test="birth != null and birth != '' ">  
-           and `birth` = #{birth}
+           and sys_user.`birth` = #{birth}
         </if>  
         <if test="integral != null and integral != '' ">  
-           and `integral` = #{integral}
+           and sys_user.`integral` = #{integral}
         </if>  
         <if test="address != null and address != '' ">  
-           and `address` = #{address}
+           and sys_user.`address` = #{address}
         </if>  
         <if test="addressLike != null and addressLike != '' ">  
-             and `address` like "%"#{addressLike}"%"
+             and sys_user.`address` like "%"#{addressLike}"%"
         </if>   
         <if test="weichat != null and weichat != '' ">  
-           and `weichat` = #{weichat}
+           and sys_user.`weichat` = #{weichat}
         </if>  
         <if test="weichatLike != null and weichatLike != '' ">  
-             and `weichat` like "%"#{weichatLike}"%"
+             and sys_user.`weichat` like "%"#{weichatLike}"%"
         </if>   
         <if test="qq != null and qq != '' ">  
-           and `qq` = #{qq}
+           and sys_user.`qq` = #{qq}
         </if>  
         <if test="face != null and face != '' ">  
-           and `face` = #{face}
+           and sys_user.`face` = #{face}
         </if>  
         <if test="faceLike != null and faceLike != '' ">  
-             and `face` like "%"#{faceLike}"%"
+             and sys_user.`face` like "%"#{faceLike}"%"
         </if>   
         <if test="remark != null and remark != '' ">  
-           and `remark` = #{remark}
+           and sys_user.`remark` = #{remark}
         </if>  
         <if test="remarkLike != null and remarkLike != '' ">  
-             and `remark` like "%"#{remarkLike}"%"
+             and sys_user.`remark` like "%"#{remarkLike}"%"
         </if>   
         <if test="createtime != null and createtime != '' ">  
-           and `createtime` = #{createtime}
+           and sys_user.`createtime` = #{createtime}
         </if>  
         <if test="createtimeBegin != null and createtimeBegin != '' ">  
-             and `createtime` &gt;= #{createtimeBegin}
+             and sys_user.`createtime` &gt;= #{createtimeBegin}
         </if>   
          <if test="createtimeEnd != null and createtimeEnd != '' ">  
-             and `createtime` &lt;= #{createtimeEnd}
+             and sys_user.`createtime` &lt;= #{createtimeEnd}
         </if> 
         <if test="updatetime != null and updatetime != '' ">  
-           and `updatetime` = #{updatetime}
+           and sys_user.`updatetime` = #{updatetime}
         </if>  
         <if test="updatetimeBegin != null and updatetimeBegin != '' ">  
-             and `updatetime` &gt;= #{updatetimeBegin}
+             and sys_user.`updatetime` &gt;= #{updatetimeBegin}
         </if>   
          <if test="updatetimeEnd != null and updatetimeEnd != '' ">  
-             and `updatetime` &lt;= #{updatetimeEnd}
+             and sys_user.`updatetime` &lt;= #{updatetimeEnd}
         </if> 
   </select>
  <select id="countByOrParams" parameterType="map" resultType="java.lang.Integer">

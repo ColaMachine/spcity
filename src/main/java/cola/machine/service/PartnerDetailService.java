@@ -78,10 +78,9 @@ public class PartnerDetailService extends BaseService {
        
        //判断是更新还是插入
         if (partnerDetail.getId()==null) {
-            //partnerDetail.setCreatetime(new Timestamp(new Date().getTime()));
+
             partnerDetailMapper.insert(partnerDetail);
         } else {
-            //partnerDetail.setUpdatetime(new Timestamp(new Date().getTime()));
             partnerDetailMapper.updateByPrimaryKeySelective(partnerDetail);
         }
         return ResultUtil.getSuccResult();

@@ -7,7 +7,6 @@
  */
 
 package cola.machine.service;
-
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
@@ -69,21 +68,21 @@ public class PartnerService extends BaseService {
      */
     public ResultDTO save(Partner partner) {
         // 进行字段验证
-       ValidateUtil<Partner> vu = new ValidateUtil<Partner>();
+      /* ValidateUtil<Partner> vu = new ValidateUtil<Partner>();
         ResultDTO result = vu.valid(partner);
         if (result.getR() != 1) {
             return result;
-        }
+        }*/
          //逻辑业务判断判断
        //判断是否有uq字段
        
        //判断是更新还是插入
         if (partner.getId()==null) {
-            partner.setCreatetime(new Timestamp(new Date().getTime()));
+
             partnerMapper.insert(partner);
         } else {
             partner.setUpdatetime(new Timestamp(new Date().getTime()));
-             partnerMapper.updateByPrimaryKeySelective(partner);
+            partnerMapper.updateByPrimaryKeySelective(partner);
         }
         return ResultUtil.getSuccResult();
     }

@@ -78,10 +78,9 @@ public class ExpertDetailService extends BaseService {
        
        //判断是更新还是插入
         if (expertDetail.getId()==null) {
-            //expertDetail.setCreatetime(new Timestamp(new Date().getTime()));
+
             expertDetailMapper.insert(expertDetail);
         } else {
-           // expertDetail.setUpdatetime(new Timestamp(new Date().getTime()));
             expertDetailMapper.updateByPrimaryKeySelective(expertDetail);
         }
         return ResultUtil.getSuccResult();

@@ -1,10 +1,10 @@
- <div id="SysUserView" class="modal-content">
-    <form id="editForm" class="form-horizontal" method="post" action="/sysUser/save.json" enctype="multipart/form-data">
-        <div class="modal-header">
+<div id="SysUserView" class="ibox float-e-margins">
+    <form id="SysUserViewForm" class="form-horizontal" >
+      <!--  <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title">用户查看</h4>
-        </div>
-        <div class="modal-body">
+        </div>-->
+        <div class="ibox-content">
                 <input type="hidden" id="id" name="id">
     <div class="form-group">
         <label for="username" class="col-sm-2 control-label">用户名:</label>
@@ -57,7 +57,7 @@
     <div class="form-group">
         <label for="sex" class="col-sm-2 control-label">性别:</label>
         <div class="col-sm-10">
-            <span  name="sex" id="sex" class="form-control"></span>
+            <span  name="sex" id="sex" datatype="map" data="{'0':'未填写','1':'男性','2':'女性',}" class="form-control" ></span>
         </div>
     </div>
     <div class="form-group">
@@ -87,13 +87,13 @@
     <div class="form-group">
         <label for="qq" class="col-sm-2 control-label">qq:</label>
         <div class="col-sm-10">
+            <span  name="qq" id="qq" class="form-control"></span>
         </div>
     </div>
     <div class="form-group">
         <label for="face" class="col-sm-2 control-label">头像:</label>
         <div class="col-sm-10">
-            <span name="face" id="face"  class="form-control"  ></span>
-        </div>
+<img  id="face" src="static/img/timg.jpeg" name="face" class="row-10 img-upload"   ></img>        </div>
     </div>
     <div class="form-group">
         <label for="remark" class="col-sm-2 control-label">备注:</label>
@@ -114,10 +114,14 @@
         </div>
     </div>
 
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-2">
+                  <button type="button" class="btn btn-white cancelBtn">取消</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button"   class="btn btn-default cancelBtn">取消</button>
-        </div>
+
     </form>
 </div><!-- /.modal-content -->
 
@@ -175,7 +179,7 @@
     <div class="form-group">
         <label for="sex" class="col-sm-2 control-label">性别:</label>
         <div class="col-sm-10">
-            <span  name="sex" id="sex" class="form-control"></span>
+            <span  name="sex" id="sex" datatype="map" data="{'0':'未填写','1':'男性','2':'女性',}" class="form-control" ></span>
         </div>
     </div>
     <div class="form-group">
@@ -205,13 +209,13 @@
     <div class="form-group">
         <label for="qq" class="col-sm-2 control-label">qq:</label>
         <div class="col-sm-10">
+            <span  name="qq" id="qq" class="form-control"></span>
         </div>
     </div>
     <div class="form-group">
         <label for="face" class="col-sm-2 control-label">头像:</label>
         <div class="col-sm-10">
-            <span name="face" id="face"  class="form-control"  ></span>
-        </div>
+<img  id="face" src="static/img/timg.jpeg" name="face" class="row-10 img-upload"   ></img>        </div>
     </div>
     <div class="form-group">
         <label for="remark" class="col-sm-2 control-label">备注:</label>
@@ -246,22 +250,25 @@ var sysUserView={
     root:$("#SysUserView"),
     init:function(){
     var that = this;
-        this.addEventListener();
+    this.addEventListener();
         //获取传入参数
-            if(!StringUtil.isBlank(getParam("id"))){
-                Ajax.getJSON("sysUser/view.json?id="+getParam("id"),null,function(data){
-                    if(data.r==AJAX_SUCC){
-                        fillJso2FormSpan("#SysUserView",data.data.bean);
-                    }else{
-                        dialog.error("获取信息失败"+data.msg,function(index){
-                            that.cancel();
-                            dialog.close(index);
-                        });
-                    }
+        if(!StringUtil.isBlank(getParam("id"))){
+            Ajax.getJSON("sysUser/view.json?id="+getParam("id"),null,function(data){
+                if(data.r==AJAX_SUCC){
+                    fillJso2FormSpan("#SysUserView",data.data.bean);
+                    $("#face").attr("src",data.data.bean.face);
+                }else{
+                    dialog.error("获取信息失败"+data.msg,function(index){
+                        that.cancel();
+                        dialog.close(index);
+                    });
+                }
 
-                });
+            });
 
-            }
+        }
+    },
+    loadData:function(){
     },
     cancel:function(){
         if(sysUserView.modal){

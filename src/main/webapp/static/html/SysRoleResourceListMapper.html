@@ -1,9 +1,10 @@
-<div id="SysRoleResourceMapperList" class="rgt_body ">
-    <div class="body_title">| 角色资源关系</div>
+<div id="SysRoleResourceMapperList" class="col-lg-12 ibox float-e-margins ">
+    <!--<div class="body_title">| 角色资源关系</div>-->
+    <div class="main-bd ibox-content clearfix" >
         <div class="body_top" >
             <form class="form-inline app-search">
-        <label for="id">主键</label>
-            <input type="number" id="id" name="id"  class="form-control input-sm"  maxlength="10" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="主键"></input>
+        <label for="id">编号</label>
+            <input type="number" id="id" name="id"  class="form-control input-sm"  maxlength="10" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="编号"></input>
         <label for="name">角色名</label>
             <input type="text" id="nameLike" name="nameLike"  class="form-control input-sm"   maxlength="20" placeholder="角色名" ></input>
         <label for="code">角色代码</label>
@@ -33,17 +34,18 @@
 
                 <button type="button" class="btn btn-default searchBtn">查询</button>
             </form>
-        <div >
-             <button class="btn saveBtn" >保存</button>
+
+             <button class="btn btn-success saveBtn" ><i class="fa fa-floppy-o" aria-hidden="true"></i>保存</button>
+        </div>
+
+        <div class="col-sm-8 mapper-grid-parent-wrap" >
+        <table id="SysRoleResourceMapperGrid" class="grid"></table>
+        <div id="SysRoleResourceMapperGrid-Pager" class="pager"></div>
+        </div>
+        <div class="col-sm-4 mapper-grid-child-wrap">
+                <ul id="treeDemo" class="ztree"></ul>
         </div>
     </div>
-     <div class="col-sm-6 mapper-grid-parent-wrap" >
-    <table id="SysRoleResourceMapperGrid" class="grid"></table>
-    <div id="SysRoleResourceMapperGrid-Pager" class="pager"></div>
-    </div>
-     <div class="col-sm-6 mapper-grid-child-wrap">
-            <ul id="treeDemo" class="ztree"></ul>
-        </div>
 </div>
 <script>
 var sysRoleResourceList={
@@ -84,7 +86,7 @@ var sysRoleResourceList={
                   jsonReader:jsonReader,
                    autowidth:true,
                   colNames : [
-                   "主键","角色名","角色代码","排序","状态","备注","创建时间" /*, '操作'*/ ],
+                   "编号","角色名","角色代码","排序","状态","备注","创建时间", ],
                   colModel : [
                           {
                               name : 'id',
@@ -106,7 +108,7 @@ var sysRoleResourceList={
                               name : 'status',
                               width : 80,
                               formatter : function(value, grid, rows) {
-                                  var map ={'1':'正常','2':'禁用',};
+                                  var map ={'2':'禁用','1':'正常',};
                                   return map[value];
                               }
                           } ,
@@ -120,28 +122,22 @@ var sysRoleResourceList={
                                formatter : function(value, grid, rows) {
                                   return new Date(value).format("yyyy-MM-dd");
                               }
-                          } 
-                         /* ,
-                          {
-                              name : 'operation',
-                              width : 150,
-                              formatter : function(value, grid, rows) {
-                                  return getViewHtml(rows.id,"sysRoleResourceList")+getEditHtml(rows.id,"sysRoleResourceList")+getDelHtml(rows.id,"sysRoleResourceList");
-                              }
-                          }*/
+                          } ,
+
+
                     ],
 
                     onSelectRow: function(id){ //alert("单击选中"+id);
                     var that =this;
                   //  var treeObj = $.fn.zTree.getZTreeObj("tree");
-                     var celldata =sysRoleResourceList.mygrid.jqGrid('getRowData',id)["id"];
+                     var celldata =$(sysRoleResourceList.mygrid).jqGrid('getRowData',id)["id"];
                      //清空原来的选项
                     sysRoleResourceList.treeObj.checkAllNodes(false);
                       Ajax.getJSON(PATH+"/sysRoleResource/listAll.json",{"roleid":celldata},function(result){
                            if(result.data){
                                           for(var i=0;i<result.data.length;i++){
                                               var node = sysRoleResourceList.treeObj.getNodeByParam("id",result.data[i].rid);
-                                             if(node!=null)
+                                              if(node!=null)
                                               sysRoleResourceList.treeObj.checkNode(node,true,true);
                                           }
                                       }
@@ -150,7 +146,7 @@ var sysRoleResourceList={
     },
     saveInfo:function(){
         //首先查出父节点勾选信息
-        var selarrrow =this.mygrid.jqGrid("getGridParam","selarrrow");
+        var selarrrow =$(this.mygrid).jqGrid("getGridParam","selarrrow");
         if(selarrrow==null || selarrrow.length==0){
             selarrrow .push(this.mygrid.jqGrid('getGridParam','selrow'));
         }
@@ -168,7 +164,7 @@ var sysRoleResourceList={
         console.log(selarrrow.join(","));
         var parentIdArray=new Array();
         for(var i=0;i<selarrrow.length;i++){
-            parentIdArray.push( this.mygrid.jqGrid("getRowData",selarrrow[i])["id"]);
+            parentIdArray.push( $(this.mygrid).jqGrid("getRowData",selarrrow[i])["id"]);
         }
 
         console.log(childids.join(","));
@@ -185,7 +181,7 @@ var sysRoleResourceList={
     },
     searchInfo:function (){
         var jso = changeForm2Jso(".app-search");
-        this.mygrid.jqGrid("setGridParam", { search: true ,"postData":jso}).trigger("reloadGrid", [{ page: 1}]);  //重载JQGrid
+        $(this.mygrid).jqGrid("setGridParam", { search: true ,"postData":jso}).trigger("reloadGrid", [{ page: 1}]);  //重载JQGrid
     },
     search:function (){
         var jso= changeForm2Jso(".app-search");

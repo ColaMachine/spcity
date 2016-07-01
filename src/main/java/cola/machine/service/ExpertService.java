@@ -7,7 +7,6 @@
  */
 
 package cola.machine.service;
-
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
@@ -69,21 +68,21 @@ public class ExpertService extends BaseService {
      */
     public ResultDTO save(Expert expert) {
         // 进行字段验证
-       ValidateUtil<Expert> vu = new ValidateUtil<Expert>();
+      /* ValidateUtil<Expert> vu = new ValidateUtil<Expert>();
         ResultDTO result = vu.valid(expert);
         if (result.getR() != 1) {
             return result;
-        }
+        }*/
          //逻辑业务判断判断
        //判断是否有uq字段
        
        //判断是更新还是插入
         if (expert.getId()==null) {
-            expert.setCreatetime(new Timestamp(new Date().getTime()));
+
             expertMapper.insert(expert);
         } else {
             expert.setUpdatetime(new Timestamp(new Date().getTime()));
-             expertMapper.updateByPrimaryKey(expert);
+            expertMapper.updateByPrimaryKeySelective(expert);
         }
         return ResultUtil.getSuccResult();
     }

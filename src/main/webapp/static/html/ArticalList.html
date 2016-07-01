@@ -1,33 +1,22 @@
 
-<div id="ArticalList">
-    <div class="main-hd">
-        <h3> 新闻咨询</h3>
-
-       <!-- <ul class="nav nav-tabs">
-            <li role="presentation" class="active"><a href="#">新建</a></li>
-            <li role="presentation"><a href="#">审核通过</a></li>
-            <li role="presentation"><a href="#">驳回</a></li>
-        </ul>-->
-
-    </div>
+<div id="ArticalList" class="col-lg-12 ibox float-e-margins">
+   <!-- <div class="main-hd ibox-title">| 新闻咨询</div>-->
 
 
-<div class="main-bd">
-    <div class="body_top" >
-        <form class="form-inline app-search">
-            <label for="id">主键</label>
+    <div class="main-bd ibox-content">
+        <div class="body_top" >
+            <form class="form-inline app-search">
+                    <label for="id">主键</label>
             <input type="number" id="id" name="id"  class="form-control input-sm"  maxlength="15" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="主键"></input>
-            <label for="title">标题</label>
+        <label for="title">标题</label>
             <input type="text" id="titleLike" name="titleLike"  class="form-control input-sm"   maxlength="40" placeholder="标题" ></input>
-            <label for="content">正文</label>
-            <input type="text" id="contentLike" name="contentLike"  class="form-control input-sm"   maxlength="4000" placeholder="正文" ></input>
-            <label for="type">类型</label>
+        <label for="type">类型</label>
             <select id="type" name="type"  class="form-control input-sm"  >
                 <option value=''>-请选择-</option>
-                <option value=1>新闻资讯</option>
-
+                <option value=1>新闻</option>
+                <option value=2>资讯</option>
             </select>
-            <label for="status">状态</label>
+        <label for="status">状态</label>
             <select id="status" name="status"  class="form-control input-sm"  >
                 <option value=''>-请选择-</option>
                 <option value=1>新建</option>
@@ -36,60 +25,25 @@
                 <option value=4>驳回</option>
                 <option value=5>删除</option>
             </select>
-            <!--    <label for="remark">备注</label>
-                <input type="text" id="remarkLike" name="remarkLike"  class="form-control input-sm"   maxlength="200" placeholder="备注" ></input>
-                <label for="createtime">创建时间</label>
-                <div class="input-group">
-                    <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间" ></input>
-                    <label class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></label>        </div>
-                <label for="createtimeBegin">创建时间开始</label>
-                <div class="input-group">
-                    <input type="text" id="createtimeBegin" name="createtimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间开始" ></input>
-                    <label class="input-group-addon" for="createtimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
-                <label for="createtimeEnd">创建时间结束</label>
-                <div class="input-group">
-                    <input type="text" id="createtimeEnd" name="createtimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间结束" ></input>
-                    <label class="input-group-addon" for="createtimeEnd" ><i class="fa fa-calendar"></i></label>        </div>
-                <label for="updatetime">更新时间</label>
-                <div class="input-group">
-                    <input type="text" id="updatetime" name="updatetime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间" ></input>
-                    <label class="input-group-addon" for="updatetime" ><i class="fa fa-calendar"></i></label>        </div>
-                <label for="updatetimeBegin">更新时间开始</label>
-                <div class="input-group">
-                    <input type="text" id="updatetimeBegin" name="updatetimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间开始" ></input>
-                    <label class="input-group-addon" for="updatetimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
-                <label for="updatetimeEnd">更新时间结束</label>
-                <div class="input-group">
-                    <input type="text" id="updatetimeEnd" name="updatetimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间结束" ></input>
-                    <label class="input-group-addon" for="updatetimeEnd" ><i class="fa fa-calendar"></i></label>        </div>
-    -->
-            <a type="button"  class="btn btn-default searchBtn">查询</a>
-        </form>
-       <!-- <div class="row">
+        <label for="remark">备注</label>
+            <input type="text" id="remarkLike" name="remarkLike"  class="form-control input-sm"   maxlength="200" placeholder="备注" ></input>
+        <label for="pic">封面</label>
+            <input type="text" id="picLike" name="picLike"  class="form-control input-sm"   maxlength="40" placeholder="封面" ></input>
+        <label for="creatorname">创建人姓名</label>
+            <input type="text" id="creatornameLike" name="creatornameLike"  class="form-control input-sm"   maxlength="20" placeholder="创建人姓名" ></input>
 
-            <div class="col-lg-4">
-                <div class="input-group input-sm">
-                    <input type="text" class="form-control" placeholder="标题">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><i class="fa fa-search"></i>&nbsp;</button>
-      </span>
-                </div>&lt;!&ndash; /input-group &ndash;&gt;
-            </div>&lt;!&ndash; /.col-lg-6 &ndash;&gt;
-            <div class="col-md-3 col-md-offset-5">
-            <a   class="btn addBtn btn-success" ><i class="fa fa-plus"></i>新增新闻资讯</a>
-                </div>
-        </div>&lt;!&ndash; /.row &ndash;&gt;-->
+            <button type="button"  class="btn btn-default searchBtn">查询</button>
+            </form>
 
-                <a   class="btn addBtn btn-success" ><i class="fa fa-plus"></i>新增新闻资讯</a>
-    </div>
-        <table id="ArticalGrid" class="grid"></table>
+            <button class="btn btn-primary addBtn" ><i class="fa fa-plus"></i>新增</button>
+            <!--<button class="btn btn-primary deleteBtn"><i class="fa fa-plus"></i>删除</button>-->
+            <!--<button class="btn btn-primary exportBtn"><i class="fa fa-plus"></i>导出</button>-->
+        </div>
+        <table id="ArticalGrid" class="grid table"></table>
         <div id="ArticalGrid-Pager" class="pager"></div>
-        <div id="content-row" class="row"></div>
-
-
+    </div>
 </div>
 <script>
-
 var articalList={
     modal:false,
     mygrid:null,
@@ -97,34 +51,13 @@ var articalList={
     dqData:null,
     root:$("#ArticalList"),
     init:function(){
+
+        setTitle("新闻咨询");
         this.mygrid =this.root.find(".grid").jqGrid(this.gridParam);
-
-
         this.addEventListener();
-
+        this.loadData();
     },
-    getData:function(){
-
-        Ajax.getJSON(PATH+"/artical/list.json",{curPage:1,pageSize:10},function(result){
-           var html='';
-            for(var i=0;i<result.data.length;i++){
-            var data =result.data[i];
-                html+=
-  '<div class="col-sm-6 col-md-4">'+
-    '<div class="thumbnail" style="overflow:hidden;">'+
-      '<img src="'+data.pic+'" alt="...">'+
-      '<div class="caption">'+
-      '  <h3>'+data.title+'</h3>'+
-     '   <p style="overflow:hidden;">'+data.content+'.</p>'+
-    '    <p><a href="#" class="btn btn-primary" role="button">编辑</a> <a href="#" class="btn btn-default" role="button">删除</a></p>'+
-   '   </div>'+
-  '  </div>'+
- ' </div>'
-
-            }
-$('#content-row').append(html);
-        });
-
+    loadData:function(){
     },
     addEventListener:function(){
         $(this.root).find(".addBtn").click(this.addInfo.Apply(this));
@@ -144,53 +77,42 @@ $('#content-row').append(html);
         pager:"#ArticalGrid-Pager",
         jsonReader:jsonReader,
         colNames : [
-        "编号","标题","正文","类型","状态","备注","创建时间","更新时间" , '操作' ],
+        "主键","标题","类型","状态","备注","封面","创建人姓名" , '操作' ],
         colModel : [
             {   name : 'id',width : 80,
+
             } ,
             {   name : 'title',width : 80,
-            } ,
-            {   name : 'content',width : 80,
-                formatter : function(value, grid, rows) {
-
-                  return value.replace(/</g,"&lt;").replace(/>/g,"&gt;");
-                }
 
             } ,
             {   name : 'type',width : 80,
                 formatter : function(value, grid, rows) {
-                  var map ={'1':'新闻资讯',};
+                  var map ={'2':'资讯','1':'新闻',};
                   return map[value];
                 }
+
             } ,
             {   name : 'status',width : 80,
                 formatter : function(value, grid, rows) {
                   var map ={'3':'审核通过','2':'提交','1':'新建','5':'删除','4':'驳回',};
                   return map[value];
                 }
+
             } ,
             {   name : 'remark',width : 80,
+
             } ,
-            {   name : 'createtime',width : 80,
-                formatter : function(value, grid, rows) {
-                  return new Date(value).format("yyyy-MM-dd");
-                }
+            {   name : 'pic',width : 80,
+
             } ,
-            {   name : 'updatetime',width : 80,
-                formatter : function(value, grid, rows) {
-                  return new Date(value).format("yyyy-MM-dd");
-                }
-            } 
-              ,
+            {   name : 'creatorname',width : 80,
+
+            } ,
+
             {   name : 'operation',
                 width : 150,
                 formatter : function(value, grid, rows) {
-                    var str= getViewHtml(rows.id,"articalList")+getEditHtml(rows.id,"articalList")+getDelHtml(rows.id,"articalList");
-                   // alert(rows.status);
-                   /* if(rows.status==1 && Auth.hasResource("Res_ArticalAuth")){
-                        str +=gridHelper.getAuditHtml(rows.id,"articalList");
-                    }*/
-                    return str;
+                    return gridHelper.getViewHtml(rows.id,"articalList")+gridHelper.getEditHtml(rows.id,"articalList")+gridHelper.getDelHtml(rows.id,"articalList");
                 }
             }
         ],
@@ -198,9 +120,9 @@ $('#content-row').append(html);
         },
         loadComplete:function(data){
             dqData=data;
-
         }
     },
+
     saveInfo:function(){
     },
     addInfo:function (){
@@ -209,20 +131,14 @@ $('#content-row').append(html);
     editInfo:function (id){
         dialog.window("/artical/edit.htm?id="+id,this.modal);
     },
-    auditInfo:function(id){
-    dialog.window("/artical/audit.htm?id="+id,this.modal);
-    },
     searchInfo:function (){
         var jso = changeForm2Jso(".app-search");
 
         this.mygrid.jqGrid("setGridParam", { search: true ,"postData":jso}).trigger("reloadGrid", [{ page: 1}]);  //重载JQGrid
-
     },
-
     viewInfo:function (id){
         dialog.window("/artical/view.htm?id="+id,this.modal);
     },
-
     exportInfo:function (){
         var jso= changeForm2Jso(".app-search");
         Ajax.getJSON(PATH+"/artical/export.json",jso,function(data){

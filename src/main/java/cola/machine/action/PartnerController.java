@@ -18,7 +18,6 @@ import java.util.LinkedHashMap;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import cola.machine.bean.SysUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,6 +127,10 @@ public class PartnerController extends BaseController{
         String remarkLike = request.getParameter("remarkLike");
         if(!StringUtil.isBlank(remarkLike)){
             params.put("remarkLike",remarkLike);
+        }
+        String type = request.getParameter("type");
+        if(!StringUtil.isBlank(type)){
+            params.put("type",type);
         }
         String creator = request.getParameter("creator");
         if(!StringUtil.isBlank(creator)){
@@ -248,6 +251,10 @@ public class PartnerController extends BaseController{
         String remarkLike = request.getParameter("remarkLike");
         if(!StringUtil.isBlank(remarkLike)){
             params.put("remarkLike",remarkLike);
+        }
+        String type = request.getParameter("type");
+        if(!StringUtil.isBlank(type)){
+            params.put("type",type);
         }
         String creator = request.getParameter("creator");
         if(!StringUtil.isBlank(creator)){
@@ -393,6 +400,11 @@ public class PartnerController extends BaseController{
             partner.setRemark(String.valueOf(remark)) ;
         }
         
+        String type = request.getParameter("type");
+        if(!StringUtil.isBlank(type)){
+            partner.setType(Integer.valueOf(type)) ;
+        }
+        
         String creator = request.getParameter("creator");
         if(!StringUtil.isBlank(creator)){
             partner.setCreator(Long.valueOf(creator)) ;
@@ -437,6 +449,10 @@ public class PartnerController extends BaseController{
         if(!StringUtil.isBlank(remark)){
             partner.setRemark(remark);
         }
+        String type = request.getParameter("type");
+        if(!StringUtil.isBlank(type)){
+            partner.setType(Integer.valueOf(type));
+        }
         String creator = request.getParameter("creator");
         if(!StringUtil.isBlank(creator)){
             partner.setCreator(Long.valueOf(creator));
@@ -465,13 +481,14 @@ public class PartnerController extends BaseController{
         //valid
         ValidateUtil vu = new ValidateUtil();
         String validStr="";
-        vu.add("id", id, "主键",  new Rule[]{new Digits(15,0)});
+        vu.add("id", id, "编号",  new Rule[]{new Digits(15,0)});
         vu.add("name", name, "名称",  new Rule[]{new Length(40),new NotEmpty()});
         vu.add("brief", brief, "简介",  new Rule[]{new Length(500),new NotEmpty()});
         vu.add("address", address, "地址",  new Rule[]{new Length(100),new NotEmpty()});
         vu.add("logo", logo, "logo",  new Rule[]{new Length(50),new NotEmpty()});
         vu.add("remark", remark, "备注",  new Rule[]{new Length(200)});
-        vu.add("creator", creator, "创建人",  new Rule[]{new Digits(11,0)});
+        vu.add("type", type, "类型",  new Rule[]{new Digits(11,0),new CheckBox(new String[]{"1","2"})});
+        vu.add("creator", creator, "创建人",  new Rule[]{new Digits(11,0),new NotEmpty()});
         vu.add("creatorname", creatorname, "创建人姓名",  new Rule[]{new Length(20)});
         vu.add("createtime", createtime, "创建时间",  new Rule[]{new DateValue("yyyy-MM-dd HH:mm:ss")});
         vu.add("updatetime", updatetime, "更新时间",  new Rule[]{new DateValue("yyyy-MM-dd HH:mm:ss")});
@@ -479,14 +496,7 @@ public class PartnerController extends BaseController{
         if(StringUtil.isNotEmpty(validStr)) {
             return ResultUtil.getResult(302,validStr);
         }
-        SysUser user =(SysUser)request.getSession().getAttribute("user");
-        if(StringUtil.isBlank(id)){
-            partner.setCreator(user.getId());
-            partner.setCreatorname(user.getUsername());
-            partner.setCreatetime(new Timestamp(new Date().getTime()));
-        }
 
-        partner.setUpdatetime(new Timestamp(new Date().getTime()));
         return partnerService.save(partner);
        
     }
@@ -521,7 +531,7 @@ public class PartnerController extends BaseController{
             ValidateUtil vu = new ValidateUtil();
             String validStr="";
             String id = idStrAry[i];
-                    vu.add("id", id, "主键",  new Rule[]{});
+                    vu.add("id", id, "编号",  new Rule[]{});
 
             try{
                 validStr=vu.validateString();
@@ -592,6 +602,10 @@ public class PartnerController extends BaseController{
         String remarkLike = request.getParameter("remarkLike");
         if(!StringUtil.isBlank(remarkLike)){
             params.put("remarkLike",remarkLike);
+        }
+        String type = request.getParameter("type");
+        if(!StringUtil.isBlank(type)){
+            params.put("type",type);
         }
         String creator = request.getParameter("creator");
         if(!StringUtil.isBlank(creator)){
@@ -672,12 +686,13 @@ public class PartnerController extends BaseController{
                 + ".xlsx";
         // 得到导出Excle时清单的英中文map
         LinkedHashMap<String, String> colTitle = new LinkedHashMap<String, String>();
-        colTitle.put("id", "主键");
+        colTitle.put("id", "编号");
         colTitle.put("name", "名称");
         colTitle.put("brief", "简介");
         colTitle.put("address", "地址");
         colTitle.put("logo", "logo");
         colTitle.put("remark", "备注");
+        colTitle.put("type", "类型");
         colTitle.put("creator", "创建人");
         colTitle.put("creatorname", "创建人姓名");
         colTitle.put("createtime", "创建时间");
@@ -692,6 +707,7 @@ public class PartnerController extends BaseController{
             map.put("address",  list.get(i).getAddress());
             map.put("logo",  list.get(i).getLogo());
             map.put("remark",  list.get(i).getRemark());
+            map.put("type",  list.get(i).getType());
             map.put("creator",  list.get(i).getCreator());
             map.put("creatorname",  list.get(i).getCreatorname());
             map.put("createtime",  list.get(i).getCreatetime());

@@ -360,7 +360,7 @@ public class SysRoleController extends BaseController{
         //valid
         ValidateUtil vu = new ValidateUtil();
         String validStr="";
-        vu.add("id", id, "主键",  new Rule[]{new Digits(10,0)});
+        vu.add("id", id, "编号",  new Rule[]{new Digits(10,0)});
         vu.add("name", name, "角色名",  new Rule[]{new Length(20),new NotEmpty()});
         vu.add("code", code, "角色代码",  new Rule[]{new Length(20),new NotEmpty()});
         vu.add("order", order, "排序",  new Rule[]{new Digits(11,0),new NotEmpty()});
@@ -408,7 +408,7 @@ public class SysRoleController extends BaseController{
             ValidateUtil vu = new ValidateUtil();
             String validStr="";
             String id = idStrAry[i];
-                    vu.add("id", id, "主键",  new Rule[]{});
+                    vu.add("id", id, "编号",  new Rule[]{});
 
             try{
                 validStr=vu.validateString();
@@ -515,7 +515,7 @@ public class SysRoleController extends BaseController{
                 + ".xlsx";
         // 得到导出Excle时清单的英中文map
         LinkedHashMap<String, String> colTitle = new LinkedHashMap<String, String>();
-        colTitle.put("id", "主键");
+        colTitle.put("id", "编号");
         colTitle.put("name", "角色名");
         colTitle.put("code", "角色代码");
         colTitle.put("order", "排序");

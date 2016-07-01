@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class Partner {
-    /**主键**/
+    /**编号**/
     private Long id;
     public Long getId(){
         return id;
@@ -46,6 +46,12 @@ public class Partner {
         return remark;
     }    public void setRemark(String remark){
         this.remark=remark;
+    }/**类型**/
+    private Integer type;
+    public Integer getType(){
+        return type;
+    }    public void setType(Integer type){
+        this.type=type;
     }/**创建人**/
     private Long creator;
     public Long getCreator(){

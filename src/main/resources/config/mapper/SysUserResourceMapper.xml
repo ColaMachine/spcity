@@ -7,14 +7,13 @@
       <result column="rid" jdbcType="BIGINT" property="rid" />
   </resultMap>
   <sql id="Base_Column_List">
-    `id` ,`uid` ,`rid` 
-   
+    sys_user_resource.`id` ,sys_user_resource.`uid` ,sys_user_resource.`rid` 
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_user_resource
-    where id =   #{id,jdbcType=BIGINT}
+    where sys_user_resource.id =   #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_user_resource
@@ -104,15 +103,17 @@ where id = #{id,jdbcType=BIGINT}
    <select id="listByParams4Page" parameterType="map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sys_user_resource where 1=1
+    from sys_user_resource
+
+    where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and sys_user_resource.`id` = #{id}
         </if>  
         <if test="uid != null and uid != '' ">  
-           and `uid` = #{uid}
+           and sys_user_resource.`uid` = #{uid}
         </if>  
         <if test="rid != null and rid != '' ">  
-           and `rid` = #{rid}
+           and sys_user_resource.`rid` = #{rid}
         </if>  
   </select>
    <select id="countByParams" parameterType="map" resultType="java.lang.Integer">
@@ -120,13 +121,13 @@ where id = #{id,jdbcType=BIGINT}
     count(1) 
     from sys_user_resource where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and sys_user_resource.`id` = #{id}
         </if>  
         <if test="uid != null and uid != '' ">  
-           and `uid` = #{uid}
+           and sys_user_resource.`uid` = #{uid}
         </if>  
         <if test="rid != null and rid != '' ">  
-           and `rid` = #{rid}
+           and sys_user_resource.`rid` = #{rid}
         </if>  
   </select>
  <select id="countByOrParams" parameterType="map" resultType="java.lang.Integer">

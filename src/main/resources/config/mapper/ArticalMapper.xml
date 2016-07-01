@@ -15,14 +15,13 @@
       <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
   </resultMap>
   <sql id="Base_Column_List">
-    `id` ,`title` ,`content` ,`type` ,`status` ,`remark` ,`creator` ,`pic` ,`creatorname` ,`createtime` ,`updatetime` 
-   
+    artical.`id` ,artical.`title` ,artical.`content` ,artical.`type` ,artical.`status` ,artical.`remark` ,artical.`creator` ,artical.`pic` ,artical.`creatorname` ,artical.`createtime` ,artical.`updatetime` 
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from artical
-    where id =   #{id,jdbcType=BIGINT}
+    where artical.id =   #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from artical
@@ -252,66 +251,68 @@ where id = #{id,jdbcType=BIGINT}
    <select id="listByParams4Page" parameterType="map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from artical where 1=1
+    from artical
+
+    where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and artical.`id` = #{id}
         </if>  
         <if test="title != null and title != '' ">  
-           and `title` = #{title}
+           and artical.`title` = #{title}
         </if>  
         <if test="titleLike != null and titleLike != '' ">  
-             and `title` like "%"#{titleLike}"%"
+             and artical.`title` like "%"#{titleLike}"%"
         </if>   
         <if test="content != null and content != '' ">  
-           and `content` = #{content}
+           and artical.`content` = #{content}
         </if>  
         <if test="contentLike != null and contentLike != '' ">  
-             and `content` like "%"#{contentLike}"%"
+             and artical.`content` like "%"#{contentLike}"%"
         </if>   
         <if test="type != null and type != '' ">  
-           and `type` = #{type}
+           and artical.`type` = #{type}
         </if>  
         <if test="status != null and status != '' ">  
-           and `status` = #{status}
+           and artical.`status` = #{status}
         </if>  
         <if test="remark != null and remark != '' ">  
-           and `remark` = #{remark}
+           and artical.`remark` = #{remark}
         </if>  
         <if test="remarkLike != null and remarkLike != '' ">  
-             and `remark` like "%"#{remarkLike}"%"
+             and artical.`remark` like "%"#{remarkLike}"%"
         </if>   
         <if test="creator != null and creator != '' ">  
-           and `creator` = #{creator}
+           and artical.`creator` = #{creator}
         </if>  
         <if test="pic != null and pic != '' ">  
-           and `pic` = #{pic}
+           and artical.`pic` = #{pic}
         </if>  
         <if test="picLike != null and picLike != '' ">  
-             and `pic` like "%"#{picLike}"%"
+             and artical.`pic` like "%"#{picLike}"%"
         </if>   
         <if test="creatorname != null and creatorname != '' ">  
-           and `creatorname` = #{creatorname}
+           and artical.`creatorname` = #{creatorname}
         </if>  
         <if test="creatornameLike != null and creatornameLike != '' ">  
-             and `creatorname` like "%"#{creatornameLike}"%"
+             and artical.`creatorname` like "%"#{creatornameLike}"%"
         </if>   
         <if test="createtime != null and createtime != '' ">  
-           and `createtime` = #{createtime}
+           and artical.`createtime` = #{createtime}
         </if>  
         <if test="createtimeBegin != null and createtimeBegin != '' ">  
-             and `createtime` &gt;= #{createtimeBegin}
+             and artical.`createtime` &gt;= #{createtimeBegin}
         </if>   
          <if test="createtimeEnd != null and createtimeEnd != '' ">  
-             and `createtime` &lt;= #{createtimeEnd}
+             and artical.`createtime` &lt;= #{createtimeEnd}
         </if> 
         <if test="updatetime != null and updatetime != '' ">  
-           and `updatetime` = #{updatetime}
+           and artical.`updatetime` = #{updatetime}
         </if>  
         <if test="updatetimeBegin != null and updatetimeBegin != '' ">  
-             and `updatetime` &gt;= #{updatetimeBegin}
+             and artical.`updatetime` &gt;= #{updatetimeBegin}
         </if>   
          <if test="updatetimeEnd != null and updatetimeEnd != '' ">  
-             and `updatetime` &lt;= #{updatetimeEnd}
+             and artical.`updatetime` &lt;= #{updatetimeEnd}
         </if> 
   </select>
    <select id="countByParams" parameterType="map" resultType="java.lang.Integer">
@@ -319,64 +320,64 @@ where id = #{id,jdbcType=BIGINT}
     count(1) 
     from artical where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and artical.`id` = #{id}
         </if>  
         <if test="title != null and title != '' ">  
-           and `title` = #{title}
+           and artical.`title` = #{title}
         </if>  
         <if test="titleLike != null and titleLike != '' ">  
-             and `title` like "%"#{titleLike}"%"
+             and artical.`title` like "%"#{titleLike}"%"
         </if>   
         <if test="content != null and content != '' ">  
-           and `content` = #{content}
+           and artical.`content` = #{content}
         </if>  
         <if test="contentLike != null and contentLike != '' ">  
-             and `content` like "%"#{contentLike}"%"
+             and artical.`content` like "%"#{contentLike}"%"
         </if>   
         <if test="type != null and type != '' ">  
-           and `type` = #{type}
+           and artical.`type` = #{type}
         </if>  
         <if test="status != null and status != '' ">  
-           and `status` = #{status}
+           and artical.`status` = #{status}
         </if>  
         <if test="remark != null and remark != '' ">  
-           and `remark` = #{remark}
+           and artical.`remark` = #{remark}
         </if>  
         <if test="remarkLike != null and remarkLike != '' ">  
-             and `remark` like "%"#{remarkLike}"%"
+             and artical.`remark` like "%"#{remarkLike}"%"
         </if>   
         <if test="creator != null and creator != '' ">  
-           and `creator` = #{creator}
+           and artical.`creator` = #{creator}
         </if>  
         <if test="pic != null and pic != '' ">  
-           and `pic` = #{pic}
+           and artical.`pic` = #{pic}
         </if>  
         <if test="picLike != null and picLike != '' ">  
-             and `pic` like "%"#{picLike}"%"
+             and artical.`pic` like "%"#{picLike}"%"
         </if>   
         <if test="creatorname != null and creatorname != '' ">  
-           and `creatorname` = #{creatorname}
+           and artical.`creatorname` = #{creatorname}
         </if>  
         <if test="creatornameLike != null and creatornameLike != '' ">  
-             and `creatorname` like "%"#{creatornameLike}"%"
+             and artical.`creatorname` like "%"#{creatornameLike}"%"
         </if>   
         <if test="createtime != null and createtime != '' ">  
-           and `createtime` = #{createtime}
+           and artical.`createtime` = #{createtime}
         </if>  
         <if test="createtimeBegin != null and createtimeBegin != '' ">  
-             and `createtime` &gt;= #{createtimeBegin}
+             and artical.`createtime` &gt;= #{createtimeBegin}
         </if>   
          <if test="createtimeEnd != null and createtimeEnd != '' ">  
-             and `createtime` &lt;= #{createtimeEnd}
+             and artical.`createtime` &lt;= #{createtimeEnd}
         </if> 
         <if test="updatetime != null and updatetime != '' ">  
-           and `updatetime` = #{updatetime}
+           and artical.`updatetime` = #{updatetime}
         </if>  
         <if test="updatetimeBegin != null and updatetimeBegin != '' ">  
-             and `updatetime` &gt;= #{updatetimeBegin}
+             and artical.`updatetime` &gt;= #{updatetimeBegin}
         </if>   
          <if test="updatetimeEnd != null and updatetimeEnd != '' ">  
-             and `updatetime` &lt;= #{updatetimeEnd}
+             and artical.`updatetime` &lt;= #{updatetimeEnd}
         </if> 
   </select>
  <select id="countByOrParams" parameterType="map" resultType="java.lang.Integer">

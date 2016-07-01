@@ -1,10 +1,10 @@
- <div id="ExpertView" class="modal-content">
-    <form id="editForm" class="form-horizontal" method="post" action="/expert/save.json" enctype="multipart/form-data">
-        <div class="modal-header">
+<div id="ExpertView" class="ibox float-e-margins">
+    <form id="ExpertViewForm" class="form-horizontal" >
+      <!--  <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title">专家查看</h4>
-        </div>
-        <div class="modal-body">
+        </div>-->
+        <div class="ibox-content">
                 <input type="hidden" id="id" name="id">
     <div class="form-group">
         <label for="username" class="col-sm-2 control-label">用户名:</label>
@@ -15,31 +15,21 @@
     <div class="form-group">
         <label for="face" class="col-sm-2 control-label">头像:</label>
         <div class="col-sm-10">
-
-            <img class="row-10 img-upload" id="faceImg" style="width:150px;height:150px" src="static/img/timg.jpeg" alt="请上传图片">
-
-            <span style="display:none"  name="face" id="face"  class="form-control"  ></span>
+<img  id="face" src="static/img/timg.jpeg" name="face" class="row-10 img-upload"   ></img>        </div>
+    </div>
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">职称:</label>
+        <div class="col-sm-10">
+            <span name="title" id="title"  class="form-control"  ></span>
         </div>
     </div>
-            <div class="form-group">
-                <label for="title" class="col-sm-2 control-label">职称:</label>
-                <div class="col-sm-10">
-                    <span name="title" id="title"  class="form-control"  ></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="baike" class="col-sm-2 control-label">百科地址:</label>
-                <div class="col-sm-10">
-                    <span name="baike" id="baike"  class="form-control"  ></span>
-                </div>
-            </div>
     <div class="form-group">
         <label for="remark" class="col-sm-2 control-label">备注:</label>
         <div class="col-sm-10">
             <span name="remark" id="remark"  class="form-control"  ></span>
         </div>
     </div>
-   <!-- <div class="form-group">
+    <div class="form-group">
         <label for="createtime" class="col-sm-2 control-label">创建时间:</label>
         <div class="col-sm-10">
             <span class="form-control" datatype="date" format="yyyy-MM-dd HH:mm:ss" name="createtime" id="createtime" ></span>
@@ -51,11 +41,15 @@
             <span class="form-control" datatype="date" format="yyyy-MM-dd HH:mm:ss" name="updatetime" id="updatetime" ></span>
         </div>
     </div>
--->
+
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-2">
+                  <button type="button" class="btn btn-white cancelBtn">取消</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button"   class="btn btn-default cancelBtn">取消</button>
-        </div>
+
     </form>
 </div><!-- /.modal-content -->
 
@@ -71,7 +65,12 @@
     <div class="form-group">
         <label for="face" class="col-sm-2 control-label">头像:</label>
         <div class="col-sm-10">
-            <span name="face" id="face"  class="form-control"  ></span>
+<img  id="face" src="static/img/timg.jpeg" name="face" class="row-10 img-upload"   ></img>        </div>
+    </div>
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">职称:</label>
+        <div class="col-sm-10">
+            <span name="title" id="title"  class="form-control"  ></span>
         </div>
     </div>
     <div class="form-group">
@@ -107,24 +106,25 @@ var expertView={
     root:$("#ExpertView"),
     init:function(){
     var that = this;
-        this.addEventListener();
+    this.addEventListener();
         //获取传入参数
-            if(!StringUtil.isBlank(getParam("id"))){
-                Ajax.getJSON("expert/view.json?id="+getParam("id"),null,function(data){
-                    if(data.r==AJAX_SUCC){
-                        fillJso2FormSpan("#ExpertView",data.data.bean);
-                            if(!StringUtil.isBlank(data.data.bean.face))
-                            $("#faceImg").attr("src",PATH+"/"+data.data.bean.face);
-                    }else{
-                        dialog.error("获取信息失败"+data.msg,function(index){
-                            that.cancel();
-                            dialog.close(index);
-                        });
-                    }
+        if(!StringUtil.isBlank(getParam("id"))){
+            Ajax.getJSON("expert/view.json?id="+getParam("id"),null,function(data){
+                if(data.r==AJAX_SUCC){
+                    fillJso2FormSpan("#ExpertView",data.data.bean);
+                    $("#face").attr("src",data.data.bean.face);
+                }else{
+                    dialog.error("获取信息失败"+data.msg,function(index){
+                        that.cancel();
+                        dialog.close(index);
+                    });
+                }
 
-                });
+            });
 
-            }
+        }
+    },
+    loadData:function(){
     },
     cancel:function(){
         if(expertView.modal){

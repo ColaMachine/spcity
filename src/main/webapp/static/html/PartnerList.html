@@ -1,68 +1,70 @@
 
-<div id="PartnerList">
-    <div class="main-hd"> 合作伙伴    </div>
+<div id="PartnerList" class="col-lg-12 ibox float-e-margins">
+   <!-- <div class="main-hd ibox-title">| 合作伙伴    </div>-->
 
 
-    <div class="main-bd">
-          <div class="body_top" >
-                <form class="form-inline app-search">
+    <div class="main-bd ibox-content">
+        <div class="body_top" >
+            <form class="form-inline app-search">
                     <label for="id">编号</label>
-                        <input type="number" id="id" name="id"  class="form-control input-sm"  maxlength="15" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="主键"></input>
-                    <label for="name">名称</label>
-                        <input type="text" id="nameLike" name="nameLike"  class="form-control input-sm"   maxlength="40" placeholder="名称" ></input>
-                    <label for="brief">简介</label>
-                        <input type="text" id="briefLike" name="briefLike"  class="form-control input-sm"   maxlength="500" placeholder="简介" ></input>
-                    <label for="address">地址</label>
-                        <input type="text" id="addressLike" name="addressLike"  class="form-control input-sm"   maxlength="100" placeholder="地址" ></input>
-                    <label for="logo">logo</label>
-                        <input type="text" id="logoLike" name="logoLike"  class="form-control input-sm"   maxlength="50" placeholder="logo" ></input>
-                   <!-- <label for="remark">备注</label>
-                        <input type="text" id="remarkLike" name="remarkLike"  class="form-control input-sm"   maxlength="200" placeholder="备注" ></input>
-                    <label for="creator">创建人</label>
-                        <input type="number" id="creator" name="creator"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="创建人"></input>
-                    <label for="creatorname">创建人姓名</label>
-                        <input type="text" id="creatornameLike" name="creatornameLike"  class="form-control input-sm"   maxlength="20" placeholder="创建人姓名" ></input>
-                    <label for="createtime">创建时间</label>
-                    <div class="input-group">
-                        <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间" ></input>
-                        <label class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></label>        </div>
-                    <label for="createtimeBegin">创建时间开始</label>
-                    <div class="input-group">
-                        <input type="text" id="createtimeBegin" name="createtimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间开始" ></input>
-                        <label class="input-group-addon" for="createtimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
-                    <label for="createtimeEnd">创建时间结束</label>
-                    <div class="input-group">
-                        <input type="text" id="createtimeEnd" name="createtimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间结束" ></input>
-                        <label class="input-group-addon" for="createtimeEnd" ><i class="fa fa-calendar"></i></label>        </div>
-                    <label for="updatetime">更新时间</label>
-                    <div class="input-group">
-                        <input type="text" id="updatetime" name="updatetime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间" ></input>
-                        <label class="input-group-addon" for="updatetime" ><i class="fa fa-calendar"></i></label>        </div>
-                    <label for="updatetimeBegin">更新时间开始</label>
-                    <div class="input-group">
-                        <input type="text" id="updatetimeBegin" name="updatetimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间开始" ></input>
-                        <label class="input-group-addon" for="updatetimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
-                    <label for="updatetimeEnd">更新时间结束</label>
-                    <div class="input-group">
-                        <input type="text" id="updatetimeEnd" name="updatetimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间结束" ></input>
-                        <label class="input-group-addon" for="updatetimeEnd" ><i class="fa fa-calendar"></i></label>
-                    </div>-->
+            <input type="number" id="id" name="id"  class="form-control input-sm"  maxlength="15" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="编号"></input>
+        <label for="name">名称</label>
+            <input type="text" id="nameLike" name="nameLike"  class="form-control input-sm"   maxlength="40" placeholder="名称" ></input>
+        <label for="brief">简介</label>
+            <input type="text" id="briefLike" name="briefLike"  class="form-control input-sm"   maxlength="500" placeholder="简介" ></input>
+        <label for="address">地址</label>
+            <input type="text" id="addressLike" name="addressLike"  class="form-control input-sm"   maxlength="100" placeholder="地址" ></input>
+        <label for="logo">logo</label>
+            <input type="text" id="logoLike" name="logoLike"  class="form-control input-sm"   maxlength="50" placeholder="logo" ></input>
+        <label for="remark">备注</label>
+            <input type="text" id="remarkLike" name="remarkLike"  class="form-control input-sm"   maxlength="200" placeholder="备注" ></input>
+        <label for="type">类型</label>
+            <select id="type" name="type"  class="form-control input-sm"  >
+                <option value=''>-请选择-</option>
+                <option value=1>企业</option>
+                <option value=2>院校</option>
+            </select>
+        <label for="creator">创建人</label>
+            <input type="number" id="creator" name="creator"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="创建人"></input>
+        <label for="creatorname">创建人姓名</label>
+            <input type="text" id="creatornameLike" name="creatornameLike"  class="form-control input-sm"   maxlength="20" placeholder="创建人姓名" ></input>
+        <label for="createtime">创建时间</label>
+        <div class="input-group">
+            <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间" ></input>
+            <label class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></label>        </div>
+        <label for="createtimeBegin">创建时间开始</label>
+        <div class="input-group">
+            <input type="text" id="createtimeBegin" name="createtimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间开始" ></input>
+            <label class="input-group-addon" for="createtimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
+        <label for="createtimeEnd">创建时间结束</label>
+        <div class="input-group">
+            <input type="text" id="createtimeEnd" name="createtimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="创建时间结束" ></input>
+            <label class="input-group-addon" for="createtimeEnd" ><i class="fa fa-calendar"></i></label>        </div>
+        <label for="updatetime">更新时间</label>
+        <div class="input-group">
+            <input type="text" id="updatetime" name="updatetime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间" ></input>
+            <label class="input-group-addon" for="updatetime" ><i class="fa fa-calendar"></i></label>        </div>
+        <label for="updatetimeBegin">更新时间开始</label>
+        <div class="input-group">
+            <input type="text" id="updatetimeBegin" name="updatetimeBegin"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间开始" ></input>
+            <label class="input-group-addon" for="updatetimeBegin" ><i class="fa fa-calendar"></i></label>        </div>
+        <label for="updatetimeEnd">更新时间结束</label>
+        <div class="input-group">
+            <input type="text" id="updatetimeEnd" name="updatetimeEnd"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  placeholder="更新时间结束" ></input>
+            <label class="input-group-addon" for="updatetimeEnd" ><i class="fa fa-calendar"></i></label>        </div>
 
-                    <button type="button"  class="btn btn-default searchBtn">查询</button>
-                </form>
+            <button type="button"  class="btn btn-default searchBtn">查询</button>
+            </form>
 
-
-                <a class="btn addBtn btn-success"><i class="fa fa-plus"></i>新增</a>
-                   <!-- <button class="btn deleteBtn">删除</button>
-                    <button class="btn exportBtn" >导出</button>-->
-                <table id="PartnerGrid" class="grid"></table>
-                <div id="PartnerGrid-Pager" class="pager"></div>
+            <button class="btn btn-primary addBtn" ><i class="fa fa-plus"></i>新增</button>
+            <!--<button class="btn btn-primary deleteBtn"><i class="fa fa-plus"></i>删除</button>-->
+            <!--<button class="btn btn-primary exportBtn"><i class="fa fa-plus"></i>导出</button>-->
         </div>
-
+        <table id="PartnerGrid" class="grid table"></table>
+        <div id="PartnerGrid-Pager" class="pager"></div>
     </div>
 </div>
 <script>
-
 var partnerList={
     modal:false,
     mygrid:null,
@@ -70,9 +72,13 @@ var partnerList={
     dqData:null,
     root:$("#PartnerList"),
     init:function(){
+
+        setTitle("合作伙伴    ");
         this.mygrid =this.root.find(".grid").jqGrid(this.gridParam);
         this.addEventListener();
-
+        this.loadData();
+    },
+    loadData:function(){
     },
     addEventListener:function(){
         $(this.root).find(".addBtn").click(this.addInfo.Apply(this));
@@ -86,42 +92,64 @@ var partnerList={
         rowNum:10,
         rowList:[10,20,30],
         multiselect : false,
-
         url : PATH+'/partner/list.json',
         autowidth:true,
         grid:"#PartnerGrid",
         pager:"#PartnerGrid-Pager",
         jsonReader:jsonReader,
         colNames : [
-        "编号","名称","简介","地址","logo","备注","创建人","创建人姓名",/*"创建时间","更新时间" ,*/ '操作' ],
+        "编号","名称","简介","地址","logo","备注","类型","创建人","创建人姓名","创建时间","更新时间" , '操作' ],
         colModel : [
             {   name : 'id',width : 80,
+
             } ,
             {   name : 'name',width : 80,
+
             } ,
             {   name : 'brief',width : 80,
+
             } ,
             {   name : 'address',width : 80,
+
             } ,
             {   name : 'logo',width : 80,
+
             } ,
             {   name : 'remark',width : 80,
+
+            } ,
+            {   name : 'type',width : 80,
+                formatter : function(value, grid, rows) {
+                  var map ={'2':'院校','1':'企业',};
+                  return map[value];
+                }
+
             } ,
             {   name : 'creator',width : 80,
+
             } ,
             {   name : 'creatorname',width : 80,
+
             } ,
-          /*  {   name : 'createtime',width : 80,
+            {   name : 'createtime',width : 80,
                 formatter : function(value, grid, rows) {
-                  return new Date(value).format("yyyy-MM-dd");
+                    if(value){
+                        return new Date(value).format("yyyy-MM-dd");
+                    }else{
+                        return "";
+                    }
                 }
             } ,
             {   name : 'updatetime',width : 80,
                 formatter : function(value, grid, rows) {
-                  return new Date(value).format("yyyy-MM-dd");
+                    if(value){
+                        return new Date(value).format("yyyy-MM-dd");
+                    }else{
+                        return "";
+                    }
                 }
-            } 
-              ,*/
+            } ,
+
             {   name : 'operation',
                 width : 150,
                 formatter : function(value, grid, rows) {
@@ -135,6 +163,7 @@ var partnerList={
             dqData=data;
         }
     },
+
     saveInfo:function(){
     },
     addInfo:function (){
@@ -148,11 +177,9 @@ var partnerList={
 
         this.mygrid.jqGrid("setGridParam", { search: true ,"postData":jso}).trigger("reloadGrid", [{ page: 1}]);  //重载JQGrid
     },
-
     viewInfo:function (id){
         dialog.window("/partner/view.htm?id="+id,this.modal);
     },
-
     exportInfo:function (){
         var jso= changeForm2Jso(".app-search");
         Ajax.getJSON(PATH+"/partner/export.json",jso,function(data){

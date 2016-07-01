@@ -11,7 +11,7 @@
   -moz-box-shadow: 0px 0px 4px;  
   box-shadow: 0px 0px 4px;
 */
-  z-index:2000;
+  z-index:23000;
       animation-name: bounceIn;
   border-radius: 2px;
       -webkit-animation-fill-mode: both;

@@ -16,12 +16,23 @@ public class ExpertArtical {
         return id;
     }    public void setId(Long id){
         this.id=id;
-    }/**专家id**/
+    }/**专家**/
     private Long expertId;
     public Long getExpertId(){
         return expertId;
     }    public void setExpertId(Long expertId){
         this.expertId=expertId;
+    }    private String Expert_username;
+    public String getExpert_username(){
+        return Expert_username;
+    }    public void setExpert_username(String Expert_username){
+        this.Expert_username=Expert_username;
+    }/**标题**/
+    private String title;
+    public String getTitle(){
+        return title;
+    }    public void setTitle(String title){
+        this.title=title;
     }/**内容**/
     private String content;
     public String getContent(){

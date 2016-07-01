@@ -43,6 +43,7 @@
 .menu-wrap ul,.menu-wrap,.menu-wrap a{
 color:white;
 	background-color: #2E3E4E;
+
 }
 
 .menu-wrap {
@@ -58,7 +59,7 @@ color:white;
 	width: 190px;
 	height: 100%;
 	/**Typography**/
-	font-size: 0.82rem;
+	font-size: 0.92rem;
 	/*color: white;*/
 	text-align: left;
 	/**Visual**/
@@ -150,12 +151,15 @@ i.undefined {
 	margin: 0px 0px 0px 0px;
 	padding: 15px 0px 0px 0px;
 }
-
+/* main.css 里有
 .menu-wrap .menu ul {
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
-}
+}*/
+.menu li ul {
+	margin-left:10px;
 
+}
 
 /** li **/
 
@@ -252,7 +256,11 @@ menu li a span{
 .menu-wrap .menu>ul>li>ul>li>a {
 	/* border-top: 1px dotted #E4E4E4;  */
 }
-
+ .menu>ul>li:hover>a,  .menu>ul>li.open>a {
+    color: #fff;
+    background: #1e282c;
+    border-left: 5px solid #3c8dbc !important;
+}
 
 /** li a span**/
 
@@ -320,10 +328,11 @@ menu li a span{
 
 .menu-wrap .nav-caret i {
 	transition: transform 0.3s ease-in-out 0s;
+	transform: rotate(90deg);
 }
 
 .menu-wrap li.open>a>.nav-caret>i {
-	transform: rotate(180deg);
+	transform: rotate(0deg);
 }
 
 
@@ -433,7 +442,7 @@ li.open>ul{
 	left: 50px;
 	top: 0px;
 	diplay: block;
-	width: 100px;
+	width: 150px;
 	z-index: 2000;
 	background-color:  #2E3E4E;
 }

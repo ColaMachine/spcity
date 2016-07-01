@@ -17,7 +17,7 @@ String.prototype.trim= function(){
     // 用空字符串替代。  
     return this.replace(/(^\s*)|(\s*$)/g, "");  
 }
-var PATH="/spcity";
+
 
 function AjaxClass()
 {
@@ -297,15 +297,6 @@ function changeForm2Jso(formId) {
 	}
 	return jso;
 }
-function fillSelectWithJso(formId,json,id,name){
-
-	var form = $("#"+formId);
-	for(var i=0;i<json.length;i++){
-	    var data=json[i];
-form.append("<option value='"+data[id]+"'>"+data[name]+"</option>");
-
-	}
-}
 
 function fillJso2Form(formId,jso){
 	var arr = $(formId).serializeArray();
@@ -325,6 +316,16 @@ function fillJso2Form(formId,jso){
 				dom.val(val);
 			}
 		}
+	}
+}
+
+function fillSelectWithJso(formId,json,id,name){
+
+	var form = $("#"+formId);
+	for(var i=0;i<json.length;i++){
+	    var data=json[i];
+form.append("<option value='"+data[id]+"'>"+data[name]+"</option>");
+
 	}
 }
 function fillJso2FormSpan(formId,jso){
@@ -348,6 +349,7 @@ function fillJso2FormSpan(formId,jso){
 			}
 			if(dom.is('span')){
 				dom.text(val);
+				console.log(val);
 			}
 		}
 	}
@@ -363,7 +365,7 @@ function isNull(str) {
 			}else{
 				return false;
 			}
-		}else 
+		}else
 	if (typeof str == 'undefined' || str == null || str.trim() == '')
 		return true;
 	else
@@ -373,7 +375,7 @@ function isNull(str) {
 
 /**
  * 限制字符长度
- * 
+ *
  * @param {Object}
  *            it
  */
@@ -398,6 +400,356 @@ function handlerAjaxReturnAndExeFun(data, fun) {
 		dialog.alert(data.msg);
 	}
 }
+/**-------------地市县区多选框插件----------------------------------------------**/
+var AreaBox = {
+		it:null,
+		o:null,
+		wrap:null,
+		sel:null,
+		sProvince:null,//select 控件
+		sCity:null,
+		container:null,
+		sCounty:null,
+
+		dataStore:null,
+		init : function(it, o) {
+
+		this.it=it;
+		this.o = $.extend({
+
+			sData : null,
+			outputId : null
+		}, o || {});
+		this. wrap = $(it);
+		this.wrap
+				.append($("<div class='col-sm-12' id='zareamcbox'>"
+						+ "<select style='width:80px'    ></select> "
+						+ "<select  style='width:80px'    ></select>"
+						+ "<select  style='width:80px'  ></select>"
+						+ "<button type='button' class='btn btn-sm' style='height:30px'>"
+						+ "<i class='icon-plus align-top bigger-125'></i>添加"
+						+ "</button>	"
+						+ "</div>"
+						+ "<input type='text' name='selected-areas' id='selected-areas' value='' placeholder='请选择地区 ...' style='display: none;'/>"));
+
+		var sel = $("select", this.wrap);// $("select",wrap);
+		this.sProvince = sel.eq(0);// $("#provinceSelect");
+		 this.sCity = sel.eq(1);// $("#citySelect");//sel.eq(1);
+		 this.sCounty = sel.eq(2);
+		// var loc = new Location();
+		 this.sProvince.empty();
+		 this.sCity.empty();
+		 this.sCounty.empty();
+		// loc.fillOption(sProvince , '0',null);
+		// loc.fillOption(sCity , '0,'+sProvince.val(),null);
+		var addButton = $("button",this. wrap).eq(0);
+		var sPval, sCval;
+		this. container = $(".tags").eq(0);
+		this. dataStore = {};
+		// 添加已经有的数据到box中
+		for (var i = 0; i < o.sData.length; i++) {
+			this.addArea(o.sData[i]);
+		}
+		addButton.click(function(area) {
+
+			return function(){
+			// addArea(sProvince.val()+"|"+ sCity.val());
+			var name = "";
+			if (area.sCounty && area.sCounty.val()) {
+				name = area.sProvince.find("option:selected").text() + "|"
+						+ area.sCity.find("option:selected").text() + "|"
+						+ area.sCounty.find("option:selected").text();
+			} else if (area.sCity.val()) {
+				name = area.sProvince.find("option:selected").text() + "|"
+						+ area.sCity.find("option:selected").text();
+			} else {
+				name = area.sProvince.find("option:selected").text();
+			}
+			area.addArea(name);
+		};}(this));
+
+		this.sProvince.change(function(area) {
+			return function(){
+				area.sCity.empty();
+				area.getCityForMulti();
+			};
+		}(this));
+		if (this.sCounty)
+			this.sCity.change(function(area) {
+				return function(){
+				area.sCounty.empty();
+				area.getCountyForMulti();
+				};
+			}(this));
+		this.getProvinceForMulti();
+	},
+
+	getProvinceForMulti : function() {
+
+		$.post(PATH + "/member/getProvince", {}, function(area) {
+			return function(data){
+			jQuery("<option value='0'>全国</option>").appendTo(area.sProvince);
+			for (var i = 0, length = data.list.length; i < length; i++) {
+				jQuery(
+						"<option value='" + data.list[i] + "'>" + data.list[i]
+								+ "</option>").appendTo(area.sProvince);
+			}
+			area.getCityForMulti();
+			};
+		}(this));
+	},
+
+	getCityForMulti : function() {
+		$.post(PATH + "/member/getCity", {
+			areaname : this.sProvince.val()
+		}, function(area) {
+			return function(data){
+				area.sCity.empty();// alert(sProvince.val());
+			 $("<option value=''>--请选择--</option>").appendTo( area.sCity);
+			for (var i = 0, length = data.list.length; i < length; i++) {
+
+				jQuery(
+						"<option value='" + data.list[i] + "'>" + data.list[i]
+								+ "</option>").appendTo( area.sCity);
+			}
+			if (area.sCounty)
+				area.getCountyForMulti();
+			};
+		}(this));
+	},
+
+	getCountyForMulti : function() {
+		$.post(PATH + "/member/getCounty", {
+			areaname : this.sCity.val()
+		}, function(area) {
+			return function(data){
+				area.sCounty.empty();// alert(sProvince.val());
+			$("<option value=''>--请选择--</option>").appendTo(area.sCounty);
+			for (var i = 0, length = data.list.length; i < length; i++) {
+				jQuery(
+						"<option value='" + data.list[i] + "'>" + data.list[i]
+								+ "</option>").appendTo(area.sCounty);
+			}
+			};
+		}(this));
+	},
+	/*
+	 * sProvince.change(function() {//alert("sProvincechange"); sCity.empty();
+	 * loc.fillOption(sCity , '0,'+sProvince.val()); });
+	 */
+	addArea : function(name) {
+		if (isNull(name))
+			return;
+		var _province = "";
+		var _city = "";
+		var _county = "";
+		if (name == "全国" && $(this.container).find(".tag").length > 0) {
+			dialog.alert("你已经选择了地区,无法添加全国");
+			return;
+		}
+		if ($(this.container).find(".tag[name='全国']").length > 0) {
+			dialog.alert("你已经选择全国,无需添加其他地区");
+			return;
+		}
+		// 添加的只是省
+		// 添加的是全国
+		if (name == "全国") {
+			_province = name.trim();
+		} else if (name.indexOf("|") <= 0) {
+			_province = name.trim();
+
+			if (this.dataStore[_province]) {
+				dialog.alert("你已经选择了省份,不能再添加");
+				return;
+			}
+		} else {// 添加的是省市
+			if (name.lastIndexOf("|") > name.indexOf("|")) {// 含有区
+				_county = name.split("|")[2];
+			}
+			_province = name.split("|")[0];
+			_city = name.split("|")[1];
+		}
+
+		//选择的是省
+		if (this.dataStore[_province] && this.dataStore[_province]["all"]) {
+			dialog.alert("你已经选择了省份,不能再添加");
+			return;
+		}
+		//有选择市
+		if (_city) {
+			if (this.dataStore[_province] && this.dataStore[_province][_city]
+					&& this.dataStore[_province][_city]["all"]) {
+				dialog.alert("你已经选择了省市,不能再添加");
+				return;
+			}
+			if (!_county)
+			if (this.dataStore[_province] && this.dataStore[_province][_city]) {
+				for (k in this.dataStore[_province][_city]) {
+					dialog.alert("你已经选择了省市,不能再添加");
+					return;
+				}
+			}
+
+		}
+		//有选择区
+		if (_county) {
+			if (this.dataStore[_province] && this.dataStore[_province][_city]
+					&& this.dataStore[_province][_city]["all"]) {
+				dialog.alert("你已经选择了上级区域,不能再添加");
+				return;
+			}
+			if (this.dataStore[_province] && this.dataStore[_province][_city]
+				&& this.dataStore[_province][_city][_county]) {
+					dialog.alert("你已经选择了该省市区,不能再添加");
+					return;
+			}
+
+		}
+		/*if (_county) {// 加的是省市区
+			if (this.dataStore[_province] && this.dataStore[_province]["all"]) {
+				alert("数据冲突！");
+				return;
+			}
+			if (this.dataStore[_province] && this.dataStore[_province][_city]
+					&& this.dataStore[_province][_city]["all"]) {
+				alert("数据冲突！");
+				return;
+			}
+			if (this.dataStore[_province] && this.dataStore[_province][_city]
+					&& this.dataStore[_province][_city][_county]) {
+				alert("数据冲突！");
+				return;
+			}
+			// this.dataStore[_province][_city][_county]=1;
+		} else if (_city) {// 加的是省市
+			if (this.dataStore[_province] && this.dataStore[_province]["all"]) {
+				alert("数据冲突！");
+				return;
+			}
+			if (this.dataStore[_province] && this.dataStore[_province][_city]
+					&& this.dataStore[_province][_city]["all"]) {
+				alert("数据冲突！");
+				return;
+			}
+			if (this.dataStore[_province] && this.dataStore[_province][_city]) {
+				for (k in this.dataStore[_province][_city]) {
+					alert("数据冲突!");
+					return;
+				}
+			}
+			// this.dataStore[_province][_city]["all"]=1;
+		} else if (_province) {// 加的是省
+			if (this.dataStore[_province]) {
+				for (k in this.dataStore[_province]) {
+					alert("数据冲突!");
+					return;
+				}
+			}
+
+		}*/
+		var str = "<span name='"
+				+ name
+				+ "' class='tag'>"
+				+ name
+				+ "<button type='button'  class='close'>x</button></span>";
+		// 判断是否有数据了
+		var ele = $(str);
+		this.container.append(ele);
+		$("button", ele).click(function(area) {
+			return function(){
+			area.removeArea(this);
+			}
+		}(this));
+
+		if (_county) {
+			if (!this.dataStore[_province]) {
+				this.dataStore[_province] = {};
+			}
+			if (!this.dataStore[_province][_city]) {
+				this.dataStore[_province][_city] = {};
+			}
+			this.dataStore[_province][_city][_county] = 1;
+		} else if (_city) {
+			if (!this.dataStore[_province]) {
+				this.dataStore[_province] = {};
+			}
+			if (!this.dataStore[_province][_city]) {
+				this.dataStore[_province][_city] = {};
+			}
+			this.dataStore[_province][_city]['all'] = 1;
+		} else {
+			if (!this.dataStore[_province]) {
+				this.dataStore[_province] = {};
+			}
+			this.dataStore[_province]["all"] = 1;
+		}
+		this.writeInput();
+	},
+
+	removeArea : function(it) {
+		var name = $(it).parent().attr("name");
+		var _province = "";
+		var _city = "";
+		var _county = "";
+
+		// 添加的只是省
+		if (name == "全国") {
+			_province = name.trim();
+		} else if (name.indexOf("|") <= 0) {
+			_province = name.trim();
+
+		} else {// 添加的是省市
+			if (name.lastIndexOf("|") > name.indexOf("|")) {// 含有区
+				_county = name.split("|")[2];
+			}
+			_province = name.split("|")[0];
+			_city = name.split("|")[1];
+		}
+
+		if (_county) {
+			this.dataStore[_province][_city][_county] = null;
+			delete this.dataStore[_province][_city][_county];
+		} else if (_city) {
+			this.dataStore[_province][_city]['all'] = null;
+			delete this.dataStore[_province][_city]['all'];
+		} else {
+			this.dataStore[_province]['all'] = null;
+			delete this.dataStore[_province]['all'];
+		}
+		$(it).parent().remove();
+		this.writeInput();
+	},
+
+	writeInput : function() {
+		var areaNameArr = new Array();
+		this.wrap.find(".tag").each(function() {
+			areaNameArr.push($(this).attr("name"));
+		});
+		$('#' + this.o.outputId).val(areaNameArr.join(","));
+	},
+	viewMode:function(){
+		this.sProvince.hide();
+		this.sCity.hide();
+		this.sCounty.hide();
+		$("button",this.wrap).hide();
+	},
+	getSeleteds : function() {
+		var arr = new Array();
+		$(this.wrap).find(".tag").each(function() {
+			arr.push($(this).attr("name"));
+		});
+
+		return arr.join(",");
+	}
+};
+/*$.fn.zAreaMCBox=function(o){
+	var areaBox =  Object.create(AreaBox);
+	areaBox.init(this,o);
+	return areaBox;
+}
+;
+*/
+/**-------------地市县区多选框插件end----------------------------------------------**/
 function getCellValue(id, index) {
 	return $("input:checkbox[value='" + id + "']").parent().parent().parent()
 			.find("td").eq(index).text();
@@ -548,7 +900,7 @@ function hideMask() {
 	$("form").prepend(str);
 }*/
 function showMsg(caption, contenttext) {
-	
+
 	dialog.alert(contenttext);
 }
 
@@ -616,17 +968,17 @@ function navPath(level1, level2) {
 /**表格刷新**/
 function reloadGrid(){
 	jQuery("#grid-table").trigger("reloadGrid");
-	
+
 }
 /**查询**/
 function searchData(){
 	searchParams= changeForm2Jso('searchForm');
-	
-	$("#grid-table").jqGrid('setGridParam',{ 
+
+	$("#grid-table").jqGrid('setGridParam',{
         postData:searchParams,
-        page:1 
-    }).trigger("reloadGrid"); //重新载入  
-    
+        page:1
+    }).trigger("reloadGrid"); //重新载入
+
     //jQuery("#grid-table").setPostData(searchParams).trigger("reloadGrid");
 }
 //ajax 成功标识位
@@ -641,7 +993,7 @@ var AJAX_MSG="msg";
 var AJAX_ERRORS="errors";
 
 /**
- * 动态加载js 
+ * 动态加载js
  * @param data 数组
  */
 function includeJS(data){
@@ -653,11 +1005,11 @@ function includeJS(data){
 			document.write("<script id='"+i+"' type='text/javascript' src='"+data[i]+"'  charset='utf-8'> </script>");
 		}
 	}
-	
-	
+
+
 }
 /**
- * 动态引入css 
+ * 动态引入css
  * @param data 数组
  */
 function includeCSS(data){
@@ -669,8 +1021,8 @@ function includeCSS(data){
 				document.write("<link rel='stylesheet' href='"+data[i]+"' type='text/css' />");
 		}
 	}
-	
-	
+
+
 }
 /**
  * 跳转链接同一用此处
@@ -682,28 +1034,84 @@ function goUrl(url){//alert(url);
 
 
 
-function LoadJS( id, fileUrl ) 
-{ 
+function LoadJS( id, fileUrl )
+{
 
-    var scriptTag = document.getElementById( id ); 
+    var scriptTag = document.getElementById( id );
 
-    var oHead = document.getElementsByTagName('HEAD').item(0); 
+    var oHead = document.getElementsByTagName('HEAD').item(0);
 
-    var oScript= document.createElement("script"); 
+    var oScript= document.createElement("script");
 
-    if ( scriptTag  ) oHead.removeChild( scriptTag  ); 
+    if ( scriptTag  ) oHead.removeChild( scriptTag  );
 
-    oScript.id = id; 
+    oScript.id = id;
 
-    oScript.type = "text/jsx"; 
+    oScript.type = "text/jsx";
 
-    oScript.src=fileUrl ; 
+    oScript.src=fileUrl ;
 
-    oHead.appendChild( oScript); 
+    oHead.appendChild( oScript);
 
-} 
+}
 
 
+
+
+/**
+ *
+ *
+ * Author: zzw <zzw1986@gmail.com>
+ *
+ *
+ * File: common.js Create Date: 2014-04-10 19:54:40
+ *
+ *
+**/
+/**
+ * 对于模态框 tab页进行自动绑定触发事件
+ */
+function pageinit(){
+	$("*[data-toggle='modal']").each(function(){
+		if($(this).attr("data-target")){
+			$(this).on("click",function(){
+				dialog.showMask();
+				$($(this).attr("data-target")).show();
+			});
+		}
+
+	});
+
+	$("*[data-dismiss='modal']").each(function(){
+		$(this).on("click",function(){
+		dialog.hideMask();
+		$(this).closest(".modal").hide();
+		});
+
+	});
+
+	$(".menu li").each(function(){
+		$(this).on("click",function(){
+			$(".select").removeClass("select");
+			$(this).addClass("select");
+		});
+	})
+
+	$(".nav-tabs li").each(function(){
+		$(this).on("click",function(){
+			$(".active").removeClass("active");
+			$(this).addClass("active");
+		});
+	});
+}
+
+
+
+
+function initGrid(gridParam){
+	 $(grid_selector).jqGrid(gridParam);
+	 return  $(grid_selector);
+}
 
 
 
@@ -734,7 +1142,7 @@ function ajaxResultHandler(result){
 		if(result.r==504  ){
 			dialog.alert(result.msg);
 			window.location=WEBCONTEXT+"/login";
-			
+
 		}
 		if(result.r==505  ){
 			dialog.alert(result.msg);
@@ -746,26 +1154,7 @@ function ajaxResultHandler(result){
 }
 
 
-function showModal(id,w,h){
 
-
-    var modal = document.getElementById(id);
-    if(typeof id =="object")
-        modal=id;
-	if(typeof h !='undefined' && h!=null )
-	    modal.style.height=h;
-	if(typeof w !='undefined' && w!=null )
-	    modal.style.width=w;
-	modal.style.display="block";
-	modal.find(".close").onclick=function(){
-	    hideModal(modal);
-	}
-
-
-	modal.setAttribute("class",(modal.getAttribute("class")||"")+" in");
-	//alert($(id).style.display);
-	dialog.showMask();
-}
 
 
 function hideModal(id){
@@ -794,7 +1183,7 @@ function clearErrorMsg(formid){
 }
 
 function showWait(msg){
-	
+
 	showMask();
 	//$(".wait").show();
 	return layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
@@ -813,7 +1202,7 @@ function hideWaitTrue(){
 function zWidgetBase(){
 	dialog.showMask();
 	if($(".widget").length>0){
-		
+
 	}else{
 		$("body").append("<div class='widget'></div>");
 	}
@@ -829,7 +1218,7 @@ function zconfirm(msg,title,fn){
 	"</div>"+
 	"</div>");
 	$(".widget").html(html);
-	if (typeof(fn) != "undefined") 
+	if (typeof(fn) != "undefined")
 	$(html).find(".zbutton_wrap").find("a").click(fn);
 }*/
 
@@ -845,7 +1234,7 @@ function zdialogue(msg,title,src,fontcolor,fn){
 	"</div>"+
 	"</div>");
 	$(".widget").html(html);
-	if (typeof(fn) != "undefined") 
+	if (typeof(fn) != "undefined")
 	$(html).find(".zbutton_wrap").find("a").click(fn);
 }*/
 var layer={
@@ -872,6 +1261,23 @@ var dialog={
         }else{
           return layer.alert(msg);
         }
+    },
+     showModal:function(id,w,h){
+        var modal = document.getElementById(id);
+        if(typeof id =="object")
+            modal=id;
+    	if(typeof h !='undefined' && h!=null )
+    	    modal.style.height=h;
+    	if(typeof w !='undefined' && w!=null )
+    	    modal.style.width=w;
+    	modal.style.display="block";
+
+    	modal.find(".close").onclick=function(){
+    	    hideModal(modal);
+    	}
+    	modal.setAttribute("class",(modal.getAttribute("class")||"")+" in");
+    	//alert($(id).style.display);
+    	dialog.showMask();
     },
     close:function(index){
         layer.close(index);
@@ -1130,11 +1536,11 @@ function chkInt(number, intLength) {
 	}
 }
 
-function clearNoNum(obj){   obj.value = obj.value.replace(/[^\d.]/g,"");  //清除“数字”和“.”以外的字符  
+function clearNoNum(obj){   obj.value = obj.value.replace(/[^\d.]/g,"");  //清除“数字”和“.”以外的字符
 
-obj.value = obj.value.replace(/^\./g,"");  //验证第一个字符是数字而不是. 
+obj.value = obj.value.replace(/^\./g,"");  //验证第一个字符是数字而不是.
 
- obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个. 清除多余的.   
+ obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个. 清除多余的.
 
 obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
 
@@ -1157,7 +1563,10 @@ var setting = {
            },
            data: {
                simpleData: {
-                   enable: true
+                   enable: true,
+                   idKey: "id",
+                    pIdKey: "pid",
+                    rootPId: 0
                }
            }
        };
@@ -1598,9 +2007,9 @@ function zImageUtil(config) {
 					//document.getElementById('myImg').src = data;//压缩结果验证
 					if (_this.preShow) {
 						console.log("img pre show");
-						_this.imgDom.src = data;
+						_this.imgDom.attr("src", data);
 
-						console.log(_this.imgDom);
+						//console.log(_this.imgDom);
 
 					}
 					console.log("begin send img");
@@ -1616,8 +2025,8 @@ function zImageUtil(config) {
 						json,
 						function(data) {
 							if (data.r == 1) {
-								_this.imgDom.src = PATH+"/" + data.data;
-								$(_this).parent().find("#picurl")
+								_this.imgDom.attr("src", PATH+"/" + data.data);
+								//$(_this).parent().find("#picurl")
 								console.log("imgUrl:" + data.data);
 							} else {
 								//	                        		zalert(data.msg);
@@ -1687,6 +2096,121 @@ function zImageUtil(config) {
 }
 
 
+function zImageUtil2(config) {
+	var o = {
+		imgDom: null, //回显的image的id
+		maxHeight: null, //预设的最大高度
+		maxWidth: null, //预设的最大宽度
+		postUrl: null, //提交的url"/calendar/image/upload.json"
+		preShow: true,
+		callback: null,
+        fileInput:null,
+		fileChange: function(e) {
+			var f = e.files[0]; //一次只上传1个文件，其实可以上传多个的
+			var FR = new FileReader();
+			var _this = this;
+
+			FR.onload = function(f) {
+
+				_this.compressImg(this.result, 300, function(data) { //压缩完成后执行的callback
+					console.log("压缩完成后执行的callback");
+					//document.getElementById('imgData').value = data;//写到form元素待提交服务器
+					//document.getElementById('myImg').src = data;//压缩结果验证
+					if (_this.preShow) {
+						console.log("img pre show");
+						_this.imgDom.attr("src",data);
+
+						//console.log(_this.imgDom);
+
+					}
+					console.log("begin send img");
+					var json = {};
+					// json.imageName= "myImage.png";
+					data ="+"+ data;//.substring(22);
+					//alert(data.substring(0,100));
+					// alert(data)
+					json.imageData = encodeURIComponent(data);
+					console.log("begin post");
+
+					Ajax.post(_this.postUrl,
+						json,
+						function(data) {
+							if (data.r == 1) {
+								_this.imgDom.src = PATH+"/" + data.data;
+								$(_this).parent().find("#picurl")
+								console.log("imgUrl:" + data.data);
+							} else {
+								//	                        		zalert(data.msg);
+							}
+							if (_this.callback != null)
+								_this.callback(data);
+						}
+					);
+				});
+			};
+			FR.readAsDataURL(f); //先注册onload，再读取文件内容，否则读取内容是空的
+		},
+		compressImg: function(imgData, maxHeight, onCompress) {
+			var _this = this;
+			if (!imgData)
+				return;
+			onCompress = onCompress || function() {};
+			maxHeight = maxHeight || this.maxHeight; //默认最大高度200px
+			var canvas = document.createElement('canvas');
+			var img = new Image();
+			console.log("maxHeight:" + maxHeight);
+			img.onload = function() {
+				if (img.height > maxHeight) { //按最大高度等比缩放
+					img.width *= maxHeight / img.height;
+					img.height = maxHeight;
+				}
+				canvas.width = img.width;
+				canvas.height = img.height;
+				var ctx = canvas.getContext("2d");
+
+				ctx.clearRect(0, 0, canvas.width, canvas.height); // canvas清屏
+
+				//重置canvans宽高 canvas.width = img.width; canvas.height = img.height;
+				console.log("width:" + img.width + "height:" + img.height);
+				ctx.drawImage(img, 0, 0, img.width, img.height); // 将图像绘制到canvas上
+				console.log("begin compress img");
+				onCompress(canvas.toDataURL("image/png")); //必须等压缩完才读取canvas值，否则canvas内容是黑帆布
+			};
+			// 记住必须先绑定事件，才能设置src属性，否则img没内容可以画到canvas
+			console.log("begin origin data load:");
+			img.src = imgData;
+
+		},
+		init: function(jso) {
+			this.imgDom = $("<img class=\"row-10 img-upload\" alt=\"请上传图片\"></img>");
+			this.maxHeight = jso.maxHeight||633;
+			this.maxWidth = jso.maxWidth||300;
+			this.postUrl = jso.postUrl||(PATH+"/image/upload.json");
+			var that =this;
+			this.callback = jso.callback||function(result){
+                $(that.input).val(result.data);
+			};
+			this.fileInput=$("<input type=\"file\" style=\"display:none\"/>");
+			this.input =$("#"+jso.input);
+            this.imgDom.attr("src",$(this.input).val())
+			$(this.input).parent().append(this.imgDom);
+			$(this.input).parent().append(this.fileInput);
+
+			 $(this.fileInput).change(function(){
+
+              //  console.log("imgDom:"+nowImg);
+                //var imageUtil= new zImageUtil({imgDom:nowImg,postUrl:"/calendar/image/upload.json",maxWidth:633,maxHeight:300});
+                that.fileChange(this);
+            });
+
+            $(this.imgDom).click(function(){
+                $(that.fileInput).trigger("click");
+            });
+		},
+	};
+	o.init(config);
+	return o;
+}
 
 function extend(obj1,obj2){
     for (i in obj2)
@@ -1760,3 +2284,70 @@ function getChild(parentNode,name){
     return null;
 
 }
+
+
+zzw=function( selector, context){
+   	return  zzw.fn.init( selector, context );
+}
+
+
+zzw.fn=zzw.prototype={
+
+init:function(selector,context){
+    if(typeof selector=="object"){
+     selector.find=find;
+        return selector;
+    }
+    if(selector[0]=='#'){
+        var dom = document.getElementById(selector.replace("#",''));
+        if(dom){
+            dom.find=find;
+        }
+        return dom;
+    }
+    if(selector[0]=='.'){
+        var dom = document.getElementById(selector.replace(".",''));
+                if(dom){
+                    dom.find=find;
+                    return dom;
+                }
+                return dom;
+    }
+
+
+}
+}
+
+zzw.extend=function(obj1,obj2){
+
+}
+zzw.fn.init.prototype = zzw.fn;
+zzw.extend = zzw.fn.extend = function(obj1,obj2){
+    for(var key in obj2){
+        obj1[key]=obj2[key];
+    }
+
+}
+function find(selector){
+     if(selector[0]=='#'){
+            var dom = getChild(this,selector);
+            if(dom){
+                dom.find=find;
+            }
+            return dom;
+        }
+        if(selector[0]=='.'){
+         var dom =getChild(this,selector);
+         if(dom){
+                         dom.find=find;
+                          return dom;
+                     }
+           return dom;
+        }
+}
+$$=zzw;
+function setTitle(str){
+$("#page-title").text(str);
+$("#page-title-2").text(str);
+}
+

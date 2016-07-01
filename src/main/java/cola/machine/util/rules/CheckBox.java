@@ -1,6 +1,8 @@
 package cola.machine.util.rules;
 
 
+import cola.machine.util.StringUtil;
+
 public class CheckBox extends Rule{
 	private String[] cherkArr;
 	public String[] getCherkArr() {
@@ -17,7 +19,7 @@ public class CheckBox extends Rule{
 	
 	@Override
 	public boolean valid() throws Exception{
-        if (this.getValue() == null) {
+        if (StringUtil.isBlank(this.getValue()) ) {
             return true;
         }
 

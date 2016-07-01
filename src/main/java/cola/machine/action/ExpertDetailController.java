@@ -218,7 +218,7 @@ public class ExpertDetailController extends BaseController{
         ValidateUtil vu = new ValidateUtil();
         String validStr="";
         vu.add("id", id, "编号",  new Rule[]{new Digits(15,0)});
-        vu.add("expertId", expertId, "专家id",  new Rule[]{new Digits(15,0),new NotEmpty()});
+        vu.add("expertId", expertId, "专家",  new Rule[]{new Digits(15,0),new NotEmpty()});
         vu.add("content", content, "介绍",  new Rule[]{new Length(50000)});
         validStr = vu.validateString();
         if(StringUtil.isNotEmpty(validStr)) {
@@ -323,7 +323,7 @@ public class ExpertDetailController extends BaseController{
         // 得到导出Excle时清单的英中文map
         LinkedHashMap<String, String> colTitle = new LinkedHashMap<String, String>();
         colTitle.put("id", "编号");
-        colTitle.put("expertId", "专家id");
+        colTitle.put("expertId", "专家");
         colTitle.put("content", "介绍");
         List finalList = new ArrayList();
         for (int i = 0; i < list.size(); i++) {

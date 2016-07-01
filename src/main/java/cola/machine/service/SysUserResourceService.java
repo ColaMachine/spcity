@@ -7,7 +7,8 @@
  */
 
 package cola.machine.service;
-
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,20 +81,20 @@ public class SysUserResourceService extends BaseService {
      */
     public ResultDTO save(SysUserResource sysUserResource) {
         // 进行字段验证
-       ValidateUtil<SysUserResource> vu = new ValidateUtil<SysUserResource>();
+      /* ValidateUtil<SysUserResource> vu = new ValidateUtil<SysUserResource>();
         ResultDTO result = vu.valid(sysUserResource);
         if (result.getR() != 1) {
             return result;
-        }
+        }*/
          //逻辑业务判断判断
        //判断是否有uq字段
        
        //判断是更新还是插入
         if (sysUserResource.getId()==null) {
-               
+
             sysUserResourceMapper.insert(sysUserResource);
         } else {
-             sysUserResourceMapper.updateByPrimaryKey(sysUserResource);
+            sysUserResourceMapper.updateByPrimaryKeySelective(sysUserResource);
         }
         return ResultUtil.getSuccResult();
     }

@@ -22,6 +22,11 @@ public class PartnerDetail {
         return partnerId;
     }    public void setPartnerId(Long partnerId){
         this.partnerId=partnerId;
+    }    private String Partner_name;
+    public String getPartner_name(){
+        return Partner_name;
+    }    public void setPartner_name(String Partner_name){
+        this.Partner_name=Partner_name;
     }/**内容**/
     private String content;
     public String getContent(){

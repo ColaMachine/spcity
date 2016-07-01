@@ -412,7 +412,7 @@ public class SysResourceController extends BaseController{
         //valid
         ValidateUtil vu = new ValidateUtil();
         String validStr="";
-        vu.add("id", id, "主键",  new Rule[]{new Digits(10,0)});
+        vu.add("id", id, "编号",  new Rule[]{new Digits(10,0)});
         vu.add("pid", pid, "父主键",  new Rule[]{new Digits(10,0),new NotEmpty()});
         vu.add("name", name, "资源名称",  new Rule[]{new Length(20),new NotEmpty()});
         vu.add("code", code, "资源代码",  new Rule[]{new Length(20),new NotEmpty()});
@@ -461,7 +461,7 @@ public class SysResourceController extends BaseController{
             ValidateUtil vu = new ValidateUtil();
             String validStr="";
             String id = idStrAry[i];
-                    vu.add("id", id, "主键",  new Rule[]{});
+                    vu.add("id", id, "编号",  new Rule[]{});
 
             try{
                 validStr=vu.validateString();
@@ -588,7 +588,7 @@ public class SysResourceController extends BaseController{
                 + ".xlsx";
         // 得到导出Excle时清单的英中文map
         LinkedHashMap<String, String> colTitle = new LinkedHashMap<String, String>();
-        colTitle.put("id", "主键");
+        colTitle.put("id", "编号");
         colTitle.put("pid", "父主键");
         colTitle.put("name", "资源名称");
         colTitle.put("code", "资源代码");

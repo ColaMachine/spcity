@@ -92,6 +92,14 @@ public class ExpertArticalController extends BaseController{
         if(!StringUtil.isBlank(expertId)){
             params.put("expertId",expertId);
         }
+        String title = request.getParameter("title");
+        if(!StringUtil.isBlank(title)){
+            params.put("title",title);
+        }
+        String titleLike = request.getParameter("titleLike");
+        if(!StringUtil.isBlank(titleLike)){
+            params.put("titleLike",titleLike);
+        }
         String content = request.getParameter("content");
         if(!StringUtil.isBlank(content)){
             params.put("content",content);
@@ -123,6 +131,14 @@ public class ExpertArticalController extends BaseController{
         String expertId = request.getParameter("expertId");
         if(!StringUtil.isBlank(expertId)){
             params.put("expertId",expertId);
+        }
+        String title = request.getParameter("title");
+        if(!StringUtil.isBlank(title)){
+            params.put("title",title);
+        }
+        String titleLike = request.getParameter("titleLike");
+        if(!StringUtil.isBlank(titleLike)){
+            params.put("titleLike",titleLike);
         }
         String content = request.getParameter("content");
         if(!StringUtil.isBlank(content)){
@@ -196,6 +212,11 @@ public class ExpertArticalController extends BaseController{
             expertArtical.setExpertId(Long.valueOf(expertId)) ;
         }
         
+        String title = request.getParameter("title");
+        if(!StringUtil.isBlank(title)){
+            expertArtical.setTitle(String.valueOf(title)) ;
+        }
+        
         String content = request.getParameter("content");
         if(!StringUtil.isBlank(content)){
             expertArtical.setContent(String.valueOf(content)) ;
@@ -209,6 +230,10 @@ public class ExpertArticalController extends BaseController{
         if(!StringUtil.isBlank(expertId)){
             expertArtical.setExpertId(Long.valueOf(expertId));
         }
+        String title = request.getParameter("title");
+        if(!StringUtil.isBlank(title)){
+            expertArtical.setTitle(title);
+        }
         String content = request.getParameter("content");
         if(!StringUtil.isBlank(content)){
             expertArtical.setContent(content);
@@ -218,7 +243,8 @@ public class ExpertArticalController extends BaseController{
         ValidateUtil vu = new ValidateUtil();
         String validStr="";
         vu.add("id", id, "编号",  new Rule[]{new Digits(15,0)});
-        vu.add("expertId", expertId, "专家id",  new Rule[]{new Digits(15,0),new NotEmpty()});
+        vu.add("expertId", expertId, "专家",  new Rule[]{new Digits(15,0),new NotEmpty()});
+        vu.add("title", title, "标题",  new Rule[]{new Length(40)});
         vu.add("content", content, "内容",  new Rule[]{new Length(50000)});
         validStr = vu.validateString();
         if(StringUtil.isNotEmpty(validStr)) {
@@ -295,6 +321,14 @@ public class ExpertArticalController extends BaseController{
         if(!StringUtil.isBlank(expertId)){
             params.put("expertId",expertId);
         }
+        String title = request.getParameter("title");
+        if(!StringUtil.isBlank(title)){
+            params.put("title",title);
+        }
+        String titleLike = request.getParameter("titleLike");
+        if(!StringUtil.isBlank(titleLike)){
+            params.put("titleLike",titleLike);
+        }
         String content = request.getParameter("content");
         if(!StringUtil.isBlank(content)){
             params.put("content",content);
@@ -323,7 +357,8 @@ public class ExpertArticalController extends BaseController{
         // 得到导出Excle时清单的英中文map
         LinkedHashMap<String, String> colTitle = new LinkedHashMap<String, String>();
         colTitle.put("id", "编号");
-        colTitle.put("expertId", "专家id");
+        colTitle.put("expertId", "专家");
+        colTitle.put("title", "标题");
         colTitle.put("content", "内容");
         List finalList = new ArrayList();
         for (int i = 0; i < list.size(); i++) {
@@ -331,6 +366,7 @@ public class ExpertArticalController extends BaseController{
             HashMap<String,Object> map = new HashMap<String,Object>();
             map.put("id",  list.get(i).getId());
             map.put("expertId",  list.get(i).getExpertId());
+            map.put("title",  list.get(i).getTitle());
             map.put("content",  list.get(i).getContent());
             finalList.add(map);
         }

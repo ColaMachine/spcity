@@ -1,13 +1,13 @@
- <div class="modal-content">
+ <div class="ibox float-e-margins">
     <form id="expertArticalEditForm" class="form-horizontal" method="post" action="/expertArtical/save.json" enctype="multipart/form-data">
-        <div class="modal-header">
+        <!--<div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title">专家文献编辑</h4>
-        </div>
-        <div class="modal-body">
+        </div>-->
+        <div class="ibox-content">
                 <input type="hidden" id="id" name="id"  class="form-control input-sm" >
     <div class="form-group">
-        <label for="expertId" class="col-sm-2 control-label">专家id:</label>
+        <label for="expertId" class="col-sm-2 control-label">专家:</label>
         <div class="col-sm-10">
             <select  id="expertId" name="expertId"  class="form-control input-sm"  >
                 <option value=''>-请选择-</option>
@@ -15,17 +15,27 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">标题:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="title" name="title"  class="form-control input-sm"   maxlength="40"  ></input>
+        </div>
+    </div>
+    <div class="form-group">
         <label for="content" class="col-sm-2 control-label">内容:</label>
         <div class="col-sm-10">
- <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>            <textarea  id="content" name="content"  class="form-control input-sm"   maxlength="50000"></textarea>
+ <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>            <textarea  id="content" name="content"  class="form-control input-sm"   maxlength="50000" style="display:none" ></textarea>
         </div>
     </div>
 
+       <div class="hr-line-dashed"></div>
+        <div class="form-group">
+           <div class="col-sm-4 col-sm-offset-2">
+               <button type="button"  class="btn btn-primary saveBtn">保存</button>
+               <button type="button" class="btn btn-white cancelBtn">取消</button>
+           </div>
         </div>
-        <div class="modal-footer">
-            <button type="button"  class="btn btn-primarys saveBtn">保存</button>
-            <button type="button" class="btn btn-default cancelBtn">取消</button>
         </div>
+
     </form>
 </div><!-- /.modal-content -->
         
@@ -46,6 +56,9 @@ var expertArticalEdit={
         expertId:{
             digits:true,required:true
         },
+        title:{
+            maxlength:40
+        },
         content:{
             maxlength:50000
         },
@@ -57,6 +70,9 @@ var expertArticalEdit={
         },
         expertId:{
             digits:"必须输入整数"
+        },
+        title:{
+            maxlength:"标题不能多于40个字符"
         },
         content:{
             maxlength:"内容不能多于50000个字符"
@@ -72,27 +88,36 @@ var expertArticalEdit={
         this.form=$(this.formId);
         this.addEventListener();
         $("#expertArticalEditForm").validate(this.validParam);
+        var that =this;
+
+        UE.delEditor('editor');
+        this.ue=UE.getEditor('editor');
+        this.ue.addListener("ready", function () {
+            that.loadData();
+        });
+
+    },
+    loadData:function(){
+        var that =this;
+                Ajax.getJSON(PATH+"/expert/list.json",{},function(data){
+            fillSelectWithJso("expertId",data.data,"id","username");
+
         Ajax.getJSON(PATH+"/expertArtical/view.json?id="+getParam("id"),null,function(data){
             if(data.r==AJAX_SUCC){
-            if(data.data.bean){
-                fillJso2Form("#expertArticalEditForm",data.data.bean);
-                this.ue.setContent(data.data.bean.content);
-            }
+                if(data.data.bean){
+                    fillJso2Form("#expertArticalEditForm",data.data.bean);
+                    that.ue.setContent(data.data.bean.content);
+                }
             }else{
                 dialog.error("获取信息失败"+data.msg,function(index){
                     goPage("expertArtical/list.htm");
-                   dialog.close(index);
+                    dialog.close(index);
                 });
             }
         });
-            this.ue=UE.getEditor('editor'),
-        this.loadData();
-    },
-    loadData:function(){
-        Ajax.getJSON(PATH+"/expert/list.json",{},function(data){
-            fillSelectWithJso("expertId",data.data,"id","username");
         });
     },
+
     saveInfo:function(){
         $("#content").val(this.ue.getContent());
         if (!$("#expertArticalEditForm").valid())

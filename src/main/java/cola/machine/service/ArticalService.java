@@ -7,7 +7,6 @@
  */
 
 package cola.machine.service;
-
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
@@ -69,24 +68,21 @@ public class ArticalService extends BaseService {
      */
     public ResultDTO save(Artical artical) {
         // 进行字段验证
-       ValidateUtil<Artical> vu = new ValidateUtil<Artical>();
+      /* ValidateUtil<Artical> vu = new ValidateUtil<Artical>();
         ResultDTO result = vu.valid(artical);
         if (result.getR() != 1) {
             return result;
-        }
+        }*/
          //逻辑业务判断判断
        //判断是否有uq字段
        
        //判断是更新还是插入
-        artical.setUpdatetime(new Timestamp(new Date().getTime()));
         if (artical.getId()==null) {
-            artical.setCreatetime(new Timestamp(new Date().getTime()));
-            artical.setStatus(1);
-            articalMapper.insert(artical);
 
+            articalMapper.insert(artical);
         } else {
             artical.setUpdatetime(new Timestamp(new Date().getTime()));
-             articalMapper.updateByPrimaryKeySelective(artical);
+            articalMapper.updateByPrimaryKeySelective(artical);
         }
         return ResultUtil.getSuccResult();
     }

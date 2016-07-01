@@ -48,8 +48,8 @@ li{ list-style: none; }
 	display:inline-block;
 	*/
 	
-	margin-left:200px;
-
+	margin-left:220px;
+    padding:0 15px;
 	position: relative;
 	/* border:1px solid red; */
 	
@@ -57,6 +57,7 @@ li{ list-style: none; }
 .main{
     padding:0rem 0.25rem 2.25rem 0.25rem ;
     width:100%;
+   /* padding-top:75px;*/
 }
 .main-content{
 	/* background-color:white; */
@@ -245,7 +246,7 @@ color:#999999;
 .radio, .checkbox {
     display: block;
     min-height: 20px;
-    padding-left: 20px;
+   /* padding-left: 20px;*/
     margin-top: 10px;
     margin-bottom: 10px;
     vertical-align: middle;

@@ -1,78 +1,91 @@
-<div class="modal-content">
+ <div class="ibox float-e-margins">
     <form id="partnerEditForm" class="form-horizontal" method="post" action="/partner/save.json" enctype="multipart/form-data">
-        <div class="modal-header">
+        <!--<div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title">合作伙伴    编辑</h4>
+        </div>-->
+        <div class="ibox-content">
+                <input type="hidden" id="id" name="id"  class="form-control input-sm" >
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">名称:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="name" name="name"  class="form-control input-sm"   maxlength="40"  ></input>
         </div>
-        <div class="modal-body">
-            <input type="hidden" id="id" name="id"  class="form-control input-sm" >
-            <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">名称:</label>
-                <div class="col-sm-10">
-                    <input  type="text"  id="name" name="name"  class="form-control input-sm"   maxlength="40"></input>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="brief" class="col-sm-2 control-label">简介:</label>
-                <div class="col-sm-10">
-                    <textarea  id="brief" name="brief"  class="form-control input-sm"   maxlength="500"></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="address" class="col-sm-2 control-label">地址:</label>
-                <div class="col-sm-10">
-                    <textarea  id="address" name="address"  class="form-control input-sm"   maxlength="100"></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="logo" class="col-sm-2 control-label">logo:</label>
-                <div class="col-sm-10">
-                    <input id="faceImgFileInput" type="file" style="display:none">
-                    <img class="row-10 img-upload" id="faceImg" style="width:150px;height:150px" src="static/img/timg.jpeg" alt="请上传图片">
+    </div>
+    <div class="form-group">
+        <label for="brief" class="col-sm-2 control-label">简介:</label>
+        <div class="col-sm-10">
+            <textarea  id="brief" name="brief"  class="form-control input-sm"   maxlength="500"  ></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="address" class="col-sm-2 control-label">地址:</label>
+        <div class="col-sm-10">
+            <textarea  id="address" name="address"  class="form-control input-sm"   maxlength="100"  ></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="logo" class="col-sm-2 control-label">logo:</label>
+        <div class="col-sm-10">
+<input  id="logo" name="logo"  value="static/img/timg.jpeg" style="display:none" class="form-control input-sm"   maxlength="50"></input>        </div>
+    </div>
+    <div class="form-group">
+        <label for="remark" class="col-sm-2 control-label">备注:</label>
+        <div class="col-sm-10">
+            <textarea  id="remark" name="remark"  class="form-control input-sm"   maxlength="200"  ></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="type" class="col-sm-2 control-label">类型:</label>
+        <div class="col-sm-10">
+            <select  id="type" name="type"  class="form-control input-sm"  >
+                <option value=''>-请选择-</option>
+                <option value=1>企业</option>
+                <option value=2>院校</option>
+            </select>
+        </div>
+    </div>
+    <div style="display:none" class="form-group">
+        <label for="creator" class="col-sm-2 control-label">创建人:</label>
+        <div class="col-sm-10">
+            <input type="number" id="creator" name="creator"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
+        </div>
+    </div>
+    <div style="display:none" class="form-group">
+        <label for="creatorname" class="col-sm-2 control-label">创建人姓名:</label>
+        <div class="col-sm-10">
+            <input  type="text"  id="creatorname" name="creatorname"  class="form-control input-sm"   maxlength="20"  ></input>
+        </div>
+    </div>
+    <div style="display:none" class="form-group">
+        <label for="createtime" class="col-sm-2 control-label">创建时间:</label>
+        <div class="input-group date">
+            <span class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></span>            <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  ></input>
+        </div>
+    </div>
+    <div style="display:none" class="form-group">
+        <label for="updatetime" class="col-sm-2 control-label">更新时间:</label>
+        <div class="input-group date">
+            <span class="input-group-addon" for="updatetime" ><i class="fa fa-calendar"></i></span>            <input type="text" id="updatetime" name="updatetime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  ></input>
+        </div>
+    </div>
 
-                    <input  style="display:none" type="text"  id="logo" name="logo"  class="form-control input-sm"   maxlength="50"></input>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="remark" class="col-sm-2 control-label">备注:</label>
-                <div class="col-sm-10">
-                    <textarea  id="remark" name="remark"  class="form-control input-sm"   maxlength="200"></textarea>
-                </div>
-            </div>
-            <!--<div class="form-group">
-                <label for="creator" class="col-sm-2 control-label">创建人:</label>
-                <div class="col-sm-10">
-                    <input type="number" id="creator" name="creator"  class="form-control input-sm"  maxlength="11" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)"></input>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="creatorname" class="col-sm-2 control-label">创建人姓名:</label>
-                <div class="col-sm-10">
-                    <input  type="text"  id="creatorname" name="creatorname"  class="form-control input-sm"   maxlength="20"></input>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="createtime" class="col-sm-2 control-label">创建时间:</label>
-                <div class="col-sm-10 z-col-table">
-                    <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  ></input>
-                    <label class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></label>        </div>
-            </div>
-            <div class="form-group">
-                <label for="updatetime" class="col-sm-2 control-label">更新时间:</label>
-                <div class="col-sm-10 z-col-table">
-                    <input type="text" id="updatetime" name="updatetime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  ></input>
-                    <label class="input-group-addon" for="updatetime" ><i class="fa fa-calendar"></i></label>        </div>
-            </div>-->
+       <div class="hr-line-dashed"></div>
+        <div class="form-group">
+           <div class="col-sm-4 col-sm-offset-2">
+               <button type="button"  class="btn btn-primary saveBtn">保存</button>
+               <button type="button" class="btn btn-white cancelBtn">取消</button>
+           </div>
+        </div>
+        </div>
 
-        </div>
-        <div class="modal-footer">
-            <button type="button"  class="btn btn-primarys saveBtn">保存</button>
-            <button type="button" class="btn btn-default cancelBtn">取消</button>
-        </div>
     </form>
 </div><!-- /.modal-content -->
-
+        
 <script type="text/javascript">
+
+
+
 var partnerEdit={
     form:null,
     modal:false,
@@ -97,6 +110,9 @@ var partnerEdit={
         remark:{
             maxlength:200
         },
+        type:{
+            CheckBox:["1","2"],digits:true
+        },
         creator:{
             digits:true,required:true
         },
@@ -116,25 +132,28 @@ var partnerEdit={
             digits:"必须输入整数"
         },
         name:{
-            maxlength:"name不能多于40个字符"
+            maxlength:"名称不能多于40个字符"
         },
         brief:{
-            maxlength:"brief不能多于500个字符"
+            maxlength:"简介不能多于500个字符"
         },
         address:{
-            maxlength:"address不能多于100个字符"
+            maxlength:"地址不能多于100个字符"
         },
         logo:{
             maxlength:"logo不能多于50个字符"
         },
         remark:{
-            maxlength:"remark不能多于200个字符"
+            maxlength:"备注不能多于200个字符"
+        },
+        type:{
+            CheckBox:"必须输入'1','2'中的值",digits:"必须输入整数"
         },
         creator:{
             digits:"必须输入整数"
         },
         creatorname:{
-            maxlength:"creatorname不能多于20个字符"
+            maxlength:"创建人姓名不能多于20个字符"
         },
         createtime:{
             ymd:"必须输入合法日期"
@@ -146,37 +165,36 @@ var partnerEdit={
         }
     },
     addEventListener:function(){
-        this.form.find(".saveBtn").click(this.saveInfo);
-        this.form.find(".cancelBtn").click(this.cancel);
+        this.form.find(".saveBtn").click(this.saveInfo.Apply(this));
+        this.form.find(".cancelBtn").click(this.cancel.Apply(this));
     },
     init:function(){
         this.form=$(this.formId);
         this.addEventListener();
         $("#partnerEditForm").validate(this.validParam);
-         var imageUtil= new zImageUtil({imgDom:$("#faceImg")[0],fileInput:$("#faceImgFileInput")[0],postUrl:PATH+"/image/upload.json",maxWidth:633,maxHeight:300,
-        callback:function(result){
-        console.log("callback");
-                    console.log(result.data);
-                   // alert("hi");
-                    $("#logo").val(result.data);
-                   // alert( $("#face").attr("src"));
-                }
-                });
-        Ajax.getJSON("partner/view.json?id="+getParam("id"),null,function(data){
+        var imageUtil=new zImageUtil2({"input":"logo"});
+        var that =this;
+
+            that.loadData();
+
+    },
+    loadData:function(){
+        var that =this;
+        Ajax.getJSON(PATH+"/partner/view.json?id="+getParam("id"),null,function(data){
             if(data.r==AJAX_SUCC){
-            if(data.data.bean){
-                fillJso2Form("#partnerEditForm",data.data.bean);
-                 if(!StringUtil.isBlank(data.data.bean.logo))
-                $("#faceImg").attr("src",PATH+"/"+data.data.bean.logo);
-            }
+                if(data.data.bean){
+                    fillJso2Form("#partnerEditForm",data.data.bean);
+                    $("#logo").parent().find("img").attr("src",$("#logo").val());
+                }
             }else{
                 dialog.error("获取信息失败"+data.msg,function(index){
                     goPage("partner/list.htm");
-                   dialog.close(index);
+                    dialog.close(index);
                 });
             }
         });
     },
+
     saveInfo:function(){
         if (!$("#partnerEditForm").valid())
             return;
@@ -192,7 +210,7 @@ var partnerEdit={
                     if(this.modal){
                         $("#partnerGrid").jqGrid("reloadGrid");
                     }
-                     dialog.close(index);
+                    dialog.close(index);
                 });
             }else{
                 dialog.error(data.msg);
@@ -201,7 +219,7 @@ var partnerEdit={
     },
     cancel:function(){
         if(this.modal){
-                $("#mymodal").modal("toggle");
+            $("#mymodal").modal("toggle");
         }else{
             goPage("partner/list.htm");
         }
@@ -209,6 +227,7 @@ var partnerEdit={
 }
 $(document).ready(function() {
     //获取传入参数
- partnerEdit.init();
+    partnerEdit.init();
+
 });
 </script>

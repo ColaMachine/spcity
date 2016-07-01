@@ -1,26 +1,32 @@
- <div id="SysUserResourceView" class="modal-content">
-    <form id="editForm" class="form-horizontal" method="post" action="/sysUserResource/save.json" enctype="multipart/form-data">
-        <div class="modal-header">
+<div id="SysUserResourceView" class="ibox float-e-margins">
+    <form id="SysUserResourceViewForm" class="form-horizontal" >
+      <!--  <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title">用户资源关系查看</h4>
-        </div>
-        <div class="modal-body">
+        </div>-->
+        <div class="ibox-content">
                 <input type="hidden" id="id" name="id">
     <div class="form-group">
         <label for="uid" class="col-sm-2 control-label">用户id:</label>
         <div class="col-sm-10">
+            <span  name="uid" id="uid" class="form-control"></span>
         </div>
     </div>
     <div class="form-group">
         <label for="rid" class="col-sm-2 control-label">资源id:</label>
         <div class="col-sm-10">
+            <span  name="rid" id="rid" class="form-control"></span>
         </div>
     </div>
 
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-2">
+                  <button type="button" class="btn btn-white cancelBtn">取消</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button"   class="btn btn-default cancelBtn">取消</button>
-        </div>
+
     </form>
 </div><!-- /.modal-content -->
 
@@ -30,11 +36,13 @@
     <div class="form-group">
         <label for="uid" class="col-sm-2 control-label">用户id:</label>
         <div class="col-sm-10">
+            <span  name="uid" id="uid" class="form-control"></span>
         </div>
     </div>
     <div class="form-group">
         <label for="rid" class="col-sm-2 control-label">资源id:</label>
         <div class="col-sm-10">
+            <span  name="rid" id="rid" class="form-control"></span>
         </div>
     </div>
 
@@ -52,22 +60,24 @@ var sysUserResourceView={
     root:$("#SysUserResourceView"),
     init:function(){
     var that = this;
-        this.addEventListener();
+    this.addEventListener();
         //获取传入参数
-            if(!StringUtil.isBlank(getParam("id"))){
-                Ajax.getJSON("sysUserResource/view.json?id="+getParam("id"),null,function(data){
-                    if(data.r==AJAX_SUCC){
-                        fillJso2FormSpan("#SysUserResourceView",data.data.bean);
-                    }else{
-                        dialog.error("获取信息失败"+data.msg,function(index){
-                            that.cancel();
-                            dialog.close(index);
-                        });
-                    }
+        if(!StringUtil.isBlank(getParam("id"))){
+            Ajax.getJSON("sysUserResource/view.json?id="+getParam("id"),null,function(data){
+                if(data.r==AJAX_SUCC){
+                    fillJso2FormSpan("#SysUserResourceView",data.data.bean);
+                }else{
+                    dialog.error("获取信息失败"+data.msg,function(index){
+                        that.cancel();
+                        dialog.close(index);
+                    });
+                }
 
-                });
+            });
 
-            }
+        }
+    },
+    loadData:function(){
     },
     cancel:function(){
         if(sysUserResourceView.modal){

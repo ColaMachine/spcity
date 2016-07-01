@@ -1,70 +1,63 @@
- <div class="modal-content">
+ <div class="ibox float-e-margins">
     <form id="expertEditForm" class="form-horizontal" method="post" action="/expert/save.json" enctype="multipart/form-data">
-        <div class="modal-header">
+        <!--<div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title">专家编辑</h4>
-        </div>
-        <div class="modal-body">
+        </div>-->
+        <div class="ibox-content">
                 <input type="hidden" id="id" name="id"  class="form-control input-sm" >
     <div class="form-group">
         <label for="username" class="col-sm-2 control-label">用户名:</label>
         <div class="col-sm-10">
-            <input  type="text"  id="username" name="username"  class="form-control input-sm"   maxlength="20"></input>
+            <input  type="text"  id="username" name="username"  class="form-control input-sm"   maxlength="20"  ></input>
         </div>
     </div>
     <div class="form-group">
         <label for="face" class="col-sm-2 control-label">头像:</label>
         <div class="col-sm-10">
-            <input id="faceImgFileInput" type="file" style="display:none">
-            <img class="row-10 img-upload" id="faceImg" style="width:150px;height:150px" src="static/img/timg.jpeg" alt="请上传图片">
-
-
-            <input  id="face" name="face"  style="display:none" class="form-control input-sm"   maxlength="100"></input>
-        </div>
+<input  id="face" name="face"  value="static/img/timg.jpeg" style="display:none" class="form-control input-sm"   maxlength="40"></input>        </div>
     </div>
-
     <div class="form-group">
         <label for="title" class="col-sm-2 control-label">职称:</label>
         <div class="col-sm-10">
-            <input  type="text"  id="title" name="title"  class="form-control input-sm"   maxlength="40"></input>
+            <input  type="text"  id="title" name="title"  class="form-control input-sm"   maxlength="40"  ></input>
         </div>
     </div>
-    <div class="form-group">
-        <label for="baike" class="col-sm-2 control-label">百科地址:</label>
-        <div class="col-sm-10">
-            <input  type="text"  id="baike" name="baike"  class="form-control input-sm"   maxlength="100"></input>
-        </div>
-    </div>
-
-
     <div class="form-group">
         <label for="remark" class="col-sm-2 control-label">备注:</label>
         <div class="col-sm-10">
-            <textarea  id="remark" name="remark"  class="form-control input-sm"   maxlength="200"></textarea>
+            <textarea  id="remark" name="remark"  class="form-control input-sm"   maxlength="200"  ></textarea>
         </div>
     </div>
-  <!--  <div class="form-group">
+    <div class="form-group">
         <label for="createtime" class="col-sm-2 control-label">创建时间:</label>
-        <div class="col-sm-10 z-col-table">
-            <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  ></input>
-            <label class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></label>        </div>
+        <div class="input-group date">
+            <span class="input-group-addon" for="createtime" ><i class="fa fa-calendar"></i></span>            <input type="text" id="createtime" name="createtime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  ></input>
+        </div>
     </div>
     <div class="form-group">
         <label for="updatetime" class="col-sm-2 control-label">更新时间:</label>
-        <div class="col-sm-10 z-col-table">
-            <input type="text" id="updatetime" name="updatetime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  ></input>
-            <label class="input-group-addon" for="updatetime" ><i class="fa fa-calendar"></i></label>        </div>
-    </div>-->
+        <div class="input-group date">
+            <span class="input-group-addon" for="updatetime" ><i class="fa fa-calendar"></i></span>            <input type="text" id="updatetime" name="updatetime"  class="form-control input-sm"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  datatype="date" format="yyyy-MM-dd HH:mm:ss"  ></input>
+        </div>
+    </div>
 
+       <div class="hr-line-dashed"></div>
+        <div class="form-group">
+           <div class="col-sm-4 col-sm-offset-2">
+               <button type="button"  class="btn btn-primary saveBtn">保存</button>
+               <button type="button" class="btn btn-white cancelBtn">取消</button>
+           </div>
         </div>
-        <div class="modal-footer">
-            <button type="button"  class="btn btn-primarys saveBtn">保存</button>
-            <button type="button" class="btn btn-default cancelBtn">取消</button>
         </div>
+
     </form>
 </div><!-- /.modal-content -->
-
+        
 <script type="text/javascript">
+
+
+
 var expertEdit={
     form:null,
     modal:false,
@@ -78,13 +71,10 @@ var expertEdit={
             maxlength:20,required:true
         },
         face:{
-            maxlength:100
-        },
-         title:{
             maxlength:40
         },
-        baike:{
-            maxlength:100
+        title:{
+            maxlength:40
         },
         remark:{
             maxlength:200
@@ -102,16 +92,13 @@ var expertEdit={
             digits:"必须输入整数"
         },
         username:{
-            maxlength:"姓名不能多于20个字符"
+            maxlength:"用户名不能多于20个字符"
         },
         face:{
-            maxlength:"头像不能多于100个字符"
+            maxlength:"头像不能多于40个字符"
         },
         title:{
-            maxlength:"头衔不能多于40个字符"
-        },
-        baike:{
-            maxlength:"百科不能多于100个字符"
+            maxlength:"职称不能多于40个字符"
         },
         remark:{
             maxlength:"备注不能多于200个字符"
@@ -126,52 +113,44 @@ var expertEdit={
         }
     },
     addEventListener:function(){
-        this.form.find(".saveBtn").click(this.saveInfo);
-        this.form.find(".cancelBtn").click(this.cancel);
+        this.form.find(".saveBtn").click(this.saveInfo.Apply(this));
+        this.form.find(".cancelBtn").click(this.cancel.Apply(this));
     },
     init:function(){
         this.form=$(this.formId);
         this.addEventListener();
         $("#expertEditForm").validate(this.validParam);
-        console.log("init");
-       var imageUtil= new zImageUtil({imgDom:$("#faceImg")[0],fileInput:$("#faceImgFileInput")[0],postUrl:PATH+"/image/upload.json",maxWidth:633,maxHeight:300,
-        callback:function(result){
-        console.log("callback");
-                    console.log(result.data);
-                   // alert("hi");
-                    $("#face").val(result.data);
-                   // alert( $("#face").attr("src"));
-                }
-                });
-        Ajax.getJSON("expert/view.json?id="+getParam("id"),null,function(data){
+        var imageUtil=new zImageUtil2({"input":"face"});
+        var that =this;
+
+            that.loadData();
+
+    },
+    loadData:function(){
+        var that =this;
+        Ajax.getJSON(PATH+"/expert/view.json?id="+getParam("id"),null,function(data){
             if(data.r==AJAX_SUCC){
-            if(data.data.bean){
-                fillJso2Form("#expertEditForm",data.data.bean);
-                if(!StringUtil.isBlank(data.data.bean.face))
-                $("#faceImg").attr("src",PATH+"/"+data.data.bean.face);
-            }
+                if(data.data.bean){
+                    fillJso2Form("#expertEditForm",data.data.bean);
+                    $("#face").parent().find("img").attr("src",$("#face").val());
+                }
             }else{
                 dialog.error("获取信息失败"+data.msg,function(index){
                     goPage("expert/list.htm");
-                   dialog.close(index);
+                    dialog.close(index);
                 });
             }
         });
     },
+
     saveInfo:function(){
         if (!$("#expertEditForm").valid())
             return;
         var jso = changeForm2Jso("#expertEditForm");
         var dialogId=dialog.showWait();
         var that=this;
-        //jso.face=document.getElementById("faceImg").src;
-       /* if(jso.face=="/img/timg.jpeg"){
-            console.log("请选择头像");
-        }*/
-
-
         Ajax.post(PATH+$("#expertEditForm").attr("action"),jso,function(data){
-           dialog.hideWait(dialogId);
+            dialog.hideWait(dialogId);
             if(data.r==0){
                 dialog.alert(data.msg||"保存成功",function(index){
                     //goPage("expert/list.htm");
@@ -179,16 +158,16 @@ var expertEdit={
                     if(this.modal){
                         $("#expertGrid").jqGrid("reloadGrid");
                     }
-                     dialog.close(index);
+                    dialog.close(index);
                 });
-           }else{
-               dialog.error(data.msg);
-             }
+            }else{
+                dialog.error(data.msg);
+            }
         },'json');
     },
     cancel:function(){
         if(this.modal){
-                $("#mymodal").modal("toggle");
+            $("#mymodal").modal("toggle");
         }else{
             goPage("expert/list.htm");
         }
@@ -196,6 +175,7 @@ var expertEdit={
 }
 $(document).ready(function() {
     //获取传入参数
- expertEdit.init();
+    expertEdit.init();
+
 });
 </script>

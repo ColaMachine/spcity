@@ -31,12 +31,12 @@ public class RandomValidateCode {
     public static final String RANDOMCODEKEY = "RANDOMVALIDATECODEKEY";//放到session中的key
     private Random random = new Random();
     private String randString = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";//随机产生的字符串
-    
+
     private int width = 80;//图片宽
     private int height = 26;//图片高
-    private int lineSize = 40;//干扰线数量
+    private int lineSize = 5;//干扰线数量
     private int stringNum = 4;//随机产生字符数量
-    private int rotate_value=30;//摇摆幅度
+    private int rotate_value=5;//摇摆幅度
     /*
      * 获得字体
      */
@@ -60,7 +60,7 @@ public class RandomValidateCode {
      * 生成随机图片
      */
     public void getImgRandcode(HttpServletRequest request,
-            HttpServletResponse response) {
+                               HttpServletResponse response) {
         HttpSession session = request.getSession();
         //BufferedImage类是具有缓冲区的Image类,Image类是用于描述图像信息的类
         BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_BGR);
@@ -80,18 +80,18 @@ public class RandomValidateCode {
         System.out.println(randomString);
         g.dispose();
         try {
-        	File file =new File("D:/a.jpg");
+            File file =new File("D:/a.jpg");
             ImageIO.write(image, "JPEG", response.getOutputStream());//将内存中的图片通过流动形式输出到客户端
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    
+
+
     /**
      * 生成随机图片
-     * @throws IOException 
-     * @throws FileNotFoundException 
+     * @throws IOException
+     * @throws FileNotFoundException
      */
     public String[] getImgRandcode(int length,String filename) throws FileNotFoundException, IOException {
         //BufferedImage类是具有缓冲区的Image类,Image类是用于描述图像信息的类
@@ -111,33 +111,33 @@ public class RandomValidateCode {
         }
         //System.out.println(randomString);
         g.dispose();
-       if(StringUtil.isBlank(filename)){
-           filename = UUIDUtil.getUUID()+".jpg";
-       }
-       
-       File file=PathManager.getInstance().getVcodePath().resolve(filename+".jpg").toFile();
+        if(StringUtil.isBlank(filename)){
+            filename = UUIDUtil.getUUID()+".jpg";
+        }
+
+        File file=PathManager.getInstance().getVcodePath().resolve(filename+".jpg").toFile();
  /*       File folder =new File(SysConfig.REALPATH+File.separator+SysConfig.VALIDATECODE_IMG_FOLDER);
             File file =new File(SysConfig.REALPATH+File.separator+SysConfig.VALIDATECODE_IMG_FOLDER+"/"+filename+".jpg");
             //File file =new File("g:/vc/"+filename+".jpg");*/
-             if(file.exists()){
-                 System.out.println("文件已经存在");
-            }else{
-              //如果要创建的多级目录不存在才需要创建。
-                file.createNewFile();
-               // file.mkdirs();
-             }
-             ByteArrayOutputStream  baos = new ByteArrayOutputStream();
-             ImageIO.write(image, "JPEG",baos);//将内存中的图片通过流动形式输出到客户端
-             byte[] bytes = baos.toByteArray();  
-              BASE64Encoder encoder = new sun.misc.BASE64Encoder();  
-            String  result = encoder.encodeBuffer(bytes).trim();  
-            ImageIO.write(image, "JPEG",file);//将内存中的图片通过流动形式输出到客户端
+        if(file.exists()){
+            System.out.println("文件已经存在");
+        }else{
+            //如果要创建的多级目录不存在才需要创建。
+            file.createNewFile();
+            // file.mkdirs();
+        }
+        ByteArrayOutputStream  baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "JPEG",baos);//将内存中的图片通过流动形式输出到客户端
+        byte[] bytes = baos.toByteArray();
+        BASE64Encoder encoder = new sun.misc.BASE64Encoder();
+        String  result = encoder.encodeBuffer(bytes).trim();
+        ImageIO.write(image, "JPEG",file);//将内存中的图片通过流动形式输出到客户端
         return new String[]{Config.getInstance().getImage().getVcodeDir()+"/"+filename+".jpg",randomString,result};
     }
     /**
      * 生成随机图片
-     * @throws IOException 
-     * @throws FileNotFoundException 
+     * @throws IOException
+     * @throws FileNotFoundException
      */
     public String[] getImgRandcodeBuffer(int length) throws FileNotFoundException, IOException {
         //BufferedImage类是具有缓冲区的Image类,Image类是用于描述图像信息的类
@@ -157,7 +157,7 @@ public class RandomValidateCode {
         }
         //System.out.println(randomString);
         g.dispose();
-       
+
         String filename = UUIDUtil.getUUID()+".jpg";
  /*       File folder =new File(SysConfig.REALPATH+File.separator+SysConfig.VALIDATECODE_IMG_FOLDER);
             File file =new File(SysConfig.REALPATH+File.separator+SysConfig.VALIDATECODE_IMG_FOLDER+"/"+filename+".jpg");
@@ -174,14 +174,14 @@ public class RandomValidateCode {
     }
     /**
      * 生成随机图片
-     * @throws IOException 
-     * @throws FileNotFoundException 
+     * @throws IOException
+     * @throws FileNotFoundException
      */
     public String[] getImgRandcode() throws FileNotFoundException, IOException {
         return this.getImgRandcode(stringNum,"");
     }
-    
-    
+
+
     /*
      * 绘制字符串
      */
@@ -190,16 +190,16 @@ public class RandomValidateCode {
         g.setColor(new Color(random.nextInt(101),random.nextInt(111),random.nextInt(121)));
         String rand = String.valueOf(getRandomString(random.nextInt(randString.length())));
         randomString +=rand;
-       int rotateAngle= random.nextInt(rotate_value*2)-rotate_value;
+        int rotateAngle= random.nextInt(rotate_value*2)-rotate_value;
         //g.translate(random.nextInt(3), random.nextInt(3));
-       int _x=random.nextInt(3);
-       int _y=random.nextInt(3);
+        int _x=random.nextInt(3);
+        int _y=random.nextInt(3);
         g.translate(13*i+_x, 16+_y);
-       g.rotate(rotateAngle * Math.PI / 180);
+        g.rotate(rotateAngle * Math.PI / 180);
         g.drawString(rand,0, 0);
         g.rotate(-rotateAngle * Math.PI / 180);
         g.translate(-13*i-_x, -16-_y);
-       // g.drawString(rand,13*i, 16);
+        // g.drawString(rand,13*i, 16);
         return randomString;
     }
     /*
@@ -237,8 +237,8 @@ public class RandomValidateCode {
         return String.valueOf(randString.charAt(num));
     }
     public static void main(String args[]){
-    	RandomValidateCode r=new RandomValidateCode();
-    	try {
+        RandomValidateCode r=new RandomValidateCode();
+        try {
             r.getImgRandcode();
         } catch (IOException e) {
             // TODO Auto-generated catch block

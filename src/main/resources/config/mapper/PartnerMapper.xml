@@ -8,20 +8,20 @@
       <result column="address" jdbcType="VARCHAR" property="address" />
       <result column="logo" jdbcType="VARCHAR" property="logo" />
       <result column="remark" jdbcType="VARCHAR" property="remark" />
+      <result column="type" jdbcType="INTEGER" property="type" />
       <result column="creator" jdbcType="BIGINT" property="creator" />
       <result column="creatorname" jdbcType="VARCHAR" property="creatorname" />
       <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
       <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
   </resultMap>
   <sql id="Base_Column_List">
-    `id` ,`name` ,`brief` ,`address` ,`logo` ,`remark` ,`creator` ,`creatorname` ,`createtime` ,`updatetime` 
-   
+    partner.`id` ,partner.`name` ,partner.`brief` ,partner.`address` ,partner.`logo` ,partner.`remark` ,partner.`type` ,partner.`creator` ,partner.`creatorname` ,partner.`createtime` ,partner.`updatetime` 
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from partner
-    where id =   #{id,jdbcType=BIGINT}
+    where partner.id =   #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from partner
@@ -37,6 +37,7 @@
 ,#{address,jdbcType=VARCHAR}
 ,#{logo,jdbcType=VARCHAR}
 ,#{remark,jdbcType=VARCHAR}
+,#{type,jdbcType=INTEGER}
 ,#{creator,jdbcType=BIGINT}
 ,#{creatorname,jdbcType=VARCHAR}
 ,#{createtime,jdbcType=TIMESTAMP}
@@ -63,6 +64,9 @@
         </if>  
         <if test="remark != null" >  
            `remark`, 
+        </if>  
+        <if test="type != null" >  
+           `type`, 
         </if>  
         <if test="creator != null" >  
            `creator`, 
@@ -95,6 +99,9 @@
         </if>  
         <if test="remark != null" >  
           #{remark,jdbcType=VARCHAR},
+        </if>  
+        <if test="type != null" >  
+          #{type,jdbcType=INTEGER},
         </if>  
         <if test="creator != null" >  
           #{creator,jdbcType=BIGINT},
@@ -131,6 +138,9 @@
         <if test="remark != null" >  
              `remark`=#{remark,jdbcType=VARCHAR},
         </if>  
+        <if test="type != null" >  
+             `type`=#{type,jdbcType=INTEGER},
+        </if>  
         <if test="creator != null" >  
              `creator`=#{creator,jdbcType=BIGINT},
         </if>  
@@ -154,6 +164,7 @@
               `address`=#{address,jdbcType=VARCHAR},  
               `logo`=#{logo,jdbcType=VARCHAR},  
               `remark`=#{remark,jdbcType=VARCHAR},  
+              `type`=#{type,jdbcType=INTEGER},  
               `creator`=#{creator,jdbcType=BIGINT},  
               `creatorname`=#{creatorname,jdbcType=VARCHAR},  
               `createtime`=#{createtime,jdbcType=TIMESTAMP},  
@@ -197,6 +208,9 @@ where id = #{id,jdbcType=BIGINT}
         <if test="remarkLike != null and remarkLike != '' ">  
              and `remark` like "%"#{remarkLike}"%"
         </if>   
+        <if test="type != null and type != '' ">  
+           and `type` = #{type}
+        </if>  
         <if test="creator != null and creator != '' ">  
            and `creator` = #{creator}
         </if>  
@@ -240,66 +254,71 @@ where id = #{id,jdbcType=BIGINT}
    <select id="listByParams4Page" parameterType="map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from partner where 1=1
+    from partner
+
+    where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and partner.`id` = #{id}
         </if>  
         <if test="name != null and name != '' ">  
-           and `name` = #{name}
+           and partner.`name` = #{name}
         </if>  
         <if test="nameLike != null and nameLike != '' ">  
-             and `name` like "%"#{nameLike}"%"
+             and partner.`name` like "%"#{nameLike}"%"
         </if>   
         <if test="brief != null and brief != '' ">  
-           and `brief` = #{brief}
+           and partner.`brief` = #{brief}
         </if>  
         <if test="briefLike != null and briefLike != '' ">  
-             and `brief` like "%"#{briefLike}"%"
+             and partner.`brief` like "%"#{briefLike}"%"
         </if>   
         <if test="address != null and address != '' ">  
-           and `address` = #{address}
+           and partner.`address` = #{address}
         </if>  
         <if test="addressLike != null and addressLike != '' ">  
-             and `address` like "%"#{addressLike}"%"
+             and partner.`address` like "%"#{addressLike}"%"
         </if>   
         <if test="logo != null and logo != '' ">  
-           and `logo` = #{logo}
+           and partner.`logo` = #{logo}
         </if>  
         <if test="logoLike != null and logoLike != '' ">  
-             and `logo` like "%"#{logoLike}"%"
+             and partner.`logo` like "%"#{logoLike}"%"
         </if>   
         <if test="remark != null and remark != '' ">  
-           and `remark` = #{remark}
+           and partner.`remark` = #{remark}
         </if>  
         <if test="remarkLike != null and remarkLike != '' ">  
-             and `remark` like "%"#{remarkLike}"%"
+             and partner.`remark` like "%"#{remarkLike}"%"
         </if>   
+        <if test="type != null and type != '' ">  
+           and partner.`type` = #{type}
+        </if>  
         <if test="creator != null and creator != '' ">  
-           and `creator` = #{creator}
+           and partner.`creator` = #{creator}
         </if>  
         <if test="creatorname != null and creatorname != '' ">  
-           and `creatorname` = #{creatorname}
+           and partner.`creatorname` = #{creatorname}
         </if>  
         <if test="creatornameLike != null and creatornameLike != '' ">  
-             and `creatorname` like "%"#{creatornameLike}"%"
+             and partner.`creatorname` like "%"#{creatornameLike}"%"
         </if>   
         <if test="createtime != null and createtime != '' ">  
-           and `createtime` = #{createtime}
+           and partner.`createtime` = #{createtime}
         </if>  
         <if test="createtimeBegin != null and createtimeBegin != '' ">  
-             and `createtime` &gt;= #{createtimeBegin}
+             and partner.`createtime` &gt;= #{createtimeBegin}
         </if>   
          <if test="createtimeEnd != null and createtimeEnd != '' ">  
-             and `createtime` &lt;= #{createtimeEnd}
+             and partner.`createtime` &lt;= #{createtimeEnd}
         </if> 
         <if test="updatetime != null and updatetime != '' ">  
-           and `updatetime` = #{updatetime}
+           and partner.`updatetime` = #{updatetime}
         </if>  
         <if test="updatetimeBegin != null and updatetimeBegin != '' ">  
-             and `updatetime` &gt;= #{updatetimeBegin}
+             and partner.`updatetime` &gt;= #{updatetimeBegin}
         </if>   
          <if test="updatetimeEnd != null and updatetimeEnd != '' ">  
-             and `updatetime` &lt;= #{updatetimeEnd}
+             and partner.`updatetime` &lt;= #{updatetimeEnd}
         </if> 
   </select>
    <select id="countByParams" parameterType="map" resultType="java.lang.Integer">
@@ -307,64 +326,67 @@ where id = #{id,jdbcType=BIGINT}
     count(1) 
     from partner where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and partner.`id` = #{id}
         </if>  
         <if test="name != null and name != '' ">  
-           and `name` = #{name}
+           and partner.`name` = #{name}
         </if>  
         <if test="nameLike != null and nameLike != '' ">  
-             and `name` like "%"#{nameLike}"%"
+             and partner.`name` like "%"#{nameLike}"%"
         </if>   
         <if test="brief != null and brief != '' ">  
-           and `brief` = #{brief}
+           and partner.`brief` = #{brief}
         </if>  
         <if test="briefLike != null and briefLike != '' ">  
-             and `brief` like "%"#{briefLike}"%"
+             and partner.`brief` like "%"#{briefLike}"%"
         </if>   
         <if test="address != null and address != '' ">  
-           and `address` = #{address}
+           and partner.`address` = #{address}
         </if>  
         <if test="addressLike != null and addressLike != '' ">  
-             and `address` like "%"#{addressLike}"%"
+             and partner.`address` like "%"#{addressLike}"%"
         </if>   
         <if test="logo != null and logo != '' ">  
-           and `logo` = #{logo}
+           and partner.`logo` = #{logo}
         </if>  
         <if test="logoLike != null and logoLike != '' ">  
-             and `logo` like "%"#{logoLike}"%"
+             and partner.`logo` like "%"#{logoLike}"%"
         </if>   
         <if test="remark != null and remark != '' ">  
-           and `remark` = #{remark}
+           and partner.`remark` = #{remark}
         </if>  
         <if test="remarkLike != null and remarkLike != '' ">  
-             and `remark` like "%"#{remarkLike}"%"
+             and partner.`remark` like "%"#{remarkLike}"%"
         </if>   
+        <if test="type != null and type != '' ">  
+           and partner.`type` = #{type}
+        </if>  
         <if test="creator != null and creator != '' ">  
-           and `creator` = #{creator}
+           and partner.`creator` = #{creator}
         </if>  
         <if test="creatorname != null and creatorname != '' ">  
-           and `creatorname` = #{creatorname}
+           and partner.`creatorname` = #{creatorname}
         </if>  
         <if test="creatornameLike != null and creatornameLike != '' ">  
-             and `creatorname` like "%"#{creatornameLike}"%"
+             and partner.`creatorname` like "%"#{creatornameLike}"%"
         </if>   
         <if test="createtime != null and createtime != '' ">  
-           and `createtime` = #{createtime}
+           and partner.`createtime` = #{createtime}
         </if>  
         <if test="createtimeBegin != null and createtimeBegin != '' ">  
-             and `createtime` &gt;= #{createtimeBegin}
+             and partner.`createtime` &gt;= #{createtimeBegin}
         </if>   
          <if test="createtimeEnd != null and createtimeEnd != '' ">  
-             and `createtime` &lt;= #{createtimeEnd}
+             and partner.`createtime` &lt;= #{createtimeEnd}
         </if> 
         <if test="updatetime != null and updatetime != '' ">  
-           and `updatetime` = #{updatetime}
+           and partner.`updatetime` = #{updatetime}
         </if>  
         <if test="updatetimeBegin != null and updatetimeBegin != '' ">  
-             and `updatetime` &gt;= #{updatetimeBegin}
+             and partner.`updatetime` &gt;= #{updatetimeBegin}
         </if>   
          <if test="updatetimeEnd != null and updatetimeEnd != '' ">  
-             and `updatetime` &lt;= #{updatetimeEnd}
+             and partner.`updatetime` &lt;= #{updatetimeEnd}
         </if> 
   </select>
  <select id="countByOrParams" parameterType="map" resultType="java.lang.Integer">
@@ -388,6 +410,9 @@ where id = #{id,jdbcType=BIGINT}
         </if>
         <if test="remark != null and remark != '' ">
            or `remark` = #{remark}
+        </if>
+        <if test="type != null and type != '' ">
+           or `type` = #{type}
         </if>
         <if test="creator != null and creator != '' ">
            or `creator` = #{creator}

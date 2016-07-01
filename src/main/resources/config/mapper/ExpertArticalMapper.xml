@@ -4,17 +4,21 @@
   <resultMap id="BaseResultMap" type="cola.machine.bean.ExpertArtical">
       <id column="id" jdbcType="BIGINT" property="id" />
       <result column="expertId" jdbcType="BIGINT" property="expertId" />
+      <result column="title" jdbcType="VARCHAR" property="title" />
       <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="expert_username" jdbcType="VARCHAR" property="expert_username" />
   </resultMap>
   <sql id="Base_Column_List">
-    `id` ,`expertId` ,`content` 
-   
+    expert_artical.`id` ,expert_artical.`expertId` ,expert_artical.`title` ,expert_artical.`content` 
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
+                ,expert.username as Expert_username
     from expert_artical
-    where id =   #{id,jdbcType=BIGINT}
+               left join expert expert
+                 on expert_artical.expertId = expert.id
+    where expert_artical.id =   #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from expert_artical
@@ -26,6 +30,7 @@
     values (
 #{id,jdbcType=BIGINT}
 ,#{expertId,jdbcType=BIGINT}
+,#{title,jdbcType=VARCHAR}
 ,#{content,jdbcType=VARCHAR}
     )
   </insert>
@@ -38,6 +43,9 @@
         <if test="expertId != null" >  
            `expertId`, 
         </if>  
+        <if test="title != null" >  
+           `title`, 
+        </if>  
         <if test="content != null" >  
            `content`, 
         </if>  
@@ -48,6 +56,9 @@
         </if>  
         <if test="expertId != null" >  
           #{expertId,jdbcType=BIGINT},
+        </if>  
+        <if test="title != null" >  
+          #{title,jdbcType=VARCHAR},
         </if>  
         <if test="content != null" >  
           #{content,jdbcType=VARCHAR},
@@ -63,6 +74,9 @@
         <if test="expertId != null" >  
              `expertId`=#{expertId,jdbcType=BIGINT},
         </if>  
+        <if test="title != null" >  
+             `title`=#{title,jdbcType=VARCHAR},
+        </if>  
         <if test="content != null" >  
              `content`=#{content,jdbcType=VARCHAR},
         </if>  
@@ -73,6 +87,7 @@
     update expert_artical
     set 
               `expertId`=#{expertId,jdbcType=BIGINT},  
+              `title`=#{title,jdbcType=VARCHAR},  
               `content`=#{content,jdbcType=VARCHAR}  
 where id = #{id,jdbcType=BIGINT}
   </update>
@@ -86,6 +101,12 @@ where id = #{id,jdbcType=BIGINT}
         <if test="expertId != null and expertId != '' ">  
            and `expertId` = #{expertId}
         </if>  
+        <if test="title != null and title != '' ">  
+           and `title` = #{title}
+        </if>  
+        <if test="titleLike != null and titleLike != '' ">  
+             and `title` like "%"#{titleLike}"%"
+        </if>   
         <if test="content != null and content != '' ">  
            and `content` = #{content}
         </if>  
@@ -96,18 +117,30 @@ where id = #{id,jdbcType=BIGINT}
    <select id="listByParams4Page" parameterType="map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from expert_artical where 1=1
+           ,expert.username as Expert_username
+    from expert_artical
+
+    left join expert expert
+      on expert_artical.expertId = expert.id
+
+    where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and expert_artical.`id` = #{id}
         </if>  
         <if test="expertId != null and expertId != '' ">  
-           and `expertId` = #{expertId}
+           and expert_artical.`expertId` = #{expertId}
         </if>  
+        <if test="title != null and title != '' ">  
+           and expert_artical.`title` = #{title}
+        </if>  
+        <if test="titleLike != null and titleLike != '' ">  
+             and expert_artical.`title` like "%"#{titleLike}"%"
+        </if>   
         <if test="content != null and content != '' ">  
-           and `content` = #{content}
+           and expert_artical.`content` = #{content}
         </if>  
         <if test="contentLike != null and contentLike != '' ">  
-             and `content` like "%"#{contentLike}"%"
+             and expert_artical.`content` like "%"#{contentLike}"%"
         </if>   
   </select>
    <select id="countByParams" parameterType="map" resultType="java.lang.Integer">
@@ -115,16 +148,22 @@ where id = #{id,jdbcType=BIGINT}
     count(1) 
     from expert_artical where 1=1
         <if test="id != null and id != '' ">  
-           and `id` = #{id}
+           and expert_artical.`id` = #{id}
         </if>  
         <if test="expertId != null and expertId != '' ">  
-           and `expertId` = #{expertId}
+           and expert_artical.`expertId` = #{expertId}
         </if>  
+        <if test="title != null and title != '' ">  
+           and expert_artical.`title` = #{title}
+        </if>  
+        <if test="titleLike != null and titleLike != '' ">  
+             and expert_artical.`title` like "%"#{titleLike}"%"
+        </if>   
         <if test="content != null and content != '' ">  
-           and `content` = #{content}
+           and expert_artical.`content` = #{content}
         </if>  
         <if test="contentLike != null and contentLike != '' ">  
-             and `content` like "%"#{contentLike}"%"
+             and expert_artical.`content` like "%"#{contentLike}"%"
         </if>   
   </select>
  <select id="countByOrParams" parameterType="map" resultType="java.lang.Integer">
@@ -136,6 +175,9 @@ where id = #{id,jdbcType=BIGINT}
         </if>
         <if test="expertId != null and expertId != '' ">
            or `expertId` = #{expertId}
+        </if>
+        <if test="title != null and title != '' ">
+           or `title` = #{title}
         </if>
         <if test="content != null and content != '' ">
            or `content` = #{content}

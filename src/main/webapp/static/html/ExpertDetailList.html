@@ -1,14 +1,14 @@
 
-<div id="ExpertDetailList">
-    <div class="main-hd">| 专家介绍</div>
+<div id="ExpertDetailList" class="col-lg-12 ibox float-e-margins">
+   <!-- <div class="main-hd ibox-title">| 专家介绍</div>-->
 
 
-    <div class="main-bd">
+    <div class="main-bd ibox-content">
         <div class="body_top" >
             <form class="form-inline app-search">
                     <label for="id">编号</label>
             <input type="number" id="id" name="id"  class="form-control input-sm"  maxlength="15" onkeyup="chkInt(this,8)" onafterpaste="chkInt(this,8)" placeholder="编号"></input>
-        <label for="expertId">专家id</label>
+        <label for="expertId">专家</label>
             <select id="expertId" name="expertId"  class="form-control input-sm"  >
                 <option value=''>-请选择-</option>
             </select>
@@ -18,11 +18,11 @@
             <button type="button"  class="btn btn-default searchBtn">查询</button>
             </form>
 
-            <button class="btn addBtn" >新增</button>
-            <button class="btn deleteBtn">删除</button>
-            <button class="btn exportBtn" >导出</button>
+            <button class="btn btn-primary addBtn" ><i class="fa fa-plus"></i>新增</button>
+            <!--<button class="btn btn-primary deleteBtn"><i class="fa fa-plus"></i>删除</button>-->
+            <!--<button class="btn btn-primary exportBtn"><i class="fa fa-plus"></i>导出</button>-->
         </div>
-        <table id="ExpertDetailGrid" class="grid"></table>
+        <table id="ExpertDetailGrid" class="grid table"></table>
         <div id="ExpertDetailGrid-Pager" class="pager"></div>
     </div>
 </div>
@@ -34,13 +34,16 @@ var expertDetailList={
     dqData:null,
     root:$("#ExpertDetailList"),
     init:function(){
+
+        setTitle("专家介绍");
         this.mygrid =this.root.find(".grid").jqGrid(this.gridParam);
         this.addEventListener();
-            this.loadData();
+        this.loadData();
     },
     loadData:function(){
-        Ajax.getJSON(PATH+"/expert/list.json",{},function(data){
+                Ajax.getJSON(PATH+"/expert/list.json",{},function(data){
             fillSelectWithJso("expertId",data.data,"id","username");
+
         });
     },
     addEventListener:function(){
@@ -54,25 +57,25 @@ var expertDetailList={
         viewrecords: true, sortorder: "desc", caption:"",
         rowNum:10,
         rowList:[10,20,30],
-        multiselect : true,
+        multiselect : false,
         url : PATH+'/expertDetail/list.json',
         autowidth:true,
         grid:"#ExpertDetailGrid",
         pager:"#ExpertDetailGrid-Pager",
         jsonReader:jsonReader,
         colNames : [
-        "编号","专家id","介绍" , '操作' ],
+        "编号","专家","介绍" , '操作' ],
         colModel : [
             {   name : 'id',width : 80,
 
             } ,
-            {   name : 'expertId',width : 80,
+            {   name : 'expert_username',width : 80,
 
             } ,
             {   name : 'content',width : 80,
 
-            } 
-              ,
+            } ,
+
             {   name : 'operation',
                 width : 150,
                 formatter : function(value, grid, rows) {
